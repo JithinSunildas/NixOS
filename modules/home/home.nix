@@ -5,10 +5,12 @@
   home.homeDirectory = "/home/tikhaboom";
   home.stateVersion = "25.05";
 
+  programs.home-manager.enable = true;
+
   imports = [
     ./waybar/waybar.nix
     ./niri/niri.nix
-    ./bash.nix
+    ./fish.nix
     ./wofi.nix
     ./tmux.nix
     ./ghostty.nix
@@ -70,8 +72,7 @@
   # 🖥️ Shell config (optional)
   ########################################
   programs.bash.enable = true;
+  programs.fish.enable = true;
   services.swww.enable = true;
-
   services.swaync.enable = true;
-
 }

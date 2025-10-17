@@ -16,7 +16,7 @@
   boot.kernelPackages = pkgs.linuxPackages;
 
   networking = {
-    hostName = "nixos";
+    hostName = "SuperDuperComputer";
     networkmanager.enable = true;
     hosts = {
       "192.168.18.33" = [ "raspi.casa.local" ];
@@ -69,6 +69,7 @@
     fzf
     lazydocker
     wofi
+    gcc
     ghostty
     vscode
     adw-gtk3
@@ -78,6 +79,9 @@
     gnumake
     go
     ly
+    fish
+    alacritty
+    fuzzel
     fastfetch
     btop
     bitwarden

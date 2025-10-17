@@ -18,14 +18,4 @@
       # your aliases here
     };
   };
-  
-  programs.ghostty = {
-    enable = true;
-    settings = {
-      shell = {
-        program = "${pkgs.fish}/bin/fish";
-        args = [ "-l" ];
-      };
-    };
-  };
 }
