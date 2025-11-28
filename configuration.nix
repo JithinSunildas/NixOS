@@ -1,20 +1,31 @@
-{ config, pkgs, ... }:
+# Configuration.nix
+{ config, pkgs, inputs, lib, ... }:
 
 {
   imports = [
-    # Include the results of the hardware scan.
+    # System Hardware and Structure
     ./hardware-configuration.nix
+    ./packages/packages.nix
   ];
 
+  # --- NixOS Core Settings ---
   nixpkgs.config.allowUnfree = true;
 
-  # Bootloader
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  
+  system.stateVersion = "25.05";
+  
+  # --- Bootloader ---
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages = pkgs.linuxPackages;
 
+  # --- Networking & Localization ---
   networking = {
     hostName = "SuperDuperComputer";
     networkmanager.enable = true;
@@ -27,14 +38,11 @@
     };
   };
 
+  # Timezone change applied
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
+  # --- User & Home Manager Configuration ---
   users.users.tikhaboom = {
     isNormalUser = true;
     description = "tikhaboom";
@@ -44,74 +52,44 @@
       "wireshark"
       "docker"
     ];
-    packages = with pkgs; [
-      chromium
-    ];
   };
 
+  home-manager.extraSpecialArgs = {
+    inherit inputs;
+  };
+
+  home-manager.users.tikhaboom = {
+    imports = [
+      ./modules/home/home.nix
+    ];
+    home.stateVersion = "25.05";
+  };
+  
+  # --- System Environment & Services ---
   environment.systemPackages = with pkgs; [
-    ffmpeg
-    nvidia-vaapi-driver
-    nvidia-modprobe
-    neovim
-    wget
-    wl-clipboard-rs
-    git
-    curl
-    wlogout
-    discord
-    obs-studio
-    spotify
-    lsd
-    bat
-    tmux
-    lazygit
-    fzf
-    lazydocker
-    wofi
-    ghostty
-    vscode
-    adw-gtk3
-    papirus-icon-theme
-    nh
-    xfce.thunar
-    gnumake
-    go
-    ly
-    fish
-    alacritty
-    fuzzel
-    fastfetch
-    btop
-    bitwarden
-    docker
-    docker-compose
-    xdg-desktop-portal-wlr
     polkit
     nixfmt-rfc-style
-    obsidian
-    nmap
-    openvpn
-    hashcat
-    burpsuite
-    caido
-    wireshark
-    rockyou
-    seclists
-    metasploit
-    gobuster
-    ffuf
-    sqlmap
-    john
-    thc-hydra
-    qbittorrent
-
     xwayland
     xwayland-satellite
   ];
 
-  programs = {
+  environment.variables = {
+    LD_LIBRARY_PATH = "/run/opengl-driver/lib";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    OZONE_PLATFORM = "wayland";
+    GDK_BACKEND = "wayland";
+  };
+  
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+  
+  security.polkit.enable = true;
+  virtualisation.docker.enable = true;
 
+  # --- System Program Enables ---
+  programs = {
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -119,7 +97,6 @@
       vimAlias = true;
     };
     wireshark.enable = true;
-
     niri.enable = true;
     xwayland.enable = true;
     obs-studio.enable = true;
@@ -131,13 +108,16 @@
     };
     gamemode.enable = true;
   };
+  
   xdg.portal.wlr.enable = true;
+  
   fonts = {
     fontconfig.enable = true;
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
     ];
   };
+  
   services = {
     qbittorrent.enable = true;
     displayManager.enable = true;
@@ -145,24 +125,7 @@
     # services.openssh.enable = true;
   };
 
-  security.polkit.enable = true;
-  virtualisation.docker.enable = true;
-
-  environment.variables = {
-    LD_LIBRARY_PATH = "/run/opengl-driver/lib";
-    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-    OZONE_PLATFORM = "wayland";
-    GDK_BACKEND = "wayland";
-  };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;
-
-  system.stateVersion = "25.05";
 }

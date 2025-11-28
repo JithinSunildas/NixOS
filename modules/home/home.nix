@@ -1,4 +1,5 @@
-{ config, pkgs, ... }:
+# modules/home/home.nix
+{ config, pkgs, inputs, lib, ... }:
 
 {
   home.username = "tikhaboom";
@@ -22,17 +23,52 @@
   home.packages = with pkgs; [
     fastfetch
     btop
-    neovim
     tmux
     starship
     swaynotificationcenter
+    ghostty
+    wofi
+    alacritty
+    fuzzel
     waybar-mpris
     playerctl
     waypaper
     waybar
     swaylock
     swww
-  ];
+
+    # Security/Penetration Testing Tools
+    nmap
+    openvpn
+    hashcat
+    burpsuite
+    caido
+    wireshark
+    rockyou
+    seclists
+    metasploit
+    gobuster
+    ffuf
+    sqlmap
+    john
+    thc-hydra
+
+    # User apps
+    chromium
+    discord
+    obs-studio
+    spotify
+    vscode
+    bitwarden
+    obsidian
+    qbittorrent
+    inputs.zen-browser.packages.${pkgs.system}.default
+
+ # Virtualization/Container Tools
+   docker
+   docker-compose
+   lazydocker
+ ];
 
   gtk = {
     enable = true;

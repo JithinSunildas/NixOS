@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "NixOS in SuperDuperComputer!";
 
@@ -7,13 +8,12 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser = {
           url = "github:0xc000022070/zen-browser-flake";
-          # Make sure it follows your main nixpkgs input for compatibility
           inputs.nixpkgs.follows = "nixpkgs";
         };
       };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       home-manager,
@@ -31,11 +31,13 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.tikhaboom = import ./modules/home/home.nix;
+              home-manager.backupFileExtension = "before-nix";
             }
           ];
+          specialArgs = {
+          inherit inputs;
         };
       };
-
     };
+  };
 }
