@@ -27,7 +27,7 @@
     };
   };
 
-  time.timeZone = "America/Lima";
+  time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.xserver.xkb = {
@@ -69,7 +69,6 @@
     fzf
     lazydocker
     wofi
-    gcc
     ghostty
     vscode
     adw-gtk3
