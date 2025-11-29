@@ -11,6 +11,7 @@
   imports = [
     ./waybar/waybar.nix
     ./niri/niri.nix
+    ./theme/stylix.nix
     ./fish.nix
     ./wofi.nix
     ./tmux.nix
@@ -23,12 +24,12 @@
   home.packages = with pkgs; [
     fastfetch
     btop
+    eww
     tmux
     starship
     swaynotificationcenter
-    ghostty
+    keyd
     wofi
-    alacritty
     fuzzel
     waybar-mpris
     playerctl
@@ -36,31 +37,37 @@
     waybar
     swaylock
     swww
+    dict
+    spicetify-cli
+    adw-gtk3
+    papirus-icon-theme
+
+    # Langs
+    python3
+    python3Packages.pip
+    go
+    rustup
+    clang
+    iverilog
 
     # Security/Penetration Testing Tools
     nmap
     openvpn
     hashcat
-    burpsuite
-    caido
-    wireshark
-    rockyou
-    seclists
     metasploit
-    gobuster
     ffuf
-    sqlmap
-    john
-    thc-hydra
 
     # User apps
     chromium
     discord
+    ghostty
+    kitty
     obs-studio
     spotify
     vscode
-    bitwarden
+    kdePackages.okular
     obsidian
+    nautilus
     qbittorrent
     inputs.zen-browser.packages.${pkgs.system}.default
 
@@ -70,15 +77,6 @@
    lazydocker
  ];
 
-  gtk = {
-    enable = true;
-    theme.name = "Adwaita-dark";
-
-    colorScheme = "dark";
-  };
-  qt = {
-    style.name = "adwaita-dark";
-  };
   home.pointerCursor = {
     enable = true;
     gtk.enable = true;
@@ -109,6 +107,7 @@
   ########################################
   programs.bash.enable = true;
   programs.fish.enable = true;
+  services.ssh-agent.enable = true;
   services.swww.enable = true;
   services.swaync.enable = true;
 }

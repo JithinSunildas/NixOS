@@ -1,10 +1,8 @@
 input {
     keyboard {
         xkb {
-          
-            layout "us,es"
+            layout "us"
             options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-
         }
         numlock
     }
@@ -18,16 +16,16 @@ input {
         // drag false
         // drag-lock
         natural-scroll
-        accel-speed 0.2
-        accel-profile "flat"
+        accel-speed 1.2
+        // accel-profile "flat"
         // scroll-method "two-finger"
         // disabled-on-external-mouse
     }
 
     mouse {
         // off
-        // natural-scroll
-        // accel-speed 0.2
+        natural-scroll
+        accel-speed 1.2
         // accel-profile "flat"
         // scroll-method "no-scroll"
     }
@@ -70,7 +68,7 @@ output "HDMI-A-1" {
     mode "1920x1080@60"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 1
+    scale 0.75
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -275,7 +273,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
-    // off
+    off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
@@ -301,49 +299,37 @@ window-rule {
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match title="Picture in picture"
-    open-floating true
+    open-floating false
     default-floating-position x=100 y=100 relative-to="bottom-right"
     tiled-state true
 }
 
-workspace "1"
-workspace "brow"
-workspace "term"
-workspace "4"
-workspace "5"
-workspace "6"
-workspace "7"
-workspace "obs"
-workspace "oss"
-
-
-
-window-rule {
-    match app-id=r#"steam"#
-    open-on-workspace "oss"
-}
-window-rule {
-    match app-id=r#"obs"#
-    open-on-workspace "obs"
-}
-window-rule {
-    match app-id=r#"^Spotify$"#
-    open-on-workspace "oss"
-}
-window-rule {
-    match app-id=r#"^discord$"#
-    open-on-workspace "oss"
-}
-window-rule {
-    match app-id=r#"chromium"#
-    open-maximized true
-    open-on-workspace "brow"
-}
-window-rule {
-    match app-id=r#"ghostty"#
-    open-maximized true
-    open-on-workspace "term"
-}
+// window-rule {
+//     match app-id=r#"steam"#
+//     open-on-workspace "oss"
+// }
+// window-rule {
+//     match app-id=r#"obs"#
+//     open-on-workspace "obs"
+// }
+// window-rule {
+//     match app-id=r#"^Spotify$"#
+//     open-on-workspace "oss"
+// }
+// window-rule {
+//     match app-id=r#"^discord$"#
+//     open-on-workspace "oss"
+// }
+// window-rule {
+//     match app-id=r#"chromium"#
+//     open-maximized true
+//     open-on-workspace "brow"
+// }
+// window-rule {
+//     match app-id=r#"ghostty"#
+//     open-maximized true
+//     open-on-workspace "term"
+// }
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -376,31 +362,21 @@ spawn-sh-at-startup "waypaper --random"
 // spawn-at-startup "obs"
 // spawn-at-startup "steam"
 // spawn-at-startup "obsidian"
-spawn-at-startup "spotify"
-spawn-at-startup "chromium"
-spawn-at-startup "ghostty"
+// spawn-at-startup "spotify"
+// spawn-at-startup "chromium"
+// spawn-at-startup "ghostty"
 
 binds {
-    // Keys consist of modifiers separated by + signs, followed by an XKB key name
-    // in the end. To find an XKB name for a particular key, you may use a program
-    // like wev.
-    //
-    // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
-    // when running as a winit window.
-    //
-    // Most actions that you can bind here can also be invoked programmatically with
-    // `niri msg action do-something`.
-
-    // Mod-Shift-/, which is usually the same as Mod-?,
-    // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal " { spawn "ghostty"; }
-    Mod+B hotkey-overlay-title="Open a Browser " { spawn "chromium"; }
+    // App bindings
+    Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "ghostty"; }
+    Mod+E hotkey-overlay-title="Open Files " { spawn "nautilus"; }
+    Mod+B hotkey-overlay-title="Open a Browser " { spawn "zen"; }
     Mod+O hotkey-overlay-title="Open a Obsidian " { spawn "obsidian"; }
-    Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "wofi --show drun"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || exec fuzzel"; }
+    Mod+Shift+Space hotkey-overlay-title="Toggle waybar" { spawn-sh "pkill waybar || exec waybar"; }
+    // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -410,76 +386,53 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+    XF86AudioMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
 
-    // Open/close the Overview: a zoomed-out view of workspaces and windows.
-    // You can also move the mouse into the top-left hot corner,
-    // or do a four-finger swipe up on a touchpad.
+    // Window-Rules
     Mod+TAB repeat=false { toggle-overview; }
-
     Mod+Q repeat=false { close-window; }
 
-    Mod+Left  { focus-column-left; }
-    Mod+Down  { focus-window-or-workspace-down; }
-    Mod+Up    { focus-window-or-workspace-up; }
-    Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
     Mod+L     { focus-column-right; }
-
-    Mod+Ctrl+Left  { move-column-left; }
-    Mod+Ctrl+Down  { move-window-down; }
-    Mod+Ctrl+Up    { move-window-up; }
-    Mod+Ctrl+Right { move-column-right; }
-    Mod+Ctrl+H     { move-column-left; }
-    Mod+Ctrl+L     { move-column-right; }
-
-    // Alternative commands that move across workspaces when reaching
-    // the first or last window in a column.
     Mod+J     { focus-window-or-workspace-down; }
     Mod+K     { focus-window-or-workspace-up; }
+
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+L     { move-column-right; }
     Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
     Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    Mod+Shift+Home { move-column-to-first; }
+    Mod+Shift+End  { move-column-to-last; }
 
-
-    // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
-
-    // And you can also move a whole workspace to another monitor:
     // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
     Mod+U              { focus-workspace-down; }
     Mod+I              { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+    Mod+Shift+U         { move-column-to-workspace-down; }
+    Mod+Shift+I         { move-column-to-workspace-up; }
 
-    // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
-
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
+    Mod+Ctrl+Page_Down { move-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-workspace-up; }
+    Mod+Ctrl+U         { move-workspace-down; }
+    Mod+Ctrl+I         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -530,15 +483,15 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }

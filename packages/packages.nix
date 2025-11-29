@@ -11,21 +11,20 @@
     git
     curl
     wlogout
-    lsd
+    eza
+    zoxide
     bat
     tmux
     lazygit
     fzf
-    adw-gtk3
-    papirus-icon-theme
     nh
-    xfce.thunar
     gnumake
-    go
+    brightnessctl
     ly
     fish
     fastfetch
     btop
+    ripgrep
     nixfmt-rfc-style
     xwayland
     xwayland-satellite

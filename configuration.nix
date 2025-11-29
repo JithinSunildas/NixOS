@@ -1,4 +1,4 @@
-# Configuration.nix
+#Configuration.nix
 { config, pkgs, inputs, lib, ... }:
 
 {
@@ -46,6 +46,7 @@
   users.users.tikhaboom = {
     isNormalUser = true;
     description = "tikhaboom";
+    shell = pkgs.fish;
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -90,17 +91,24 @@
 
   # --- System Program Enables ---
   programs = {
+    fish.enable = true;
+
     neovim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
     };
+
     wireshark.enable = true;
+
     niri.enable = true;
+
     xwayland.enable = true;
+
     obs-studio.enable = true;
     obs-studio.plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -120,8 +128,10 @@
   
   services = {
     qbittorrent.enable = true;
-    displayManager.enable = true;
-    displayManager.ly.enable = true;
+    displayManager = {
+      enable = true;
+      ly.enable = true;
+    };
     # services.openssh.enable = true;
   };
 
