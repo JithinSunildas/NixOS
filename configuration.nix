@@ -1,4 +1,4 @@
-# Configuration.nix
+#Configuration.nix
 { config, pkgs, inputs, lib, ... }:
 
 {
@@ -10,6 +10,14 @@
 
   # --- NixOS Core Settings ---
   nixpkgs.config.allowUnfree = true;
+
+  # Hibernation swap space...
+  swapDevices = [ 
+    { device = "/dev/nvme0n1p3"; }
+  ];
+  boot.resumeDevice = "/dev/nvme0n1p3";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "hibernate";
+  services.logind.settings.Login.HandleLidSwitch = "hibernate";
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -24,6 +32,7 @@
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelModules = ["uinput"];
 
   # --- Networking & Localization ---
   networking = {
@@ -46,11 +55,15 @@
   users.users.tikhaboom = {
     isNormalUser = true;
     description = "tikhaboom";
+    shell = pkgs.fish;
     extraGroups = [
       "wheel"
+      "input"
+      "uinput"
       "networkmanager"
       "wireshark"
       "docker"
+      "adbusers"
     ];
   };
 
@@ -90,17 +103,24 @@
 
   # --- System Program Enables ---
   programs = {
+    fish.enable = true;
+
     neovim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
     };
+
     wireshark.enable = true;
+
     niri.enable = true;
+
     xwayland.enable = true;
+
     obs-studio.enable = true;
     obs-studio.plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -120,9 +140,27 @@
   
   services = {
     qbittorrent.enable = true;
-    displayManager.enable = true;
-    displayManager.ly.enable = true;
+    displayManager = {
+      enable = true;
+      ly.enable = true;
+    };
     # services.openssh.enable = true;
+  };
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      default = {
+        config = ''
+          (defsrc caps)
+          (deflayer base @cap)
+          (defalias cap (tap-hold 200 200 esc lctl))
+        '';
+      };
+    };
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];

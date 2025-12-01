@@ -11,10 +11,12 @@
   imports = [
     ./waybar/waybar.nix
     ./niri/niri.nix
+    ./theme/stylix.nix
     ./fish.nix
     ./wofi.nix
     ./tmux.nix
     ./ghostty.nix
+    ./bash.nix
   ];
 
   ########################################
@@ -23,44 +25,57 @@
   home.packages = with pkgs; [
     fastfetch
     btop
+    eww
     tmux
     starship
     swaynotificationcenter
-    ghostty
+    keyd
     wofi
-    alacritty
     fuzzel
     waybar-mpris
     playerctl
+    kmonad
     waypaper
     waybar
     swaylock
     swww
+    dict
+    spicetify-cli
+    adw-gtk3
+    papirus-icon-theme
+    unzip
+    xhost
+
+    # Langs
+    python3
+    python3Packages.pip
+    nixpkgs-fmt
+    go
+    rustup
+    clang
+    iverilog
 
     # Security/Penetration Testing Tools
     nmap
     openvpn
     hashcat
-    burpsuite
-    caido
-    wireshark
-    rockyou
-    seclists
     metasploit
-    gobuster
     ffuf
-    sqlmap
-    john
-    thc-hydra
 
     # User apps
+    zed-editor
     chromium
+    gnome-disk-utility
     discord
+    ghostty
+    kitty
     obs-studio
     spotify
     vscode
-    bitwarden
+    kdePackages.okular
+    gparted
     obsidian
+    nautilus
     qbittorrent
     inputs.zen-browser.packages.${pkgs.system}.default
 
@@ -68,24 +83,39 @@
    docker
    docker-compose
    lazydocker
+
+# === DEVELOPEMENT ===
+    # === Flutter ===
+    android-studio
+    android-tools
+    
+    # === Java/Spring Boot ===
+    jdk21
+    maven
+    gradle
+    spring-boot-cli
+    
+    # === PHP/Laravel ===
+    php83
+    php83Extensions.pdo
+    php83Extensions.mbstring
+    php83Extensions.xml
+    php83Extensions.curl
+    php83Extensions.zip
+    php83Extensions.gd
+    
+    # === Database ===
+    mysql80
+    postgresql
  ];
 
-  gtk = {
-    enable = true;
-    theme.name = "Adwaita-dark";
-
-    colorScheme = "dark";
-  };
-  qt = {
-    style.name = "adwaita-dark";
-  };
-  home.pointerCursor = {
-    enable = true;
-    gtk.enable = true;
-    package = pkgs.catppuccin-cursors.mochaSapphire;
-      name = "catppuccin-mocha-sapphire-cursors";
-    size = 12;
-  };
+ home.pointerCursor = {
+   enable = true;
+   gtk.enable = true;
+   package = pkgs.bibata-cursors;
+   name = "Bibata-Modern-Classic";
+   size = 24;
+ };
 
   ########################################
   # 🧬 Git config
@@ -94,8 +124,8 @@
 
     git = {
       enable = true;
-      userName = "JithinSunildas";
-      userEmail = "jithinsunildas6@gmail.com";
+      settings.user.name = "JithinSunildas";
+      settings.user.email = "jithinsunildas6@gmail.com";
       extraConfig = {
         init.defaultBranch = "main";
         pull.rebase = true;
@@ -109,6 +139,11 @@
   ########################################
   programs.bash.enable = true;
   programs.fish.enable = true;
+  services.ssh-agent.enable = true;
   services.swww.enable = true;
   services.swaync.enable = true;
+  # services.postgresql = {
+  #   enable = true;
+  #   enableTCPIP = true;
+  # };
 }
