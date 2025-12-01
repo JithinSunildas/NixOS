@@ -16,6 +16,7 @@
     ./wofi.nix
     ./tmux.nix
     ./ghostty.nix
+    ./bash.nix
   ];
 
   ########################################
@@ -33,6 +34,7 @@
     fuzzel
     waybar-mpris
     playerctl
+    kmonad
     waypaper
     waybar
     swaylock
@@ -41,10 +43,12 @@
     spicetify-cli
     adw-gtk3
     papirus-icon-theme
+    unzip
 
     # Langs
     python3
     python3Packages.pip
+    nixpkgs-fmt
     go
     rustup
     clang
@@ -58,6 +62,7 @@
     ffuf
 
     # User apps
+    zed-editor
     chromium
     discord
     ghostty
@@ -75,15 +80,39 @@
    docker
    docker-compose
    lazydocker
+
+# === DEVELOPEMENT ===
+    # === Flutter ===
+    android-studio
+    android-tools
+    
+    # === Java/Spring Boot ===
+    jdk21
+    maven
+    gradle
+    spring-boot-cli
+    
+    # === PHP/Laravel ===
+    php83
+    php83Extensions.pdo
+    php83Extensions.mbstring
+    php83Extensions.xml
+    php83Extensions.curl
+    php83Extensions.zip
+    php83Extensions.gd
+    
+    # === Database ===
+    mysql80
+    postgresql
  ];
 
-  home.pointerCursor = {
-    enable = true;
-    gtk.enable = true;
-    package = pkgs.catppuccin-cursors.mochaSapphire;
-      name = "catppuccin-mocha-sapphire-cursors";
-    size = 12;
-  };
+ home.pointerCursor = {
+   enable = true;
+   gtk.enable = true;
+   package = pkgs.bibata-cursors;
+   name = "Bibata-Modern-Classic";
+   size = 24;
+ };
 
   ########################################
   # 🧬 Git config
@@ -110,4 +139,8 @@
   services.ssh-agent.enable = true;
   services.swww.enable = true;
   services.swaync.enable = true;
+  # services.postgresql = {
+  #   enable = true;
+  #   enableTCPIP = true;
+  # };
 }

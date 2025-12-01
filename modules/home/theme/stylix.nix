@@ -10,9 +10,13 @@
     
     polarity = "dark";
     
-    targets.qt = {
-      enable = true;
-      platform = "qtct";
+    targets = {
+        qt = {
+            enable = true;
+            platform = "qtct";
+        };
+
+        neovim.enable = true;
     };
   };
   

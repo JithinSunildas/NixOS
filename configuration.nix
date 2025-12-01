@@ -11,6 +11,14 @@
   # --- NixOS Core Settings ---
   nixpkgs.config.allowUnfree = true;
 
+  # Hibernation swap space...
+  swapDevices = [ 
+    { device = "/dev/nvme0n1p3"; }
+  ];
+  boot.resumeDevice = "/dev/nvme0n1p3";
+  services.logind.lidSwitch = "hibernate";
+  services.logind.lidSwitchExternalPower = "hibernate";
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -24,6 +32,7 @@
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelModules = ["uinput"];
 
   # --- Networking & Localization ---
   networking = {
@@ -49,9 +58,12 @@
     shell = pkgs.fish;
     extraGroups = [
       "wheel"
+      "input"
+      "uinput"
       "networkmanager"
       "wireshark"
       "docker"
+      "adbusers"
     ];
   };
 
@@ -133,6 +145,22 @@
       ly.enable = true;
     };
     # services.openssh.enable = true;
+  };
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      default = {
+        config = ''
+          (defsrc caps)
+          (deflayer base @cap)
+          (defalias cap (tap-hold 200 200 esc lctl))
+        '';
+      };
+    };
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];
