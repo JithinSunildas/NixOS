@@ -44,6 +44,7 @@
     adw-gtk3
     papirus-icon-theme
     unzip
+    xhost
 
     # Langs
     python3
@@ -64,6 +65,7 @@
     # User apps
     zed-editor
     chromium
+    gnome-disk-utility
     discord
     ghostty
     kitty
@@ -71,6 +73,7 @@
     spotify
     vscode
     kdePackages.okular
+    gparted
     obsidian
     nautilus
     qbittorrent
@@ -121,8 +124,8 @@
 
     git = {
       enable = true;
-      userName = "JithinSunildas";
-      userEmail = "jithinsunildas6@gmail.com";
+      settings.user.name = "JithinSunildas";
+      settings.user.email = "jithinsunildas6@gmail.com";
       extraConfig = {
         init.defaultBranch = "main";
         pull.rebase = true;
