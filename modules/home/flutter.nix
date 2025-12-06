@@ -16,6 +16,7 @@ in
     flutter
     android-tools
     androidsdk
+    sdkmanager
 
     cmake
     ninja
