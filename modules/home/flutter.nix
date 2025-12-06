@@ -34,10 +34,4 @@ in
 
     GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdkRoot}/build-tools/34.0.0/aapt2";
   };
-  
-  programs.android-licenses.enable = true;
-  programs.android-licenses.licenses = [
-    "android-sdk-license"
-    "android-sdk-preview-license"
-  ];
 }
