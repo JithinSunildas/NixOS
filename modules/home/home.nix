@@ -15,7 +15,6 @@
     ./theme/stylix.nix
     ./fish/fish.nix
     ./ghostty.nix
-    ./flutter.nix
     ./spicetify.nix
     ./bash.nix
     ./tmux.nix
@@ -49,6 +48,8 @@
     unzip
     dunst
     xhost
+    ninja
+    pkg-config
 
     # Langs
     python3
@@ -57,6 +58,7 @@
     go
     rustup
     clang
+    cmake
     iverilog
     haskellPackages.ghc
     haskellPackages.cabal-install
@@ -95,6 +97,12 @@
    docker
    docker-compose
    lazydocker
+
+ # === Flutter ===
+    flutter
+    android-tools
+    androidsdk
+    sdkmanager
 
     # === Java/Spring Boot ===
     jdk21
