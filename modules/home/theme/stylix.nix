@@ -38,6 +38,7 @@
             platform = "qtct";
         };
 
+        fuzzel.enable = true;
         neovim.enable = true;
     };
   };
