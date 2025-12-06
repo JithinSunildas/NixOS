@@ -16,7 +16,6 @@ in
     flutter
     android-tools
     androidsdk
-    mesa-utils
 
     cmake
     ninja
