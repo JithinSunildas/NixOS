@@ -116,6 +116,11 @@
     postgresql
  ];
 
+ nixpkgs.config = {
+   android_sdk.accept_license = true;
+   allowUnfree = true; 
+ };
+
  home.pointerCursor = {
    enable = true;
    gtk.enable = true;

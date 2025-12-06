@@ -9,7 +9,6 @@ let
   };
 
   androidSdkRoot = "${androidSdk}/libexec/android-sdk";
-  android_sdk.accept_license = true;
 in
 {
   home.packages = with pkgs; [
