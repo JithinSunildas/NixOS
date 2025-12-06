@@ -2,6 +2,7 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   home.username = "tikhaboom";
   home.homeDirectory = "/home/tikhaboom";
   home.stateVersion = "25.05";
@@ -11,26 +12,26 @@
   imports = [
     ./waybar/waybar.nix
     ./niri/niri.nix
+    ./dunst.nix
     ./theme/stylix.nix
-    ./fish.nix
-    ./wofi.nix
+    ./fish/fish.nix
     ./tmux.nix
     ./ghostty.nix
     ./bash.nix
+    ./spicetify.nix
   ];
 
   ########################################
   # 🧰 User tools and base config
   ########################################
   home.packages = with pkgs; [
-    fastfetch
-    btop
     eww
     tmux
     starship
     swaynotificationcenter
     keyd
     wofi
+    yazi
     fuzzel
     waybar-mpris
     playerctl
@@ -38,12 +39,14 @@
     waypaper
     waybar
     swaylock
+    gifski
+    swayosd
     swww
     dict
-    spicetify-cli
     adw-gtk3
     papirus-icon-theme
     unzip
+    dunst
     xhost
 
     # Langs
@@ -54,8 +57,12 @@
     rustup
     clang
     iverilog
+    haskellPackages.ghc
+    haskellPackages.cabal-install
+    haskellPackages.stack
 
     # Security/Penetration Testing Tools
+    bettercap
     nmap
     openvpn
     hashcat
@@ -65,15 +72,19 @@
     # User apps
     zed-editor
     chromium
+    firefox
     gnome-disk-utility
+    gnome-calculator
+    telegram-desktop
+    mpv
     discord
     ghostty
     kitty
     obs-studio
-    spotify
     vscode
     kdePackages.okular
     gparted
+    dbeaver-bin
     obsidian
     nautilus
     qbittorrent
@@ -121,12 +132,11 @@
   # 🧬 Git config
   ########################################
   programs = {
-
     git = {
       enable = true;
-      settings.user.name = "JithinSunildas";
-      settings.user.email = "jithinsunildas6@gmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "JithinSunildas";
+        user.email = "jithinsunildas6@gmail.com";
         init.defaultBranch = "main";
         pull.rebase = true;
         color.ui = "auto";
@@ -142,8 +152,4 @@
   services.ssh-agent.enable = true;
   services.swww.enable = true;
   services.swaync.enable = true;
-  # services.postgresql = {
-  #   enable = true;
-  #   enableTCPIP = true;
-  # };
 }
