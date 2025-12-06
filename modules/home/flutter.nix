@@ -4,7 +4,7 @@ let
   androidSdk = pkgs.androidenv.composeAndroidPackages {
     platformVersions = [ "android-34" "android-33" ]; 
     buildToolsVersions = [ "34.0.0" ];
-    cmdlineToolsVersion = "latest";
+    cmdLineToolsVersion = "latest";
     includeEmulator = true;
   };
 
