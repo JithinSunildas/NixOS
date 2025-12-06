@@ -101,7 +101,6 @@
 
  # === Flutter ===
     flutter
-    android-tools
     androidsdk
     sdkmanager
 
