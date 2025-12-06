@@ -87,7 +87,7 @@
     vscode
     kdePackages.okular
     gparted
-    protonvpngui
+    protonvpn-gui
     dbeaver-bin
     obsidian
     nautilus
