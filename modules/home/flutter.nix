@@ -12,14 +12,6 @@ let
 in
 {
   home.packages = with pkgs; [
-    flutter
-    android-tools
-    androidsdk
-    sdkmanager
-
-    cmake
-    ninja
-    pkg-config
   ];
 
   home.sessionVariables = {

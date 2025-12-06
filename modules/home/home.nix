@@ -87,6 +87,7 @@
     vscode
     kdePackages.okular
     gparted
+    protonvpngui
     dbeaver-bin
     obsidian
     nautilus
