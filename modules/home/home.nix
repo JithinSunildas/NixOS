@@ -97,6 +97,7 @@
 
 # === DEVELOPEMENT ===
     # === Flutter ===
+    flutter
     android-studio
     android-tools
     

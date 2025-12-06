@@ -7,6 +7,8 @@
 }
 /* === Waybar Window === */
 window#waybar {
+    background-color: #000000;
+    color: #ffffff;
 }
 /* === Workspaces === */
 #workspaces {
@@ -19,11 +21,13 @@ window#waybar {
     border: 0;
     border-radius: 10px;
     background: #0F1419;
+    color: #E6E1CF;
 }
 #workspaces button:hover,
 #workspaces button.active {
     background: linear-gradient(45deg, #131721, #131721);
     border: 1px solid transparent;
+    color: #E6B673;
 }
 /* === Module Defaults === */
 #window,
@@ -47,6 +51,17 @@ window#waybar {
     background: #000000;  /* Fixed: was incomplete */
 }
 /* === Individual Modules === */
+#memory { color: #ffffff; }
+#clock { color: #ffffff; }
+#cpu { color: #ffffff; }
+#disk { color: #ffffff; }
+#network { color: #ffffff; }
+#tray { color: #ffffff; }
+#pulseaudio { color: #ffffff; }
+#custom-notification { color: #E6E1CF; }
+#custom-startmenu { color: #ffffff; }
+#custom-expand-icon { color: #ffffff; }
+#mpris { color: #ffffff; }
 /* === Special Modules === */
 #idle_inhibitor,
 #battery {
@@ -55,6 +70,9 @@ window#waybar {
     padding: 2px 20px;
     background: #000000;
 }
+#idle_inhibitor { color: #ffffff; }
+#battery { color: #ffffff; }
+#custom-exit { color: #ffffff; }
 /* === Tray === */
 .tray-group-item {
     padding: 0 4px;
