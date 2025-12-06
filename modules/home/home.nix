@@ -10,15 +10,16 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./waybar/waybar.nix
     ./niri/niri.nix
-    ./dunst.nix
+    ./waybar/waybar.nix
     ./theme/stylix.nix
     ./fish/fish.nix
-    ./tmux.nix
     ./ghostty.nix
-    ./bash.nix
+    ./flutter.nix
     ./spicetify.nix
+    ./bash.nix
+    ./tmux.nix
+    ./dunst.nix
   ];
 
   ########################################
@@ -95,12 +96,6 @@
    docker-compose
    lazydocker
 
-# === DEVELOPEMENT ===
-    # === Flutter ===
-    flutter
-    android-studio
-    android-tools
-    
     # === Java/Spring Boot ===
     jdk21
     maven

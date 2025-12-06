@@ -73,6 +73,7 @@
     nixfmt-rfc-style
     xwayland
     xwayland-satellite
+    android-tools
     dict
   ];
 
