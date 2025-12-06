@@ -102,7 +102,7 @@
  # === Flutter ===
     flutter
     androidsdk
-    sdkmanager
+    android-tools
 
     # === Java/Spring Boot ===
     jdk21
