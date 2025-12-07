@@ -125,6 +125,7 @@ alias fgrep='fgrep --color=auto'
 alias psf='ps aux | grep -v grep | grep -i'
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
 alias killall='killall -v'
+alias cmyram='sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
 
 # System info
 alias sysinfo='fastfetch'
@@ -145,7 +146,7 @@ alias zed='zed .'
 alias py='python3'
 alias pip='pip3'
 alias venv='python3 -m venv venv'
-alias activate='source venv/bin/activate.fish'
+alias srcfish='source ~/nix-config/modules/home/fish/live.fish'
 
 # Docker
 alias d='docker'

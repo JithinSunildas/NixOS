@@ -51,19 +51,6 @@
     ninja
     pkg-config
 
-    # Langs
-    python3
-    python3Packages.pip
-    nixpkgs-fmt
-    go
-    rustup
-    clang
-    cmake
-    iverilog
-    haskellPackages.ghc
-    haskellPackages.cabal-install
-    haskellPackages.stack
-
     # Security/Penetration Testing Tools
     bettercap
     nmap
@@ -93,6 +80,20 @@
     nautilus
     qbittorrent
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+
+    # Langs
+    python3
+    python3Packages.pip
+    nixpkgs-fmt
+    go
+    rustup
+    clang
+    cmake
+    iverilog
+    haskellPackages.ghc
+    haskellPackages.cabal-install
+    haskellPackages.stack
+    nodejs
 
  # Virtualization/Container Tools
    docker
