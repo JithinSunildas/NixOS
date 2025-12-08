@@ -108,7 +108,6 @@
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
     pyright
-    rust-analyzer
     nodePackages.prettier
     black
     rustfmt
