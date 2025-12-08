@@ -1,22 +1,18 @@
-# ~/.config/nix-config/programs/helix.nix
+# ~/.config/nix-config/programs/helix.nix (The Corrected Module)
 
 { config, pkgs, lib, ... }:
 
 let
-  editableConfigFile = ./live.toml; 
+  editableConfigFile = ./live.toml;
 
 in {
-  programs.helix = {
-    enable = true;
-    
-    extraPackages = [
-      (pkgs.writeText "helix-symlink-install" ''
-        ln -sf ${editableConfigFile} $out/.config/helix/config.toml
-      '')
-    ];
-
-    extraFiles = {
-      "live.toml".source = editableConfigFile;
+  programs.helix.enable = true;
+  stylix.targets.helix.enable = true;
+  
+  home.file = {
+    ".config/helix/config.toml" = {
+      source = editableConfigFile;
+      type = "link"; 
     };
   };
 }
