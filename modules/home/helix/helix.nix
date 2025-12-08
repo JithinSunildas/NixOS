@@ -6,7 +6,6 @@ let
   editableConfigFile = ./live.toml;
 in {
   programs.helix.enable = true;
-  stylix.targets.helix.enable = true;
   
   home.file = {
     ".config/helix/config.toml" = {
