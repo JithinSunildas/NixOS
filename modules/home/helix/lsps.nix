@@ -43,9 +43,6 @@ in
     vscode-langservers-extracted
     stylelint-lsp
 
-    # rust
-    rust-toolchain
-
     # protobuf
     buf
 
