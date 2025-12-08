@@ -69,22 +69,7 @@
             cursor-line = "warning";
           };
 
-          clipboard-provider =
-            if (!config.conf.headless) then
-              (if (!config.conf.darwin) then "wayland" else "pasteboard")
-            else
-              {
-                custom = with config.programs.system-clip; {
-                  yank = {
-                    command = package;
-                    args = [ "paste" ];
-                  };
-                  paste = {
-                    command = package;
-                    args = [ "copy" ];
-                  };
-                };
-              };
+          clipboard-provider = "wayland";
         };
       };
 
