@@ -21,7 +21,7 @@ in
       # Plugins
       lua54Packages.plenary-nvim
       lua54Packages.lualine-nvim
-      vimPlugins.mini-nivm
+      vimPlugins.mini-nvim
       # Rust
       rust-analyzer
       rustfmt
