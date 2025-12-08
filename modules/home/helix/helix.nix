@@ -10,9 +10,13 @@ in {
   stylix.targets.helix.enable = true;
   
   home.file = {
-    "/home/tikhaboom/.config/helix/config.toml" = {
+    "**config/helix/config.toml" = {
       source = editableConfigFile;
       type = "link"; 
     };
+  };
+
+  home.sessionVariables = {
+    HELIX_CONFIG = "${config.home.homeDirectory}/.config/helix"; 
   };
 }
