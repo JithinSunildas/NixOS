@@ -95,7 +95,7 @@
     go
     rustup
     nodePackages_latest.coc-clangd
-    clangd
+    clang
     cmake
     iverilog
     haskellPackages.ghc
