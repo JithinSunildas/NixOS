@@ -1,6 +1,9 @@
 # modules/home/neovim/nvim.nix
 { config, pkgs, lib, ... }:
 
+let
+  initLua = ./init.lua;
+in
 {
   programs.neovim = {
     enable = true;
@@ -8,6 +11,7 @@
     viAlias = true;
     vimAlias = true;
     
+    # All LSPs, formatters, and tools via Nix
     extraPackages = with pkgs; [
       # Rust
       rust-analyzer
@@ -21,8 +25,8 @@
       # PHP/Laravel
       phpactor
       php83Packages.composer
-      php83Packages.phpstan
-      php83Packages.php-cs-fixer
+      phpstan
+      php-cs-fixer
       
       # JavaScript/TypeScript
       nodePackages.typescript-language-server
@@ -72,6 +76,6 @@
       wget
     ];
     
-    extraLuaConfig = builtins.readFile ./init.lua;
+    extraLuaConfig = builtins.readFile initLua;
   };
 }
