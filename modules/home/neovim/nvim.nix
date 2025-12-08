@@ -21,7 +21,7 @@
       # PHP/Laravel
       phpactor
       php83Packages.composer
-      phpstan
+      php83Packages.phpstan
       php-cs-fixer
       
       # JavaScript/TypeScript
