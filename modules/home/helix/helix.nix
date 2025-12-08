@@ -233,7 +233,7 @@
           };
         };
       };
-    ignores = import "./ignores.nix";
+    ignores = import "~/nix-config/modules/home/helix/ignores.nix";
 
     };
 
