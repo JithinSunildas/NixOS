@@ -19,9 +19,9 @@ in
     # All LSPs, formatters, and tools via Nix
     extraPackages = with pkgs; [
       # Plugins
-      plenary-nvim
-      lualine-nvim
-      mini-nivm
+      lua54Packages.plenary-nvim
+      lua54Packages.lualine-nvim
+      vimPlugins.mini-nivm
       # Rust
       rust-analyzer
       rustfmt
