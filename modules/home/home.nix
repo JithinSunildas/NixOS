@@ -110,7 +110,6 @@
     pyright
     nodePackages.prettier
     black
-    rustfmt
 
     # Virtualization/Container Tools
     docker
