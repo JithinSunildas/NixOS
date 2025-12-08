@@ -102,6 +102,16 @@
     haskellPackages.cabal-install
     haskellPackages.stack
     nodejs
+    clang-tools
+    lldb
+    jdt-language-server
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
+    pyright
+    rust-analyzer
+    nodePackages.prettier
+    black
+    rustfmt
 
     # Virtualization/Container Tools
     docker
