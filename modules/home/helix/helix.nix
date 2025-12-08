@@ -1,10 +1,9 @@
-# ~/.config/nix-config/programs/helix.nix (The Corrected Module)
+# ~/.config/nix-config/programs/helix.nix (Final FIX)
 
 { config, pkgs, lib, ... }:
 
 let
   editableConfigFile = ./live.toml;
-
 in {
   programs.helix.enable = true;
   stylix.targets.helix.enable = true;
