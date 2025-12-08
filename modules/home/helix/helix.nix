@@ -14,7 +14,7 @@
       package = pkgs.helix;
       enable = true;
       defaultEditor = true;
-      extraPackages = import "./lsps.nix" pkgs config;
+      extraPackages = import "${inputs.self}/modules/home/helix/lsps.nix" pkgs config;
 
       settings = {
         keys = {
@@ -233,6 +233,7 @@
           };
         };
       };
+    ignores = import "${inputs.self}/modules/home/helix/ignores.nix";
 
     };
 
