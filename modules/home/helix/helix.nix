@@ -9,7 +9,4 @@ in {
 
   home.file.".config/helix/config.toml".source = ./live.toml;  
 
-  home.sessionVariables = {
-    HELIX_CONFIG = "${config.home.homeDirectory}/.config/helix"; 
-  };
 }
