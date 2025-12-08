@@ -15,9 +15,6 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    plugins = {
-      mini-nivm.enable = true;
-    };
 
     # All LSPs, formatters, and tools via Nix
     extraPackages = with pkgs; [
