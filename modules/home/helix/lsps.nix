@@ -58,5 +58,4 @@ in
     config.programs.git.package
     config.programs.yazi.package
   ]
-  ++ headlessPkgsOnly
   ++ x64PkgsOnly
