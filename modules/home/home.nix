@@ -94,8 +94,8 @@
     nixpkgs-fmt
     go
     rustup
-    nodePackages_latest.clangd
-    clang
+    nodePackages_latest.coc-clangd
+    clangd
     cmake
     iverilog
     haskellPackages.ghc
