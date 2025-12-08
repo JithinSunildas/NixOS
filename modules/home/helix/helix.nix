@@ -10,7 +10,7 @@ in {
   stylix.targets.helix.enable = true;
   
   home.file = {
-    ".config/helix/config.toml" = {
+    "~/.config/helix/config.toml" = {
       source = editableConfigFile;
       type = "link"; 
     };
