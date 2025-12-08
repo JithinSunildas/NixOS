@@ -1,4 +1,4 @@
-# ~/.config/nix-config/programs/helix.nix (Final FIX)
+# ~/.config/nix-config/programs/helix.nix (Final Clean Up)
 
 { config, pkgs, lib, ... }:
 
@@ -9,7 +9,7 @@ in {
   stylix.targets.helix.enable = true;
   
   home.file = {
-    "**.config/helix/config.toml**" = {
+    ".config/helix/config.toml" = {
       source = editableConfigFile;
       type = "link"; 
     };
