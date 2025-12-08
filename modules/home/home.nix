@@ -1,5 +1,11 @@
 # modules/home/home.nix
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -96,12 +102,12 @@
     haskellPackages.stack
     nodejs
 
- # Virtualization/Container Tools
-   docker
-   docker-compose
-   lazydocker
+    # Virtualization/Container Tools
+    docker
+    docker-compose
+    lazydocker
 
- # === Flutter ===
+    # === Flutter ===
     flutter
     androidsdk
     android-tools
@@ -111,7 +117,7 @@
     maven
     gradle
     spring-boot-cli
-    
+
     # === PHP/Laravel ===
     php83
     php83Extensions.pdo
@@ -120,23 +126,23 @@
     php83Extensions.curl
     php83Extensions.zip
     php83Extensions.gd
-    
+
     # === Database ===
     mysql80
     postgresql
- ];
+  ];
 
- nixpkgs.config = {
-   android_sdk.accept_license = true;
- };
+  nixpkgs.config = {
+    android_sdk.accept_license = true;
+  };
 
- home.pointerCursor = {
-   enable = true;
-   gtk.enable = true;
-   package = pkgs.bibata-cursors;
-   name = "Bibata-Modern-Classic";
-   size = 24;
- };
+  home.pointerCursor = {
+    enable = true;
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
 
   ########################################
   # 🧬 Git config

@@ -1,7 +1,7 @@
 # flake.nix
 {
   description = "NixOS in SuperDuperComputer!";
-  
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     home-manager = {
@@ -21,30 +21,40 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  
-  outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, stylix, spicetify-nix, ... }: {
-    nixosConfigurations = {
-      SuperDuperComputer = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./configuration.nix ];
-        specialArgs = { inherit inputs; };
+
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      zen-browser,
+      stylix,
+      spicetify-nix,
+      ...
+    }:
+    {
+      nixosConfigurations = {
+        SuperDuperComputer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./configuration.nix ];
+          specialArgs = { inherit inputs; };
+        };
       };
-    };
-    
-    homeConfigurations = {
-      tikhaboom = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        
-        modules = [
-          ./modules/home/home.nix
-          stylix.homeModules.stylix
-          spicetify-nix.homeManagerModules.default
-        ];
-        
-        extraSpecialArgs = {
-          inherit inputs spicetify-nix;
+
+      homeConfigurations = {
+        tikhaboom = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+          modules = [
+            ./modules/home/home.nix
+            stylix.homeModules.stylix
+            spicetify-nix.homeManagerModules.default
+          ];
+
+          extraSpecialArgs = {
+            inherit inputs spicetify-nix;
+          };
         };
       };
     };
-  };
 }

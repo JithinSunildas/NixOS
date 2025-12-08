@@ -1,5 +1,11 @@
 #Configuration.nix
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -11,7 +17,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Hibernation swap space...
-  swapDevices = [ 
+  swapDevices = [
     { device = "/dev/nvme0n1p3"; }
   ];
   boot.resumeDevice = "/dev/nvme0n1p3";
@@ -22,9 +28,9 @@
     "nix-command"
     "flakes"
   ];
-  
+
   system.stateVersion = "25.05";
-  
+
   # --- Bootloader ---
   boot.loader = {
     systemd-boot.enable = true;
@@ -32,7 +38,7 @@
     systemd-boot.graceful = true;
   };
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelModules = ["uinput"];
+  boot.kernelModules = [ "uinput" ];
 
   # --- Networking & Localization ---
   networking = {
@@ -88,7 +94,7 @@
     layout = "us";
     variant = "";
   };
-  
+
   security.polkit.enable = true;
   virtualisation.docker.enable = true;
 
@@ -119,16 +125,16 @@
     };
     gamemode.enable = true;
   };
-  
+
   xdg.portal.wlr.enable = true;
-  
+
   fonts = {
     fontconfig.enable = true;
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
     ];
   };
-  
+
   services = {
     qbittorrent.enable = true;
     displayManager = {
@@ -139,7 +145,7 @@
   };
 
   services.gvfs.enable = true;
-  programs.adb.enable = true; 
+  programs.adb.enable = true;
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
@@ -159,7 +165,7 @@
 
   services.postgresql = {
     enable = true;
-    enableTCPIP = true; 
+    enableTCPIP = true;
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];

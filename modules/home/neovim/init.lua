@@ -1,4 +1,5 @@
 -- modules/neovim/init.lua
+-- Basic settings
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -40,7 +41,33 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin setup
 require("lazy").setup({
 	-- Colorscheme
-	{},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
+				transparent_background = false,
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					nvimtree = true,
+					treesitter = true,
+					telescope = true,
+					which_key = true,
+				},
+			})
+			vim.cmd.colorscheme("catppuccin-mocha")
+		end,
+	},
+
+	-- Icons (required for many plugins)
+	{
+		"nvim-tree/nvim-web-devicons",
+		lazy = true,
+	},
 
 	-- Treesitter for syntax highlighting
 	{
@@ -317,16 +344,26 @@ require("lazy").setup({
 	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle File Explorer" },
 		},
 		config = function()
 			require("nvim-tree").setup({
+				sort_by = "case_sensitive",
 				view = {
-					width = 30,
+					width = 35,
 				},
 				renderer = {
 					group_empty = true,
+					icons = {
+						show = {
+							file = true,
+							folder = true,
+							folder_arrow = true,
+							git = true,
+						},
+					},
 				},
 				filters = {
 					dotfiles = false,
@@ -415,13 +452,23 @@ require("lazy").setup({
 	-- Status line
 	{
 		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		config = function()
 			require("lualine").setup({
 				options = {
 					theme = "catppuccin",
-					component_separators = "|",
-					section_separators = "",
+					component_separators = { left = "|", right = "|" },
+					section_separators = { left = "", right = "" },
+					globalstatus = true,
+				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch", "diff", "diagnostics" },
+					lualine_c = { { "filename", path = 1 } },
+					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
 				},
 			})
 		end,
@@ -482,7 +529,104 @@ require("lazy").setup({
 		event = { "BufReadPost", "BufNewFile" },
 		main = "ibl",
 		config = function()
-			require("ibl").setup()
+			require("ibl").setup({
+				indent = {
+					char = "│",
+					tab_char = "│",
+				},
+				scope = { enabled = false },
+				exclude = {
+					filetypes = {
+						"help",
+						"lazy",
+						"mason",
+						"notify",
+						"NvimTree",
+					},
+				},
+			})
+		end,
+	},
+
+	-- Buffer line (tabs)
+	{
+		"akinsho/bufferline.nvim",
+		event = "VeryLazy",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					mode = "buffers",
+					diagnostics = "nvim_lsp",
+					always_show_bufferline = false,
+					offsets = {
+						{
+							filetype = "NvimTree",
+							text = "File Explorer",
+							highlight = "Directory",
+							separator = true,
+						},
+					},
+				},
+			})
+		end,
+	},
+
+	-- Smooth scrolling
+	{
+		"karb94/neoscroll.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("neoscroll").setup()
+		end,
+	},
+
+	-- Colorize color codes
+	{
+		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPre",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
+
+	-- Dashboard
+	{
+		"goolord/alpha-nvim",
+		event = "VimEnter",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			local alpha = require("alpha")
+			local dashboard = require("alpha.themes.dashboard")
+
+			dashboard.section.header.val = {
+				[[                                                                       ]],
+				[[                                                                       ]],
+				[[                                                                       ]],
+				[[                                                                       ]],
+				[[                                                                     ]],
+				[[       ████ ██████           █████      ██                     ]],
+				[[      ███████████             █████                             ]],
+				[[      █████████ ███████████████████ ███   ███████████   ]],
+				[[     █████████  ███    █████████████ █████ ██████████████   ]],
+				[[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+				[[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+				[[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
+				[[                                                                       ]],
+				[[                                                                       ]],
+				[[                                                                       ]],
+			}
+
+			dashboard.section.buttons.val = {
+				dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
+				dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+				dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
+				dashboard.button("g", "  Find text", ":Telescope live_grep <CR>"),
+				dashboard.button("c", "  Config", ":e ~/.config/home-manager/modules/neovim/init.lua <CR>"),
+				dashboard.button("q", "  Quit", ":qa<CR>"),
+			}
+
+			alpha.setup(dashboard.opts)
 		end,
 	},
 })
