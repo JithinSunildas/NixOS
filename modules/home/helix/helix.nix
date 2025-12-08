@@ -233,7 +233,7 @@
           };
         };
       };
-    ignores = import ./ignores.nix";
+    ignores = import "./ignores.nix";
 
     };
 
