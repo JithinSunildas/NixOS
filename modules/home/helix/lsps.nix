@@ -13,10 +13,6 @@ with pkgs; let
     then extensions
     else [];
 
-  headlessPkgsOnly = extensionsIf (config.xfconf.headless) [
-    wl-clipboard
-  ];
-
   x64PkgsOnly = extensionsIf (!isArm) [
     terraform-ls
     starpls-bin
