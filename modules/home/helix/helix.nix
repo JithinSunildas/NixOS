@@ -233,7 +233,7 @@
           };
         };
       };
-    ignores = import "${inputs.self}/ignores.nix";
+    ignores = import ./ignores.nix";
 
     };
 
