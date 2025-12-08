@@ -13,7 +13,7 @@ with pkgs; let
     then extensions
     else [];
 
-  headlessPkgsOnly = extensionsIf (config.conf.headless) [
+  headlessPkgsOnly = extensionsIf (config.dconf.headless) [
     wl-clipboard
   ];
 
