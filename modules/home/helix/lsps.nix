@@ -10,7 +10,7 @@ with pkgs; let
 
   x64PkgsOnly = extensionsIf (!isArm) [
     terraform-ls
-    starpls-bin
+    starpls
   ];
 in
   [
