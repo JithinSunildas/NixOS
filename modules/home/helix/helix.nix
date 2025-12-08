@@ -233,7 +233,7 @@
           };
         };
       };
-    ignores = import "~/nix-config/modules/home/helix/ignores.nix";
+    ignores = import "/home/tikhaboom/nix-config/modules/home/helix/ignores.nix";
 
     };
 
