@@ -44,6 +44,7 @@
     playerctl
     kmonad
     waypaper
+    helix
     waybar
     swaylock
     gifski
