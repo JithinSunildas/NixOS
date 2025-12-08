@@ -95,6 +95,7 @@
     go
     rustup
     clang
+    clangd
     cmake
     iverilog
     haskellPackages.ghc
