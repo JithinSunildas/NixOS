@@ -21,6 +21,7 @@
     ./theme/stylix.nix
     ./fish/fish.nix
     ./helix/helix.nix
+    ./helix/languages.nix
     ./ghostty.nix
     ./spicetify.nix
     ./bash.nix
