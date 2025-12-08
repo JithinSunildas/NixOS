@@ -3,7 +3,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  editableConfigFile = ~/nix-config/modules/home/helix/live.toml;
+  editableConfigFile = ./live.toml;
 
 in {
   programs.helix.enable = true;
