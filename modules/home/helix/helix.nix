@@ -11,7 +11,6 @@ in {
   home.file = {
     ".config/helix/config.toml" = {
       source = editableConfigFile;
-      type = "link"; 
     };
   };
 
