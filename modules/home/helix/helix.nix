@@ -17,8 +17,6 @@
       extraPackages = import "${inputs.self}/shared/lsps.nix" pkgs config;
 
       settings = {
-        theme = "gruvbox";
-
         keys = {
           normal = {
             ret = "goto_word";
@@ -236,7 +234,6 @@
         };
       };
 
-      ignores = import "${inputs.self}/shared/ignores.nix";
     };
 
   xdg.configFile."clangd/config.yaml".text = ''
