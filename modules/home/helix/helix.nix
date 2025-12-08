@@ -1,4 +1,4 @@
-# ~/.config/nix-config/programs/helix.nix (Final Clean Up)
+# modules/home/helix/helix.nix 
 
 { config, pkgs, lib, ... }:
 
