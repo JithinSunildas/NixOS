@@ -1,0 +1,29 @@
+# ~/.config/nix-config/helix/config.toml
+
+[editor]
+auto-format = true
+idle-timeout = 200
+line-number = "relative"
+true-color = true
+popup-border = "single"
+scroll-lines = 1
+
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"
+
+[editor.lsp]
+auto-format = true
+display-inlay-hints = true
+
+[editor.file-picker]
+hidden = false
+sort-by = "alpha"
+sort-last = ["directories"]
+
+[keys.normal]
+"C-s" = ":w"
+"C-h" = "goto_previous_buffer"
+"C-l" = "goto_next_buffer"
+w = { h = "hsplit", v = "vsplit" }
