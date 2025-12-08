@@ -1,10 +1,5 @@
 pkgs: config:
 with pkgs; let
-  rust-toolchain = pkgs.rust-bin.selectLatestNightlyWith (toolchain:
-    toolchain.default.override {
-      extensions = ["rustfmt" "rust-analyzer" "rust-src" "cargo" "rustc"];
-      targets = ["x86_64-unknown-linux-gnu"];
-    });
 
   isArm = pkgs.system == "aarch64-linux";
 
