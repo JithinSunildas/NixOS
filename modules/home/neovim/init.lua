@@ -1,33 +1,25 @@
-# modules/home/neovim/neovim.nix
-{ config, pkgs, lib, ... }:
+-- modules/home/neovim/init.lua (The NEW version)
 
-{
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    
-    # Just the essentials to start
-    extraPackages = with pkgs; [
-      # Basic tools
-      ripgrep    # For telescope grep
-      fd         # For telescope file finding
-      git        # For git integration
-      
-      # Rust LSP
-      cargo      # Includes cargo-fmt
-    ];
-    
-    # Load our Lua config
-    extraLuaConfig = builtins.readFile ./init.lua;
-  };
-  
-  # Make tools available in shell too
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    git
-    cargo
-  ];
-}
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins", {
+})
+
+require("options")
+require("keymaps")
+require("plugins")
+require("lsp")

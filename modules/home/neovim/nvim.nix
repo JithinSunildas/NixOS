@@ -1,6 +1,9 @@
-# modules/home/neovim/neovim.nix
+# modules/home/neovim/nvim.nix 
 { config, pkgs, lib, ... }:
 
+let
+  nvimConfigSrc = "${config.home.homeDirectory}/nix-config/modules/home/neovim"; 
+in
 {
   programs.neovim = {
     enable = true;
@@ -8,23 +11,26 @@
     viAlias = true;
     vimAlias = true;
     
-    # Just the essentials to start
-    extraPackages = with pkgs; [
-      # Basic tools
-      ripgrep    # For telescope grep
-      fd         # For telescope file finding
-      git        # For git integration
-      
+    plugins = with pkgs.vimPlugins; [
+      lazy-nvim
     ];
-    
-    # Load our Lua config
-    extraLuaConfig = builtins.readFile ./init.lua;
+
+    extraPackages = with pkgs; [
+      ripgrep
+      fd
+      git
+      cargo
+    ];
   };
   
+  home.file."${config.xdg.configHome}/nvim".source = 
+    lib.mkOutOfStoreSymlink nvimConfigSrc;
+
   # Make tools available in shell too
   home.packages = with pkgs; [
     ripgrep
     fd
     git
+    cargo
   ];
 }
