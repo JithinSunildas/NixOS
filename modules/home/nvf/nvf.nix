@@ -13,10 +13,6 @@
       lineNumberMode = "relNumber";
       preventJunkFiles = true;
       useSystemClipboard = true;
-      tabWidth = 4;
-      autoIndent = true;
-      syntaxHighlighting = true;
-      mapLeaderSpace = true;
       
       # Theme - disable for Stylix
       theme.enable = false;
@@ -30,18 +26,10 @@
       # Tabline
       tabline.nvimBufferline.enable = true;
       
-      # Dashboard
-      dashboard.dashboard-nvim.enable = true;
-      
       # File tree
       filetree.nvimTree = {
         enable = true;
         openOnSetup = false;
-        setupOpts = {
-          view.width = 35;
-          renderer.group_empty = true;
-          filters.dotfiles = false;
-        };
       };
       
       # Telescope
@@ -51,30 +39,21 @@
       treesitter = {
         enable = true;
         fold = true;
-        context.enable = true;
       };
       
       # Git
       git = {
         enable = true;
         gitsigns.enable = true;
-        gitsigns.codeActions = true;
       };
       
       # LSP
       lsp = {
         enable = true;
         formatOnSave = true;
-        lspkind.enable = true;
-        lightbulb.enable = true;
-        nvimCodeActionMenu.enable = true;
         
         # Language servers
-        rust-analyzer = {
-          enable = true;
-          installCargo = true;
-          installRustc = true;
-        };
+        rust-analyzer.enable = true;
         ts-ls.enable = true;
         html.enable = true;
         cssls.enable = true;
@@ -99,72 +78,35 @@
         nix.enable = true;
         lua.enable = true;
         clang.enable = true;
-        markdown.enable = true;
-        bash.enable = true;
       };
       
       # Visuals
       visuals = {
         enable = true;
         nvimWebDevicons.enable = true;
-        scrollBar.enable = true;
-        smoothScroll.enable = true;
-        indentBlankline = {
-          enable = true;
-          fillChar = "│";
-        };
-        cursorline.enable = true;
-      };
-      
-      # Utility
-      utility = {
-        diffview-nvim.enable = true;
-        motion = {
-          hop.enable = true;
-          leap.enable = true;
-        };
+        indentBlankline.enable = true;
       };
       
       # UI
       ui = {
-        borders = {
-          enable = true;
-          globalStyle = "rounded";
-        };
+        borders.enable = true;
         noice.enable = true;
-        colorizer.enable = true;
-        illuminate.enable = true;
       };
       
       # Autocomplete
       autocomplete.enable = true;
       
-      # Snippets
-      snippets.luasnip.enable = true;
-      
       # Terminal
-      terminal.toggleterm = {
-        enable = true;
-        direction = "horizontal";
-      };
-      
-      # Session
-      session.nvim-session-manager.enable = true;
+      terminal.toggleterm.enable = true;
       
       # Keybindings
-      binds = {
-        whichKey.enable = true;
-        cheatsheet.enable = true;
-      };
+      binds.whichKey.enable = true;
       
       # Comments
       comments.comment-nvim.enable = true;
       
       # Autopairs
       autopairs.enable = true;
-      
-      # Projects
-      projects.project-nvim.enable = true;
     };
   };
   
@@ -178,8 +120,7 @@
     phpactor
     php83Packages.composer
     php83Packages.phpstan
-    php83Packages.php-cs-fixer
-    
+    php83Packages.php-cs-fixer    
     # Java
     jdt-language-server
     google-java-format
