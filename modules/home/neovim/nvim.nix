@@ -1,6 +1,6 @@
 # modules/home/neovim/nvim.nix 
-{ config, pkgs, lib, ... }:
-
+{
+home-manager.users.tikhaboom = { config, pkgs, lib, ... }: {
 let
   nvimConfigSrc = "${config.home.homeDirectory}/nix-config/modules/home/neovim"; 
 in
@@ -22,7 +22,6 @@ in
       cargo
     ];
   };
-  
   home.file."${config.xdg.configHome}/nvim".source = 
     lib.mkOutOfStoreSymlink nvimConfigSrc;
 
@@ -33,4 +32,5 @@ in
     git
     cargo
   ];
+  };
 }
