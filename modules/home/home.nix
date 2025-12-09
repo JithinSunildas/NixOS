@@ -16,6 +16,7 @@
   programs.home-manager.enable = true;
 
   imports = [
+    inputs.nvf.homeManagerModules.default
     ./niri/niri.nix
     ./waybar/waybar.nix
     ./theme/stylix.nix
@@ -167,6 +168,27 @@
         pull.rebase = true;
         color.ui = "auto";
       };
+    };
+  };
+programs.nvf = {
+    enable = true;
+    
+    # Customize Neovim settings declaratively in Nix:
+    vim = {
+      # Use a preferred colorscheme
+      colorscheme.enable = true;
+      colorscheme.name = "tokyonight";
+      
+      # Example: Enable core features
+      languages.enableLSP = true;
+      languages.enableTreesitter = true;
+      
+      # Example: Configure Nix support
+      languages.nix.enable = true;
+      
+      # Add other features like Telescope, Git, etc., directly here
+      telescope.enable = true;
+      git.enable = true;
     };
   };
 
