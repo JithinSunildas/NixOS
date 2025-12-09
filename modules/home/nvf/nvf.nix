@@ -177,8 +177,8 @@
     # PHP/Laravel
     phpactor
     php83Packages.composer
-    phpstan
-    php-cs-fixer
+    php83Packages.phpstan
+    php83Packages.php-cs-fixer
     
     # Java
     jdt-language-server
