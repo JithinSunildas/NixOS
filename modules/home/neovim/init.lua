@@ -17,7 +17,6 @@
       
       # Rust LSP
       rust-analyzer
-      cargo      # Includes cargo-fmt
     ];
     
     # Load our Lua config
