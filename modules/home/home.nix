@@ -173,7 +173,6 @@
 
     # You can add other top-level NVF options here if you want to configure
     # things outside of the 'vim' attribute set.
-  };
 
   ########################################
   # 🖥️ Shell config (optional)
