@@ -54,6 +54,7 @@
     adw-gtk3
     papirus-icon-theme
     unzip
+    imagemagick
     dunst
     xhost
     ninja
