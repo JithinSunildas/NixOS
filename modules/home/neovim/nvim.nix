@@ -15,8 +15,6 @@
       fd         # For telescope file finding
       git        # For git integration
       
-      # One LSP to test
-      rust-analyzer
     ];
     
     # Load our Lua config
@@ -28,6 +26,5 @@
     ripgrep
     fd
     git
-    rust-analyzer
   ];
 }
