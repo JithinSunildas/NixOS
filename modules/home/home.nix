@@ -20,6 +20,7 @@
     ./waybar/waybar.nix
     ./theme/stylix.nix
     ./fish/fish.nix
+    ./neovim/nvim.nix
     ./ghostty.nix
     ./spicetify.nix
     ./bash.nix
