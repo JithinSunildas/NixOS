@@ -1,5 +1,11 @@
 -- modules/home/neovim/init.lua
 
+local config_dir = vim.fn.stdpath("config")
+package.path = package.path .. ";" .. config_dir .. "/?.lua"
+package.path = package.path .. ";" .. config_dir .. "/?/init.lua"
+package.path = package.path .. ";" .. config_dir .. "/plugins/?.lua"
+-- ================================================
+--
 -- Basic settings
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
