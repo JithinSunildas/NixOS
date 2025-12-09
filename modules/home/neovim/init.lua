@@ -1,55 +1,90 @@
 -- modules/home/neovim/init.lua
+-- Minimal Neovim config with Lazy.nvim
 
-local config_dir = vim.fn.stdpath("config")
-package.path = package.path .. ";" .. config_dir .. "/?.lua"
-package.path = package.path .. ";" .. config_dir .. "/?/init.lua"
-package.path = package.path .. ";" .. config_dir .. "/plugins/?.lua"
--- ================================================
---
 -- Basic settings
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Core options
+-- Use system clipboard
 vim.opt.clipboard = "unnamedplus"
+
+-- Basic editor settings
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = false
-vim.opt.wrap = true
-vim.opt.breakindent = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.termguicolors = true
-vim.opt.signcolumn = "yes"
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.undofile = true
-vim.opt.cursorline = true
-vim.opt.scrolloff = 10
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load plugin definitions from the plugins folder
-require("plugins.alpha")
-require("lazy").setup(require("plugins"))
+-- Plugin setup
+require("lazy").setup({
+  -- Treesitter for syntax highlighting
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {},  -- Managed by Nix
+        auto_install = false,
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end,
+  },
+  
+  -- LSP Configuration
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require("lspconfig")
+      
+      -- Just Rust for now
+      lspconfig.rust_analyzer.setup({
+        settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = { command = "clippy" },
+          },
+        },
+      })
+      
+      -- Basic keymaps
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+    end,
+  },
+  
+  -- Telescope for fuzzy finding
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+    },
+  },
+})
 
--- Load all keymaps and final configurations
-require("config")
+-- Basic keymaps
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
+vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
+
+print("Neovim loaded! Press <Space>ff to find files")
