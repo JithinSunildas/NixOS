@@ -4,7 +4,7 @@
 let
   # This path is relative to your flake root: ~/nix-config
   nvimConfigSrc = "/home/tikhaboom/nix-config/modules/home/neovim"; 
-  link = lib.file.mkOutOfStoreSymlink;
+  link = lib.mkOutOfStoreSymlink;
 
 in
 {
