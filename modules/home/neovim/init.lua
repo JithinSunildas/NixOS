@@ -15,7 +15,6 @@
       fd         # For telescope file finding
       git        # For git integration
 
-      cargo
     ];
     
     # Load our Lua config
@@ -27,6 +26,5 @@
     ripgrep
     fd
     git
-    cargo
   ];
 }
