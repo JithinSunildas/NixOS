@@ -14,7 +14,10 @@
       ripgrep    # For telescope grep
       fd         # For telescope file finding
       git        # For git integration
-
+      
+      # Rust LSP
+      rust-analyzer
+      cargo      # Includes cargo-fmt
     ];
     
     # Load our Lua config
@@ -26,5 +29,7 @@
     ripgrep
     fd
     git
+    rust-analyzer
+    cargo
   ];
 }

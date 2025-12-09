@@ -17,7 +17,6 @@
       
       # One LSP to test
       rust-analyzer
-      rustfmt
     ];
     
     # Load our Lua config
@@ -30,6 +29,5 @@
     fd
     git
     rust-analyzer
-    rustfmt
   ];
 }
