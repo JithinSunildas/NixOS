@@ -21,6 +21,7 @@
     ./waybar/waybar.nix
     ./theme/stylix.nix
     ./fish/fish.nix
+    ./nvf/nvf.nix
     ./ghostty.nix
     ./spicetify.nix
     ./bash.nix
