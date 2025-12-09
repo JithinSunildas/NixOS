@@ -1,4 +1,4 @@
--- modules/neovim/init.lua
+-- modules/home/neovim/init.lua
 -- Basic settings
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -12,7 +12,7 @@ vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.breakindent = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -73,7 +73,7 @@ require("lazy").setup({
 		},
 		config = function()
 			-- Use new vim.lsp.config API (Neovim 0.11+)
-			local lspconfig = require("lspconfig")
+			local lspconfig = vim.lsp.config
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- Common on_attach function for keymaps

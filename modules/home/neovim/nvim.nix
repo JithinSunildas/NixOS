@@ -16,12 +16,17 @@ in
     viAlias = true;
     vimAlias = true;
 
+    plugins = with pkgs.vimPlugins; [
+      nvim-treesitter
+      nvim-neoclip-lua
+      telescope-nvim
+      lualine-nvim
+      plenary-nvim
+      mini-nvim
+    ];
+
     # All LSPs, formatters, and tools via Nix
     extraPackages = with pkgs; [
-      # Plugins
-      lua53Packages.plenary-nvim
-      lua53Packages.lualine-nvim
-      vimPlugins.mini-nvim
       # Rust
       rust-analyzer
       rustfmt
