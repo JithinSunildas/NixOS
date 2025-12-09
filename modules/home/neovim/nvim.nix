@@ -1,8 +1,9 @@
-# modules/home/neovim/nvim.nix 
+# modules/home/neovim/nvim.nix (The NEW version)
 { config, pkgs, lib, ... }:
 
 let
-  nvimConfigSrc = "${config.home.homeDirectory}/nix-config/modules/home/neovim"; 
+  # This path is relative to your flake root: ~/nix-config
+  nvimConfigSrc = "/home/tikhaboom/nix-config/modules/home/neovim"; 
 in
 {
   programs.neovim = {
@@ -10,7 +11,6 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    withPackages = false;
     
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
@@ -23,15 +23,10 @@ in
       cargo
     ];
   };
-home.file = {
-    # Target: ~/.config/nvim
-    "${config.xdg.configHome}/nvim" = {
-      # Source: The directory in your local Git repo
-      source = nvimConfigSrc;
-      # CRITICAL FIX: Use the native home.file linking mechanism
-      type = "link";
-    };
-  };
+  
+  home.file.".config/nvim".source = 
+    lib.mkOutOfStoreSymlink nvimConfigSrc;
+
   # Make tools available in shell too
   home.packages = with pkgs; [
     ripgrep
