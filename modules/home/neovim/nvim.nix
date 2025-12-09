@@ -24,7 +24,7 @@ in
   };
 home.file = {
     # Target: ~/.config/nvim
-    "${config.xdg.configHome}/nvim/" = {
+    ".config/nvim/" = {
       # Source: The directory in your local Git repo
       source = nvimConfigSrc;
       # CRITICAL FIX: Use the native home.file linking mechanism
