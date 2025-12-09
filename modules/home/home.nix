@@ -171,23 +171,6 @@
     };
   };
 
-programs.nvf = {
-  enable = true;
-  
-  # This is where the NVF module expects its full configuration set
-  config = { 
-    vim = {
-      colorscheme = {
-        enable = true;
-        name = "tokyonight";
-      };
-      languages.enableLSP = true;
-      languages.enableTreesitter = true;
-      languages.nix.enable = true;
-      telescope.enable = true;
-      git.enable = true;
-    };
-    
     # You can add other top-level NVF options here if you want to configure
     # things outside of the 'vim' attribute set.
   };
