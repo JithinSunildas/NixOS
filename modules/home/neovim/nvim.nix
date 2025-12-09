@@ -10,6 +10,7 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    withPackages = false;
     
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
@@ -24,7 +25,7 @@ in
   };
 home.file = {
     # Target: ~/.config/nvim
-    ".config/nvim" = {
+    "${config.xdg.configHome}/nvim" = {
       # Source: The directory in your local Git repo
       source = nvimConfigSrc;
       # CRITICAL FIX: Use the native home.file linking mechanism
