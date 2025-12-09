@@ -169,27 +169,28 @@
       };
     };
   };
+
 programs.nvf = {
-    enable = true;
-    
-    # Customize Neovim settings declaratively in Nix:
+  enable = true;
+  
+  # This is where the NVF module expects its full configuration set
+  config = { 
     vim = {
-      # Use a preferred colorscheme
-      colorscheme.enable = true;
-      colorscheme.name = "tokyonight";
-      
-      # Example: Enable core features
+      colorscheme = {
+        enable = true;
+        name = "tokyonight";
+      };
       languages.enableLSP = true;
       languages.enableTreesitter = true;
-      
-      # Example: Configure Nix support
       languages.nix.enable = true;
-      
-      # Add other features like Telescope, Git, etc., directly here
       telescope.enable = true;
       git.enable = true;
     };
+    
+    # You can add other top-level NVF options here if you want to configure
+    # things outside of the 'vim' attribute set.
   };
+};
 
   ########################################
   # 🖥️ Shell config (optional)
