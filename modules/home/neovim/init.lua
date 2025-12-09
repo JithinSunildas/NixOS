@@ -16,7 +16,6 @@
       git        # For git integration
       
       # Rust LSP
-      rust-analyzer
       cargo      # Includes cargo-fmt
     ];
     
@@ -29,7 +28,6 @@
     ripgrep
     fd
     git
-    rust-analyzer
     cargo
   ];
 }
