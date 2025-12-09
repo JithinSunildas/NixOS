@@ -1,6 +1,6 @@
 # modules/home/neovim/nvim.nix 
 {
-home-manager.users.tikhaboom = { config, pkgs, lib, ... }: {
+  home-manager.users.tikhaboom = { config, pkgs, lib, ... }: {
 let
   nvimConfigSrc = "${config.home.homeDirectory}/nix-config/modules/home/neovim"; 
 in
@@ -22,10 +22,16 @@ in
       cargo
     ];
   };
-  home.file."${config.xdg.configHome}/nvim".source = 
-    lib.mkOutOfStoreSymlink nvimConfigSrc;
+  home.file = {
+    # Target: ~/.config/nvim
+    "${config.xdg.configHome}/nvim" = {
+      # Source: The directory in your local Git repo
+      source = nvimConfigSrc;
+      # CRITICAL FIX: Use the native home.file linking mechanism
+      type = "link";
+    };
+  };  # Make tools available in shell too
 
-  # Make tools available in shell too
   home.packages = with pkgs; [
     ripgrep
     fd
