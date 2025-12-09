@@ -42,7 +42,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load plugin definitions from the plugins folder
-require("dashboard")
+require("plugins.alpha")
 require("lazy").setup(require("plugins"))
 
 -- Load all keymaps and final configurations
