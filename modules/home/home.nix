@@ -80,7 +80,7 @@
   home.packages = with pkgs; [
     flutter
     dart
-    php83Packages.phpactor
+    phpactor
     php83Packages.composer
     verible
     verilator
