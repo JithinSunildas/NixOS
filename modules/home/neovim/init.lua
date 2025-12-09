@@ -30,6 +30,5 @@
     fd
     git
     rust-analyzer
-    cargo
   ];
 }
