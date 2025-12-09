@@ -22,7 +22,6 @@ in
       cargo
     ];
   };
-  home-manager.users.tikhaboom = 
 home.file = {
     # Target: ~/.config/nvim
     "${config.xdg.configHome}/nvim" = {
