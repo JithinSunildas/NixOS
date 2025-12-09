@@ -68,6 +68,7 @@
     ffuf
 
     # User apps
+    libreoffice
     zed-editor
     chromium
     firefox
