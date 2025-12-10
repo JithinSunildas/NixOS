@@ -10,6 +10,7 @@
     wget
     wl-clipboard-rs
     git
+    helix
     curl
     wlogout
     eza

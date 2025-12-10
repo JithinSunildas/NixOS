@@ -35,6 +35,7 @@
   home.packages = with pkgs; [
     eww
     tmux
+    zellij
     starship
     swaynotificationcenter
     keyd
@@ -93,6 +94,7 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Langs
+    nixd
     python3
     python3Packages.pip
     nixpkgs-fmt

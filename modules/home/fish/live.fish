@@ -1,8 +1,8 @@
 # ==========================================
 # Environment Variables
 # ==========================================
-set -gx EDITOR nvim
-set -gx VISUAL nvim
+set -gx EDITOR hx
+set -gx VISUAL hx
 set -gx GOPATH $HOME/go
 set -gx BROWSER zen-browser
 
@@ -29,9 +29,9 @@ zoxide init fish | source
 # ==========================================
 # Aliases - Nix/System Management
 # ==========================================
-alias ns='sudo nvim /etc/nixos/configuration.nix'
-alias hn='nvim ~/nix-config/modules/home/home.nix'
-alias fn='nvim ~/nix-config/modules/home/fish/config.fish'
+alias es='sudo -E hx /etc/nixos/configuration.nix'
+alias he='hx ~/nix-config/modules/home/home.nix'
+alias fe='hx ~/nix-config/modules/home/fish/live.fish'
 alias update='sudo nix-channel --update'
 alias nr='cd ~/nix-config && sudo nixos-rebuild switch --flake .#SuperDuperComputer'
 alias hr='home-manager switch --flake ~/nix-config#tikhaboom'
@@ -81,7 +81,7 @@ alias hm='home-manager'
 alias hme='home-manager edit'
 alias hmg='home-manager generations'
 alias hmr='home-manager switch --rollback'
-alias dotfiles='cd ~/nix-config && nvim'
+alias dot='hx -w ~/nix-config/'
 alias backup='cd ~/nix-config && git add -A && git commit -m "backup: $(date +%Y-%m-%d_%H:%M:%S)" && git push'
 alias sync='cd ~/nix-config && git pull && hr'
 
@@ -138,7 +138,7 @@ alias ports='ss -tulanp'
 # ==========================================
 alias v='nvim'
 alias vim='nvim'
-alias nano='sudo -E nvim'
+alias nano='sudo -E hx'
 alias code='code .'
 alias zed='zed .'
 
