@@ -94,6 +94,7 @@
 
     # Langs
     nixd
+    nil
     python3
     python3Packages.pip
     nixpkgs-fmt
