@@ -1,9 +1,7 @@
 # modules/home/home.nix
 {
-  config,
   pkgs,
   inputs,
-  lib,
   ...
 }:
 
@@ -103,6 +101,8 @@
     clang
     cmake
     iverilog
+    svlangserver
+    superhtml
     haskellPackages.ghc
     haskellPackages.cabal-install
     haskellPackages.stack
