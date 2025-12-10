@@ -101,7 +101,6 @@
     clang
     cmake
     iverilog
-    svlangserver
     superhtml
     haskellPackages.ghc
     haskellPackages.cabal-install
