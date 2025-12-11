@@ -12,7 +12,7 @@
 
     cursor = {
       package = pkgs.vimix-cursors;
-      name = "Vimix";
+      name = "Vimix-cursors";
       size = 20;
     };
 
