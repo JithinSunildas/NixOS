@@ -54,7 +54,7 @@
     adw-gtk3
     papirus-icon-theme
     candy-icons
-    reversal-icon-them
+    reversal-icon-theme
     unzip
     imagemagick
     dunst
