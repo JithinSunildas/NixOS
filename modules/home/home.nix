@@ -154,8 +154,8 @@
   home.pointerCursor = {
     enable = true;
     gtk.enable = true;
-    package = pkgs.future-dark-cursors;
-    name = "future-dark-cursors";
+    package = pkgs.vimix-cursors;
+    name = "vimix-cursors";
     size = 20;
   };
 
