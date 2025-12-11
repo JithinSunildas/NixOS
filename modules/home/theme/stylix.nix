@@ -56,8 +56,8 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Windows10";
-      package = pkgs.windows10-icons;
+      name = "Reversal-dark";
+      package = pkgs.reversal-icon-theme;
     };
   };
 
