@@ -154,7 +154,7 @@
   home.pointerCursor = {
     enable = true;
     gtk.enable = true;
-    package = pkgs.Future-dark-cursors;
+    package = pkgs.future-dark-cursors;
     name = "future-dark-cursors";
     size = 20;
   };
