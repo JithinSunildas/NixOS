@@ -151,14 +151,6 @@
     android_sdk.accept_license = true;
   };
 
-  home.pointerCursor = {
-    enable = true;
-    gtk.enable = true;
-    package = pkgs.vimix-cursors;
-    name = "vimix-cursors";
-    size = 20;
-  };
-
   ########################################
   # 🧬 Git config
   ########################################
