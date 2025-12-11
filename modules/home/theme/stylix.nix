@@ -16,11 +16,6 @@
       size = 20;
     };
 
-    iconTheme = {
-      package = pkgs.windows10-icons;
-      name = "Windows10";
-    };
-
     # Configure fonts
     fonts = {
       serif = {
@@ -55,6 +50,14 @@
       fuzzel.enable = true;
       neovim.enable = true;
       # helix.enable = true;
+    };
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Windows10";
+      package = pkgs.windows10-icons;
     };
   };
 
