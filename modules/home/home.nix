@@ -53,6 +53,8 @@
     dict
     adw-gtk3
     papirus-icon-theme
+    candy-icons
+    reversal-reversal-icon-them
     unzip
     imagemagick
     dunst
