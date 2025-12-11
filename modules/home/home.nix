@@ -38,6 +38,7 @@
     keyd
     wofi
     yazi
+    qemu
     fuzzel
     waybar-mpris
     playerctl
@@ -81,6 +82,7 @@
     kitty
     obs-studio
     vscode
+    kicad
     kdePackages.okular
     gparted
     protonvpn-gui
