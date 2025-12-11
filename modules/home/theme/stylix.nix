@@ -1,11 +1,25 @@
 # modules/home/stylix.nix
-{ config, pkgs, lib, ... }:
+{
+  pkgs,
+  ...
+}:
 {
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
     image = ./wallpapers/wade-meng-LgCj9qcrfhI-unsplash.jpg;
     polarity = "dark";
+
+    cursor = {
+      package = pkgs.vimix-cursors;
+      name = "Vimix";
+      size = 20;
+    };
+
+    iconTheme = {
+      package = pkgs.windows10-icons;
+      name = "Windows10";
+    };
 
     # Configure fonts
     fonts = {
@@ -33,14 +47,14 @@
     };
 
     targets = {
-        qt = {
-            enable = true;
-            platform = "qtct";
-        };
+      qt = {
+        enable = true;
+        platform = "qtct";
+      };
 
-        fuzzel.enable = true;
-        neovim.enable = true;
-        # helix.enable = true;
+      fuzzel.enable = true;
+      neovim.enable = true;
+      # helix.enable = true;
     };
   };
 
