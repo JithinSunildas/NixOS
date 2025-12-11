@@ -78,6 +78,7 @@
     telegram-desktop
     mpv
     discord
+    nwg-look
     ghostty
     kitty
     obs-studio
