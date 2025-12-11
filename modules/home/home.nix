@@ -124,7 +124,6 @@
 
     # === Flutter ===
     flutter
-    androidsdk
     android-tools
 
     # === Java/Spring Boot ===
