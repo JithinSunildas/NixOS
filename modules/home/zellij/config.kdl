@@ -1,0 +1,26 @@
+ui {
+  status false
+  pane_frames {
+    rounded_corners true
+    hide_session_name false
+  }
+}
+
+theme "kanagawa"
+simplified_ui true
+ui_mode "compact"
+show_startup_tips false
+default_shell "fish"
+pane_frames true
+auto_layout true
+session_serialization false
+copy_on_select true
+scrollback_editor "nvim"
+mirror_session false
+mouse_mode true
+scroll_buffer_size 10000
+copy_command "wl-copy"
+copy_clipboard "primary"
+
+layout_dir "./layouts"
+theme_dir "./themes"
