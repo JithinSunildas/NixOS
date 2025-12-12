@@ -12,5 +12,11 @@
     # Shell tools
     starship
     dict
+    fd               
+    ripgrep          
+    fzf              
+    zoxide           
+    man-db
+    man-pages
   ];
 }

@@ -11,10 +11,6 @@
     unar             
     jq               
     poppler-utils    
-    fd               
-    ripgrep          
-    fzf              
-    zoxide           
     
     # File management
     yazi
