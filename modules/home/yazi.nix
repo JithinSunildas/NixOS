@@ -181,21 +181,21 @@
     };
     
     # Theme (will be overridden by Stylix)
-    theme = {
-      manager = {
-        cwd = { fg = "#7fb4ca"; };
-        hovered = { bg = "#2d4f67"; fg = "#c8c093"; };
-        preview_hovered = { underline = true; };
-        find_keyword = { fg = "#e82424"; bold = true; };
-        find_position = { fg = "#957fb8"; italic = true; };
-        marker_selected = { fg = "#76946a"; bg = "#76946a"; };
-        marker_copied = { fg = "#dca561"; bg = "#dca561"; };
-        marker_cut = { fg = "#e82424"; bg = "#e82424"; };
-        tab_active = { fg = "#dcd7ba"; bg = "#1f1f28"; };
-        tab_inactive = { fg = "#727169"; bg = "#1f1f28"; };
-        border_symbol = "│";
-        border_style = { fg = "#54546d"; };
-      };
+    # theme = {
+    #   manager = {
+    #     cwd = { fg = "#7fb4ca"; };
+    #     hovered = { bg = "#2d4f67"; fg = "#c8c093"; };
+    #     preview_hovered = { underline = true; };
+    #     find_keyword = { fg = "#e82424"; bold = true; };
+    #     find_position = { fg = "#957fb8"; italic = true; };
+    #     marker_selected = { fg = "#76946a"; bg = "#76946a"; };
+    #     marker_copied = { fg = "#dca561"; bg = "#dca561"; };
+    #     marker_cut = { fg = "#e82424"; bg = "#e82424"; };
+    #     tab_active = { fg = "#dcd7ba"; bg = "#1f1f28"; };
+    #     tab_inactive = { fg = "#727169"; bg = "#1f1f28"; };
+    #     border_symbol = "│";
+    #     border_style = { fg = "#54546d"; };
+    #   };
       
       status = {
         separator_open = "";
