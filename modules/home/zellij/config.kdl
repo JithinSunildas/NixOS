@@ -1,12 +1,2 @@
 theme "kanagawa"
 show_startup_tips false
-default_shell "fish"
-session_serialization false
-copy_on_select true
-scrollback_editor "hx"
-mirror_session false
-scroll_buffer_size 10000
-copy_command "wl-copy"
-copy_clipboard "primary"
-
-layout_dir "./layouts"
