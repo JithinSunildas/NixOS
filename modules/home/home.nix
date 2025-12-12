@@ -29,7 +29,7 @@
     ./theme/stylix.nix
     ./fish/fish.nix
     ./zellij.nix
-    ./yazi.nix
+    # ./yazi.nix
     ./ghostty.nix
     ./spicetify.nix
     ./bash.nix
@@ -60,7 +60,7 @@
   ########################################
   services = {
     ssh-agent.enable = true;
-    swww.enable =  true;
+    swww.enable = true;
     swaync.enable = true;
   };
 }
