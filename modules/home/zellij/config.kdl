@@ -23,4 +23,3 @@ copy_command "wl-copy"
 copy_clipboard "primary"
 
 layout_dir "./layouts"
-theme_dir "./themes"
