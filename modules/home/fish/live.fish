@@ -293,9 +293,3 @@ end
 # ==========================================
 # Uncomment to show system info on startup
 # fastfetch --logo nixos
-
-# Show git status if in a git repo
-if test -d .git
-    echo "📁 Git repository detected"
-    git status -sb
-end
