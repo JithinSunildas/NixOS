@@ -7,7 +7,7 @@
 
     settings = {
       theme = "kanagawa";
-      simplified_ui = false;
+      simplified_ui = true;
       ui_mode = "compact";
       default_shell = "fish";
       pane_frames = true;
