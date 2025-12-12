@@ -1,6 +1,6 @@
 ui {
   status false
-  pane_frames false
+  pane_frames true
 }
 
 theme "kanagawa"
