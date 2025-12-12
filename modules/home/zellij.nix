@@ -9,7 +9,7 @@
       theme = "kanagawa";
       simplified_ui = true;
       default_shell = "fish";
-      pane_frames = true;
+      pane_frames = false;
       auto_layout = true;
       session_serialization = false;
       copy_on_select = true;
