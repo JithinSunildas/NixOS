@@ -1,10 +1,4 @@
-ui {
-  status false
-  pane_frames false
-}
-
 theme "kanagawa"
-ui_mode "compact"
 show_startup_tips false
 default_shell "fish"
 session_serialization false
