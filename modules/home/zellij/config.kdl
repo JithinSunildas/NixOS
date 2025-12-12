@@ -1,5 +1,5 @@
 ui {
-  status false
+  status true
   pane_frames true
 }
 
