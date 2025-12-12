@@ -3,6 +3,8 @@
   programs.zellij = {
     enable = true;
 
+    configuration.ui.status = false;
+
     settings = {
       theme = "kanagawa";
       simplified_ui = true;
