@@ -7,6 +7,14 @@
     ninja
     pkg-config
     imagemagick
+    ffmpegthumbnailer 
+    unar             
+    jq               
+    poppler-utils    
+    fd               
+    ripgrep          
+    fzf              
+    zoxide           
     
     # File management
     yazi

@@ -20,6 +20,7 @@
     mpv
     obs-studio
     gifski
+    imv 
     
     # Downloads
     qbittorrent
