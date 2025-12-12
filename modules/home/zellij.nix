@@ -3,7 +3,7 @@
   programs.zellij = {
     enable = true;
 
-    configuration.ui.status = false;
+    ui.status = false;
 
     settings = {
       theme = "kanagawa";
