@@ -1,9 +1,6 @@
 ui {
   status false
-  pane_frames {
-    rounded_corners true
-    hide_session_name false
-  }
+  pane_frames false
 }
 
 theme "kanagawa"
