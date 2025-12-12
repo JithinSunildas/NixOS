@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ config, ... }:
 {
   programs.zellij = {
     enable = true;
@@ -403,12 +403,6 @@
           "bind \"d\"" = {
             Detach = { };
             SwitchToMode = "normal";
-          };
-          "bind \"w\"" = {
-            LaunchOrFocusPlugin = {
-              floating = true;
-              move_to_focused_tab = true;
-            };
           };
         };
       };
