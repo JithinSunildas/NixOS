@@ -7,7 +7,7 @@
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-    image = ./wallpapers/wade-meng-LgCj9qcrfhI-unsplash.jpg;
+    image = ./wallpapers/demo.jpg;
     polarity = "dark";
 
     cursor = {

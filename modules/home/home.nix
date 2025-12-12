@@ -28,6 +28,8 @@
     ./waybar/waybar.nix
     ./theme/stylix.nix
     ./fish/fish.nix
+    ./zellij.nix
+    ./yazi.nix
     ./ghostty.nix
     ./spicetify.nix
     ./bash.nix
