@@ -139,8 +139,8 @@ alias ports='ss -tulanp'
 alias v='nvim'
 alias vim='nvim'
 alias nano='sudo -E hx'
-alias code='code .'
-alias zed='zed .'
+alias zj='zellij'
+alias yz='yazi'
 
 # Python
 alias py='python3'
