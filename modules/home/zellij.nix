@@ -5,8 +5,10 @@
 
     settings = {
       theme = "kanagawa";
+      simplified_ui = true;
       ui_mode = "compact";
       default_shell = "fish";
+      pane_frames = true;
       auto_layout = true;
       session_serialization = false;
       copy_on_select = true;
