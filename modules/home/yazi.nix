@@ -275,7 +275,7 @@
     ffmpegthumbnailer  # Video thumbnails
     unar              # Archive preview
     jq                # JSON preview
-    poppler_utils     # PDF preview
+    poppler-utils     # PDF preview
     fd                # Fast file search
     ripgrep           # Fast grep
     fzf               # Fuzzy finder
