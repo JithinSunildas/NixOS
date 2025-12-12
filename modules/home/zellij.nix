@@ -2,8 +2,6 @@
 {
   programs.zellij = {
     enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
 
     settings = {
       theme = "kanagawa";
