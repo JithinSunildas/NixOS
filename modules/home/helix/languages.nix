@@ -30,6 +30,9 @@ in
     gopls
     go
 
+    # java
+    google-java-format
+
     # python
     basedpyright
     ruff
