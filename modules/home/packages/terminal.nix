@@ -12,6 +12,7 @@
     # Shell tools
     starship
     dict
+    asciinema
     fd               
     ripgrep          
     fzf              
