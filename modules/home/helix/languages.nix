@@ -14,9 +14,10 @@ with pkgs; let
   ];
 in
   [
-    #cpp
+    #c/cpp
     llvmPackages_20.clang-tools
     lldb_20
+    gcc
 
     # nix
     alejandra
