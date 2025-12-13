@@ -18,6 +18,7 @@ in
     llvmPackages_20.clang-tools
     lldb_20
     gcc
+    gdb
 
     # nix
     alejandra
