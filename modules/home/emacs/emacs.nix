@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  emacsPackage = pkgs.emacs-pgtk-native-comp;
+  emacsPackage = pkgs.emacs-pgtk;
 
 in
 {
@@ -16,6 +16,7 @@ in
   ];
 
   home.packages = with pkgs; [
+    emacsPackage
     git
     ripgre
     fd     
