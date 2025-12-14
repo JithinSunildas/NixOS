@@ -25,7 +25,6 @@ in
     zstd
     # Language Servers (Recommended for your interests)
     haskell-language-server
-    clangd
   ];
 
   services.emacs = {
