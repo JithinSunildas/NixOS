@@ -22,7 +22,6 @@ in
     gnutls 
     zstd   
     
-    rust-analyzer
     haskell-language-server
   ];
 
