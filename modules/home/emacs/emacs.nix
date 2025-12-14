@@ -2,13 +2,14 @@
 
 let
   emacsPackage = pkgs.emacs-pgtk;
+  myDoomConfigDir = "~/nix-config/modules/home/emacs/doom";
 
 in
 {
   home.sessionVariables = {
-    EMACSDIR = "/home/tikhaboom/nix-config/modules/home/emacs"; 
-    DOOMDIR = "/home/tikhaboom/nix-config/modules/home/emacs/doom";   
-    DOOMLOCALDIR = "/home/tikhaboom/nix-config/modules/home/emacs/doom";
+    EMACSDIR = "${config.xdg.configHome}/emacs";
+    DOOMDIR = myDoomConfigDir;
+    DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
   };
 
   home.sessionPath = [
@@ -18,17 +19,22 @@ in
   home.packages = with pkgs; [
     emacsPackage
     git
-    fd     
-    gnutls 
-    zstd   
-    
+    fd       # Fast directory search (used by project search)
+    ripgrep  # Fast file content search (used by project search)
+    gnutls
+    zstd
+    # Language Servers (Recommended for your interests)
     haskell-language-server
+    clangd
   ];
 
   services.emacs = {
     enable = true;
-    package = emacsPackage; 
-    # Optional: ensure it restarts if it crashes
-    # serviceConfig.Restart = "on-failure"; 
+    package = emacsPackage;
   };
+
+  # 5. NEW: Declaratively provide your configuration files
+  # This makes your init.el part of your Nix history.
+  # home.file."${myDoomConfigDir}/init.el".source = ./path/to/your/init.el;
+  # home.file."${myDoomConfigDir}/config.el".source = ./path/to/your/config.el;
 }
