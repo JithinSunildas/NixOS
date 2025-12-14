@@ -18,7 +18,6 @@ in
   home.packages = with pkgs; [
     emacsPackage
     git
-    ripgre
     fd     
     gnutls 
     zstd   
