@@ -1,9 +1,6 @@
 #Configuration.nix
 {
-  config,
   pkgs,
-  inputs,
-  lib,
   ...
 }:
 
@@ -142,6 +139,7 @@
       ly.enable = true;
     };
     # services.openssh.enable = true;
+    emacs.enable = true;
   };
 
   services.gvfs.enable = true;

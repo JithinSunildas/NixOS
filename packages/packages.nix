@@ -1,5 +1,5 @@
 # packages/packages.nix
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -11,6 +11,7 @@
     wl-clipboard-rs
     git
     helix
+    emacs
     curl
     wlogout
     eza
