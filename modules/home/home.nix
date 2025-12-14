@@ -28,6 +28,7 @@
     ./waybar/waybar.nix
     ./theme/stylix.nix
     ./fish/fish.nix
+    ./emacs/emacs.nix
     ./zellij/zellij.nix
     # ./yazi.nix
     ./ghostty.nix
