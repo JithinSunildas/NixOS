@@ -12,7 +12,6 @@
   programs.home-manager.enable = true;
 
   imports = [
-    # inputs.nvf.homeManagerModules.default # Packages
     ./packages/system.nix
     ./packages/terminal.nix
     ./packages/wayland.nix
