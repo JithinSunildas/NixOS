@@ -230,7 +230,7 @@ dashboard.section.header.val = {
   "    ██║    ██║ ██╔═██╗  ██╔══██║ ██╔══██║ ██╔══██╗ ██║   ██║ ██║   ██║ ██║╚██╔╝██║ ",
   "    ██║    ██║ ██║  ██╗ ██║  ██║ ██║  ██║ ██████╔╝ ╚██████╔╝ ╚██████╔╝ ██║ ╚═╝ ██║ ",
   "    ╚═╝    ╚═╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝   ╚═════╝   ╚═════╝  ╚═╝     ╚═╝ ",
-  "  "A man who dares to waste one hour of time has not discovered the value of life." ",
+  "  \"A man who dares to waste one hour of time has not discovered the value of life.\" ",
   "                                                                   — Charles Darwin ",
   "                                                                                    ",
 }
