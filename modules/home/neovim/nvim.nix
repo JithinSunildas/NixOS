@@ -21,7 +21,7 @@
   };
 
   home.file.".config/nvim" = {
-    source = ./neovim/config;
+    source = ./config;
   };
   # Make tools available in shell too
   home.packages = with pkgs; [
