@@ -1,5 +1,6 @@
 # modules/home/home.nix
 {
+inputs, 
   ...
 }:
 
@@ -12,7 +13,7 @@
   programs.home-manager.enable = true;
 
   imports = [
-    # Packages
+    inputs.nvf.homeManagerModules.default # Packages
     ./packages/system.nix
     ./packages/terminal.nix
     ./packages/wayland.nix
