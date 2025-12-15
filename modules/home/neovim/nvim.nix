@@ -1,12 +1,6 @@
 # modules/home/neovim/nvim.nix (The NEW version)
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
-let
-  # This path is relative to your flake root: ~/nix-config
-  nvimConfigSrc = "/home/tikhaboom/nix-config/modules/home/neovim"; 
-  link = lib.mkOutOfStoreSymlink;
-
-in
 {
   programs.neovim = {
     enable = true;
@@ -26,8 +20,10 @@ in
     ];
   };
   
-  home.file.".config/nvim".source = 
-    link nvimConfigSrc;
+  home.file.".config/nvim" = {
+    source = "./config";
+    recursive = true;
+  };
 
   # Make tools available in shell too
   home.packages = with pkgs; [
