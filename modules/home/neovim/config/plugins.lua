@@ -1,92 +1,147 @@
 -- modules/home/neovim/config/plugins.lua
 
 return {
-  -- === 1. UI & Navigation (You already have this) ===
+  -- === 1. UI & Navigation ===
   {
     "nvim-tree/nvim-tree.lua",
     lazy = true,
     cmd = "NvimTreeToggle",
-    -- Optional config:
     keys = { { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Explorer" } },
   },
 
-  -- === 2. Language Server Protocol (LSP) ===
+  -- === 2. Mason (LSP Installer) ===
   {
-    "neovim/nvim-lspconfig",
-    event = "BufReadPost",
-    dependencies = {
-      -- 2a. Automatic LSP installer
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      
-      -- 2b. The actual completion engine (see next section)
-      "hrsh7th/nvim-cmp",
-    },
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    build = ":MasonUpdate",
+    config = function()
+      require("mason").setup({
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+          }
+        }
+      })
+    end,
   },
 
-  -- === 3. Autocompletion & Snippets (The engine behind LSP) ===
+  -- === 3. LSP Configuration ===
   {
-    "hrsh7th/nvim-cmp", -- Autocompletion engine
-    event = "InsertEnter",
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",  -- Source: LSP
-      "hrsh7th/cmp-buffer",    -- Source: Current buffer words
-      "hrsh7th/cmp-path",      -- Source: File paths
-      
-      -- Snippet support (Essential for modern editing)
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip", -- Connects Luasnip to nvim-cmp
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      -- Configuration to set up the completion sources and keymaps (e.g., Tab to select)
+      require("lsp")
+    end,
+  },
+
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+  },
+
+  -- === 4. Autocompletion & Snippets ===
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+    },
+    config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       cmp.setup({
-        snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
+          { name = "path" },
         }),
-        -- Add keymaps like <C-Space> to trigger completion
       })
     end,
   },
-  
-  -- === 4. Fuzzy Finder (Telescope is the standard) ===
+
+  -- === 5. Fuzzy Finder ===
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = {
-      "nvim-lua/plenary.nvim", -- Utility functions
-      -- Add extensions like: 'nvim-telescope/telescope-fzf-native.nvim' for speed
+      "nvim-lua/plenary.nvim",
     },
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
     },
   },
 
-  -- === 5. Syntax & Text Objects ===
+  -- === 6. Treesitter ===
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "c", "cpp", "rust", "haskell", "java", "nix", "lua" }, -- I added your favorites!
+        ensure_installed = { "c", "cpp", "rust", "haskell", "java", "nix", "lua", "python" },
         highlight = { enable = true },
         indent = { enable = true },
       })
     end,
   },
-  
-  -- Treesitter-based text objects (essential for quick editing)
-  { "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" },
-  
-  -- === 6. The Status/Tabline (Lualine is highly flexible) ===
+
+  { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
+
+  -- === 7. Status Line ===
   {
     "nvim-lualine/lualine.nvim",
-    opts = { options = { theme = "auto" } },
+    event = "VeryLazy",
+    opts = {
+      options = {
+        theme = "auto",
+        component_separators = { left = "|", right = "|" },
+        section_separators = { left = "", right = "" },
+      },
+    },
   },
 }
