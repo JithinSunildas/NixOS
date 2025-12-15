@@ -1,6 +1,8 @@
--- modules/home/neovim/init.lua (The NEW version)
+-- modules/home/neovim/config/init.lua 
 
-vim.g.mapleader = " "
+local config_root = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand("<sfile>")), ":h")
+package.path = package.path .. ";" .. config_root .. "/?.lua"vim.g.mapleader = " "
+
 vim.g.maplocalleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -21,5 +23,4 @@ require("lazy").setup("plugins", {
 
 require("options")
 require("keymaps")
-require("plugins")
 require("lsp")
