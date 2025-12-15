@@ -21,7 +21,7 @@
   };
   
   home.file."/home/tikhaboom/.config/nvim" = {
-    source = "./config";
+    source = "/home/tikhaboom/nix-config/modules/home/neovim/config";
     recursive = true;
   };
 
