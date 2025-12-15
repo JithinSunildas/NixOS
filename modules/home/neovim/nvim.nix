@@ -20,8 +20,8 @@
     ];
   };
   
-  home.file."/home/tikhaboom/.config/nvim" = {
-    source = "/home/tikhaboom/nix-config/modules/home/neovim/config";
+  home.file."config.home.homeDirectory/.config/nvim" = {
+    source = "config.home.homeDirectory/nix-config/modules/home/neovim/config";
     recursive = true;
   };
 
