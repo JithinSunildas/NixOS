@@ -20,7 +20,7 @@
     ];
   };
   
-  home.file.".config/nvim" = {
+  home.file."/home/tikhaboom/.config/nvim" = {
     source = "./config";
     recursive = true;
   };
