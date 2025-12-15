@@ -16,6 +16,7 @@
     fd               
     ripgrep          
     fzf              
+    lf
     zoxide           
     man-db
     man-pages

@@ -29,6 +29,9 @@ zoxide init fish | source
 # ==========================================
 # Aliases - Nix/System Management
 # ==========================================
+alias e='~/.config/emacs/bin/doom emacs -nw'
+alias doom='exec /home/tikhaboom/.config/emacs/bin/doom'
+alias pick='exec /home/tikhaboom/nix-config/scripts/yazi.sh'
 alias es='sudo -E hx /etc/nixos/configuration.nix'
 alias he='hx ~/nix-config/modules/home/home.nix'
 alias fe='hx ~/nix-config/modules/home/fish/live.fish'

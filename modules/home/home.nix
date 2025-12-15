@@ -2,7 +2,7 @@
 {
   ...
 }:
-
+j
 {
   nixpkgs.config.allowUnfree = true;
   home.username = "tikhaboom";

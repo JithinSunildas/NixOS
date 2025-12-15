@@ -144,6 +144,7 @@ window-rule {
 spawn-at-startup "waybar"
 spawn-sh-at-startup "swww-daemon"
 spawn-at-startup "swayosd-server"
+spawn-at-startup "~/.config/emacs/bin/doom emacs --daemon"
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -152,6 +153,7 @@ binds {
     // App bindings
     Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "ghostty"; }
     Mod+E hotkey-overlay-title="Open Files " { spawn "nautilus"; }
+    Mod+Shift+E hotkey-overlay-title="Run emacs client " {spawn-sh "exec /home/tikhaboom/.config/emacs/bin/doom emacs --daemon"}
     Mod+B hotkey-overlay-title="Open a Browser " { spawn "zen"; }
     Mod+O hotkey-overlay-title="Open a Obsidian " { spawn "obsidian"; }
     Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || exec fuzzel"; }
