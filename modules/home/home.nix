@@ -1,6 +1,6 @@
 # modules/home/home.nix
 {
-inputs, 
+  inputs,
   ...
 }:
 
@@ -13,7 +13,7 @@ inputs,
   programs.home-manager.enable = true;
 
   imports = [
-    inputs.nvf.homeManagerModules.default # Packages
+    # inputs.nvf.homeManagerModules.default # Packages
     ./packages/system.nix
     ./packages/terminal.nix
     ./packages/wayland.nix
@@ -30,7 +30,8 @@ inputs,
     ./theme/stylix.nix
     ./fish/fish.nix
     # ./emacs/emacs.nix
-    ./nvf/nvf.nix
+    # ./nvf/nvf.nix
+    ./neovim/nvim.nix
     ./zellij/zellij.nix
     # ./yazi.nix
     ./ghostty.nix
