@@ -7,7 +7,7 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    
+
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
     ];
@@ -19,10 +19,10 @@
       cargo
     ];
   };
-  
-home.file.".config/nvim" = {
-  source = ./nix-config/modules/home/neovim/config;
-};
+
+  home.file.".config/nvim" = {
+    source = ./neovim/config;
+  };
   # Make tools available in shell too
   home.packages = with pkgs; [
     ripgrep
