@@ -1,134 +1,63 @@
-# modules/home/nvf/nvf.nix
+# ~/nix-config/modules/home/nvf/nvf.nix
+
 { config, pkgs, lib, ... }:
 
 {
-  programs.nvf = {
-    enable = true;
-    
-    settings.vim = {
-      viAlias = true;
-      vimAlias = true;
-      
-      # Core settings
-      lineNumberMode = "relNumber";
-      preventJunkFiles = true;
-      useSystemClipboard = true;
-      
-      # Theme - disable for Stylix
-      theme.enable = false;
-      
-      # Statusline
-      statusline.lualine = {
-        enable = true;
-        theme = "auto";
-      };
-      
-      # Tabline
-      tabline.nvimBufferline.enable = true;
-      
-      # File tree
-      filetree.nvimTree = {
-        enable = true;
-        openOnSetup = false;
-      };
-      
-      # Telescope
-      telescope.enable = true;
-      
-      # Treesitter
-      treesitter = {
-        enable = true;
-        fold = true;
-      };
-      
-      # Git
-      git = {
-        enable = true;
-        gitsigns.enable = true;
-      };
-      
-      # LSP
-      lsp = {
-        enable = true;
-        formatOnSave = true;
-        
-        # Language servers
-        rust-analyzer.enable = true;
-        ts-ls.enable = true;
-        html.enable = true;
-        cssls.enable = true;
-        jsonls.enable = true;
-        pyright.enable = true;
-        clangd.enable = true;
-        nil.enable = true;
-        lua-ls.enable = true;
-      };
-      
-      # Languages
-      languages = {
-        enableLSP = true;
-        enableFormat = true;
-        enableTreesitter = true;
-        
-        rust.enable = true;
-        ts.enable = true;
-        html.enable = true;
-        css.enable = true;
-        python.enable = true;
-        nix.enable = true;
-        lua.enable = true;
-        clang.enable = true;
-      };
-      
-      # Visuals
-      visuals = {
-        enable = true;
-        nvimWebDevicons.enable = true;
-        indentBlankline.enable = true;
-      };
-      
-      # UI
-      ui = {
-        borders.enable = true;
-        noice.enable = true;
-      };
-      
-      # Autocomplete
-      autocomplete.enable = true;
-      
-      # Terminal
-      terminal.toggleterm.enable = true;
-      
-      # Keybindings
-      binds.whichKey.enable = true;
-      
-      # Comments
-      comments.comment-nvim.enable = true;
-      
-      # Autopairs
-      autopairs.enable = true;
-    };
+  vim.enable = true;
+
+  vim.options = {
+    expandtab = true;
+    shiftwidth = 2;
+    tabstop = 2;
+    relativenumber = true;
+    cmdheight = 1;
+    timeoutlen = 500;
   };
-  
-  # Additional packages for languages not built-in to NVF
-  home.packages = with pkgs; [
-    # Flutter/Dart
-    flutter
-    dart
+
+  # vim.theme = {
+  #   enable = true;
+  #   name = "tokyonight";
+  #   style = "storm"; # A darker, less vibrant alternative to 'night'
+  # };
+
+  # 🧩 Languages, LSP, and Tools 
+  vim.languages = {
+    enableLSP = true;
+    enableTreesitter = true;
+    enableFormat = true;
+    enableExtraDiagnostics = true;
+
+    rust.enable = true;
+    cpp.enable = true; 
+    java.enable = true;
+    haskell.enable = true;
+    lua.enable = true; 
+    nix.enable = true; 
+  };
+
+  vim.autocomplete.nvim-cmp.enable = true;
+  vim.telescope.enable = true;
+  vim.filetree.neo-tree.enable = true;
+  vim.tabline.nvimBufferline.enable = true;
+  vim.git.gitsigns.enable = true;
+
+  vim.luaConfig = ''
+    -- Set the leader key to <Space> (the superior leader, in my humble opinion)
+    vim.g.mapleader = ' '
+    vim.g.maplocalleader = ' '
+
+    -- Custom binding for Neo-tree (using <Leader> + 'e')
+    vim.keymap.set('n', '<leader>e', function()
+      require('neo-tree.command').execute({ toggle = true })
+    end, { desc = "Toggle Neo-tree" })
+
+    -- Example: Set up the Rust language server and formatting.
+    -- (NVF often handles this, but here is where you'd place advanced overrides)
+    local lspconfig = require('lspconfig')
+    lspconfig.rust_analyzer.setup{}
     
-    # PHP/Laravel
-    phpactor
-    php83Packages.composer
-    php83Packages.phpstan
-    php83Packages.php-cs-fixer    
-    # Java
-    jdt-language-server
-    google-java-format
-    maven
-    gradle
-    
-    # Verilog
-    verible
-    verilator
-  ];
+    -- Haskell specific setup (may require nixpkgs overlays for tools like hlint/fourmolu)
+    -- You would typically add the packages in 'home.packages' or via a Nix-side overlay.
+
+  '';
 }

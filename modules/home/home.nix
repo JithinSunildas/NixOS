@@ -29,6 +29,7 @@
     ./theme/stylix.nix
     ./fish/fish.nix
     # ./emacs/emacs.nix
+    ./nvf/nvf.nix
     ./zellij/zellij.nix
     # ./yazi.nix
     ./ghostty.nix
