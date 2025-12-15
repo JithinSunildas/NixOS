@@ -16,7 +16,6 @@
       ripgrep
       fd
       git
-      cargo
     ];
   };
 
@@ -28,6 +27,5 @@
     ripgrep
     fd
     git
-    cargo
   ];
 }
