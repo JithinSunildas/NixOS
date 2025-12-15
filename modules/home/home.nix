@@ -1,6 +1,6 @@
 # modules/home/home.nix
 {
-  inputs,
+  # inputs,
   ...
 }:
 
@@ -31,7 +31,7 @@
     ./fish/fish.nix
     # ./emacs/emacs.nix
     # ./nvf/nvf.nix
-    ./neovim/nvim.nix
+    ./neovim/neovim.nix
     ./zellij/zellij.nix
     # ./yazi.nix
     ./ghostty.nix
