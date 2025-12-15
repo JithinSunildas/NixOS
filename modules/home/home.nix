@@ -1,6 +1,5 @@
 # modules/home/home.nix
 {
-  # inputs,
   ...
 }:
 
@@ -29,11 +28,8 @@
     ./waybar/waybar.nix
     ./theme/stylix.nix
     ./fish/fish.nix
-    # ./emacs/emacs.nix
-    # ./nvf/nvf.nix
     ./neovim/neovim.nix
     ./zellij/zellij.nix
-    # ./yazi.nix
     ./ghostty.nix
     ./spicetify.nix
     ./bash.nix

@@ -20,9 +20,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvf.url = "github:NotAShelf/nvf";
-    nvf.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -33,7 +30,6 @@
       zen-browser,
       stylix,
       spicetify-nix,
-      nvf,
       ...
     }:
     {
