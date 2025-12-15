@@ -1,31 +1,111 @@
-# modules/home/neovim/nvim.nix (The NEW version)
+# modules/home/neovim/nvim.nix
 { pkgs, ... }:
-
 {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-
+    
+    # All your plugins managed by Nix
     plugins = with pkgs.vimPlugins; [
-      lazy-nvim
+      # LSP
+      nvim-lspconfig
+      mason-nvim
+      mason-lspconfig-nvim
+      
+      # Autocompletion
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      luasnip
+      cmp_luasnip
+      
+      # Treesitter
+      (nvim-treesitter.withPlugins (p: [
+        p.c
+        p.cpp
+        p.rust
+        p.nix
+        p.lua
+        p.python
+        p.java
+        p.javascript
+        p.typescript
+        p.html
+        p.css
+        p.json
+      ]))
+      nvim-treesitter-textobjects
+      
+      # Fuzzy finder
+      telescope-nvim
+      telescope-fzf-native-nvim
+      plenary-nvim
+      
+      # UI
+      nvim-tree-lua
+      lualine-nvim
+      nvim-web-devicons
+      bufferline-nvim
+      which-key-nvim
+      alpha-nvim
+      
+      # Git
+      gitsigns-nvim
+      
+      # Utilities
+      nvim-autopairs
+      comment-nvim
+      indent-blankline-nvim
+      nvim-colorizer-lua
+      
+      # Themes (pick your favorite)
+      tokyonight-nvim
+      catppuccin-nvim
+      gruvbox-nvim
     ];
-
+    
+    # External tools needed by plugins
     extraPackages = with pkgs; [
+      # Language servers
+      clang-tools
+      nil
+      pyright
+      jdtls
+      lua-language-server
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted # html, css, json
+      
+      # Formatters
+      rustfmt
+      black
+      isort
+      prettier
+      stylua
+      nixfmt-classic
+      
+      # Linters
+      ruff
+      
+      # Tools for telescope
       ripgrep
       fd
       git
     ];
+    
+    extraLuaConfig = ''
+      -- Load configuration
+      require("options")
+      require("keymaps")
+      require("plugins")
+    '';
   };
-
-  home.file.".config/nvim" = {
-    source = ./config;
+  
+  # Copy config files to ~/.config/nvim
+  xdg.configFile."nvim/lua" = {
+    source = ./config/lua;
+    recursive = true;
   };
-  # Make tools available in shell too
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    git
-  ];
 }

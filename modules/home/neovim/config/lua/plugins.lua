@@ -1,25 +1,89 @@
--- modules/home/neovim/config/plugins.lua
--- This file configures plugins that are installed via Nix
+-- ~/.config/nvim/lua/plugins.lua
+-- Configure all plugins installed by Nix
 
--- === Treesitter Configuration ===
+-- === Treesitter ===
 require("nvim-treesitter.configs").setup({
-  ensure_installed = {}, -- Managed by Nix, leave empty
-  auto_install = false,  -- Don't auto-install since Nix manages this
   highlight = { enable = true },
   indent = { enable = true },
+  incremental_selection = { enable = true },
+  textobjects = { enable = true },
 })
 
--- === Telescope Configuration ===
-local telescope = require("telescope")
-telescope.setup({
-  defaults = {
-    prompt_prefix = "🔍 ",
-    selection_caret = "➜ ",
-    path_display = { "truncate" },
+-- === LSP Configuration ===
+local lspconfig = require("lspconfig")
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- Setup Mason
+mason.setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
+    },
   },
 })
 
--- === Autocompletion Configuration ===
+-- LSP keymaps
+local on_attach = function(client, bufnr)
+  local opts = { buffer = bufnr, silent = true }
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "Go to implementation" }))
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "Show references" }))
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover documentation" }))
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+  vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Show diagnostic" }))
+end
+
+-- Configure servers
+local servers = {
+  "rust_analyzer",
+  "clangd",
+  "nil_ls",
+  "pyright",
+  "lua_ls",
+  "ts_ls",
+  "html",
+  "cssls",
+  "jsonls",
+}
+
+mason_lspconfig.setup({
+  ensure_installed = servers,
+  handlers = {
+    function(server_name)
+      lspconfig[server_name].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+    end,
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            },
+            telemetry = { enable = false },
+          },
+        },
+      })
+    end,
+  },
+})
+
+-- === Autocompletion ===
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
@@ -62,21 +126,122 @@ cmp.setup({
   }),
 })
 
--- === NvimTree Configuration ===
+-- === Telescope ===
+local telescope = require("telescope")
+
+telescope.setup({
+  defaults = {
+    prompt_prefix = "🔍 ",
+    selection_caret = "➜ ",
+    path_display = { "truncate" },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+    },
+  },
+})
+
+-- Load extensions
+pcall(telescope.load_extension, "fzf")
+
+-- Telescope keymaps
+local map = vim.keymap.set
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
+
+-- === NvimTree ===
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = { width = 35 },
-  renderer = {
-    group_empty = true,
-  },
+  renderer = { group_empty = true },
   filters = { dotfiles = false },
 })
 
--- === Lualine Configuration ===
+map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File Explorer" })
+
+-- === Lualine ===
 require("lualine").setup({
   options = {
     theme = "auto",
     component_separators = { left = "|", right = "|" },
     section_separators = { left = "", right = "" },
+    globalstatus = true,
   },
 })
+
+-- === Bufferline ===
+require("bufferline").setup({
+  options = {
+    mode = "buffers",
+    diagnostics = "nvim_lsp",
+    separator_style = "thin",
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "File Explorer",
+        highlight = "Directory",
+        separator = true,
+      },
+    },
+  },
+})
+
+-- Bufferline keymaps
+map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous Buffer" })
+map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
+
+-- === Gitsigns ===
+require("gitsigns").setup({
+  signs = {
+    add = { text = "│" },
+    change = { text = "│" },
+    delete = { text = "_" },
+    topdelete = { text = "‾" },
+    changedelete = { text = "~" },
+  },
+})
+
+-- === Utilities ===
+require("nvim-autopairs").setup()
+require("Comment").setup()
+require("which-key").setup()
+require("ibl").setup({
+  indent = { char = "│" },
+  scope = { enabled = false },
+})
+require("colorizer").setup()
+
+-- === Alpha (Dashboard) ===
+local alpha = require("alpha")
+local dashboard = require("alpha.themes.dashboard")
+
+dashboard.section.header.val = {
+  "                                                                                   ",
+  " ████████╗ ██╗ ██╗  ██╗ ██╗  ██╗  █████╗  ██████╗   ██████╗   ██████╗  ███╗   ███╗ ",
+  " ╚══██╔══╝ ██║ ██║ ██╔╝ ██║  ██║ ██╔══██╗ ██╔══██╗ ██╔═══██╗ ██╔═══██╗ ████╗ ████║ ",
+  "    ██║    ██║ █████╔╝  ███████║ ███████║ ██████╔╝ ██║   ██║ ██║   ██║ ██╔████╔██║ ",
+  "    ██║    ██║ ██╔═██╗  ██╔══██║ ██╔══██║ ██╔══██╗ ██║   ██║ ██║   ██║ ██║╚██╔╝██║ ",
+  "    ██║    ██║ ██║  ██╗ ██║  ██║ ██║  ██║ ██████╔╝ ╚██████╔╝ ╚██████╔╝ ██║ ╚═╝ ██║ ",
+  "    ╚═╝    ╚═╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝   ╚═════╝   ╚═════╝  ╚═╝     ╚═╝ ",
+  "                                                                                   ",
+}
+
+dashboard.section.buttons.val = {
+  dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
+  dashboard.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
+  dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
+  dashboard.button("g", "  Find text", ":Telescope live_grep <CR>"),
+  dashboard.button("q", "  Quit", ":qa<CR>"),
+}
+
+alpha.setup(dashboard.opts)
+
+-- Set colorscheme
+vim.cmd.colorscheme("tokyonight") -- or catppuccin, gruvbox, etc.
