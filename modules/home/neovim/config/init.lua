@@ -1,9 +1,10 @@
--- modules/home/neovim/config/init.lua 
+-- modules/home/neovim/config/init.lua
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 local config_root = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand("<sfile>")), ":h")
-package.path = package.path .. ";" .. config_root .. "/?.lua"vim.g.mapleader = " "
-
-vim.g.maplocalleader = " "
+package.path = package.path .. ";" .. config_root .. "/?.lua"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -18,8 +19,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
-})
+require("lazy").setup("plugins", {})
 
 require("options")
 require("keymaps")
