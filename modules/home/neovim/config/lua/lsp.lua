@@ -8,7 +8,6 @@ local mason_lspconfig = require('mason-lspconfig')
 local servers = {
   'rust_analyzer', -- For Rust (your favorite!)
   'clangd',        -- For C/C++
-  'nil_ls',        -- For Nix expressions (super helpful!)
   'pyright',       -- For Python
   'jdtls',         -- For Java
   'lua_ls',        -- For Neovim config (essential)
@@ -80,4 +79,12 @@ mason_lspconfig.setup({
   }
 })
 
--- NOTE: If you have your own keymaps module, ensure it is set up to load the on_attach function keymaps!
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+    end
+  end,
+})
+

@@ -11,20 +11,7 @@ require("nvim-treesitter.configs").setup({
 
 -- === LSP Configuration ===
 local lspconfig = require("lspconfig")
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- Setup Mason
-mason.setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-})
 
 -- LSP keymaps
 local on_attach = function(client, bufnr)
@@ -54,32 +41,39 @@ local servers = {
   "jsonls",
 }
 
-mason_lspconfig.setup({
-  ensure_installed = servers,
-  handlers = {
-    function(server_name)
-      lspconfig[server_name].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-    end,
-    ["lua_ls"] = function()
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim" } },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-              checkThirdParty = false,
-            },
-            telemetry = { enable = false },
-          },
-        },
-      })
-    end,
+lspconfig.rust_analyzer.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.clangd.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.nixd.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.lua_ls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      diagnostics = { globals = { "vim" } },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = { enable = false },
+    },
   },
 })
 

@@ -96,7 +96,6 @@ plugins = with pkgs.vimPlugins; [
     extraPackages = with pkgs; [
       # Language servers
       clang-tools
-      nil
       pyright
       vimPlugins.nvim-jdtls
       lua-language-server
