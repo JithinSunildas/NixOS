@@ -9,12 +9,12 @@ local config_root = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand("<sfile>")),
 package.path = config_root .. "/lua/?.lua;" .. package.path
 
 if lazy_installed_by_nix then
-  for _, path in ipairs(vim.api.nvim_list_runtime_paths()) do
-    if path:match("lazy%-nvim") then
-      lazypath = path
-      break
+    for _, path in ipairs(vim.api.nvim_list_runtime_paths()) do
+        if path:match("lazy%-nvim") then
+            lazypath = path
+            break
+        end
     end
-  end
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -25,21 +25,18 @@ require("config")
 require("keymaps")
 
 require("lazy").setup("plugins", {
-  defaults = {
-    lazy = true,
-  },
-  install = {
-    missing = true,
-  },
-  checker = {
-    enabled = false,
-  },
-  performance = {
-    rtp = {
-      reset = false,
+    defaults = {
+        lazy = true,
     },
-  },
+    install = {
+        missing = true,
+    },
+    checker = {
+        enabled = false,
+    },
+    performance = {
+        rtp = {
+            reset = false,
+        },
+    },
 })
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
