@@ -1,5 +1,8 @@
 -- ~/.config/nvim/config/lua/keymaps.lua
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local map = vim.keymap.set
 
 -- Disable space default behavior (since it's our leader key)
