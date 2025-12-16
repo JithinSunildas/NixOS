@@ -8,7 +8,7 @@
     vimAlias = true;
     
     # All your plugins managed by Nix
-    plugins = with pkgs.vimPlugins; [
+plugins = with pkgs.vimPlugins; [
       # LSP
       nvim-lspconfig
       mason-nvim
@@ -60,13 +60,13 @@
       comment-nvim
       indent-blankline-nvim
       nvim-colorizer-lua
-      
-      # Themes (pick your favorite)
-      tokyonight-nvim
-      catppuccin-nvim
-      gruvbox-nvim
-    ];
-    
+      flash-nvim
+      vim-visual-multi
+      fidget-nvim
+      mini-nvim  
+      tabout-nvim
+    ];    
+
     # External tools needed by plugins
     extraPackages = with pkgs; [
       # Language servers

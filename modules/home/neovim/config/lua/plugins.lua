@@ -244,6 +244,4 @@ dashboard.section.buttons.val = {
 }
 
 alpha.setup(dashboard.opts)
-
--- Set colorscheme
-vim.cmd.colorscheme("tokyonight") -- or catppuccin, gruvbox, etc.
+require("plugins.extra")
