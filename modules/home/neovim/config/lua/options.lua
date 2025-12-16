@@ -1,4 +1,4 @@
--- modules/home/neovim/config/options.lua
+-- modules/home/neovim/config/lua/options.lua
 
 local opt = vim.opt
 
