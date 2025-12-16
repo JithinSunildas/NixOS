@@ -40,3 +40,6 @@ require("lazy").setup("plugins", {
     },
   },
 })
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
