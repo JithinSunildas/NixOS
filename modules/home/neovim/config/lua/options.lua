@@ -17,7 +17,7 @@ opt.shiftwidth = 4       -- Auto-indent commands (like << or >>) use 4 spaces
 opt.smartindent = true   -- Insert indents automatically
 
 -- [[ Search Configuration ]]
-opt.ignorecase = true    -- Case-insensitive searching
+opt.ignorecase = false    -- Case-insensitive searching
 opt.smartcase = true     -- But be case-sensitive if a search term contains a capital letter
 opt.incsearch = true     -- Highlight matches as you type
 opt.hlsearch = true      -- Highlight all search matches
