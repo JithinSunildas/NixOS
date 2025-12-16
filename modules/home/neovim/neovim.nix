@@ -106,9 +106,12 @@
       -- This runs BEFORE init.lua
     '';
   };
-  # Copy config files to ~/.config/nvim INCLUDING init.lua
-  xdg.configFile."nvim" = {
-    source = ./config;
-    recursive = true;
+
+  xdg.configFile."nvim/init.lua" = {
+    source = ./config/init.lua;
   };
-}
+  
+  xdg.configFile."nvim/lua" = {
+    source = ./config/lua;
+    recursive = true;
+  };}
