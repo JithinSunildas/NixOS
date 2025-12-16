@@ -1,6 +1,33 @@
 # modules/home/neovim/nvim.nix
 { pkgs, ... }:
+
 {
+    home.packages = with pkgs; [
+      clang-tools
+      nil
+      pyright
+      vimPlugins.nvim-jdtls
+      lua-language-server
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted # html, css, json
+      
+      # Formatters
+      rustfmt
+      black
+      isort
+      prettier
+      stylua
+      nixfmt-classic
+      
+      # Linters
+      ruff
+      
+      # Tools for telescope
+      ripgrep
+      fd
+      git
+    ]
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -68,7 +95,7 @@ plugins = with pkgs.vimPlugins; [
     ];    
 
     # External tools needed by plugins
-    home.Packages = with pkgs; [
+    extraPackages = with pkgs; [
       # Language servers
       clang-tools
       nil
