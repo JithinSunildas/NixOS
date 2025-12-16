@@ -26,7 +26,7 @@
       ripgrep
       fd
       git
-    ]
+    ];
 
   programs.neovim = {
     enable = true;
