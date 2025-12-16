@@ -21,8 +21,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load options and keymaps first
-require("options")
-require("keymaps")
+require("lua.options")
+require("lua.keymaps")
 
 -- Setup lazy.nvim and load plugins
 require("lazy").setup("plugins", {
