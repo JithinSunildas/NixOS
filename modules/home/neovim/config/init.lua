@@ -23,7 +23,7 @@ require("options")
 require("lsp")
 require("keymaps")
 
-require("lazy").setup("plugins", {
+require("lazy").setup("plugins.init", {
     defaults = {
         lazy = true,
     },
