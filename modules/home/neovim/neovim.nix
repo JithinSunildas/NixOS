@@ -12,7 +12,6 @@
       nodePackages.vscode-langservers-extracted # html, css, json
       
       # Formatters
-      rustfmt
       black
       isort
       prettier
