@@ -6,7 +6,6 @@
       clang-tools
       nil
       pyright
-      vimPlugins.nvim-jdtls
       lua-language-server
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted # html, css, json
