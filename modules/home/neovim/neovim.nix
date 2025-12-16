@@ -68,7 +68,7 @@ plugins = with pkgs.vimPlugins; [
     ];    
 
     # External tools needed by plugins
-    extraPackages = with pkgs; [
+    home.Packages = with pkgs; [
       # Language servers
       clang-tools
       nil
