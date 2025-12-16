@@ -345,7 +345,7 @@ map("n", "<leader>cd", "<cmd>ColorizerDetachFromBuffer<cr>", { desc = "Detach Co
 -- === Vim-visual-multi (Multi-cursors) ===
 -- Configure vim-visual-multi
 vim.g.VM_leader = "\\"
-vim.g.VM_theme = "iceblue"
+-- vim.g.VM_theme = "iceblue"
 vim.g.VM_highlight_matches = "underline"
 
 -- Default mappings (these work out of the box):

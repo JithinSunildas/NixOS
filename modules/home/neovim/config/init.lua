@@ -39,3 +39,6 @@ require("lazy").setup("plugins", {
         },
     },
 })
+
+require("plugins.setup")
+require("plugins.extra")
