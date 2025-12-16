@@ -1,6 +1,5 @@
 # modules/home/neovim/nvim.nix
 { pkgs, ... }:
-
 {
   home.packages = with pkgs; [
     clang-tools
@@ -9,36 +8,29 @@
     lua-language-server
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted # html, css, json
-
     # Formatters
     black
     isort
     prettier
     stylua
     nixfmt-classic
-
     # Linters
     ruff
-
     # Tools for telescope
     ripgrep
     fd
     git
   ];
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-
     # All your plugins managed by Nix
     plugins = with pkgs.vimPlugins; [
       # LSP
       nvim-lspconfig
-      mason-nvim
-      mason-lspconfig-nvim
-
+      
       # Autocompletion
       nvim-cmp
       cmp-nvim-lsp
@@ -46,7 +38,6 @@
       cmp-path
       luasnip
       cmp_luasnip
-
       # Treesitter
       (nvim-treesitter.withPlugins (p: [
         p.c
@@ -63,12 +54,10 @@
         p.json
       ]))
       nvim-treesitter-textobjects
-
       # Fuzzy finder
       telescope-nvim
       telescope-fzf-native-nvim
       plenary-nvim
-
       # UI
       nvim-tree-lua
       lualine-nvim
@@ -76,10 +65,8 @@
       bufferline-nvim
       which-key-nvim
       alpha-nvim
-
       # Git
       gitsigns-nvim
-
       # Utilities
       nvim-autopairs
       comment-nvim
@@ -90,8 +77,9 @@
       fidget-nvim
       mini-nvim
       tabout-nvim
+      # Lazy.nvim for managing additional config
+      lazy-nvim
     ];
-
     # External tools needed by plugins
     extraPackages = with pkgs; [
       # Language servers
@@ -101,35 +89,26 @@
       lua-language-server
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted # html, css, json
-
       # Formatters
-      rustfmt
       black
       isort
       prettier
       stylua
       nixfmt-classic
-
       # Linters
       ruff
-
       # Tools for telescope
       ripgrep
       fd
       git
     ];
-
     extraLuaConfig = ''
-      -- Load configuration
-      require("options")
-      require("keymaps")
-      require("plugins")
+      -- This runs BEFORE init.lua
     '';
   };
-
-  # Copy config files to ~/.config/nvim
-  xdg.configFile."nvim/lua" = {
-    source = ./config/lua;
+  # Copy config files to ~/.config/nvim INCLUDING init.lua
+  xdg.configFile."nvim" = {
+    source = ./config;
     recursive = true;
   };
 }
