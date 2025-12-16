@@ -1,12 +1,9 @@
 -- ~/nix-config/modules/home/neovim/config/init.lua
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazy_installed_by_nix = vim.fn.isdirectory(lazypath) == 0
-local config_root = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand("<sfile>")), ":h")
-package.path = config_root .. "/lua/?.lua;" .. package.path
 
 if lazy_installed_by_nix then
     for _, path in ipairs(vim.api.nvim_list_runtime_paths()) do
@@ -19,6 +16,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Load basic config FIRST (before lazy)
 require("options")
 require("keymaps")
 
@@ -39,6 +37,7 @@ require("lazy").setup("plugins.init", {
     },
 })
 
+-- Load LSP and plugin configurations AFTER lazy setup
 require("lsp")
 require("plugins.setup")
 require("plugins.extra")
