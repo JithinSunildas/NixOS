@@ -22,6 +22,8 @@ map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 map("v", "<C-c>", '"+y', { desc = "Copy to clipboard" })
 map("i", "<C-v>", "<C-r>+", { desc = "Paste from clipboard" })
 map("n", "<C-a>", "ggVG", { desc = "Select all" })
+map("i", "<C-a>", "ggVG", { desc = "Select all" })
+map("v", "<C-a>", "ggVG", { desc = "Select all" })
 
 -- === Window Management ===
 -- Navigate between windows
@@ -47,7 +49,9 @@ map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
 map("n", "<leader>]", "<cmd>tabnext<cr>", { desc = "Next tab" })
+map("n", "L", "<cmd>tabnext<cr>", { desc = "Next tab" })
 map("n", "<leader>[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+map("n", "H", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
 
 -- === Editing ===
 -- Move lines up/down
@@ -77,16 +81,6 @@ map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 
--- === File Explorer ===
--- Note: <leader>e is configured in plugins.lua for NvimTree
-
--- === Telescope ===
--- Note: All telescope keymaps are in plugins.lua
-
--- === LSP ===
--- Note: LSP keymaps are configured in the on_attach function in plugins.lua
--- They include: gd, gD, gi, gr, K, <leader>rn, <leader>ca, [d, ]d, <leader>d
-
 -- === Terminal ===
 -- Open terminal in split
 map("n", "<leader>th", "<cmd>split | terminal<cr>", { desc = "Terminal horizontal" })
@@ -97,8 +91,8 @@ map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
-map({ "n", "v" }, "H", "^", { desc = "Beginning of line" })
-map({ "n", "v" }, "L", "$", { desc = "End of line" })
+map({ "n", "v" }, "gh", "^", { desc = "Beginning of line" })
+map({ "n", "v" }, "gl", "$", { desc = "End of line" })
 
 -- === Diagnostics ===
 map("n", "<leader>xx", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
@@ -126,7 +120,7 @@ map("n", "[c", function()
   return "<Ignore>"
 end, { expr = true, desc = "Previous git hunk" })
 
--- Actions
+-- Acggtions
 map("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<cr>", { desc = "Stage hunk" })
 map("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<cr>", { desc = "Reset hunk" })
 map("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<cr>", { desc = "Stage buffer" })
