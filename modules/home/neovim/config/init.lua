@@ -41,3 +41,4 @@ require("lazy").setup("plugins.init", {
 require("lsp")
 require("plugins.setup")
 require("plugins.extra")
+vim.cmd("colorscheme base16-stylix")
