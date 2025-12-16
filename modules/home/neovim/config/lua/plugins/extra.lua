@@ -386,3 +386,5 @@ vim.g.VM_maps = {
     ["Seek Down"]          = "<C-f>",
     ["Toggle Mappings"]    = "\\<Space>",
 }
+
+return {}
