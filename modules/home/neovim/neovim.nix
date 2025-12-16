@@ -2,43 +2,43 @@
 { pkgs, ... }:
 
 {
-    home.packages = with pkgs; [
-      clang-tools
-      nil
-      pyright
-      lua-language-server
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted # html, css, json
-      
-      # Formatters
-      black
-      isort
-      prettier
-      stylua
-      nixfmt-classic
-      
-      # Linters
-      ruff
-      
-      # Tools for telescope
-      ripgrep
-      fd
-      git
-    ];
+  home.packages = with pkgs; [
+    clang-tools
+    nil
+    pyright
+    lua-language-server
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted # html, css, json
+
+    # Formatters
+    black
+    isort
+    prettier
+    stylua
+    nixfmt-classic
+
+    # Linters
+    ruff
+
+    # Tools for telescope
+    ripgrep
+    fd
+    git
+  ];
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    
+
     # All your plugins managed by Nix
-plugins = with pkgs.vimPlugins; [
+    plugins = with pkgs.vimPlugins; [
       # LSP
       nvim-lspconfig
       mason-nvim
       mason-lspconfig-nvim
-      
+
       # Autocompletion
       nvim-cmp
       cmp-nvim-lsp
@@ -46,7 +46,7 @@ plugins = with pkgs.vimPlugins; [
       cmp-path
       luasnip
       cmp_luasnip
-      
+
       # Treesitter
       (nvim-treesitter.withPlugins (p: [
         p.c
@@ -63,12 +63,12 @@ plugins = with pkgs.vimPlugins; [
         p.json
       ]))
       nvim-treesitter-textobjects
-      
+
       # Fuzzy finder
       telescope-nvim
       telescope-fzf-native-nvim
       plenary-nvim
-      
+
       # UI
       nvim-tree-lua
       lualine-nvim
@@ -76,10 +76,10 @@ plugins = with pkgs.vimPlugins; [
       bufferline-nvim
       which-key-nvim
       alpha-nvim
-      
+
       # Git
       gitsigns-nvim
-      
+
       # Utilities
       nvim-autopairs
       comment-nvim
@@ -88,9 +88,9 @@ plugins = with pkgs.vimPlugins; [
       flash-nvim
       vim-visual-multi
       fidget-nvim
-      mini-nvim  
+      mini-nvim
       tabout-nvim
-    ];    
+    ];
 
     # External tools needed by plugins
     extraPackages = with pkgs; [
@@ -101,7 +101,7 @@ plugins = with pkgs.vimPlugins; [
       lua-language-server
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted # html, css, json
-      
+
       # Formatters
       rustfmt
       black
@@ -109,16 +109,16 @@ plugins = with pkgs.vimPlugins; [
       prettier
       stylua
       nixfmt-classic
-      
+
       # Linters
       ruff
-      
+
       # Tools for telescope
       ripgrep
       fd
       git
     ];
-    
+
     extraLuaConfig = ''
       -- Load configuration
       require("options")
@@ -126,7 +126,7 @@ plugins = with pkgs.vimPlugins; [
       require("plugins")
     '';
   };
-  
+
   # Copy config files to ~/.config/nvim
   xdg.configFile."nvim/lua" = {
     source = ./config/lua;

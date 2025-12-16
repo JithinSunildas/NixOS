@@ -9,10 +9,6 @@ require("nvim-treesitter.configs").setup({
   textobjects = { enable = true },
 })
 
--- === LSP Configuration ===
-local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 -- LSP keymaps
 local on_attach = function(client, bufnr)
   local opts = { buffer = bufnr, silent = true }
@@ -27,55 +23,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
   vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Show diagnostic" }))
 end
-
--- Configure servers
-local servers = {
-  "rust_analyzer",
-  "clangd",
-  "nil_ls",
-  "pyright",
-  "lua_ls",
-  "ts_ls",
-  "html",
-  "cssls",
-  "jsonls",
-}
-
-lspconfig.rust_analyzer.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-lspconfig.clangd.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-lspconfig.nixd.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-lspconfig.pyright.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-lspconfig.lua_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = { version = "LuaJIT" },
-      diagnostics = { globals = { "vim" } },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false,
-      },
-      telemetry = { enable = false },
-    },
-  },
-})
 
 -- === Autocompletion ===
 local cmp = require("cmp")

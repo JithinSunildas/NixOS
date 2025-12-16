@@ -1,90 +1,55 @@
--- modules/home/neovim/config/lsp.lua
+-- ~/nix-config/modules/home/neovim/config/lua/lsp.lua
 
-local lsp_config = require('lspconfig')
-local mason = require('mason')
-local mason_lspconfig = require('mason-lspconfig')
-
--- Define the servers you want Mason to ensure are installed
+-- Configure servers
 local servers = {
-  'rust_analyzer', -- For Rust (your favorite!)
-  'clangd',        -- For C/C++
-  'pyright',       -- For Python
-  'jdtls',         -- For Java
-  'lua_ls',        -- For Neovim config (essential)
+  "rust_analyzer",
+  "clangd",
+  "pyright",
+  "ts_ls",
+    "nixd",
+"stylua"
+  "html",
+  "cssls",
+  "jsonls",
 }
 
--- Key setup function that runs when an LSP server is attached to a buffer
-local on_attach = function(client, bufnr)
-  -- Customize how specific servers interact (e.g., enable format-on-save for some)
-  -- if client.name == 'rust_analyzer' then
-  --   client.server_capabilities.documentFormattingProvider = true
-  -- end
+-- === LSP Configuration ===
+local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-  -- Set up keymaps that are local to the buffer being edited (bufnr)
-  local map = function(mode, lhs, rhs, desc)
-    vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
-  end
-  
-  -- Example LSP keymaps (these would ideally be in keymaps.lua, but are shown here for context):
-  map('n', 'gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  map('n', 'gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  map('n', 'K', vim.lsp.buf.hover, 'Hover Documentation')
-  map('n', '<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  map('n', '<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-end
-
--- --- 1. MASON Setup ---
-mason.setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
-    }
-  }
+lspconfig.rust_analyzer.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
 })
 
--- --- 2. MASON-LSPCONFIG BRIDGE ---
-mason_lspconfig.setup({
-  ensure_installed = servers,
-  -- This is the magic part: It calls lsp_config.SERVER.setup for every installed server
-  handlers = {
-    -- Default setup for all servers installed by Mason
-    function (server_name)
-      lsp_config[server_name].setup({
-        on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        -- Add any server-specific settings here, e.g.,
-        -- settings = {
-        --   pyright = { ... }
-        -- }
-      })
-    end,
-    
-    -- Specific handler for 'lua_ls' to include your config directory
-    ['lua_ls'] = function ()
-      lsp_config.lua_ls.setup({
-        on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        settings = {
-          Lua = {
-            -- Ensure Neovim knows about your custom modules
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-            diagnostics = { globals = { 'vim' } },
-          },
-        },
-      })
-    end
-  }
+lspconfig.clangd.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-    end
-  end,
+lspconfig.nixd.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.stylua.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      diagnostics = { globals = { "vim" } },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = { enable = false },
+    },
+  },
 })
 
