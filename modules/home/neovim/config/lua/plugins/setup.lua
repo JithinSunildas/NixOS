@@ -161,6 +161,5 @@ dashboard.section.buttons.val = {
 }
 
 alpha.setup(dashboard.opts)
-require("plugins.extra")
 
 return {}
