@@ -12,17 +12,18 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
--- Save and quit
+-- Save and --[[ quit ]]
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 
 -- === Clipboard ===
 -- System clipboard shortcuts
-map("v", "<C-c>", '"+y', { desc = "Copy to clipboard" })
+map("v", "<C-c>", '<Esc>gcc', { desc = "Comment/uncomment" })
+map("n", "<C-c>", 'gcc', { desc = "Comment/uncomment" })
 map("i", "<C-v>", "<C-r>+", { desc = "Paste from clipboard" })
 map("n", "<C-a>", "ggVG", { desc = "Select all" })
-map("i", "<C-a>", "ggVG", { desc = "Select all" })
+map("i", "<C-a>", "<Esc>ggVG", { desc = "Select all" })
 map("v", "<C-a>", "ggVG", { desc = "Select all" })
 
 -- === Window Management ===
@@ -42,16 +43,16 @@ map("n", "<leader>sx", "<cmd>close<cr>", { desc = "Close split" })
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increast width" })
 
 -- === Tab Management ===
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
 map("n", "<leader>]", "<cmd>tabnext<cr>", { desc = "Next tab" })
-map("n", "L", "<cmd>tabnext<cr>", { desc = "Next tab" })
 map("n", "<leader>[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
-map("n", "H", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer" })
 
 -- === Editing ===
 -- Move lines up/down
@@ -83,16 +84,26 @@ map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 
 -- === Terminal ===
 -- Open terminal in split
+map("n", "<leader>tt", "<cmd>tabnew | terminal<cr>", { desc = "Terminal (new tab)" })
 map("n", "<leader>th", "<cmd>split | terminal<cr>", { desc = "Terminal horizontal" })
 map("n", "<leader>tv", "<cmd>vsplit | terminal<cr>", { desc = "Terminal vertical" })
 
 -- Exit terminal mode easily
-map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
-map({ "n", "v" }, "gh", "^", { desc = "Beginning of line" })
+map({ "n", "v" }, "gH", "0", { desc = "Beginning of line" })
+map({ "n", "v" }, "gh", "^", { desc = "Beginning of sentence" })
 map({ "n", "v" }, "gl", "$", { desc = "End of line" })
+
+-- === Powerful Insert mode ===
+map("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })
+map("i", "<C-h>", "<C-Left>", { desc = "Move previous word" })
+map("i", "<C-Del>", "<C-o>dw", { desc = "Delete next word" })
+map("i", "<C-l>", "<C-Right>", { desc = "Move next word" })
+map("i", "<C-z>", "<C-o>u", { desc = "Undo" })
+map("i", "<C-y>", "<C-o><C-r>", { desc = "Redo" })
 
 -- === Diagnostics ===
 map("n", "<leader>xx", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })

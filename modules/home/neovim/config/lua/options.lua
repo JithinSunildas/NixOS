@@ -9,6 +9,9 @@ opt.relativenumber = true -- Show relative line numbers for navigation
 opt.signcolumn = "yes"   -- Always show the sign column (for LSPs, git, etc.)
 opt.scrolloff = 8        -- Keep 8 lines above/below the cursor when scrolling
 opt.cmdheight = 1        -- Command line height
+opt.cursorline = true
+opt.cursorlineopt = "number,line"
+vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
 
 -- [[ Tabs, Spaces, and Indentation ]]
 opt.expandtab = true     -- Use spaces instead of tabs
