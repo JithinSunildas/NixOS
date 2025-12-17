@@ -1,9 +1,11 @@
 #Configuration.nix
-{ config, pkgs, inputs, lib, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   imports = [
-    # System Hardware and Structure
     ./hardware-configuration.nix
     ./packages/packages.nix
   ];
@@ -12,7 +14,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Hibernation swap space...
-  swapDevices = [ 
+  swapDevices = [
     { device = "/dev/nvme0n1p3"; }
   ];
   boot.resumeDevice = "/dev/nvme0n1p3";
@@ -23,16 +25,17 @@
     "nix-command"
     "flakes"
   ];
-  
+
   system.stateVersion = "25.05";
-  
+
   # --- Bootloader ---
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
+    systemd-boot.graceful = true;
   };
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelModules = ["uinput"];
+  boot.kernelModules = [ "uinput" ];
 
   # --- Networking & Localization ---
   networking = {
@@ -51,7 +54,7 @@
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # --- User & Home Manager Configuration ---
+  # --- User Configuration ---
   users.users.tikhaboom = {
     isNormalUser = true;
     description = "tikhaboom";
@@ -67,23 +70,14 @@
     ];
   };
 
-  home-manager.extraSpecialArgs = {
-    inherit inputs;
-  };
-
-  home-manager.users.tikhaboom = {
-    imports = [
-      ./modules/home/home.nix
-    ];
-    home.stateVersion = "25.05";
-  };
-  
   # --- System Environment & Services ---
   environment.systemPackages = with pkgs; [
     polkit
     nixfmt-rfc-style
     xwayland
     xwayland-satellite
+    android-tools
+    dict
   ];
 
   environment.variables = {
@@ -92,12 +86,12 @@
     OZONE_PLATFORM = "wayland";
     GDK_BACKEND = "wayland";
   };
-  
+
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
-  
+
   security.polkit.enable = true;
   virtualisation.docker.enable = true;
 
@@ -128,16 +122,16 @@
     };
     gamemode.enable = true;
   };
-  
+
   xdg.portal.wlr.enable = true;
-  
+
   fonts = {
     fontconfig.enable = true;
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
     ];
   };
-  
+
   services = {
     qbittorrent.enable = true;
     displayManager = {
@@ -145,7 +139,11 @@
       ly.enable = true;
     };
     # services.openssh.enable = true;
+    emacs.enable = true;
   };
+
+  services.gvfs.enable = true;
+  programs.adb.enable = true;
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
@@ -161,6 +159,11 @@
         '';
       };
     };
+  };
+
+  services.postgresql = {
+    enable = true;
+    enableTCPIP = true;
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];

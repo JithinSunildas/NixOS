@@ -1,17 +1,21 @@
 # packages/packages.nix
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
     # --- Base Packages ---
+    home-manager
     ffmpeg
     neovim
     wget
     wl-clipboard-rs
     git
+    helix
+    emacs
     curl
     wlogout
     eza
+    libmtp
     zoxide
     bat
     tmux
@@ -20,6 +24,7 @@
     nh
     gnumake
     brightnessctl
+    cmatrix
     ly
     fish
     fastfetch
