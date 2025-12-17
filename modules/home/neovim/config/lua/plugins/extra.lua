@@ -47,7 +47,7 @@ map({ "o", "x" }, "R", function()
     require("flash").treesitter_search()
 end, { desc = "Treesitter Search" })
 
-map({ "c" }, "<CR>", function()
+map({ "n" }, "<CR>", function()
     require("flash").toggle()
 end, { desc = "Toggle Flash Search" })
 
