@@ -3,6 +3,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.opt.mouse = ""
+
 local map = vim.keymap.set
 
 -- Disable space default behavior (since it's our leader key)
@@ -51,8 +53,6 @@ map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
 map("n", "<leader>]", "<cmd>tabnext<cr>", { desc = "Next tab" })
 map("n", "<leader>[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
-map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
-map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer" })
 
 -- === Editing ===
 -- Move lines up/down
@@ -93,9 +93,10 @@ map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
-map({ "n", "v" }, "gH", "0", { desc = "Beginning of line" })
+map({ "n", "v" }, "<S-h>", "0", { desc = "Beginning of line" })
+map({ "n", "v" }, "<S-l>", "$", { desc = "Beginning of line" })
 map({ "n", "v" }, "gh", "^", { desc = "Beginning of sentence" })
-map({ "n", "v" }, "gl", "$", { desc = "End of line" })
+map({ "n", "v" }, "gl", "g_", { desc = "End of sentence" })
 
 -- === Powerful Insert mode ===
 map("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })
@@ -112,23 +113,23 @@ map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Loc
 -- === Git (with gitsigns) ===
 -- Navigation
 map("n", "]c", function()
-  if vim.wo.diff then
-    return "]c"
-  end
-  vim.schedule(function()
-    require("gitsigns").next_hunk()
-  end)
-  return "<Ignore>"
+    if vim.wo.diff then
+        return "]c"
+    end
+    vim.schedule(function()
+        require("gitsigns").next_hunk()
+    end)
+    return "<Ignore>"
 end, { expr = true, desc = "Next git hunk" })
 
 map("n", "[c", function()
-  if vim.wo.diff then
-    return "[c"
-  end
-  vim.schedule(function()
-    require("gitsigns").prev_hunk()
-  end)
-  return "<Ignore>"
+    if vim.wo.diff then
+        return "[c"
+    end
+    vim.schedule(function()
+        require("gitsigns").prev_hunk()
+    end)
+    return "<Ignore>"
 end, { expr = true, desc = "Previous git hunk" })
 
 -- Acggtions
@@ -150,3 +151,8 @@ map("n", "<leader>un", "<cmd>set nu!<cr>", { desc = "Toggle line numbers" })
 map("n", "<leader>ur", "<cmd>set rnu!<cr>", { desc = "Toggle relative numbers" })
 map("n", "<leader>uw", "<cmd>set wrap!<cr>", { desc = "Toggle line wrap" })
 map("n", "<leader>us", "<cmd>set spell!<cr>", { desc = "Toggle spell check" })
+
+-- map("", "<up>", "<nop>", { noremap = true })
+-- map("", "<down>", "<nop>", { noremap = true })
+-- map("i", "<up>", "<nop>", { noremap = true })
+-- map("i", "<down>", "<nop>", { noremap = true })

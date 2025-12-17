@@ -85,8 +85,8 @@ require('kanso').setup({
     foreground = "default",
 })
 
--- setup must be called before loading
 vim.cmd("colorscheme kanso")
+
 -- Load extensions
 pcall(telescope.load_extension, "fzf")
 
