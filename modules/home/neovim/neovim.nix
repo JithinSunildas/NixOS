@@ -23,8 +23,6 @@
     git
   ];
 
-  stylix.targets.neovim.enable = true;
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
