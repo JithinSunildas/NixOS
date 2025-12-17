@@ -1,6 +1,5 @@
 -- modules/home/neovim/config/lua/options.lua
 
-vim.cmd("colorscheme kanso")
 local opt = vim.opt
 
 -- [[ UI Configuration ]]
