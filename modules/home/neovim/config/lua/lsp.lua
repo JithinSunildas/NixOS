@@ -59,14 +59,6 @@ vim.lsp.config.clangd = {
     on_attach = on_attach,
 }
 
-vim.lsp.config.google-java-format = {
-    cmd = { "google-java-format" },
-    filetypes = { "java" },
-    root_markers = { "compile_commands.json", ".git" },
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-
 vim.lsp.config.pyright = {
     cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
