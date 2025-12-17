@@ -80,6 +80,7 @@ map("v", "p", '"_dP', { desc = "Paste without yanking" })
 map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+map("n", "<leader>bb", "<cmd>b#<cr>", { desc = "Switch to last buffer" })
 
 -- === Terminal ===
 -- Open terminal in split
@@ -108,6 +109,14 @@ map("i", "<C-y>", "<C-o><C-r>", { desc = "Redo" })
 -- === Diagnostics ===
 map("n", "<leader>xx", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
 map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Location list" })
+
+-- === Multi Cursor ===
+vim.g.multi_cursor_start_word_key      = "<C-n>"
+vim.g.multi_cursor_select_all_word_key = "g<C-n>"
+vim.g.multi_cursor_next_key            = "<C-n>"
+vim.g.multi_cursor_prev_key            = "<C-p>"
+vim.g.multi_cursor_skip_key            = "<C-s>"
+vim.g.multi_cursor_quit_key            = "<Esc>"
 
 -- === Git (with gitsigns) ===
 -- Navigation

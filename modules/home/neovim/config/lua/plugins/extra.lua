@@ -134,37 +134,26 @@ require("fidget").setup({
 
 -- === Mini.surround - Add/delete/replace surroundings ===
 require("mini.surround").setup({
-    -- Configuration for different surroundings
     custom_surroundings = nil,
 
-    -- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
     highlight_duration = 500,
 
-    -- Module mappings. Use `''` (empty string) to disable one.
     mappings = {
-        add = "sa",            -- Add surrounding in Normal and Visual modes
-        delete = "sd",         -- Delete surrounding
-        find = "sf",           -- Find surrounding (to the right)
-        find_left = "sF",      -- Find surrounding (to the left)
-        highlight = "sh",      -- Highlight surrounding
-        replace = "sr",        -- Replace surrounding
-        update_n_lines = "sn", -- Update `n_lines`
+        add = "sa",
+        delete = "sd",
+        find = "sf",
+        find_left = "sF",
+        highlight = "sh",
+        replace = "sr",
+        update_n_lines = "sn",
 
-        suffix_last = "l",     -- Suffix to search with "prev" method
-        suffix_next = "n",     -- Suffix to search with "next" method
+        suffix_last = "l",
+        suffix_next = "n",
     },
 
-    -- Number of lines within which surrounding is searched
     n_lines = 20,
 
-    -- Whether to respect selection type:
-    -- - Place surroundings on separate lines in linewise mode.
-    -- - Place surroundings on each line in blockwise mode.
     respect_selection_type = false,
-
-    -- How to search for surrounding (first inside current line, then inside
-    -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
-    -- 'cover_or_nearest', 'next', 'prev', 'nearest'.
     search_method = "cover",
 })
 
