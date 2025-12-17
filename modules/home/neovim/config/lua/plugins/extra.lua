@@ -47,7 +47,7 @@ map({ "o", "x" }, "R", function()
     require("flash").treesitter_search()
 end, { desc = "Treesitter Search" })
 
-map({ "n" }, "<CR>", function()
+map({ "c" }, "<c-s>", function()
     require("flash").toggle()
 end, { desc = "Toggle Flash Search" })
 
@@ -343,25 +343,8 @@ map("n", "<leader>ca", "<cmd>ColorizerAttachToBuffer<cr>", { desc = "Attach Colo
 map("n", "<leader>cd", "<cmd>ColorizerDetachFromBuffer<cr>", { desc = "Detach Colorizer" })
 
 -- === Vim-visual-multi (Multi-cursors) ===
--- Configure vim-visual-multi
 vim.g.VM_leader = "\\"
--- vim.g.VM_theme = "iceblue"
 vim.g.VM_highlight_matches = "underline"
-
--- Default mappings (these work out of the box):
--- <C-n>         Start multi-cursor, select next occurrence
--- <C-Down/Up>   Create cursors vertically
--- n/N           Get next/previous occurrence
--- [/]           Select next/previous cursor
--- q             Skip current and get next occurrence
--- Q             Remove current cursor/selection
--- <Tab>         Switch between cursor and extend mode
--- \\A           Select all occurrences
--- \\\/          Start regex search
--- \\\\          Add cursor at position
--- \\c           Toggle case sensitive search
--- \\f           Find with input
--- \\r           Start replace mode
 
 -- Custom keymaps for easier access
 vim.g.VM_maps = {

@@ -23,6 +23,19 @@ local on_attach = function(client, bufnr)
 end
 
 -- =========================
+-- ENABLE SERVERS
+-- =========================
+
+vim.lsp.enable({
+    "nixfmt",
+    "rust_analyzer",
+    "clangd",
+    "pyright",
+    "lua_ls",
+    "googel-java-formatter"
+})
+
+-- =========================
 -- LSP SERVER DEFINITIONS
 -- =========================
 
@@ -37,6 +50,14 @@ vim.lsp.config.rust_analyzer = {
 vim.lsp.config.clangd = {
     cmd = { "clangd" },
     filetypes = { "c", "cpp", "objc", "objcpp" },
+    root_markers = { "compile_commands.json", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+vim.lsp.config.google-java-formatter = {
+    cmd = { "google-java-formatter" },
+    filetypes = { "java" },
     root_markers = { "compile_commands.json", ".git" },
     capabilities = capabilities,
     on_attach = on_attach,
@@ -68,17 +89,6 @@ vim.lsp.config.lua_ls = {
         },
     },
 }
-
--- =========================
--- ENABLE SERVERS
--- =========================
-
-vim.lsp.enable({
-    "rust_analyzer",
-    "clangd",
-    "pyright",
-    "lua_ls",
-})
 
 -- =========================
 -- INLAY HINTS

@@ -92,10 +92,10 @@ map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
-map({ "n", "v" }, "<S-h>", "^", { desc = "Beginning of sentence" })
-map({ "n", "v" }, "<S-l>", "g_", { desc = "End of sentence" })
-map({ "n", "v" }, "gh", "0", { desc = "Beginning of line" })
-map({ "n", "v" }, "gl", "$", { desc = "End of line" })
+map({ "n", "v", "o" }, "<S-h>", "^", { desc = "Beginning of sentence" })
+map({ "n", "v", "o" }, "<S-l>", "g_", { desc = "End of sentence" })
+map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" })
+map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
 map("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })

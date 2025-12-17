@@ -14,6 +14,7 @@
     prettier
     stylua
     nixfmt-classic
+    google-java-formatter
     # Linters
     ruff
     # Tools for telescope

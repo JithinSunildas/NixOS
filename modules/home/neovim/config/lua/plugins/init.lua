@@ -25,11 +25,11 @@ return {
     "goolord/alpha-nvim",
     "lukas-reineke/indent-blankline.nvim",
     "NvChad/nvim-colorizer.lua",
-    {
-        "webhooked/kanso.nvim",
-        lazy = false,
-        priority = 1000
-    },
+    -- {
+    --     "webhooked/kanso.nvim",
+    --     lazy = false,
+    --     priority = 1000
+    -- },
     "sainnhe/everforest",
 
     -- Git
@@ -47,5 +47,8 @@ return {
     "abecodes/tabout.nvim",
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "mg979/vim-visual-multi"
+    {
+        "mg979/vim-visual-multi",
+        lazy = false
+    }
 }
