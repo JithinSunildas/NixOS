@@ -110,14 +110,6 @@ map("i", "<C-y>", "<C-o><C-r>", { desc = "Redo" })
 map("n", "<leader>xx", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
 map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Location list" })
 
--- === Multi Cursor ===
-vim.g.multi_cursor_start_word_key      = "<C-n>"
-vim.g.multi_cursor_select_all_word_key = "g<C-n>"
-vim.g.multi_cursor_next_key            = "<C-n>"
-vim.g.multi_cursor_prev_key            = "<C-p>"
-vim.g.multi_cursor_skip_key            = "<C-s>"
-vim.g.multi_cursor_quit_key            = "<Esc>"
-
 -- === Git (with gitsigns) ===
 -- Navigation
 map("n", "]c", function()
