@@ -48,8 +48,12 @@ vim.lsp.config.rust_analyzer = {
 }
 
 vim.lsp.config.clangd = {
-    cmd = { "clangd" },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+        "--fallback-style={IndentWidth: 4, ColumnLimit: 100}" 
+    },    filetypes = { "c", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
     capabilities = capabilities,
     on_attach = on_attach,
