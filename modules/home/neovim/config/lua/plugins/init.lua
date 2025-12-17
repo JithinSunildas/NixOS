@@ -29,6 +29,7 @@ return {
         lazy = false,
         priority = 1000
     },
+    "sainnhe/everforest",
 
     -- Git
     "lewis6991/gitsigns.nvim",
