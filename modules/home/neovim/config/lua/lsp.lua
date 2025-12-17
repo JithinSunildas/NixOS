@@ -32,7 +32,7 @@ vim.lsp.enable({
     "clangd",
     "pyright",
     "lua_ls",
-    "googel-java-formatter"
+    "jdtls"
 })
 
 -- =========================
@@ -52,12 +52,31 @@ vim.lsp.config.clangd = {
         "clangd",
         "--background-index",
         "--clang-tidy",
-        "--fallback-style={IndentWidth: 4, ColumnLimit: 100}"
+        "--fallback-style={IndentWidth: 4, TabWidth: 4, UseTab: Never}"
     },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
+    filetypes = { "c", "h", "hpp", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
     capabilities = capabilities,
     on_attach = on_attach,
+}
+
+vim.lsp.config.jdtls = {
+    cmd = { "jdtls" },
+    filetypes = { "java" },
+    root_markers = { "pom.xml", "gradle.build", ".git", "build.gradle" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        java = {
+            format = {
+                enabled = true,
+                settings = {
+                    url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                    profile = "GoogleStyle",
+                },
+            },
+        },
+    },
 }
 
 vim.lsp.config.pyright = {
@@ -106,9 +125,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
-        for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
+        for _, client in ipairs(clients) do
             if client.server_capabilities.documentFormattingProvider then
-                vim.lsp.buf.format({ async = false })
+                vim.lsp.buf.format({ async = false, id = client.id })
                 return
             end
         end

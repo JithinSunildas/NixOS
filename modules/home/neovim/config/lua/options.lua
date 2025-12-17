@@ -11,7 +11,6 @@ opt.scrolloff = 8
 opt.cmdheight = 1
 opt.cursorline = true
 opt.cursorlineopt = "number,line"
-vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
 opt.wrap = true
 opt.linebreak = true
 opt.breakindent = true
