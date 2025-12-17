@@ -55,8 +55,8 @@ vim.lsp.config.clangd = {
     on_attach = on_attach,
 }
 
-vim.lsp.config.google-java-formatter = {
-    cmd = { "google-java-formatter" },
+vim.lsp.config.google-java-format = {
+    cmd = { "google-java-format" },
     filetypes = { "java" },
     root_markers = { "compile_commands.json", ".git" },
     capabilities = capabilities,
