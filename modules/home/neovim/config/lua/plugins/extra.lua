@@ -31,7 +31,7 @@ require("flash").setup({
 -- Flash keymaps
 local map = vim.keymap.set
 
-map({ "n", "x", "o" }, "s", function()
+map({ "n", "x", "o", "v" }, "CR", function()
     require("flash").jump()
 end, { desc = "Flash" })
 
