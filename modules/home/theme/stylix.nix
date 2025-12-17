@@ -49,7 +49,7 @@
 
       fuzzel.enable = true;
       neovim.enable = true;
-      # helix.enable = true;
+      helix.enable = true;
     };
   };
 

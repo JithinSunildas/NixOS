@@ -23,7 +23,7 @@
     git
   ];
 
-  stylix.target.neovim.enable = true;
+  stylix.targets.neovim.enable = true;
 
   programs.neovim = {
     enable = true;
