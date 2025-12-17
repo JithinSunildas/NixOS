@@ -154,7 +154,12 @@ require("gitsigns").setup({
 -- === Utilities ===
 require("nvim-autopairs").setup()
 require("Comment").setup()
-require("which-key").setup()
+require("which-key").setup({
+    window = {
+        border = "rounded",
+        position = "center",
+    },
+})
 require("ibl").setup({
     indent = { char = "│" },
     scope = { enabled = false },
