@@ -23,7 +23,7 @@ require("flash").setup({
         },
     },
     modes = {
-        search = { enabled = true },
+        search = { enabled = false },
         char = { enabled = true },
     },
 })
@@ -47,7 +47,7 @@ map({ "o", "x" }, "R", function()
     require("flash").treesitter_search()
 end, { desc = "Treesitter Search" })
 
-map({ "c" }, "<c-s>", function()
+map({ "c" }, "<CR>", function()
     require("flash").toggle()
 end, { desc = "Toggle Flash Search" })
 

@@ -1,4 +1,5 @@
 -- ~/nix-config/modules/home/neovim/config/lua/plugins/init.lua
+
 return {
     -- LSP & Completion
     "neovim/nvim-lspconfig",
