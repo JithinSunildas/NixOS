@@ -41,8 +41,16 @@ vim.lsp.enable({
 -- =========================
 
 vim.lsp.config.haskell_language_server = {
-    cmd = {"haskell-language-server},
-    }
+    cmd = { "haskell-language-server-wrapper", "--lsp" },
+    filetypes = { "haskell", "lhaskell" },
+    root_markers = {
+        "stack.yaml",
+        "cabal.project",
+        "*.cabal",
+        "hie.yaml",
+        ".git",
+    },
+}
 
 vim.lsp.config.rust_analyzer = {
     cmd = { "rust-analyzer" },
