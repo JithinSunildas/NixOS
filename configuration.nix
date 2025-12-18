@@ -18,8 +18,8 @@
     { device = "/dev/nvme0n1p3"; }
   ];
   boot.resumeDevice = "/dev/nvme0n1p3";
-  services.logind.settings.Login.HandleLidSwitchExternalPower = "hibernate";
-  services.logind.settings.Login.HandleLidSwitch = "hibernate";
+  # services.logind.settings.Login.HandleLidSwitchExternalPower = "hibernate";
+  # services.logind.settings.Login.HandleLidSwitch = "hibernate";
 
   nix.settings.experimental-features = [
     "nix-command"

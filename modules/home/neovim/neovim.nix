@@ -8,6 +8,8 @@
     lua-language-server
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted # html, css, json
+    haskell-language-server
+
     # Formatters
     black
     isort
@@ -15,6 +17,7 @@
     stylua
     nixfmt-classic
     google-java-format
+    ormolu
     # Linters
     ruff
     # Tools for telescope

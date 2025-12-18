@@ -32,12 +32,17 @@ vim.lsp.enable({
     "clangd",
     "pyright",
     "lua_ls",
-    "jdtls"
+    "jdtls",
+    "haskell_language_server"
 })
 
 -- =========================
 -- LSP SERVER DEFINITIONS
 -- =========================
+
+vim.lsp.config.haskell_language_server = {
+    cmd = {"haskell-language-server},
+    }
 
 vim.lsp.config.rust_analyzer = {
     cmd = { "rust-analyzer" },
