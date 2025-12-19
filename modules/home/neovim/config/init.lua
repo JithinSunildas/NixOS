@@ -2,6 +2,12 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+local stylix_colors = os.getenv("HOME") ..
+    "/.config/stylix/colors/everforest-dark-medium.lua"
+if vim.fn.filereadable(stylix_colors) == 1 then
+    dofile(stylix_colors)
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazy_installed_by_nix = vim.fn.isdirectory(lazypath) == 0
 
