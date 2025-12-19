@@ -6,7 +6,6 @@
 {
     stylix = {
         enable = true;
-        xdg.configFile."kanso.yaml".source = "${./kanso.yaml}";
         image = ./wallpapers/demo.jpg;
         polarity = "dark";
 
@@ -15,7 +14,9 @@
             name = "Vimix-cursors";
             size = 24;
         };
-
+        xdg.configFile."kanso.yaml" = {
+          source = "${./kanso.yaml}";
+        };
 # Configure fonts
         fonts = {
             serif = {
