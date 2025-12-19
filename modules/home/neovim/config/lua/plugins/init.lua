@@ -25,6 +25,7 @@ return {
     "goolord/alpha-nvim",
     "lukas-reineke/indent-blankline.nvim",
     "NvChad/nvim-colorizer.lua",
+    "nvim-mini/mini.base16",
     -- {
     --     "webhooked/kanso.nvim",
     --     lazy = false,

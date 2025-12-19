@@ -43,6 +43,9 @@ cmp.setup({
     }),
 })
 
+
+require("mini.base16").setup()
+
 -- === Telescope ===
 local telescope = require("telescope")
 
