@@ -43,4 +43,4 @@ require("plugins.setup")
 require("plugins.extra")
 -- vim.cmd("colorscheme everforest")
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
-opt.termguicolors = true
+vim.opt.termguicolors = true
