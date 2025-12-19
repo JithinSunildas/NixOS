@@ -54,6 +54,13 @@ cmp.setup({
 --     end
 -- end
 
+require("everforest").setup({
+    background = {
+        dark = "hard"
+    }
+})
+
+
 -- === Telescope ===
 local telescope = require("telescope")
 
