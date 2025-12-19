@@ -1,0 +1,21 @@
+ # Kanso theme converted to base16 format
+
+scheme: "Kanso"
+author: "webhooked (converted to base16)"
+base00: "#090E13"  
+base01: "#1C1E25"  
+base02: "#22262D"  
+base03: "#393B44"  
+base04: "#C5C9C7"  
+base05: "#f2f1ef"  
+base06: "#A4A7A4"  
+base07: "#FFFFFF"  
+
+base08: "#C34043"  
+base09: "#DCA561"  
+base0A: "#E6C384"  
+base0B: "#98BB6C"  
+base0C: "#8ea4a2"  
+base0D: "#7FB4CA"  
+base0E: "#938AA9"  
+base0F: "#b6927b"  
