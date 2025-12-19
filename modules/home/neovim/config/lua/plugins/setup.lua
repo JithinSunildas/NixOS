@@ -43,8 +43,11 @@ cmp.setup({
     }),
 })
 
-
-require("mini.base16").setup()
+require("mini.base16").setup({
+    palette = nil,
+    use_cterm = nil,
+    plugins = { default = true },
+})
 
 -- === Telescope ===
 local telescope = require("telescope")
