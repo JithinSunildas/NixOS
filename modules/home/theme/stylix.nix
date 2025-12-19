@@ -6,6 +6,7 @@
 {
     stylix = {
         enable = true;
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
         image = ./wallpapers/demo.jpg;
         polarity = "dark";
 
@@ -14,9 +15,7 @@
             name = "Vimix-cursors";
             size = 24;
         };
-        xdg.configFile."kanso.yaml" = {
-          source = "${./kanso.yaml}";
-        };
+
 # Configure fonts
         fonts = {
             serif = {
