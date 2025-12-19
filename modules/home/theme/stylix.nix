@@ -50,7 +50,7 @@
       fuzzel.enable = true;
       neovim.enable = true;
       neovim.colors.enable = true;
-      terminal.enable = true;
+      console.enable = true;
       helix.enable = true;
     };
   };
