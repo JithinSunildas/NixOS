@@ -2,10 +2,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local stylix_colors = os.getenv("HOME") ..
-    "/.config/stylix/colors/everforest-dark-medium.lua"
-if vim.fn.filereadable(stylix_colors) == 1 then
-    dofile(stylix_colors)
+if vim.g.stylix_colors then
+    vim.g.colors_loaded = true
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -47,5 +45,9 @@ require("lazy").setup("plugins.init", {
 require("lsp")
 require("plugins.setup")
 require("plugins.extra")
-vim.cmd("colorscheme kanso")
+
+if not vim.g.stylix_colors then
+    vim.cmd("colorscheme kanso")
+end
+
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
