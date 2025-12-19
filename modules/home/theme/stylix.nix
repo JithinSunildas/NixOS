@@ -6,7 +6,7 @@
 {
     stylix = {
         enable = true;
-        base16Scheme = xdg.configFile."kanso.yaml".source = "${./kanso.yaml}";
+        xdg.configFile."kanso.yaml".source = "${./kanso.yaml}";
         image = ./wallpapers/demo.jpg;
         polarity = "dark";
 
