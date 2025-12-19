@@ -2,8 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.g.colors_loaded = true
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazy_installed_by_nix = vim.fn.isdirectory(lazypath) == 0
 
@@ -44,8 +42,6 @@ require("lsp")
 require("plugins.setup")
 require("plugins.extra")
 
--- if not vim.g.stylix_colors then
---     vim.cmd("colorscheme kanso")
--- end
+vim.cmd("colorscheme kanso")
 
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
