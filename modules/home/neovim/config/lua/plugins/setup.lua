@@ -43,41 +43,6 @@ cmp.setup({
     }),
 })
 
--- if vim.g.stylix_colors and type(vim.g.stylix_colors) == "table" then
---     local ok, mini = pcall(require, "mini.base16")
---     if ok then
---         mini.setup({
---             palette = vim.g.stylix_colors,
---             use_cterm = nil,
---             plugins = { default = true },
---         })
---     end
--- end
-
-require('kanso').setup({
-    bold = true,
-    italics = true,
-    compile = false,
-    undercurl = true,
-    commentStyle = { italic = true },
-    functionStyle = {},
-    keywordStyle = { italic = true },
-    statementStyle = {},
-    typeStyle = {},
-    transparent = false,
-    dimInactive = false,
-    terminalColors = true,
-    colors = {
-        palette = {},
-        theme = { zen = {}, pearl = {}, ink = {}, all = {} },
-    },
-    background = {
-        dark = "ink",
-        light = "ink"
-    },
-    foreground = "default",
-})
-
 -- === Telescope ===
 local telescope = require("telescope")
 
