@@ -6,7 +6,7 @@
 {
     stylix = {
         enable = true;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-wave.yaml";
         image = ./wallpapers/demo.jpg;
         polarity = "dark";
 
