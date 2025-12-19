@@ -50,7 +50,6 @@
             fuzzel.enable = true;
             neovim = {
                 enable = true;
-                colors.enable = true;
             };
             helix.enable = true;
         };
