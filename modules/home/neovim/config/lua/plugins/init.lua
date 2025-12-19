@@ -25,13 +25,12 @@ return {
     "goolord/alpha-nvim",
     "lukas-reineke/indent-blankline.nvim",
     "NvChad/nvim-colorizer.lua",
-    -- "nvim-mini/mini.base16",
-    -- {
-    --     "webhooked/kanso.nvim",
-    --     lazy = false,
-    --     priority = 1000
-    -- },
-    "sainnhe/everforest",
+    "nvim-mini/mini.base16",
+    {
+        "webhooked/kanso.nvim",
+        lazy = false,
+        priority = 1000
+    },
 
     -- Git
     "lewis6991/gitsigns.nvim",
