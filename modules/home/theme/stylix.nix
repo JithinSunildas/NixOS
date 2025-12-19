@@ -6,7 +6,7 @@
 {
     stylix = {
         enable = true;
-        base16Scheme = "./kanso.yaml";
+        base16Scheme = "~/nix-config/modules/home/theme/kanso.yaml";
         image = ./wallpapers/demo.jpg;
         polarity = "dark";
 
