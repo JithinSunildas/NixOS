@@ -51,7 +51,6 @@
             neovim = {
                 enable = true;
                 colors.enable = true;
-                colors.path = "/home/tikhaboom/.config/nvim/lua/stylix/colors.lua";
             };
             helix.enable = true;
         };
