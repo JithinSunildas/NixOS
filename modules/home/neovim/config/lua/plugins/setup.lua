@@ -43,10 +43,16 @@ cmp.setup({
     }),
 })
 
-require("mini.base16").setup({
-    palette = vim.g.stylix_colors,
-    plugins = { default = true },
-})
+if vim.g.stylix_colors and type(vim.g.stylix_colors) == "table" then
+    local ok, mini = pcall(require, "mini.base16")
+    if ok then
+        mini.setup({
+            palette = vim.g.stylix_colors,
+            use_cterm = nil,
+            plugins = { default = true },
+        })
+    end
+end
 
 -- === Telescope ===
 local telescope = require("telescope")
