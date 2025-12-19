@@ -54,12 +54,29 @@ cmp.setup({
 --     end
 -- end
 
-require("everforest").setup({
+require('kanso').setup({
+    bold = true,
+    italics = true,
+    compile = false,
+    undercurl = true,
+    commentStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = true },
+    statementStyle = {},
+    typeStyle = {},
+    transparent = false,
+    dimInactive = false,
+    terminalColors = true,
+    colors = {
+        palette = {},
+        theme = { zen = {}, pearl = {}, ink = {}, all = {} },
+    },
     background = {
-        dark = "hard"
-    }
+        dark = "ink",
+        light = "ink"
+    },
+    foreground = "default",
 })
-
 
 -- === Telescope ===
 local telescope = require("telescope")
