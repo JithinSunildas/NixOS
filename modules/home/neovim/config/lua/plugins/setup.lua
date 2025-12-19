@@ -43,11 +43,10 @@ cmp.setup({
     }),
 })
 
--- require("mini.base16").setup({
---     palette = vim.g.stylix_colors,
---     use_cterm = nil,
---     plugins = { default = true },
--- })
+require("mini.base16").setup({
+    palette = vim.g.stylix_colors,
+    plugins = { default = true },
+})
 
 -- === Telescope ===
 local telescope = require("telescope")
