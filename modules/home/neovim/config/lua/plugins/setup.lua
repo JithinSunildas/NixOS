@@ -44,7 +44,7 @@ cmp.setup({
 })
 
 require("mini.base16").setup({
-    palette = nil,
+    palette = vim.g.stylix_colors,
     use_cterm = nil,
     plugins = { default = true },
 })
