@@ -7,7 +7,7 @@
     stylix = {
         enable = true;
         # base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-        base16Scheme = ./kanso.yaml;
+        base16Scheme = "./kanso.yaml";
         image = ./wallpapers/;
         polarity = "dark";
 
