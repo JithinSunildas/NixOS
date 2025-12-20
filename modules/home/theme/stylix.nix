@@ -54,6 +54,7 @@
                 transparentBackground.signColumn = false;
             };
             helix.enable = true;
+            spicetify.enable = false;
         };
     };
 
