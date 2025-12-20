@@ -7,7 +7,7 @@
     stylix = {
         enable = true;
         # base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-        base16Scheme = ./kanso.yaml;
+        # base16Scheme = ./kanso.yaml;
         image = ./wallpapers/demo.jpg;
         polarity = "dark";
 
@@ -17,6 +17,9 @@
             size = 24;
         };
 
+        xdg.configFile."${pkgs.base16-schemes}/share/themes/kanso.yaml" = {
+            source = ./kanos.yaml;
+        };
 # Configure fonts
         fonts = {
             serif = {
