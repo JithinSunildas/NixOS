@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     # QEMU
-    qemu
+    qemu_full
     
     # Docker
     docker
