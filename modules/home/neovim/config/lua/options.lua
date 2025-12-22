@@ -44,13 +44,20 @@ opt.undofile = true  -- Enable persistent undo (undo history survives reboots)
 vim.diagnostic.config({
     virtual_text = {
         spacing = 4,
-        prefix = "●", -- or "▎", "■", ""
+        prefix = "●",
     },
     signs = true,
     underline = true,
     update_in_insert = false,
     severity_sort = true,
 })
+vim.keymap.set('n', '<leader>k', function()
+    vim.diagnostic.open_float({
+        scope = "line",
+        border = "rounded",
+        focusable = false,
+    })
+end)
 
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --     callback = function()
