@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     # System utilities
+    efibootmgr
     unzip
     xhost
     ninja
