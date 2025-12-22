@@ -7,7 +7,7 @@
     stylix = {
         enable = true;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-        image = ./wallpapers/demo.jpg;
+        image = ./wallpapers/secluded-grove-pixel.png;
         polarity = "dark";
 
         cursor = {
