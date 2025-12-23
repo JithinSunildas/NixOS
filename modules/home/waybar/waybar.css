@@ -39,7 +39,7 @@ window#waybar {
 #battery,
 #network,
 #tray,
-#pipewire,
+#pulseaudio,
 #custom-notification,
 #custom-startmenu,
 #custom-exit,
@@ -57,7 +57,7 @@ window#waybar {
 #disk { color: #ffffff; }
 #network { color: #ffffff; }
 #tray { color: #ffffff; }
-#pipewire { color: #ffffff; }
+#pulseaudio { color: #ffffff; }
 #custom-notification { color: #E6E1CF; }
 #custom-startmenu { color: #ffffff; }
 #custom-expand-icon { color: #ffffff; }
