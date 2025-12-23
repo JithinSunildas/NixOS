@@ -64,8 +64,6 @@ vim.lsp.config.clangd = {
     cmd = {
         "clangd",
         "--background-index",
-        "--clang-tidy",
-        "--fallback-style={IndentWidth: 4, TabWidth: 4, UseTab: Never}"
     },
     filetypes = { "c", "h", "hpp", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
