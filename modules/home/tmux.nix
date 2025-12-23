@@ -8,7 +8,6 @@
     baseIndex = 1;
     
     plugins = with pkgs.tmuxPlugins; [
-      yank    
     ];
     sensible
     extraConfig = ''
