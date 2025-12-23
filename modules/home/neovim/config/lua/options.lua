@@ -19,8 +19,8 @@ opt.colorcolumn = "80,120"
 
 -- [[ Tabs, Spaces, and Indentation ]]
 opt.expandtab = true
-opt.tabstop = 4
-opt.shiftwidth = 4
+opt.tabstop = 2
+opt.shiftwidth = 2
 opt.smartindent = true
 
 -- [[ Search Configuration ]]
