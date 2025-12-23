@@ -1,0 +1,10 @@
+.rw-r--r-- 3.5k tikhaboom 16 Dec 23:16 #configuration.nix#
+.rw-r--r--    0 tikhaboom 23 Dec 09:32 cat
+.rw-r--r-- 4.2k tikhaboom 23 Dec 08:46 configuration.nix
+.rw-r--r--  12k tikhaboom 23 Dec 08:49 flake.lock
+.rw-r--r-- 1.4k tikhaboom 16 Dec 00:19 flake.nix
+.rw-r--r-- 1.5k tikhaboom  8 Dec 10:12 hardware-configuration.nix
+drwxr-xr-x    - tikhaboom 17 Oct 19:42 modules
+drwxr-xr-x    - tikhaboom 14 Dec 15:57 packages
+.rw-r--r-- 1.4k tikhaboom 17 Dec 22:46 README.md
+drwxr-xr-x    - tikhaboom 15 Dec 21:23 scripts
