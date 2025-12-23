@@ -150,10 +150,11 @@ binds {
     Mod+Shift+R { spawn "niri" "msg" "action" "reload-config"; }
 
     // App bindings
-    Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "ghostty"; }
+    Mod+Return hotkey-overlay-title="Open Terminal " { spawn "ghostty"; }
     Mod+E hotkey-overlay-title="Open Files " { spawn "nautilus"; }
-    Mod+B hotkey-overlay-title="Open a Browser " { spawn "zen"; }
-    Mod+O hotkey-overlay-title="Open a Obsidian " { spawn "obsidian"; }
+    Mod+B hotkey-overlay-title="Open Browser " { spawn "zen"; }
+    Mod+O hotkey-overlay-title="Open Obsidian " { spawn "obsidian"; }
+    Mod+Shift+C hotkey-overlay-title="Open Calculator" { spawn "calculator"; }
     Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || exec fuzzel"; }
     Mod+Shift+Space hotkey-overlay-title="Toggle waybar" { spawn-sh "pkill waybar || exec waybar"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
