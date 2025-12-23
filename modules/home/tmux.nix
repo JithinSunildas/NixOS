@@ -5,19 +5,53 @@
 {
   programs.tmux = {
     enable = true;
+    
+    # Change prefix to Ctrl-Space
     prefix = "C-Space";
+    
+    # Enable mouse support
     mouse = true;
+    
+    # Use 256 colors
     terminal = "screen-256color";
+    
+    # Start window numbering at 1
     baseIndex = 1;
+    
+    # Renumber windows when one is closed
     escapeTime = 0;
     historyLimit = 10000;
     
+    plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = tmux-fzf;
+        extraConfig = ''
+          bind-key "s" run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/session.sh switch"
+        '';
+      }
+    ];
+    
     extraConfig = ''
-      # Vim-like pane navigation
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
+      # Vim-like pane navigation (no prefix needed!)
+      bind -n M-h select-pane -L
+      bind -n M-j select-pane -D
+      bind -n M-k select-pane -U
+      bind -n M-l select-pane -R
+      
+      # Tab navigation (Alt + number)
+      bind -n M-1 select-window -t 1
+      bind -n M-2 select-window -t 2
+      bind -n M-3 select-window -t 3
+      bind -n M-4 select-window -t 4
+      bind -n M-5 select-window -t 5
+      bind -n M-6 select-window -t 6
+      bind -n M-7 select-window -t 7
+      bind -n M-8 select-window -t 8
+      bind -n M-9 select-window -t 9
+      
+      # Next/previous window
+      bind -n M-n next-window
+      bind -n M-p previous-window
       
       # Vim-like pane resizing
       bind -r H resize-pane -L 5
@@ -30,6 +64,12 @@
       bind - split-window -v
       unbind '"'
       unbind %
+      
+      # Floating pane (popup)
+      bind g display-popup -E -w 80% -h 80%
+      
+      # Floating terminal for quick commands
+      bind t display-popup -E -w 80% -h 80% -d "#{pane_current_path}"
       
       # Reload config
       bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
@@ -49,6 +89,9 @@
       # Pane borders
       set -g pane-border-style 'fg=colour8'
       set -g pane-active-border-style 'fg=colour8'
+      
+      # Popup border
+      set -g popup-border-style 'fg=colour8'
       
       # Remove clutter
       set -g status-left-length 0
