@@ -1,5 +1,4 @@
-# ~/nix-config/modules/home/tmux.nix
-
+# tmux.nix
 { config, pkgs, ... }:
 
 {
@@ -49,9 +48,11 @@
       bind -n M-8 select-window -t 8
       bind -n M-9 select-window -t 9
       
-      # Next/previous window
-      bind -n M-n next-window
-      bind -n M-p previous-window
+      # Alt-f: Toggle floating pane
+      bind -n M-f display-popup -E -w 80% -h 80% -d "#{pane_current_path}"
+      
+      # Alt-n: Quick vertical split
+      bind -n M-n split-window -h -c "#{pane_current_path}"
       
       # Vim-like pane resizing
       bind -r H resize-pane -L 5
@@ -64,12 +65,6 @@
       bind - split-window -v
       unbind '"'
       unbind %
-      
-      # Floating pane (popup)
-      bind g display-popup -E -w 80% -h 80%
-      
-      # Floating terminal for quick commands
-      bind t display-popup -E -w 80% -h 80% -d "#{pane_current_path}"
       
       # Reload config
       bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
