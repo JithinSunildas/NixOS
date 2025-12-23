@@ -7,7 +7,7 @@
     enable = true;
     
     # Change prefix to Ctrl-Space
-    prefix = "C-Space";
+    prefix = "A-Space";
     
     # Enable mouse support
     mouse = true;
