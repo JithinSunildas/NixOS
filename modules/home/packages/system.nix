@@ -5,6 +5,7 @@
     efibootmgr
     unzip
     parted
+    xxd
     xhost
     ninja
     pkg-config
