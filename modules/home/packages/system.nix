@@ -4,6 +4,7 @@
     # System utilities
     efibootmgr
     unzip
+    lsusb
     parted
     xxd
     xhost

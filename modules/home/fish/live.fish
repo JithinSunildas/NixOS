@@ -291,8 +291,3 @@ if type -q fzf
     fzf --fish | source
 end
 
-# ==========================================
-# Welcome Message (optional)
-# ==========================================
-# Uncomment to show system info on startup
-# fastfetch --logo nixos
