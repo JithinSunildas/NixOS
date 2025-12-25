@@ -5,7 +5,6 @@
     efibootmgr
     unzip
     cyme
-    usbutils
     parted
     xxd
     xhost
