@@ -74,6 +74,7 @@
         "wireshark"
         "docker"
         "adbusers"
+        "video"
     ];
   };
 
