@@ -244,58 +244,58 @@ end
 
 # nix profile add
 function give --description "Imperatively add nixpkgs and log them"
-  if not set -q argv[1]
-    echo "Give what? Bruh... Don't leave me hanging, give me a package or index!"
-    return 1
-  end
-  set -l log_file "$HOME/nix-config/modules/home/packages/.nix-profile-history"
-  for pkg in $argv
-    echo "Adding $pkg..."
-    if nix profile add "nixpkgs#$pkg"
-      echo $pkg >> $log_file
-      echo "Successfully gave you $pkg"
-    else
-      echo "Failed to add $pkg. Check the name."
+    if not set -q argv[1]
+        echo "Give what? Bruh... Don't leave me hanging!"
+        return 1
     end
-  end
+    set -l log_file "$HOME/nix-config/modules/home/packages/.nix-profile-history"
+    for pkg in $argv
+        echo "Adding $pkg..."
+        if nix profile add "nixpkgs#$pkg"
+            echo $pkg >> $log_file
+            echo "Successfully gave you $pkg"
+        else
+            echo "Failed to add $pkg. Check the name."
+        end
+    end
 end
 
 # nix profile remove
 function throw --description "remove packages iteratively or purge all via -a"
-  argparse a/all -- $argv
-  or return 1
-  set -l log_file "$HOME/nix-config/modules/home/packages/.nix-profile-bin"
-  if set -q _flag_all
-    if not test -f "$HOME/nix-config/modules/home/packages/.nix-profile-history"
-      echo "history file not found at "$HOME/nix-config/modules/home/packages/.nix-profile-history" nothing to purge."
-      return 1
-    end
-    echo "🚀 nuke mode engaged. purging all packages from history..."
-    for pkg in (cat "$HOME/nix-config/modules/home/packages/.nix-profile-history")
-      echo "throwing $pkg..."
-      nix profile remove "nixpkgs#$pkg" 2>/dev/null
-      echo $pkg >> $log_file
-    end
-    echo -n "" > "$HOME/nix-config/modules/home/packages/.nix-profile-history"
-    echo "clean slate. history wiped."
-  else
-    # standard iterative removal
-    if not set -q argv[1]
-      echo "throw what? (use -a to throw everything)"
-      return 1
-    end
-    for item in $argv
-      if nix profile remove $item
-        echo $pkg >> $log_file
-        echo "successfully removed $item"
-        if test -f "$HOME/nix-config/modules/home/packages/.nix-profile-history"
-          sed -i "/^$item\$/d" "$HOME/nix-config/modules/home/packages/.nix-profile-history"
+    argparse a/all -- $argv
+    or return 1
+    set -l history_file "$HOME/nix-config/modules/home/packages/.nix-profile-history"
+    set -l bin_file "$HOME/nix-config/modules/home/packages/.nix-profile-bin"
+    if set -q _flag_all
+        if not test -f "$history_file"
+            echo "History file not found. Nothing to purge."
+            return 1
         end
-      else
-        echo "failed to remove $item."
-      end
+        echo "🚀 Nuke mode engaged. Moving history to bin..."
+        for pkg in (cat "$history_file")
+            echo "Throwing $pkg..."
+            nix profile remove "nixpkgs#$pkg" 2>/dev/null
+            echo $pkg >> $bin_file
+        end
+        echo -n "" > "$history_file"
+        echo "Clean slate. History moved to bin."
+    else
+        if not set -q argv[1]
+            echo "Throw what? (use -a to throw everything)"
+            return 1
+        end
+        for item in $argv
+            if nix profile remove $item
+                echo $item >> $bin_file
+                echo "Successfully removed $item"
+                if test -f "$history_file"
+                    sed -i "/^$item\$/d" "$history_file"
+                end
+            else
+                echo "Failed to remove $item."
+            end
+        end
     end
-  end
 end
 
 # Quick home-manager rebuild with commit
