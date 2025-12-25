@@ -9,6 +9,7 @@
     
     # Office & Productivity
     libreoffice
+    cheese
     obsidian
     gnome-calculator
     kdePackages.okular
