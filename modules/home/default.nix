@@ -35,26 +35,4 @@
     ./tmux.nix
     ./dunst.nix
   ];
-
-  programs = {
-    home-manager.enable = true;
-    git = {
-      enable = true;
-      userName = "JithinSunildas";
-      userEmail = "jithinsunildas6@gmail.com";
-      extraConfig = {
-        init.defaultBranch = "main";
-        pull.rebase = true;
-        color.ui = "auto";
-      };
-    };
-    bash.enable = true;
-    fish.enable = true;
-  };
-
-  services = {
-    ssh-agent.enable = true;
-    swww.enable = true;
-    swaync.enable = true;
-  };
 }
