@@ -12,7 +12,16 @@
       control-center-layer = "overlay";
       layer-shell = true;
       cssPriority = "application";
-
+      idle-timeout = 0;
+      show-control-center = false;
+      hide-on-action = true;
+      hide-on-clear = true;
+      notification-window-width = 400;
+      notification-icon-size = 64;
+      popup-enabled = true;
+# popup position
+      positionX = "right";
+      positionY = "top";
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
       control-center-margin-right = 10;
