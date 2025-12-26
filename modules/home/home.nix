@@ -39,6 +39,5 @@
   services = {
     ssh-agent.enable = true;
     swww.enable = true;
-    swaync.enable = true;
   };
 }
