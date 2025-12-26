@@ -26,6 +26,7 @@
     ./niri/niri.nix
     ./waybar/waybar.nix
     ./theme/stylix.nix
+    ./swaync/swaync.nix
     ./fish/fish.nix
     ./neovim/neovim.nix
     ./zellij/zellij.nix

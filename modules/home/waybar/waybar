@@ -4,14 +4,15 @@
 
   "modules-left": [
     "niri/workspaces",
-    "niri/window"
+    "niri/window",
   ],
 
   "modules-center": [
-    "custom/clock"
+    "custom/clock",
   ],
 
   "modules-right": [
+    "mpris",
     "group/tray-expander",
     "battery",
     "custom/exit"
@@ -31,20 +32,18 @@
       "memory",
       "cpu",
       "tray",
-      "custom/notification"
+      "custom/notification",
     ]
   },
-
   "niri/workspaces": {
     "format": "{index}{icon}",
     "format-icons": {
       "default": "",
-      "active": "👀"
-    }
+      "active": "👀",
+    },
   },
-
   "wlr/taskbar": {
-    "tooltip-format": "{title} | {app_id}"
+    "tooltip-format": "{title} | {app_id}",
   },
 
   "custom/clock": {
@@ -53,7 +52,7 @@
     "format": "{}",
     "tooltip": true,
     "tooltip-format": "<big>{:%A, %d.%B %Y }</big><tt><small>{calendar}</small></tt>",
-    "on-click": "waybar-client --tool-tips toggle"
+    "on-click": "waybar-client --tool-tips toggle",
   },
   
   "niri/window": {
@@ -63,21 +62,22 @@
 
   "memory": {
     "interval": 5,
-    "format": "  {}%",
+    "format": "  {}%",
     "tooltip": true,
     "on-click": "ghostty -e btop"
   },
 
   "cpu": {
     "interval": 1,
-    "format": "  {usage:2}%",
+    "format": "  {usage:2}%",
     "tooltip": true,
     "on-click": "ghostty -e btop"
   },
 
   "disk": {
-    "format": "  {free}",
+    "format": "  {free}",
     "tooltip": true
+    // "on-click": "ghostty -e sh -c df -h ; read"
   },
 
   "network": {
@@ -88,14 +88,16 @@
       "󰤥",
       "󰤨"
     ],
-    "format-ethernet": " {bandwidthDownBits}",
-    "format-wifi": " {bandwidthDownBits}",
+    "format-ethernet": " {bandwidthDownBits}",
+    "format-wifi": " {bandwidthDownBits}",
     "format-disconnected": "󰤮",
     "tooltip": true,
     "on-click": "ghostty -e nmtui connect",
     "on-click-right": "nm-connection-editor",
     "interval": 1
-  },
+},
+
+
 
   "custom/expand-icon": {
     "format": "ഏ",
@@ -109,22 +111,22 @@
 
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": "",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
       "default": [
-        "",
-        "",
-        ""
+        "",
+        "",
+        ""
       ]
     },
     "on-click": "pavucontrol"
@@ -136,18 +138,24 @@
     "on-click": "sleep 0.1 && wlogout"
   },
 
+  "custom/startmenu": {
+    "tooltip": false,
+    "format": "",
+    "on-click": "wofi --show drun"
+  },
+
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": ""
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
@@ -180,5 +188,25 @@
     "on-click": "",
     "tooltip": false,
     "interval": 1
+  },
+
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "player-icons": {
+      "default": "▶",
+      "mpv": "🎵"
+    },
+    "status-icons": {
+      "paused": "⏸"
+    },
+    "ignored-players": [ "chromium" ],
+    "max-length": 60
+  },
+
+  "custom/date": {
+    "format": " {:%a, %b %d}",
+    "tooltip": false,
+    "interval": 3600 // Only update hourly (3600 seconds) for efficiency
   }
 }
