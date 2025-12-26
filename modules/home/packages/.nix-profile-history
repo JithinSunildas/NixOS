@@ -8,3 +8,4 @@ ncmpcpp
 helvum
 gnomeExtensions.sound-loopback
 pulseaudio
+libnotify
