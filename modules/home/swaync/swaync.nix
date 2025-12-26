@@ -12,23 +12,29 @@
       control-center-layer = "overlay";
       layer-shell = true;
       cssPriority = "application";
+
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
       control-center-margin-right = 10;
       control-center-margin-left = 0;
+
       notification-2fa-action = true;
       notification-inline-replies = false;
       notification-icon-size = 64;
       notification-body-image-height = 100;
       notification-body-image-width = 200;
+
       timeout = 10;
       timeout-low = 5;
       timeout-critical = 0;
+
       fit-to-screen = true;
       relative-timestamps = true;
+
       control-center-width = 500;
       control-center-height = 600;
       notification-window-width = 400;
+
       keyboard-shortcuts = true;
       image-visibility = "when-available";
       transition-time = 200;
@@ -107,149 +113,139 @@
       };
     };
 
-# Custom styling
+# --- Custom Styling (Monochrome Polished) ---
     style = ''
-      /* SwayNC - Monochrome Edition */
+      /* SwayNC - Monochrome Structural Fix & Glass UI */
       * {
 all: unset;
      font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
       }
 
-    /* --- MAIN WINDOW --- */
+    /* The Main Window */
     .control-center {
-background: rgba(15, 15, 15, 0.95);
+background: rgba(0, 0, 0, 0.85);
             border-radius: 24px;
-border: 1px solid rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.08);
 margin: 10px;
 padding: 16px;
-         backdrop-filter: blur(12px);
     }
 
-    /* --- MPRIS WIDGET --- */
+    /* MPRIS MAIN BLOCK */
     .widget-mpris {
-background: rgba(255, 255, 255, 0.05);
+background: rgba(255, 255, 255, 0.06);
             border-radius: 18px;
 padding: 12px;
 margin: 10px;
     }
 
+    /* Force everything to stay horizontally aligned */
     .widget-mpris-player {
+background: transparent;
 display: flex;
-         align-items: center;
-gap: 15px;
-width: 100%;
+         flex-direction: row;
+         align-items: center;  /* 🎯 THIS stops title from floating upward */
+padding: 8px;
     }
 
     .widget-mpris-album-art {
       border-radius: 12px;
-      min-width: 64px;
-      min-height: 64px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+width: 64px;
+height: 64px;
     }
 
+    /* Container for title + subtitle + controls */
     .widget-mpris-content {
-      flex-grow: 1;
-      min-width: 0;
 display: flex;
          flex-direction: column;
-         justify-content: center;
+         justify-content: center; /* 👇 pulls text down to button level */
+         margin-left: 15px;
+         max-width: 230px; /* prevents overlapping on small widths */
     }
 
     .widget-mpris-title {
       font-size: 16px;
       font-weight: bold;
-color: #e5e5e5; /* light gray */
+color: #ffffff;
        padding-bottom: 2px;
-overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
     }
 
     .widget-mpris-subtitle {
       font-size: 13px;
-color: #9e9e9e; /* medium gray */
-       padding-bottom: 10px;
-overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+color: rgba(255, 255, 255, 0.65);
+       padding-bottom: 6px;
     }
 
-    /* controls */
-    .widget-mpris button {
-background: rgba(255, 255, 255, 0.08);
+    /* Buttons */
+    .widget-mpris > box > button {
+background: rgba(255, 255, 255, 0.12);
             border-radius: 10px;
 padding: 5px 15px;
-margin: 5px;
-color: #e5e5e5;
-    }
-
-    .widget-mpris button:hover {
-background: rgba(255, 255, 255, 0.15);
+margin: 4px;
 color: white;
     }
 
-    /* --- NOTIFICATIONS --- */
+    .widget-mpris > box > button:hover {
+background: rgba(255, 255, 255, 0.22);
+    }
+
+    /* Notifications */
     .notification {
-background: rgba(30, 30, 30, 0.6);
+background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-border: 1px solid rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.03);
 margin: 8px;
 padding: 12px;
-
-display: flex;
-gap: 10px;
-     align-items: flex-start;
     }
 
     .notification-content {
 margin: 5px;
-        flex-grow: 1;
-        min-width: 0;
     }
 
     .summary {
       font-weight: bold;
-color: #d6d6d6;
+color: #fff;
        font-size: 15px;
-       word-wrap: break-word;
     }
 
     .body {
-color: #b4b4b4;
+color: rgba(255, 255, 255, 0.75);
        font-size: 13px;
-       word-wrap: break-word;
     }
 
-    /* --- TITLES & BUTTONS --- */
+    /* Widget Titles */
     .widget-title {
-color: #eeeeee;
+color: white;
        font-size: 20px;
        font-weight: bold;
 padding: 10px;
     }
 
     .widget-title > button {
-background: rgba(255, 255, 255, 0.08);
-color: #e5e5e5;
+background: rgba(255, 255, 255, 0.12);
+color: #fff;
        border-radius: 10px;
 padding: 5px 15px;
     }
 
-    /* --- DND WIDGET --- */
+    /* DND Widget */
     .widget-dnd {
-background: rgba(255, 255, 255, 0.03);
+background: rgba(255, 255, 255, 0.04);
             border-radius: 15px;
 padding: 10px;
 margin: 10px;
     }
 
-    /* --- SCROLLBAR --- */
+    /* Scrollbar */
     scrollbar trough {
 background: transparent;
     }
+
     scrollbar slider {
-background: rgba(255, 255, 255, 0.1);
+background: rgba(255, 255, 255, 0.12);
             border-radius: 10px;
     }
     '';
   };
 }
+
