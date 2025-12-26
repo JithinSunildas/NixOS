@@ -14,8 +14,6 @@
       cssPriority = "application";
       idle-timeout = 0;
       show-control-center = false;
-      hide-on-action = true;
-      hide-on-clear = true;
       popup-enabled = true;
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
