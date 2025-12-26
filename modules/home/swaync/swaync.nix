@@ -19,9 +19,6 @@
       notification-window-width = 400;
       notification-icon-size = 64;
       popup-enabled = true;
-# popup position
-      positionX = "right";
-      positionY = "top";
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
       control-center-margin-right = 10;
