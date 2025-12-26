@@ -4,7 +4,7 @@
 {
   services.swaync = {
     enable = true;
-    
+
     settings = {
       positionX = "right";
       positionY = "top";
@@ -35,15 +35,15 @@
       hide-on-clear = false;
       hide-on-action = true;
       script-fail-notify = true;
-      
+
       widgets = [
         "inhibitors"
-        "title"
-        "dnd"
-        "mpris"
-        "notifications"
+          "title"
+          "dnd"
+          "mpris"
+          "notifications"
       ];
-      
+
       widget-config = {
         inhibitors = {
           text = "Inhibitors";
@@ -78,27 +78,27 @@
             label = "⏻";
             position = "right";
             actions = [
-              {
-                label = "󰐥 Shutdown";
-                command = "systemctl poweroff";
-              }
-              {
-                label = "󰜉 Reboot";
-                command = "systemctl reboot";
-              }
-              {
-                label = "󰤄 Suspend";
-                command = "systemctl suspend";
-              }
-              {
-                label = "󰍃 Logout";
-                command = "niri msg action quit";
-              }
+            {
+              label = "󰐥 Shutdown";
+              command = "systemctl poweroff";
+            }
+            {
+              label = "󰜉 Reboot";
+              command = "systemctl reboot";
+            }
+            {
+              label = "󰤄 Suspend";
+              command = "systemctl suspend";
+            }
+            {
+              label = "󰍃 Logout";
+              command = "niri msg action quit";
+            }
             ];
           };
         };
       };
-      
+
       scripts = {
         example-script = {
           exec = "echo 'Do something...'";
@@ -106,152 +106,150 @@
         };
       };
     };
-    
-    # Custom styling
-style = ''
-  /* SwayNC - Structural Fix & Glass UI */
-  * {
-    all: unset;
-    font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
-  }
 
-  /* --- MAIN WINDOW --- */
-  .control-center {
-    background: rgba(20, 20, 25, 0.95);
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 10px;
-    padding: 16px;
-    backdrop-filter: blur(12px);
-  }
+# Custom styling
+    style = ''
+      /* SwayNC - Monochrome Edition */
+      * {
+all: unset;
+     font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+      }
 
-  /* --- MPRIS WIDGET --- */
-  .widget-mpris {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 18px;
-    padding: 12px;
-    margin: 10px;
-  }
+    /* --- MAIN WINDOW --- */
+    .control-center {
+background: rgba(15, 15, 15, 0.95);
+            border-radius: 24px;
+border: 1px solid rgba(255, 255, 255, 0.05);
+margin: 10px;
+padding: 16px;
+         backdrop-filter: blur(12px);
+    }
 
-  /* layout: album art + text + controls */
-  .widget-mpris-player {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-  }
+    /* --- MPRIS WIDGET --- */
+    .widget-mpris {
+background: rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+padding: 12px;
+margin: 10px;
+    }
 
-  .widget-mpris-album-art {
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    min-width: 64px; /* prevents shrinking on small layouts */
-    min-height: 64px;
-  }
+    .widget-mpris-player {
+display: flex;
+         align-items: center;
+gap: 15px;
+width: 100%;
+    }
 
-  .widget-mpris-content {
-    flex-grow: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+    .widget-mpris-album-art {
+      border-radius: 12px;
+      min-width: 64px;
+      min-height: 64px;
+    }
 
-  .widget-mpris-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #61afef;
-    padding-bottom: 2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    .widget-mpris-content {
+      flex-grow: 1;
+      min-width: 0;
+display: flex;
+         flex-direction: column;
+         justify-content: center;
+    }
 
-  .widget-mpris-subtitle {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.7);
-    padding-bottom: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    .widget-mpris-title {
+      font-size: 16px;
+      font-weight: bold;
+color: #e5e5e5; /* light gray */
+       padding-bottom: 2px;
+overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+    }
 
-  /* controls container might vary, so target buttons directly */
-  .widget-mpris button {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 5px 15px;
-    margin: 5px;
-    color: white;
-  }
+    .widget-mpris-subtitle {
+      font-size: 13px;
+color: #9e9e9e; /* medium gray */
+       padding-bottom: 10px;
+overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+    }
 
-  .widget-mpris button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #c678dd;
-  }
+    /* controls */
+    .widget-mpris button {
+background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+padding: 5px 15px;
+margin: 5px;
+color: #e5e5e5;
+    }
 
-  /* --- NOTIFICATIONS --- */
-  .notification {
-    background: rgba(40, 44, 52, 0.5);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    margin: 8px;
-    padding: 12px;
+    .widget-mpris button:hover {
+background: rgba(255, 255, 255, 0.15);
+color: white;
+    }
 
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
+    /* --- NOTIFICATIONS --- */
+    .notification {
+background: rgba(30, 30, 30, 0.6);
+            border-radius: 15px;
+border: 1px solid rgba(255, 255, 255, 0.05);
+margin: 8px;
+padding: 12px;
 
-  .notification-content {
-    margin: 5px;
-    flex-grow: 1;
-    min-width: 0;
-  }
+display: flex;
+gap: 10px;
+     align-items: flex-start;
+    }
 
-  .summary {
-    font-weight: bold;
-    color: #e06c75;
-    font-size: 15px;
-    word-wrap: break-word;
-  }
+    .notification-content {
+margin: 5px;
+        flex-grow: 1;
+        min-width: 0;
+    }
 
-  .body {
-    color: #abb2bf;
-    font-size: 13px;
-    word-wrap: break-word;
-  }
+    .summary {
+      font-weight: bold;
+color: #d6d6d6;
+       font-size: 15px;
+       word-wrap: break-word;
+    }
 
-  /* --- TITLES & BUTTONS --- */
-  .widget-title {
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 10px;
-  }
+    .body {
+color: #b4b4b4;
+       font-size: 13px;
+       word-wrap: break-word;
+    }
 
-  .widget-title > button {
-    background: rgba(224, 108, 117, 0.2);
-    color: #e06c75;
-    border-radius: 10px;
-    padding: 5px 15px;
-  }
+    /* --- TITLES & BUTTONS --- */
+    .widget-title {
+color: #eeeeee;
+       font-size: 20px;
+       font-weight: bold;
+padding: 10px;
+    }
 
-  /* --- DND WIDGET --- */
-  .widget-dnd {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 15px;
-    padding: 10px;
-    margin: 10px;
-  }
+    .widget-title > button {
+background: rgba(255, 255, 255, 0.08);
+color: #e5e5e5;
+       border-radius: 10px;
+padding: 5px 15px;
+    }
 
-  /* --- SCROLLBAR --- */
-  scrollbar trough {
-    background: transparent;
-  }
-  scrollbar slider {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-  }
-'';
+    /* --- DND WIDGET --- */
+    .widget-dnd {
+background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+padding: 10px;
+margin: 10px;
+    }
+
+    /* --- SCROLLBAR --- */
+    scrollbar trough {
+background: transparent;
+    }
+    scrollbar slider {
+background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+    }
+    '';
   };
 }
