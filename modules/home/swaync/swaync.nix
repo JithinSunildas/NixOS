@@ -109,170 +109,126 @@
     
     # Custom styling
  style = ''
-      /* SwayNC - Modern Glassmorphism & Fixed Layout */
-
+      /* SwayNC - Structural Fix & Glass UI */
       * {
         all: unset;
         font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
-        font-size: 14px;
       }
 
-      /* Control Center Container */
+      /* The Main Window */
       .control-center {
-        background: rgba(20, 20, 25, 0.92);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
+        background: rgba(20, 20, 25, 0.95);
+        border-radius: 24px;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 18px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        margin: 10px;
+        padding: 16px;
       }
 
-      /* Fixed MPRIS Widget - No more overlapping */
+      /* --- MPRIS WIDGET (The Media Player) --- */
       .widget-mpris {
         background: rgba(255, 255, 255, 0.05);
-        border-radius: 16px;
+        border-radius: 18px;
         padding: 12px;
-        margin: 10px 0;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        margin: 10px;
       }
 
-      /* Ensure content flows horizontally: Art | Text */
+      /* Force horizontal alignment: [Art] [Text + Controls] */
       .widget-mpris-player {
-        padding: 6px;
+        padding: 8px;
         background: transparent;
       }
 
       .widget-mpris-album-art {
         border-radius: 12px;
-        margin-right: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       }
 
-      /* Text Container - Prevents overlapping thumbnail */
+      /* THIS PREVENTS THE OVERLAY MESS */
+      .widget-mpris-content {
+        margin-left: 15px; 
+      }
+
       .widget-mpris-title {
         font-size: 16px;
-        font-weight: 800;
-        color: #ffffff;
-        margin-bottom: 2px;
+        font-weight: bold;
+        color: #61afef;
+        padding-bottom: 2px;
       }
 
       .widget-mpris-subtitle {
         font-size: 13px;
-        color: rgba(255, 255, 255, 0.6);
-        margin-bottom: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        padding-bottom: 10px;
       }
 
-      /* Controls Layout - Balanced Visibility */
+      /* Buttons: Clean & Readable */
       .widget-mpris > box > button {
-        background: rgba(255, 255, 255, 0.08);
-        color: #ffffff;
-        border-radius: 50%; /* Circular buttons */
-        padding: 10px;
-        margin: 0 6px;
-        min-width: 32px;
-        min-height: 32px;
-        transition: all 0.2s ease-in-out;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 5px 15px;
+        margin: 5px;
+        color: white;
       }
 
       .widget-mpris > box > button:hover {
-        background: #61afef;
-        color: #1a1b26;
-        transform: scale(1.1);
+        background: rgba(255, 255, 255, 0.2);
+        color: #c678dd;
       }
 
-      /* Progress Bar Styling */
-      .widget-mpris scale {
-        padding: 0;
-        margin-top: 10px;
-      }
-
-      .widget-mpris scale trough {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        min-height: 6px;
-      }
-
-      .widget-mpris scale trough highlight {
-        background: linear-gradient(90deg, #61afef, #c678dd);
-        border-radius: 10px;
-      }
-
-      /* Notifications List */
+      /* --- NOTIFICATIONS --- */
       .notification {
-        background: rgba(30, 30, 40, 0.7);
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(40, 44, 52, 0.5);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
         margin: 8px;
-        padding: 14px;
-        transition: transform 0.2s ease;
+        padding: 12px;
       }
 
-      .notification:hover {
-        background: rgba(40, 40, 50, 0.9);
-        transform: translateY(-2px);
+      .notification-content {
+        margin: 5px;
       }
 
       .summary {
+        font-weight: bold;
+        color: #e06c75;
         font-size: 15px;
-        font-weight: 700;
-        color: #61afef;
       }
 
       .body {
-        color: #dcd7ba;
-        line-height: 1.4;
+        color: #abb2bf;
+        font-size: 13px;
       }
 
-      /* Headers/Titles */
+      /* --- TITLES & BUTTONS --- */
       .widget-title {
-        color: #ffffff;
-        font-weight: 800;
+        color: white;
         font-size: 20px;
-        margin-bottom: 10px;
-      }
-
-      .widget-title > button {
-        background: rgba(224, 108, 117, 0.15);
-        color: #e06c75;
-        border-radius: 10px;
-        padding: 6px 14px;
         font-weight: bold;
-      }
-
-      .widget-title > button:hover {
-        background: #e06c75;
-        color: #ffffff;
-      }
-
-      /* Buttons & Badges */
-      .close-button {
-        background: rgba(224, 108, 117, 0.1);
-        color: #e06c75;
-        border-radius: 8px;
-        padding: 2px 8px;
-      }
-
-      /* Custom Toggles (DND) */
-      .widget-dnd {
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 12px;
         padding: 10px;
       }
 
-      .widget-dnd switch {
+      .widget-title > button {
+        background: rgba(224, 108, 117, 0.2);
+        color: #e06c75;
+        border-radius: 10px;
+        padding: 5px 15px;
+      }
+
+      /* --- DND WIDGET --- */
+      .widget-dnd {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 15px;
+        padding: 10px;
+        margin: 10px;
+      }
+      
+      /* Scrollbar */
+      scrollbar trough {
+        background: transparent;
+      }
+      scrollbar slider {
         background: rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
+        border-radius: 10px;
       }
-
-      .widget-dnd switch:checked {
-        background: #98c379;
-      }
-
-      .widget-dnd switch slider {
-        background: #ffffff;
-        border-radius: 20px;
-        margin: 2px;
-      }
-    ''; 
-  };
+    ''; };
 }
