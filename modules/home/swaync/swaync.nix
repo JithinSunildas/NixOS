@@ -16,7 +16,6 @@
       show-control-center = false;
       hide-on-action = true;
       hide-on-clear = true;
-      notification-window-width = 400;
       popup-enabled = true;
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
