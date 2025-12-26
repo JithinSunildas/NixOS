@@ -21,7 +21,6 @@
     ./packages/languages.nix
     ./packages/virtualization.nix
     ./packages/apps.nix
-    ./packages/commit.nix  # The declarative script we built
 
     # Configs
     ./niri/niri.nix
