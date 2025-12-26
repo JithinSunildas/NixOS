@@ -43,7 +43,6 @@ alias nc='nix-collect-garbage -d'
 alias ncs='sudo nix-collect-garbage -d'
 alias nd='nix-store --query --requisites /run/current-system | grep -F /nix/store | xargs du -sh | sort -hr'
 alias see='nix search nixpkgs'
-alias throw='nix profile remove'
 alias ndev='nix develop'
 alias nshell='nix-shell'
 alias hib='sudo systemctl hibernate'
@@ -296,6 +295,29 @@ function throw --description "remove packages iteratively or purge all via -a"
             end
         end
     end
+end
+
+# Commiting fuction to declare all packages from bin to default.nix
+function commit --description "Move binned packages into default.nix and clear the bin"
+    set -l bin_file "$HOME/nix-config/modules/home/packages/.nix-profile-bin"
+    set -l target_nix "$HOME/nix-config/modules/home/default.nix"
+    if not test -s "$bin_file"
+        echo "Bin is empty. Nothing to commit."
+        return 1
+    end
+    echo "Injecting packages into $target_nix..."
+    for pkg in (cat $bin_file)
+        # sed logic: 
+        # 1. Finds the line 'packages = ['
+        # 2. Appends '      pkgs.<package>' on the next line
+        if sed -i "/packages = \[/a \      pkgs.$pkg" $target_nix
+            echo "✅ Committed: $pkg"
+        else
+            echo "❌ Failed to commit $pkg"
+        end
+    end
+    echo -n "" > $bin_file
+    echo "🧹 Bin cleared. Run 'hrb' to finalize."
 end
 
 # Quick home-manager rebuild with commit

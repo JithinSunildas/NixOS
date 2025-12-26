@@ -42,30 +42,19 @@ opt.backup = false   -- Disable backups
 opt.undofile = true  -- Enable persistent undo (undo history survives reboots)
 
 vim.diagnostic.config({
-    virtual_text = {
-        spacing = 4,
-        prefix = "●",
-    },
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
+  virtual_text = {
+    spacing = 4,
+    prefix = "●",
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
 })
 vim.keymap.set('n', '<leader>k', function()
-    vim.diagnostic.open_float({
-        scope = "line",
-        border = "rounded",
-        focusable = false,
-    })
+  vim.diagnostic.open_float({
+    scope = "line",
+    border = "rounded",
+    focusable = false,
+  })
 end)
-
--- vim.api.nvim_create_autocmd("BufWritePre", {
---     callback = function()
---         for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
---             if client.server_capabilities.documentFormattingProvider then
---                 vim.lsp.buf.format({ async = false })
---                 return
---             end
---         end
---     end,
--- })
