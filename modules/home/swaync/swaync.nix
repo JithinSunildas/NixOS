@@ -115,7 +115,55 @@
       };
     };
 
-# --- Custom Styling (Monochrome Polished) ---
+    style = ''
+      window.notification-popup {
+        border-radius: 16px;
+border: 1px solid;
+padding: 12px 14px;
+margin: 10px;
+        min-width: 350px;
+        max-width: 450px;
+        backdrop-filter: blur(12px);
+      }
+
+    .popup-notification {
+display: flex;
+         align-items: flex-start;
+gap: 12px;       
+padding: 2px 0; 
+    }
+
+    .popup-image {
+      border-radius: 12px;
+      min-width: 48px;
+      min-height: 48px;
+      margin-top: 2px;
+    }
+
+    .popup-text {
+display: flex;
+         flex-direction: column;
+gap: 3px;      
+     padding-right: 4px;
+    }
+
+    .popup-title {
+      font-weight: bold;
+      font-size: 15px;
+      padding-bottom: 1px;
+overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+    }
+
+    .popup-body {
+      font-size: 13px;
+      line-height: 1.25;
+overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+    } 
+    '';
   };
 }
 
