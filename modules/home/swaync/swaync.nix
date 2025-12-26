@@ -108,127 +108,150 @@
     };
     
     # Custom styling
- style = ''
-      /* SwayNC - Structural Fix & Glass UI */
-      * {
-        all: unset;
-        font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
-      }
+style = ''
+  /* SwayNC - Structural Fix & Glass UI */
+  * {
+    all: unset;
+    font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+  }
 
-      /* The Main Window */
-      .control-center {
-        background: rgba(20, 20, 25, 0.95);
-        border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        margin: 10px;
-        padding: 16px;
-      }
+  /* --- MAIN WINDOW --- */
+  .control-center {
+    background: rgba(20, 20, 25, 0.95);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 10px;
+    padding: 16px;
+    backdrop-filter: blur(12px);
+  }
 
-      /* --- MPRIS WIDGET (The Media Player) --- */
-      .widget-mpris {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 18px;
-        padding: 12px;
-        margin: 10px;
-      }
+  /* --- MPRIS WIDGET --- */
+  .widget-mpris {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 12px;
+    margin: 10px;
+  }
 
-      /* Force horizontal alignment: [Art] [Text + Controls] */
-      .widget-mpris-player {
-        padding: 8px;
-        background: transparent;
-      }
+  /* layout: album art + text + controls */
+  .widget-mpris-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+  }
 
-      .widget-mpris-album-art {
-        border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      }
+  .widget-mpris-album-art {
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    min-width: 64px; /* prevents shrinking on small layouts */
+    min-height: 64px;
+  }
 
-      /* THIS PREVENTS THE OVERLAY MESS */
-      .widget-mpris-content {
-        margin-left: 15px; 
-      }
+  .widget-mpris-content {
+    flex-grow: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-      .widget-mpris-title {
-        font-size: 16px;
-        font-weight: bold;
-        color: #61afef;
-        padding-bottom: 2px;
-      }
+  .widget-mpris-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #61afef;
+    padding-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-      .widget-mpris-subtitle {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.7);
-        padding-bottom: 10px;
-      }
+  .widget-mpris-subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    padding-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-      /* Buttons: Clean & Readable */
-      .widget-mpris > box > button {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        padding: 5px 15px;
-        margin: 5px;
-        color: white;
-      }
+  /* controls container might vary, so target buttons directly */
+  .widget-mpris button {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin: 5px;
+    color: white;
+  }
 
-      .widget-mpris > box > button:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #c678dd;
-      }
+  .widget-mpris button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #c678dd;
+  }
 
-      /* --- NOTIFICATIONS --- */
-      .notification {
-        background: rgba(40, 44, 52, 0.5);
-        border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        margin: 8px;
-        padding: 12px;
-      }
+  /* --- NOTIFICATIONS --- */
+  .notification {
+    background: rgba(40, 44, 52, 0.5);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin: 8px;
+    padding: 12px;
 
-      .notification-content {
-        margin: 5px;
-      }
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
 
-      .summary {
-        font-weight: bold;
-        color: #e06c75;
-        font-size: 15px;
-      }
+  .notification-content {
+    margin: 5px;
+    flex-grow: 1;
+    min-width: 0;
+  }
 
-      .body {
-        color: #abb2bf;
-        font-size: 13px;
-      }
+  .summary {
+    font-weight: bold;
+    color: #e06c75;
+    font-size: 15px;
+    word-wrap: break-word;
+  }
 
-      /* --- TITLES & BUTTONS --- */
-      .widget-title {
-        color: white;
-        font-size: 20px;
-        font-weight: bold;
-        padding: 10px;
-      }
+  .body {
+    color: #abb2bf;
+    font-size: 13px;
+    word-wrap: break-word;
+  }
 
-      .widget-title > button {
-        background: rgba(224, 108, 117, 0.2);
-        color: #e06c75;
-        border-radius: 10px;
-        padding: 5px 15px;
-      }
+  /* --- TITLES & BUTTONS --- */
+  .widget-title {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+  }
 
-      /* --- DND WIDGET --- */
-      .widget-dnd {
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 15px;
-        padding: 10px;
-        margin: 10px;
-      }
-      
-      /* Scrollbar */
-      scrollbar trough {
-        background: transparent;
-      }
-      scrollbar slider {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-      }
-    ''; };
+  .widget-title > button {
+    background: rgba(224, 108, 117, 0.2);
+    color: #e06c75;
+    border-radius: 10px;
+    padding: 5px 15px;
+  }
+
+  /* --- DND WIDGET --- */
+  .widget-dnd {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  /* --- SCROLLBAR --- */
+  scrollbar trough {
+    background: transparent;
+  }
+  scrollbar slider {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+'';
+  };
 }
