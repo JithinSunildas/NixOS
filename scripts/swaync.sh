@@ -1,7 +1,6 @@
 #!/home/tikhaboom/.nix-profile/bin/bash
 
-killall -q swaync
-while pgrep -x swaync >/dev/null; do sleep 0.1; done
-swaync &
-
-echo "SwayNC started successfully!"
+app="$SWAYNC_APP_NAME"
+id=$(niri msg windows --json | jq -r \
+    ".Ok | map(select(.app_id == \"$app\"))[0].id")
+[ -n "$id" ] && niri msg action focus-window --id "$id"

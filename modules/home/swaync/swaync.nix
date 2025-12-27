@@ -12,7 +12,7 @@
       control-center-layer = "overlay";
       layer-shell = true;
       cssPriority = "application";
-      idle-timeout = 0;
+      idle-timeout = 5;
       show-control-center = true;
       popup-enabled = true;
       action-on-click = true;
@@ -31,7 +31,7 @@
       timeout-low = 5;
       timeout-critical = 0;
 
-      fit-to-screen = true;
+      fit-to-screen = false;
       relative-timestamps = true;
 
       control-center-width = 500;
@@ -109,10 +109,10 @@
       };
 
       scripts = {
-        example-script = {
-          exec = "echo 'Do something...'";
-          urgency = "Normal";
-        };
+        "focus-window": {
+          "exec": "~/nix-config/scripts/swaync.sh",
+          "run-on": "action"
+        }
       };
     };
 
