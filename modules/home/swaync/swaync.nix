@@ -109,7 +109,7 @@
       };
 
       scripts = {
-        "focus-window": {
+        focus-window = {
           "exec": "~/nix-config/scripts/swaync.sh",
           "run-on": "action"
         }
