@@ -78,10 +78,11 @@ map("v", "p", '"_dP', { desc = "Paste without yanking" })
 
 -- === Buffer Navigation ===
 -- Note: Tab and S-Tab are configured in plugins.lua for bufferline
-map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+map("n", "<leader>q", "<cmd>b# | bd#<cr>", { desc = "Delete buffer" })
 map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 map("n", "<leader>bb", "<cmd>b#<cr>", { desc = "Switch to last buffer" })
+map("n", "<leader><Tab>", "<cmd>Telescope buffers<cr>", { desc = "List open buffers" })
 
 -- === Terminal ===
 -- Open terminal in split
@@ -114,23 +115,23 @@ map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Loc
 -- === Git (with gitsigns) ===
 -- Navigation
 map("n", "]c", function()
-    if vim.wo.diff then
-        return "]c"
-    end
-    vim.schedule(function()
-        require("gitsigns").next_hunk()
-    end)
-    return "<Ignore>"
+  if vim.wo.diff then
+    return "]c"
+  end
+  vim.schedule(function()
+    require("gitsigns").next_hunk()
+  end)
+  return "<Ignore>"
 end, { expr = true, desc = "Next git hunk" })
 
 map("n", "[c", function()
-    if vim.wo.diff then
-        return "[c"
-    end
-    vim.schedule(function()
-        require("gitsigns").prev_hunk()
-    end)
-    return "<Ignore>"
+  if vim.wo.diff then
+    return "[c"
+  end
+  vim.schedule(function()
+    require("gitsigns").prev_hunk()
+  end)
+  return "<Ignore>"
 end, { expr = true, desc = "Previous git hunk" })
 
 -- Acggtions

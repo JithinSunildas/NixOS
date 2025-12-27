@@ -13,15 +13,16 @@
       layer-shell = true;
       cssPriority = "application";
       idle-timeout = 0;
-      show-control-center = false;
+      show-control-center = true;
       popup-enabled = true;
+      action-on-click = true;
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
       control-center-margin-right = 10;
       control-center-margin-left = 0;
 
       notification-2fa-action = true;
-      notification-inline-replies = false;
+      notification-inline-replies = true;
       notification-icon-size = 64;
       notification-body-image-height = 100;
       notification-body-image-width = 200;
