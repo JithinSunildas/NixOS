@@ -13,6 +13,7 @@
     obsidian
     gnome-calculator
     kdePackages.okular
+    ventoy-full
     
     # Communication
     telegram-desktop
