@@ -70,6 +70,7 @@
       "wheel"
         "input"
         "libvirtd"
+        "kvm"
         "uinput"
         "networkmanager"
         "wireshark"
