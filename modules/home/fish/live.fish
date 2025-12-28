@@ -250,7 +250,9 @@ function give --description "Imperatively add nixpkgs and log them"
     set -l log_file "$HOME/nix-config/modules/home/packages/.nix-profile-history"
     for pkg in $argv
         echo "Adding $pkg..."
-        if nix profile add "nixpkgs#$pkg"
+        export NIXPKGS_ALLOW_UNFREE=1
+        export NIXPKGS_ALLOW_INSECURE=1
+        if nix profile add "nixpkgs#$pkg --impure"
             echo $pkg >> $log_file
             echo "Successfully gave you $pkg"
         else
