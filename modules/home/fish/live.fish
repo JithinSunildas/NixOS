@@ -252,7 +252,7 @@ function give --description "Imperatively add nixpkgs and log them"
         echo "Adding $pkg..."
         export NIXPKGS_ALLOW_UNFREE=1
         export NIXPKGS_ALLOW_INSECURE=1
-        if nix profile add "nixpkgs#$pkg --impure"
+        if nix profile add "nixpkgs#$pkg" --impure
             echo $pkg >> $log_file
             echo "Successfully gave you $pkg"
         else
