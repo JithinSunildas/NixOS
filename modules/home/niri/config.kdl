@@ -5,6 +5,11 @@ input {
       options "compose:ralt"
     }
     numlock
+    ignore-device "AT Translated Set 2 keyboard"
+    ignore-device "Intel HID events"
+    ignore-device "Intel HID 5 button array"
+    ignore-device "MSI WMI hotkeys"
+    ignore-device "Video Bus"
   }
 
   touchpad {
@@ -157,6 +162,7 @@ binds {
   Mod+B hotkey-overlay-title="Open Browser " { spawn "zen"; }
   Mod+O hotkey-overlay-title="Open Obsidian " { spawn "obsidian"; }
   Mod+Shift+C hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
+  Mod+X hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
   Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
   Mod+Shift+Space hotkey-overlay-title="Toggle waybar" allow-inhibiting=false { spawn-sh "pkill waybar || waybar"; }
   // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
