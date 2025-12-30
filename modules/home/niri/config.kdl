@@ -1,8 +1,253 @@
 input {
-    keyboard {
-        xkb { layout "us"; }
+  keyboard {
+    xkb {
+      layout "us"
+      options "grp:win_space_toggle,compose:ralt"
     }
+    numlock
+  }
+
+  touchpad {
+    dwt
+    tap
+    natural-scroll
+    accel-speed 0.8
+  }
+
+  mouse {
+    // off
+    natural-scroll
+    accel-speed 0.8
+    // accel-profile "flat"
+    // scroll-method "no-scroll"
+  }
+
+  trackpoint {
+    // off
+    // natural-scroll
+    // accel-speed 0.2
+    // accel-profile "flat"
+    // scroll-method "on-button-down"
+    // scroll-button 273
+    // scroll-button-lock
+    // middle-emulation
+  }
+
+  // warp-mouse-to-focus
+  focus-follows-mouse max-scroll-amount="0%"
 }
+
+gestures {
+  // This setting disables all hot corners globally.
+  // By default, the top-left corner is active.
+  hot-corners {
+    off
+  }
+}
+
+output "HDMI-A-1" {
+  mode "1920x1080@60"
+  scale 1.0
+  transform "normal"
+  position x=1280 y=0
+}
+
+layout {
+  gaps 15
+  center-focused-column "on-overflow"
+  always-center-single-column
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+  }
+
+  default-column-width { proportion 0.5; }
+
+  focus-ring {
+    width 1
+    active-color "#7fc8ff"
+    inactive-color "#505050"
+  }
+
+  border {
+    off
+    width 2
+    active-color "#ffc87f"
+    inactive-color "#505050"
+    urgent-color "#9b0000"
+  }
+
+  shadow {
+    on
+    softness 30
+    spread 5
+    offset x=0 y=5
+    color "#0007"
+  }
+  background-color "transparent"
+
+  struts {
+    // left 64
+    // right 64
+    // top 64
+    // bottom 64
+  }
+}
+
+hotkey-overlay {
+  skip-at-startup
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+animations {
+  // off
+  slowdown 0.2
+}
+//
+// Inactive windows
+// window-rule {
+//     match is-focused=false
+//     opacity 0.7
+// }
+// 
+// // Active/focused window
+// window-rule {
+//     match is-focused=true
+//     opacity 0.8
+// }
+
+window-rule {
+  match app-id=r#"^org\.wezfurlong\.wezterm$"#
+  default-column-width {}
+}
+
+window-rule {
+  match title="Picture in picture"
+  open-floating true
+  default-floating-position x=100 y=100 relative-to="bottom-right"
+  tiled-state false
+}
+
+/-window-rule {
+  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+  match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+  block-out-from "screen-capture"
+}
+
+window-rule {
+  geometry-corner-radius 6
+  clip-to-geometry true
+}
+
+spawn-at-startup "waybar"
+spawn-sh-at-startup "swww-daemon"
+spawn-at-startup "swayosd-server"
+spawn-at-startup "swaync"
+
 binds {
-    Mod+Space { spawn "fuzzel"; }
+  Mod+Shift+Slash { show-hotkey-overlay; }
+  Mod+Shift+R { spawn "niri" "msg" "action" "reload-config"; }
+
+  // App bindings
+  Mod+Return hotkey-overlay-title="Open Terminal " { spawn "ghostty"; }
+  Mod+E hotkey-overlay-title="Open Files " { spawn "nautilus"; }
+  Mod+B hotkey-overlay-title="Open Browser " { spawn "zen"; }
+  Mod+O hotkey-overlay-title="Open Obsidian " { spawn "obsidian"; }
+  Mod+Shift+C hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
+  Mod+X hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
+  Mod+Shift+Space hotkey-overlay-title="Toggle waybar" allow-inhibiting=false { spawn-sh "pkill waybar || waybar"; }
+  // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
+  XF86AudioMute allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+  XF86AudioMicMute allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
+  XF86MonBrightnessUp allow-when-locked=true { spawn "swayosd-client" "--brightness" "raise"; }
+  XF86MonBrightnessDown allow-when-locked=true { spawn "swayosd-client" "--brightness" "lower"; }
+
+  // Navigation
+  Mod+1 { focus-workspace 1; }
+  Mod+2 { focus-workspace 2; }
+  Mod+3 { focus-workspace 3; }
+  Mod+4 { focus-workspace 4; }
+  Mod+5 { focus-workspace 5; }
+  Mod+6 { focus-workspace 6; }
+  Mod+7 { focus-workspace 7; }
+  Mod+8 { focus-workspace 8; }
+  Mod+9 { focus-workspace 9; }
+  Mod+0 { focus-workspace 10; }
+  Mod+TAB repeat=false { toggle-overview; }
+  Mod+Q repeat=false { close-window; }
+  Mod+Shift+1 { move-column-to-workspace 1; }
+  Mod+Shift+2 { move-column-to-workspace 2; }
+  Mod+Shift+3 { move-column-to-workspace 3; }
+  Mod+Shift+4 { move-column-to-workspace 4; }
+  Mod+Shift+5 { move-column-to-workspace 5; }
+  Mod+Shift+6 { move-column-to-workspace 6; }
+  Mod+Shift+7 { move-column-to-workspace 7; }
+  Mod+Shift+8 { move-column-to-workspace 8; }
+  Mod+Shift+9 { move-column-to-workspace 9; }
+  Mod+Shift+0 { move-column-to-workspace 10; }
+  Mod+H     { focus-column-left; }
+  Mod+L     { focus-column-right; }
+  Mod+J     { focus-window-or-workspace-down; }
+  Mod+K     { focus-window-or-workspace-up; }
+  Mod+Shift+H     { move-column-left; }
+  Mod+Shift+L     { move-column-right; }
+  Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+  Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
+  Mod+Home { focus-column-first; }
+  Mod+End  { focus-column-last; }
+  Mod+Shift+Home { move-column-to-first; }
+  Mod+Shift+End  { move-column-to-last; }
+  // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
+  // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+  Mod+Page_Down      { focus-workspace-down; }
+  Mod+Page_Up        { focus-workspace-up; }
+  Mod+Shift+J         { move-column-to-workspace-down; }
+  Mod+Shift+K         { move-column-to-workspace-up; }
+  Mod+Shift+Page_Down { move-workspace-down; }
+  Mod+Shift+Page_Up   { move-workspace-up; }
+  Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+  Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+  Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+  Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+  Mod+WheelScrollRight      { focus-column-right; }
+  Mod+WheelScrollLeft       { focus-column-left; }
+  Mod+Ctrl+WheelScrollRight { move-column-right; }
+  Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+  Mod+Shift+WheelScrollDown      { focus-column-right; }
+  Mod+Shift+WheelScrollUp        { focus-column-left; }
+  Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+  Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+  Mod+BracketLeft  { consume-or-expel-window-left; }
+  Mod+BracketRight { consume-or-expel-window-right; }
+  Mod+Comma  { consume-window-into-column; }
+  Mod+Period { expel-window-from-column; }
+  Mod+R { switch-preset-column-width; }
+  Mod+Ctrl+R { reset-window-height; }
+  Mod+F { maximize-column; }
+  Mod+Shift+F { fullscreen-window; }
+  Mod+Ctrl+F { expand-column-to-available-width; }
+  Mod+C { center-column; }
+  Mod+Ctrl+C { center-visible-columns; }
+  Mod+Minus { set-column-width "-10%"; }
+  Mod+Equal { set-column-width "+10%"; }
+  Mod+Shift+Minus { set-window-height "-10%"; }
+  Mod+Shift+Equal { set-window-height "+10%"; }
+  Mod+V       { toggle-window-floating; }
+  Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+  Mod+W { toggle-column-tabbed-display; }
+  Print { screenshot; }
+  Ctrl+Print { screenshot-screen; }
+  Alt+Print { screenshot-window; }
+  Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+  // Mod+Shift+E { quit; }
+  // Ctrl+Alt+Delete { quit; }
+  Mod+Shift+P { power-off-monitors; }
+}
+layer-rule {
+  place-within-backdrop true
 }
