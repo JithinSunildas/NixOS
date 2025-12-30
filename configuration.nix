@@ -18,7 +18,7 @@
   { device = "/dev/nvme0n1p3"; }
   ];
   boot.resumeDevice = "/dev/nvme0n1p3";
-  boot.kernelParams = [ "mem_sleep_default=deep" ];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
   services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
   services.logind.settings.Login.HandleLidSwitch = "suspend";
 
