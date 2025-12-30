@@ -19,8 +19,8 @@
   ];
   boot.resumeDevice = "/dev/nvme0n1p3";
   boot.kernelParams = [ "mem_sleep_default=deep" ];
-# services.logind.settings.Login.HandleLidSwitchExternalPower = "hibernate";
-# services.logind.settings.Login.HandleLidSwitch = "hibernate";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
+  services.logind.settings.Login.HandleLidSwitch = "suspend";
 
   nix.settings.experimental-features = [
     "nix-command"
