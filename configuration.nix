@@ -150,7 +150,7 @@
       enable = true;
       ly.enable = true;
     };
-# services.openssh.enable = true;
+    openssh.enable = true;
     emacs.enable = true;
   };
 
