@@ -157,7 +157,7 @@ binds {
   Mod+B hotkey-overlay-title="Open Browser " { spawn "zen"; }
   Mod+O hotkey-overlay-title="Open Obsidian " { spawn "obsidian"; }
   Mod+Shift+C hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
-  Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
+  Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel"; }
   Mod+Shift+Space hotkey-overlay-title="Toggle waybar" { spawn-sh "pkill waybar || waybar"; }
   // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
   XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
