@@ -165,14 +165,19 @@
     keyboards = {
       default = {
         config = ''
-          (defsrc caps)
-          (deflayer base @cap)
-          (defalias cap (tap-hold 200 200 esc lctl))
+          (defsrc 
+           caps esc
+          )
+          (deflayer base 
+           @cap caps
+          )
+          (defalias 
+           cap (tap-hold 200 200 esc lctl)
+          )
           '';
       };
     };
   };
-
   services.postgresql = {
     enable = true;
     enableTCPIP = true;
