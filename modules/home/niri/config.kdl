@@ -247,7 +247,7 @@ binds {
   // Mod+Shift+E { quit; }
   // Ctrl+Alt+Delete { quit; }
   Mod+Shift+P { power-off-monitors; }
-  Mod+Delete { spawn-sh "wlogout"; }
+  Mod+Delete { spawn-sh "pkill wlogout || wlogout"; }
 }
 layer-rule {
   place-within-backdrop true
