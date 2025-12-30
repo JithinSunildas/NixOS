@@ -5,11 +5,6 @@ input {
       options "compose:ralt"
     }
     numlock
-    ignore-device "AT Translated Set 2 keyboard"
-    ignore-device "Intel HID events"
-    ignore-device "Intel HID 5 button array"
-    ignore-device "MSI WMI hotkeys"
-    ignore-device "Video Bus"
   }
 
   touchpad {
