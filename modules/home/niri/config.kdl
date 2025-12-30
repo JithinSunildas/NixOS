@@ -158,8 +158,8 @@ binds {
   Mod+O hotkey-overlay-title="Open Obsidian " { spawn "obsidian"; }
   Mod+Shift+C hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
   Mod+X hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
-    Mod+Space hotkey-overlay-title="Run an Application: vicinae open" { spawn-sh "vicinae open"; }
-  Mod+Shift+space hotkey-overlay-title="Toggle waybar" allow-inhibiting=false { spawn-sh "pkill waybar || waybar"; }
+  Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
+  Mod+Shift+Space hotkey-overlay-title="Toggle waybar" allow-inhibiting=false { spawn-sh "pkill waybar || waybar"; }
   // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
   XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
   XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
