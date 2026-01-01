@@ -111,6 +111,9 @@ map("i", "<C-y>", "<C-o><C-r>", { desc = "Redo" })
 -- === Diagnostics ===
 map("n", "<leader>xx", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
 map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Location list" })
+map('n', '<leader>d', function()
+  vim.diagnostic.open_float(nil, { focus = false })
+end, { desc = "Show inline diagnostics" })
 
 -- === Git (with gitsigns) ===
 -- Navigation
