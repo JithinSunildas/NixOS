@@ -53,6 +53,8 @@
       
       # Alt-n: Quick vertical split
       bind -n M-n split-window -h -c "#{pane_current_path}"
+      bind -n M-z resize-pane -Z
+      bind -n M-m last-pane \; resize-pane -Z
       
       # Vim-like pane resizing
       bind -r H resize-pane -L 5
