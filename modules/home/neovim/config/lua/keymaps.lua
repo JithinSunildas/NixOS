@@ -18,6 +18,14 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 
+-- Search and Replace
+map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+  desc = "Toggle Spectre (Find and Replace)"
+})
+map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+  desc = "Search current word"
+})
+
 -- === Clipboard ===
 -- System clipboard shortcuts
 map("v", "<C-c>", '<Esc>gcc', { desc = "Comment/uncomment" })
