@@ -16,7 +16,6 @@
     nodePackages.vscode-langservers-extracted
     nodePackages.prettier
     nodejs_22
-    vimPlugins.friendly-snippets
     emmet-ls
 
     # Formatters
