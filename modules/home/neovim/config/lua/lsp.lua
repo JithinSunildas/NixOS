@@ -40,6 +40,7 @@ vim.lsp.enable({
   "ts_ls",
   "tailwindcss",
   "cssls",
+  "emmet_ls",
   "html"
 })
 
@@ -143,6 +144,16 @@ vim.lsp.config.ocamllsp = {
 -- =========================
 -- WEB DEVELOPMENT
 -- =========================
+require("luasnip.loaders.from_vscode").lazy_load()
+
+vim.lsp.config.emmet_ls = {
+  cmd = { "emmet-ls", "--stdio" },
+  filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "eruby" },
+  root_markers = { ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 vim.lsp.config.nixd = {
   cmd = { "nixd" },
   filetypes = { "nix" },
