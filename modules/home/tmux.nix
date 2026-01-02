@@ -31,6 +31,8 @@
     ];
     
     extraConfig = ''
+      set -as terminal-overrides ',*:kdch1=\E[3~'
+      set -g xterm-keys on
       set-window-option -g xterm-keys on
       set -g default-terminal "xterm-256color"
       set -s escape-time 0
