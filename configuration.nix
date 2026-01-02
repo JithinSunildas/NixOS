@@ -1,43 +1,44 @@
 #Configuration.nix
 {
   pkgs,
-  ...
+    ...
 }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    ./packages/packages.nix
+      ./packages/packages.nix
   ];
 
-  # --- NixOS Core Settings ---
+# --- NixOS Core Settings ---
   nixpkgs.config.allowUnfree = true;
 
-  # Hibernation swap space...
+# Hibernation swap space...
   swapDevices = [
-    { device = "/dev/nvme0n1p3"; }
+  { device = "/dev/nvme0n1p3"; }
   ];
   boot.resumeDevice = "/dev/nvme0n1p3";
-  services.logind.settings.Login.HandleLidSwitchExternalPower = "hibernate";
-  services.logind.settings.Login.HandleLidSwitch = "hibernate";
+  boot.kernelParams = [ "mem_sleep_default=s2idle" "nvme.noacpi=1" ];
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
+  services.logind.settings.Login.HandleLidSwitch = "suspend";
 
   nix.settings.experimental-features = [
     "nix-command"
-    "flakes"
+      "flakes"
   ];
 
   system.stateVersion = "25.05";
 
-  # --- Bootloader ---
+# --- Bootloader ---
   boot.loader = {
     systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    efi.canTouchEfiVariables = false;
     systemd-boot.graceful = true;
   };
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "uinput" ];
 
-  # --- Networking & Localization ---
+# --- Networking & Localization ---
   networking = {
     hostName = "SuperDuperComputer";
     networkmanager.enable = true;
@@ -45,39 +46,48 @@
       "192.168.18.33" = [ "raspi.casa.local" ];
       "10.129.16.223" = [
         "blog.inlanefreight.local"
-        "blog-dev.inlanefreight.local"
+          "blog-dev.inlanefreight.local"
       ];
     };
   };
 
-  # Timezone change applied
+# Timezone change applied
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # --- User Configuration ---
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+
+# --- User Configuration ---
   users.users.tikhaboom = {
     isNormalUser = true;
     description = "tikhaboom";
     shell = pkgs.fish;
     extraGroups = [
       "wheel"
-      "input"
-      "uinput"
-      "networkmanager"
-      "wireshark"
-      "docker"
-      "adbusers"
+        "input"
+        "libvirtd"
+        "kvm"
+        "uinput"
+        "networkmanager"
+        "wireshark"
+        "docker"
+        "adbusers"
+        "video"
     ];
   };
 
-  # --- System Environment & Services ---
+# --- System Environment & Services ---
   environment.systemPackages = with pkgs; [
     polkit
-    nixfmt-rfc-style
-    xwayland
-    xwayland-satellite
-    android-tools
-    dict
+      nixfmt-rfc-style
+      xwayland
+      xwayland-satellite
+      android-tools
+      dict
   ];
 
   environment.variables = {
@@ -94,8 +104,10 @@
 
   security.polkit.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
-  # --- System Program Enables ---
+# --- System Program Enables ---
   programs = {
     fish.enable = true;
 
@@ -138,7 +150,7 @@
       enable = true;
       ly.enable = true;
     };
-    # services.openssh.enable = true;
+    openssh.enable = true;
     emacs.enable = true;
   };
 
@@ -147,26 +159,31 @@
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-  '';
+    '';
   services.kanata = {
     enable = true;
     keyboards = {
       default = {
         config = ''
-          (defsrc caps)
-          (deflayer base @cap)
-          (defalias cap (tap-hold 200 200 esc lctl))
-        '';
+          (defsrc 
+           caps esc
+          )
+          (deflayer base 
+           @cap caps
+          )
+          (defalias 
+           cap (tap-hold 200 200 esc lctl)
+          )
+          '';
       };
     };
   };
-
   services.postgresql = {
     enable = true;
     enableTCPIP = true;
   };
 
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # networking.firewall.enable = false;
+# networking.firewall.allowedTCPPorts = [ ... ];
+# networking.firewall.allowedUDPPorts = [ ... ];
+# networking.firewall.enable = false;
 }

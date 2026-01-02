@@ -2,7 +2,11 @@
 {
   home.packages = with pkgs; [
     # System utilities
+    efibootmgr
     unzip
+    cyme
+    parted
+    xxd
     xhost
     ninja
     pkg-config

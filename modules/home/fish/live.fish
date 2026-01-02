@@ -170,111 +170,192 @@ alias dprune='docker system prune -af'
 
 # Quick project starter
 function mkcd
-    mkdir -p $argv[1]
-    cd $argv[1]
+  mkdir -p $argv[1]
+  cd $argv[1]
 end
 
 # Extract archives
 function extract
-    if test -f $argv[1]
-        switch $argv[1]
-            case '*.tar.bz2'
-                tar xjf $argv[1]
-            case '*.tar.gz'
-                tar xzf $argv[1]
-            case '*.bz2'
-                bunzip2 $argv[1]
-            case '*.rar'
-                unrar x $argv[1]
-            case '*.gz'
-                gunzip $argv[1]
-            case '*.tar'
-                tar xf $argv[1]
-            case '*.tbz2'
-                tar xjf $argv[1]
-            case '*.tgz'
-                tar xzf $argv[1]
-            case '*.zip'
-                unzip $argv[1]
-            case '*.Z'
-                uncompress $argv[1]
-            case '*.7z'
-                7z x $argv[1]
-            case '*'
-                echo "'$argv[1]' cannot be extracted via extract()"
-        end
-    else
-        echo "'$argv[1]' is not a valid file"
+  if test -f $argv[1]
+    switch $argv[1]
+      case '*.tar.bz2'
+        tar xjf $argv[1]
+      case '*.tar.gz'
+        tar xzf $argv[1]
+      case '*.bz2'
+        bunzip2 $argv[1]
+      case '*.rar'
+        unrar x $argv[1]
+      case '*.gz'
+        gunzip $argv[1]
+      case '*.tar'
+        tar xf $argv[1]
+      case '*.tbz2'
+        tar xjf $argv[1]
+      case '*.tgz'
+        tar xzf $argv[1]
+      case '*.zip'
+        unzip $argv[1]
+      case '*.Z'
+        uncompress $argv[1]
+      case '*.7z'
+        7z x $argv[1]
+      case '*'
+        echo "'$argv[1]' cannot be extracted via extract()"
     end
+  else
+    echo "'$argv[1]' is not a valid file"
+  end
 end
 
 # Git commit with automatic message
 function gac
-    git add .
-    if test (count $argv) -gt 0
-        git commit -m "$argv"
-    else
-        git commit -m "Quick update: $(date +%Y-%m-%d_%H:%M)"
-    end
+  git add .
+  if test (count $argv) -gt 0
+    git commit -m "$argv"
+  else
+    git commit -m "Quick update: $(date +%Y-%m-%d_%H:%M)"
+  end
 end
 
 # Git add, commit, push in one command
 function gacp
-    git add .
-    if test (count $argv) -gt 0
-        git commit -m "$argv"
-    else
-        git commit -m "Quick update: $(date +%Y-%m-%d_%H:%M)"
-    end
-    git push
+  git add .
+  if test (count $argv) -gt 0
+    git commit -m "$argv"
+  else
+    git commit -m "Quick update: $(date +%Y-%m-%d_%H:%M)"
+  end
+  git push
 end
 
 # Quick nix rebuild with commit
 function nrb
-    cd ~/nix-config
-    git add -A
-    if test (count $argv) -gt 0
-        git commit -m "$argv"
-    else
-        git commit -m "config: $(date +%Y-%m-%d_%H:%M)"
+  cd ~/nix-config
+  git add -A
+  if test (count $argv) -gt 0
+    git commit -m "$argv"
+  else
+    git commit -m "config: $(date +%Y-%m-%d_%H:%M)"
+  end
+  sudo nixos-rebuild switch --flake .#SuperDuperComputer
+end
+
+# nix profile add
+function give --description "Imperatively add nixpkgs and log them"
+    if not set -q argv[1]
+        echo "Give what? Bruh... Don't leave me hanging!"
+        return 1
     end
-    sudo nixos-rebuild switch --flake .#SuperDuperComputer
+    set -l log_file "$HOME/nix-config/modules/home/packages/.nix-profile-history"
+    for pkg in $argv
+        echo "Adding $pkg..."
+        export NIXPKGS_ALLOW_UNFREE=1
+        export NIXPKGS_ALLOW_INSECURE=1
+        if nix profile add "nixpkgs#$pkg" --impure
+            echo $pkg >> $log_file
+            echo "Successfully gave you $pkg"
+        else
+            echo "Failed to add $pkg. Check the name."
+        end
+    end
+end
+
+# nix profile remove
+function throw --description "remove packages iteratively or purge all via -a"
+    argparse a/all -- $argv
+    or return 1
+    set -l history_file "$HOME/nix-config/modules/home/packages/.nix-profile-history"
+    set -l bin_file "$HOME/nix-config/modules/home/packages/.nix-profile-bin"
+    if set -q _flag_all
+        if not test -f "$history_file"
+            echo "History file not found. Nothing to purge."
+            return 1
+        end
+        echo "🚀 Nuke mode engaged. Moving history to bin..."
+        for pkg in (cat "$history_file")
+            echo "Throwing $pkg..."
+            nix profile remove "nixpkgs#$pkg" 2>/dev/null
+            echo $pkg >> $bin_file
+        end
+        echo -n "" > "$history_file"
+        echo "Clean slate. History moved to bin."
+    else
+        if not set -q argv[1]
+            echo "Throw what? (use -a to throw everything)"
+            return 1
+        end
+        for item in $argv
+            if nix profile remove $item
+                echo $item >> $bin_file
+                echo "Successfully removed $item"
+                if test -f "$history_file"
+                    sed -i "/^$item\$/d" "$history_file"
+                end
+            else
+                echo "Failed to remove $item."
+            end
+        end
+    end
+end
+
+# Commiting fuction to declare all packages from bin to default.nix
+function commit --description "Move binned packages into default.nix and clear the bin"
+    set -l bin_file "$HOME/nix-config/modules/home/packages/.nix-profile-bin"
+    set -l target_nix "$HOME/nix-config/modules/home/default.nix"
+    if not test -s "$bin_file"
+        echo "Bin is empty. Nothing to commit."
+        return 1
+    end
+    echo "Injecting packages into $target_nix..."
+    for pkg in (cat $bin_file)
+        # sed logic: 
+        # 1. Finds the line 'packages = ['
+        # 2. Appends '      pkgs.<package>' on the next line
+        if sed -i "/packages = \[/a \      pkgs.$pkg" $target_nix
+            echo "✅ Committed: $pkg"
+        else
+            echo "❌ Failed to commit $pkg"
+        end
+    end
+    echo -n "" > $bin_file
+    echo "🧹 Bin cleared. Run 'hrb' to finalize."
 end
 
 # Quick home-manager rebuild with commit
 function hrb
-    cd ~/nix-config
-    git add -A
-    if test (count $argv) -gt 0
-        git commit -m "$argv"
-    else
-        git commit -m "home: $(date +%Y-%m-%d_%H:%M)"
-    end
-    home-manager switch --flake .#tikhaboom
+  cd ~/nix-config
+  git add -A
+  if test (count $argv) -gt 0
+    git commit -m "$argv"
+  else
+    git commit -m "home: $(date +%Y-%m-%d_%H:%M)"
+  end
+  home-manager switch --flake .#tikhaboom
 end
 
 # Search nix packages and show details
 function seeless
-    nix search nixpkgs $argv | less
+  nix search nixpkgs $argv | less
 end
 
 # Create a temporary nix shell with packages
 function tmp
-    nix-shell -p $argv
+  nix-shell -p $argv
 end
 
 # Quick server
 function serve
-    set port 8000
-    if test (count $argv) -gt 0
-        set port $argv[1]
-    end
-    python3 -m http.server $port
+  set port 8000
+  if test (count $argv) -gt 0
+    set port $argv[1]
+  end
+  python3 -m http.server $port
 end
 
 # Find and kill process by name
 function kp
-    ps aux | grep -v grep | grep -i $argv[1] | awk '{print $2}' | xargs kill -9
+  ps aux | grep -v grep | grep -i $argv[1] | awk '{print $2}' | xargs kill -9
 end
 
 # ==========================================
@@ -283,16 +364,11 @@ end
 
 # Load direnv if available
 if type -q direnv
-    direnv hook fish | source
+  direnv hook fish | source
 end
 
 # Load fzf keybindings if available
 if type -q fzf
-    fzf --fish | source
+  fzf --fish | source
 end
 
-# ==========================================
-# Welcome Message (optional)
-# ==========================================
-# Uncomment to show system info on startup
-# fastfetch --logo nixos

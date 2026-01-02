@@ -85,8 +85,6 @@ require('kanso').setup({
     foreground = "default",
 })
 
-vim.cmd("colorscheme kanso")
-
 -- Load extensions
 pcall(telescope.load_extension, "fzf")
 

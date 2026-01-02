@@ -12,28 +12,7 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./packages/system.nix
-    ./packages/terminal.nix
-    ./packages/wayland.nix
-    ./packages/themes.nix
-    ./packages/security.nix
-    ./packages/development.nix
-    ./packages/languages.nix
-    ./packages/virtualization.nix
-    ./packages/apps.nix
-
-    # Configs
-    ./niri/niri.nix
-    ./waybar/waybar.nix
-    ./theme/stylix.nix
-    ./fish/fish.nix
-    ./neovim/neovim.nix
-    ./zellij/zellij.nix
-    ./ghostty.nix
-    ./spicetify.nix
-    ./bash.nix
-    ./tmux.nix
-    ./dunst.nix
+    ./default.nix
   ];
 
   ########################################
@@ -60,6 +39,5 @@
   services = {
     ssh-agent.enable = true;
     swww.enable = true;
-    swaync.enable = true;
   };
 }
