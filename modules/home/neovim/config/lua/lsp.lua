@@ -27,14 +27,17 @@ end
 -- =========================
 
 vim.lsp.enable({
-  "nixfmt",
+  "nixd",
   "rust_analyzer",
   "clangd",
   "pyright",
   "lua_ls",
   "jdtls",
-  "haskell_language_server"
-})
+  "haskell_language_server",
+  "gopls",
+  "zls",
+  "ocamllsp",
+  "ts_ls" })
 
 -- =========================
 -- LSP SERVER DEFINITIONS
@@ -115,6 +118,49 @@ vim.lsp.config.lua_ls = {
       telemetry = { enable = false },
     },
   },
+}
+
+-- =========================
+-- WEB DEVELOPMENT
+-- =========================
+vim.lsp.config.nixd = {
+  cmd = { "nixd" },
+  filetypes = { "nix" },
+  root_markers = { "flake.nix", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.gopls = {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_markers = { "go.work", "go.mod", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.zls = {
+  cmd = { "zls" },
+  filetypes = { "zig", "zir" },
+  root_markers = { "build.zig", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.ocamllsp = {
+  cmd = { "ocamllsp" },
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+  root_markers = { "*.opam", "dune-project", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.ts_ls = {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { "package.json", "tsconfig.json", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 -- =========================
