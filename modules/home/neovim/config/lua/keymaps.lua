@@ -78,8 +78,9 @@ map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
 
 -- Keep search matches centered
 map("n", "n", "nzzzv", { desc = "Next match (centered)" })
+map("n", "m", "vi", { desc = "Match inside" })
 map("n", "N", "Nzzzv", { desc = "Previous match (centered)" })
-map("n", "m", "viw", { desc = "Match word under cursor" })
+map("n", "M", "va", { desc = "Match around" })
 
 -- Better paste (don't yank replaced text)
 map("v", "p", '"_dP', { desc = "Paste without yanking" })
