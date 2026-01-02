@@ -12,6 +12,10 @@
     zls
     ocamlPackages.ocaml-lsp
     typescript-language-server
+    tailwindcss-language-server
+    nodePackages.vscode-langservers-extracted
+    nodePackages.prettier
+    nodejs_22
 
     # Formatters
     black

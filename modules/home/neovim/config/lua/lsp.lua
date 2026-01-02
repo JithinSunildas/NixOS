@@ -37,7 +37,11 @@ vim.lsp.enable({
   "gopls",
   "zls",
   "ocamllsp",
-  "ts_ls" })
+  "ts_ls",
+  "tailwindcss",
+  "cssls",
+  "html"
+})
 
 -- =========================
 -- LSP SERVER DEFINITIONS
@@ -120,6 +124,22 @@ vim.lsp.config.lua_ls = {
   },
 }
 
+vim.lsp.config.zls = {
+  cmd = { "zls" },
+  filetypes = { "zig", "zir" },
+  root_markers = { "build.zig", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.ocamllsp = {
+  cmd = { "ocamllsp" },
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+  root_markers = { "*.opam", "dune-project", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 -- =========================
 -- WEB DEVELOPMENT
 -- =========================
@@ -139,26 +159,32 @@ vim.lsp.config.gopls = {
   on_attach = on_attach,
 }
 
-vim.lsp.config.zls = {
-  cmd = { "zls" },
-  filetypes = { "zig", "zir" },
-  root_markers = { "build.zig", ".git" },
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-vim.lsp.config.ocamllsp = {
-  cmd = { "ocamllsp" },
-  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
-  root_markers = { "*.opam", "dune-project", ".git" },
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
 vim.lsp.config.ts_ls = {
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   root_markers = { "package.json", "tsconfig.json", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.tailwindcss = {
+  cmd = { "tailwindcss-language-server", "--stdio" },
+  filetypes = { "html", "css", "javascriptreact", "typescriptreact", "svelte", "vue" },
+  root_markers = { "tailwind.config.js", "tailwind.config.ts", "postcss.config.js" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.cssls = {
+  cmd = { "vscode-css-language-server", "--stdio" },
+  filetypes = { "css", "scss", "less" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+vim.lsp.config.html = {
+  cmd = { "vscode-html-language-server", "--stdio" },
+  filetypes = { "html" },
   capabilities = capabilities,
   on_attach = on_attach,
 }
