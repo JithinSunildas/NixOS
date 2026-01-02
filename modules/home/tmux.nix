@@ -31,6 +31,10 @@
     ];
     
     extraConfig = ''
+      set-window-option -g xterm-keys on
+      set -g default-terminal "xterm-256color"
+      set -s escape-time 0
+
       # Vim-like pane navigation (no prefix needed!)
       bind -n M-h select-pane -L
       bind -n M-j select-pane -D
