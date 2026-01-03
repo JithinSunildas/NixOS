@@ -35,6 +35,7 @@ vim.lsp.enable({
   "jdtls",
   "haskell_language_server",
   "gopls",
+  -- "flutter-tools",
   "zls",
   "ocamllsp",
   "ts_ls",
@@ -78,6 +79,30 @@ vim.lsp.config.clangd = {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+require("flutter-tools").setup({
+  ui = {
+    border = "rounded",
+    notification_style = "native",
+  },
+  decorations = {
+    statusline = {
+      device = true,
+      app_version = true,
+    }
+  },
+  lsp = {
+    color_utils = {
+      enabled = true,
+    },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      showTodos = true,
+      completeFunctionCalls = true,
+    }
+  }
+})
 
 vim.lsp.config.jdtls = {
   cmd = { "jdtls" },
