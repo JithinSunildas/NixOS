@@ -92,6 +92,9 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
 
+require('telescope').load_extension('projects')
+vim.keymap.set('n', '<leader>pp', ":Telescope projects<CR>", { desc = "Switch Projects" })
+
 require("flutter-tools").setup({
   ui = {
     border = "rounded",
