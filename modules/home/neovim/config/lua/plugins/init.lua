@@ -21,6 +21,7 @@ return {
   "nvim-telescope/telescope.nvim",
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   "nvim-lua/plenary.nvim",
+  "nvim-telescope/project.nvim",
 
   -- Find and Replace
   'nvim-pack/nvim-spectre',
@@ -53,7 +54,6 @@ return {
 
   -- Extra plugins
   "nvim-flutter/flutter-tools.nvim",
-  "ahmekhalf/project.nvim",
   "folke/flash.nvim",
   "j-hui/fidget.nvim",
   "echasnovski/mini.surround",
