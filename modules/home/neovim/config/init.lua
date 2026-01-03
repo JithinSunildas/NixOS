@@ -7,7 +7,7 @@ local lazy_installed_by_nix = vim.fn.isdirectory(lazypath) == 0
 
 if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font:h12"
-  vim.g.neovide_scale_factor = 1.0
+  vim.g.neovide_scale_factor = 0.8
   vim.g.neovide_frame = "none"
 end
 
