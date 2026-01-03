@@ -222,6 +222,7 @@ dashboard.section.buttons.val = {
   dashboard.button("p", "  Projects", ":Telescope projects <CR>"),
   dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
   dashboard.button("g", "  Find text", ":Telescope live_grep <CR>"),
+  dashboard.button("t", "  Open Terminal", ":tabnew | terminal <CR>"),
   dashboard.button("q", "  Quit", ":qa<CR>"),
 }
 
