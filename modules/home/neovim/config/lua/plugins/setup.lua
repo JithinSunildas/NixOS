@@ -108,6 +108,11 @@ require("flutter-tools").setup({
       app_version = true,
     }
   },
+  lsp = {
+    color_utils = {
+      enabled = true,
+    },
+  },
 })
 
 require('neoscroll').setup({

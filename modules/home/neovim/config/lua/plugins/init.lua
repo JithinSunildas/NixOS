@@ -36,7 +36,6 @@ return {
   "goolord/alpha-nvim",
   "lukas-reineke/indent-blankline.nvim",
   "NvChad/nvim-colorizer.lua",
-  "nvim-mini/mini.base16",
   "karb94/neoscroll.nvim",
   {
     "webhooked/kanso.nvim",
