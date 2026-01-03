@@ -52,6 +52,7 @@ return {
   "folke/which-key.nvim",
 
   -- Extra plugins
+  "nvim-flutter/flutter-tools.nvim",
   "folke/flash.nvim",
   "j-hui/fidget.nvim",
   "echasnovski/mini.surround",

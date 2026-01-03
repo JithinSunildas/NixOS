@@ -92,6 +92,19 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
 
+require("flutter-tools").setup({
+  ui = {
+    border = "rounded",
+    notification_style = "native",
+  },
+  decorations = {
+    statusline = {
+      device = true,
+      app_version = true,
+    }
+  },
+})
+
 -- === NvimTree ===
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
