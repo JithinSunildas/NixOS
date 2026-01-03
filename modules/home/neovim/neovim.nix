@@ -10,7 +10,7 @@
     haskell-language-server
     gopls
     zls
-    vimPlugins.flutter-tools-nvim
+    # vimPlugins.flutter-tools-nvim
     ocamlPackages.ocaml-lsp
     typescript-language-server
     tailwindcss-language-server
