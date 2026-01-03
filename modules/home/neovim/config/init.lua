@@ -9,7 +9,7 @@ if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font:h12"
   vim.g.neovide_scale_factor = 0.9
   vim.g.neovide_frame = "none"
-  vim.g.neovide_cursor_vfx_mode = "pixeldust"
+  vim.g.neovide_cursor_vfx_mode = "pixiedust"
 end
 
 if lazy_installed_by_nix then
