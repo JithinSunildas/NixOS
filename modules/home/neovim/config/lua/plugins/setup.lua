@@ -91,7 +91,7 @@ map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
-require('telescope').load_extension('projects')
+-- require('telescope').load_extension('projects')
 require("project_nvim").setup({
   patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "pubspec.yaml", "package.json", "flake.nix" },
 })
@@ -192,7 +192,7 @@ dashboard.section.header.val = {
 dashboard.section.buttons.val = {
   dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
   dashboard.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
-  dashboard.button("p", "󰉋  Projects", ":Telescope projects<CR>"),
+  dashboard.button("p", "󰉋  Projects", ":Telescope projects <CR>"),
   dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
   dashboard.button("g", "  Find text", ":Telescope live_grep <CR>"),
   dashboard.button("q", "  Quit", ":qa<CR>"),
