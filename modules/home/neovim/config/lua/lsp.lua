@@ -35,7 +35,7 @@ vim.lsp.enable({
   "jdtls",
   "haskell_language_server",
   "gopls",
-  -- "flutter-tools",
+  "flutter-tools",
   "zls",
   "ocamllsp",
   "ts_ls",
