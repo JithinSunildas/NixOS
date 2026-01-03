@@ -35,7 +35,6 @@ vim.lsp.enable({
   "jdtls",
   "haskell_language_server",
   "gopls",
-  "flutter_tools_nvim",
   "zls",
   "ocamllsp",
   "ts_ls",
@@ -80,7 +79,7 @@ vim.lsp.config.clangd = {
   on_attach = on_attach,
 }
 
-require("flutter-tools-nvim").setup({
+require("flutter-tools").setup({
   ui = {
     border = "rounded",
     notification_style = "native",
