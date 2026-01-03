@@ -53,6 +53,7 @@ return {
 
   -- Extra plugins
   "nvim-flutter/flutter-tools.nvim",
+  "ahmekhalf/project.nvim",
   "folke/flash.nvim",
   "j-hui/fidget.nvim",
   "echasnovski/mini.surround",
