@@ -90,6 +90,7 @@ end, { desc = "Find Files (hidden)" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
+map("n", "<leader>fp", "<cmd>Telescope projects<cr>", { desc = "Recent Projects" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
 
 require("project_nvim").setup({
