@@ -97,6 +97,7 @@ alias h='history'
 alias w='cd ~/Work'
 alias d='cd ~/Downloads'
 alias doc='cd ~/Documents'
+alias notes='cd ~/Documents/My\ Vault/'
 alias nconf='cd ~/nix-config'
 
 # LS aliases (using eza)
