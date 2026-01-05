@@ -12,6 +12,7 @@
     git
     helix
     openssh
+    mariadb
     emacs
     curl
     wlogout
