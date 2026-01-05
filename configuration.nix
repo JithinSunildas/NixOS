@@ -163,14 +163,12 @@
       };
     };
   };
-  services.postgresql = {
-    enable = true;
-    enableTCPIP = true;
-  };
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-    enableTCPIP = true;
+  services = {
+    postgresql.enable = true;
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];
