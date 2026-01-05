@@ -166,16 +166,11 @@
   services.postgresql = {
     enable = true;
     enableTCPIP = true;
-    services.postgresql = {
-      enable = true;
-      enableTCPIP = true;
-    };
-    services.mysql = {
-      enable = true;
-      package = pkgs.mariadb;
-      enableTCPIP = true;
-    };
-
+  };
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+    enableTCPIP = true;
   };
 
   # networking.firewall.allowedTCPPorts = [ ... ];
