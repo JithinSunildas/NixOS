@@ -55,12 +55,13 @@
     kernel = super.kernel.override {
       ignoreConfigErrors = true;
       structuredExtraConfig = with lib.kernel; {
+        # Use lib.mkForce to override the default 'n' value
+        PREEMPT = lib.mkForce yes;
+
         MCORE_NATIVE = yes;
-        PREEMPT = yes;
       };
     };
   });
-
   boot.kernelModules = [ "uinput" ];
 
   # --- Networking & Localization ---
