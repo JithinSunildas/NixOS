@@ -71,9 +71,6 @@ vim.lsp.config.rust_analyzer = {
       diagnostics = {
         enable = true,
       },
-      checkOnSave = {
-        command = "clippy",
-      },
       imports = {
         granularity = { group = "module" },
         prefix = "self",
