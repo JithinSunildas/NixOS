@@ -1,5 +1,4 @@
-# Configuration.nix
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ./packages/packages.nix ];
@@ -10,24 +9,58 @@
   # Hibernation swap space...
   swapDevices = [{ device = "/dev/nvme0n1p3"; }];
   boot.resumeDevice = "/dev/nvme0n1p3";
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "nvme.noacpi=1" ];
+
+  # Optimization: Silent boot + existing hibernation fixes
+  boot.kernelParams = [
+    "quiet"
+    "loglevel=3"
+    "systemd.show_status=auto"
+    "rd.udev.log_level=3"
+    "mem_sleep_default=s2idle"
+    "nvme.noacpi=1"
+  ];
+
   services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
   services.logind.settings.Login.HandleLidSwitch = "suspend";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Optimization: Use all cores for your custom kernel build
+  nix.settings.cores = 0;
+
   system.stateVersion = "25.05";
 
-  # --- Bootloader ---
+  # --- Bootloader (Limine) ---
   boot.loader = {
     systemd-boot.enable = false;
     limine = {
       enable = true;
-      # enableEfiAsRemovable = true; 
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+      # Custom styling to match a clean setup
+      config = ''
+        TIMEOUT=3
+        GRAPHICS=yes
+        INTERFACE_RESOLUTION=1920x1080
+        TERM_BACKDROP=000000
+        TERM_BACKGROUND=1e1e2e
+        TERM_FOREGROUND=cdd6f4
+      '';
     };
-    # efi.canTouchEfiVariables = false;
+    efi.canTouchEfiVariables = false;
   };
-  boot.kernelPackages = pkgs.linuxPackages;
+
+  # --- Custom Compiled Kernel ---
+  boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
+    kernel = super.kernel.override {
+      ignoreConfigErrors = true;
+      structuredExtraConfig = with lib.kernel; {
+        MCORE_NATIVE = yes;
+        PREEMPT = yes;
+      };
+    };
+  });
+
   boot.kernelModules = [ "uinput" ];
 
   # --- Networking & Localization ---
@@ -41,7 +74,6 @@
     };
   };
 
-  # Timezone change applied
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -70,7 +102,7 @@
     ];
   };
 
-  # --- System Environment & Services ---
+  # --- Environment ---
   environment.systemPackages = with pkgs; [
     polkit
     nixfmt-rfc-style
@@ -87,9 +119,33 @@
     GDK_BACKEND = "wayland";
   };
 
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  # --- Services ---
+  services = {
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+    qbittorrent.enable = true;
+    displayManager = {
+      enable = true;
+      ly.enable = true;
+    };
+    openssh.enable = true;
+    emacs.enable = true;
+    gvfs.enable = true;
+    kanata = {
+      enable = true;
+      keyboards.default.config = ''
+        (defsrc caps esc)
+        (deflayer base @cap caps)
+        (defalias cap (tap-hold 200 200 esc lctl))
+      '';
+    };
+    postgresql.enable = true;
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
   };
 
   security.polkit.enable = true;
@@ -97,26 +153,22 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  # --- System Program Enables ---
+  # --- Programs ---
   programs = {
     fish.enable = true;
-
     neovim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
     };
-
     wireshark.enable = true;
-
     niri.enable = true;
-
     xwayland.enable = true;
-
-    obs-studio.enable = true;
-    obs-studio.plugins = [ pkgs.obs-studio-plugins.wlrobs ];
-
+    obs-studio = {
+      enable = true;
+      plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -132,48 +184,7 @@
     packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
   };
 
-  services = {
-    qbittorrent.enable = true;
-    displayManager = {
-      enable = true;
-      ly.enable = true;
-    };
-    openssh.enable = true;
-    emacs.enable = true;
-  };
-
-  services.gvfs.enable = true;
-
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
-  services.kanata = {
-    enable = true;
-    keyboards = {
-      default = {
-        config = ''
-          (defsrc 
-           caps esc
-          )
-          (deflayer base 
-           @cap caps
-          )
-          (defalias 
-           cap (tap-hold 200 200 esc lctl)
-          )
-        '';
-      };
-    };
-  };
-  services = {
-    postgresql.enable = true;
-    mysql = {
-      enable = true;
-      package = pkgs.mariadb;
-    };
-  };
-
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # networking.firewall.enable = false;
 }
