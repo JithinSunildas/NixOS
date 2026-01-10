@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     # Editors
     helix
@@ -7,7 +6,6 @@
     vscode
 
     # Build tools
-    clang
     cmake
 
     # Hardware design
@@ -40,7 +38,5 @@
     dbeaver-bin
   ];
 
-  nixpkgs.config = {
-    android_sdk.accept_license = true;
-  };
+  nixpkgs.config = { android_sdk.accept_license = true; };
 }

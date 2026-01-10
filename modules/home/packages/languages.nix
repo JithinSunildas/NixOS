@@ -18,7 +18,7 @@
     rustup
 
     # C/C++
-    clang
+    (pkgs.lib.hiPrio pkgs.clang)
     clang-tools
     lldb
     gcc
