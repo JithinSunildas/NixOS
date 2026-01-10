@@ -4,7 +4,7 @@
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx GOPATH $HOME/go
-set -gx BROWSER zen-browser
+set -gx BROWSER zen
 
 # XDG Base Directory
 set -gx XDG_CONFIG_HOME $HOME/.config
