@@ -142,7 +142,6 @@ alias ports='ss -tulanp'
 # Aliases - Development
 # ==========================================
 alias v='nvim'
-alias vim='nvim'
 alias nano='sudo -E nvim'
 alias zj='zellij'
 alias yz='yazi'

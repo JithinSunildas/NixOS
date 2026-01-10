@@ -66,6 +66,25 @@ vim.lsp.config.rust_analyzer = {
   root_markers = { "Cargo.toml", ".git" },
   capabilities = capabilities,
   on_attach = on_attach,
+  -- Add this to help RA find the workspace
+  settings = {
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true,
+      },
+    }
+  }
 }
 
 vim.lsp.config.clangd = {
