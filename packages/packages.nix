@@ -6,6 +6,7 @@
     # --- Base Packages ---
     home-manager
     ffmpeg
+    limine
     neovim
     wget
     wl-clipboard-rs

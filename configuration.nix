@@ -20,9 +20,12 @@
 
   # --- Bootloader ---
   boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = false;
-    systemd-boot.graceful = true;
+    systemd-boot.enable = false;
+    limine = {
+      enable = true;
+      # enableEfiAsRemovable = true; 
+    };
+    # efi.canTouchEfiVariables = false;
   };
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "uinput" ];
