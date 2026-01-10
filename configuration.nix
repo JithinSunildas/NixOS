@@ -38,7 +38,7 @@
       efiSupport = true;
       efiInstallAsRemovable = true;
       # Custom styling to match a clean setup
-      config = ''
+      extraConfig = ''
         TIMEOUT=3
         GRAPHICS=yes
         INTERFACE_RESOLUTION=1920x1080
