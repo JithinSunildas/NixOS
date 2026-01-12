@@ -22,44 +22,31 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      zen-browser,
-      stylix,
-      spicetify-nix,
-      ...
-    }:
-  {
-    nixosConfigurations = {
-      SuperDuperComputer = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./configuration.nix ];
-        specialArgs = { inherit inputs; };
-      };
-    };
-
-    homeConfigurations = {
-      tikhaboom = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
+  outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, stylix
+    , spicetify-nix, ... }: {
+      nixosConfigurations = {
+        SuperDuperComputer = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          config = {
-            allowUnfree = true;
-          };
+          modules = [ ./configuration.nix ];
+          specialArgs = { inherit inputs; };
         };
+      };
 
-        modules = [
-          ./modules/home/home.nix
+      homeConfigurations = {
+        tikhaboom = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config = { allowUnfree = true; };
+          };
+
+          modules = [
+            ./modules/home/home.nix
             stylix.homeModules.stylix
             spicetify-nix.homeManagerModules.default
-        ];
+          ];
 
-        extraSpecialArgs = {
-          inherit inputs spicetify-nix;
+          extraSpecialArgs = { inherit inputs spicetify-nix; };
         };
       };
     };
-  };
 }

@@ -4,7 +4,7 @@
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx GOPATH $HOME/go
-set -gx BROWSER zen-browser
+set -gx BROWSER zen
 
 # XDG Base Directory
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -30,6 +30,7 @@ zoxide init fish | source
 # Aliases - Nix/System Management
 # ==========================================
 alias e='~/.config/emacs/bin/doom emacs -nw'
+alias run='~/Work/OS/Assignment_1/run'
 alias doom='exec /home/tikhaboom/.config/emacs/bin/doom'
 alias pick='exec /home/tikhaboom/nix-config/scripts/yazi.sh'
 alias es='sudo -E nvim /etc/nixos/configuration.nix'
@@ -97,6 +98,7 @@ alias h='history'
 alias w='cd ~/Work'
 alias d='cd ~/Downloads'
 alias doc='cd ~/Documents'
+alias notes='cd ~/Documents/My\ Vault/'
 alias nconf='cd ~/nix-config'
 
 # LS aliases (using eza)
@@ -140,7 +142,6 @@ alias ports='ss -tulanp'
 # Aliases - Development
 # ==========================================
 alias v='nvim'
-alias vim='nvim'
 alias nano='sudo -E nvim'
 alias zj='zellij'
 alias yz='yazi'
