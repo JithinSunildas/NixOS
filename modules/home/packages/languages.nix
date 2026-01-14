@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # Nix
     nixd
@@ -15,7 +16,13 @@
     go
 
     # Rust
-    rustup
+    cargo
+    rustc
+    rust-analyzer
+    rustfmt
+    clippy
+    lld
+    pkg-config
 
     # C/C++
     (pkgs.lib.hiPrio pkgs.clang)
