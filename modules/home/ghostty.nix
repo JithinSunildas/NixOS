@@ -1,4 +1,5 @@
 {
+  stylix.targets.ghostty.enable = false;
   programs.ghostty = {
     enable = true;
     settings = {

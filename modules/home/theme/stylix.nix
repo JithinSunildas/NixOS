@@ -1,5 +1,6 @@
 # modules/home/stylix.nix
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
