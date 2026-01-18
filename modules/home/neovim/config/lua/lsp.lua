@@ -2,6 +2,8 @@
 -- Neovim 0.11+ native LSP configuration (NO nvim-lspconfig)
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- =========================
 -- ON_ATTACH
@@ -23,6 +25,12 @@ local on_attach = function(client, bufnr)
 end
 
 -- =========================
+-- COMPLETEOPT (IMPORTANT FOR CMP + TAB)
+-- =========================
+
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+
+-- =========================
 -- ENABLE SERVERS
 -- =========================
 
@@ -37,7 +45,7 @@ vim.lsp.enable({
   "gopls",
   "zls",
   "ocamllsp",
-  "ts_ls",
+  "tsserver",
   "tailwindcss",
   "cssls",
   "emmet_ls",
@@ -58,6 +66,8 @@ vim.lsp.config.haskell_language_server = {
     "hie.yaml",
     ".git",
   },
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 vim.lsp.config.rust_analyzer = {
@@ -160,6 +170,7 @@ vim.lsp.config.ocamllsp = {
 -- =========================
 -- WEB DEVELOPMENT
 -- =========================
+
 require("luasnip.loaders.from_vscode").lazy_load()
 
 vim.lsp.config.emmet_ls = {
@@ -186,7 +197,7 @@ vim.lsp.config.gopls = {
   on_attach = on_attach,
 }
 
-vim.lsp.config.ts_ls = {
+vim.lsp.config.tsserver = {
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   root_markers = { "package.json", "tsconfig.json", ".git" },

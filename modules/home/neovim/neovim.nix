@@ -23,7 +23,7 @@
     isort
     prettier
     stylua
-    nixfmt-classic
+    nixfmt
     google-java-format
     ormolu
     # Linters
@@ -107,7 +107,7 @@
       isort
       prettier
       stylua
-      nixfmt-classic
+      nixfmt
       # Linters
       ruff
       # Tools for telescope

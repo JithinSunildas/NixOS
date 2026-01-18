@@ -2,7 +2,6 @@
   home.packages = with pkgs; [
     # Editors
     helix
-    zed-editor
     vscode
 
     # Build tools
