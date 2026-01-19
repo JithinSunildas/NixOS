@@ -61,30 +61,30 @@ telescope.setup({
   },
 })
 
--- require('kanso').setup({
---     bold = true,
---     italics = true,
---     compile = false,
---     undercurl = true,
---     commentStyle = { italic = true },
---     functionStyle = {},
---     keywordStyle = { italic = true },
---     statementStyle = {},
---     typeStyle = {},
---     transparent = false,
---     dimInactive = false,
---     terminalColors = true,
---     colors = {
---         palette = {},
---         theme = { zen = {}, pearl = {}, ink = {}, all = {} },
---     },
---     background = {
---         dark = "ink",
---         light = "ink"
---     },
---     foreground = "default",
--- })
---
+require('kanso').setup({
+  bold = true,
+  italics = true,
+  compile = false,
+  undercurl = true,
+  commentStyle = { italic = true },
+  functionStyle = {},
+  keywordStyle = { italic = true },
+  statementStyle = {},
+  typeStyle = {},
+  transparent = false,
+  dimInactive = false,
+  terminalColors = true,
+  colors = {
+    palette = {},
+    theme = { zen = {}, pearl = {}, ink = {}, all = {} },
+  },
+  background = {
+    dark = "ink",
+    light = "ink"
+  },
+  foreground = "default",
+})
+
 -- Load extensions
 pcall(telescope.load_extension, "fzf")
 
