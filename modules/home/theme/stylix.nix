@@ -43,6 +43,8 @@
         platform = "qtct";
       };
 
+      ghostty.enable = false;
+
       fuzzel.enable = true;
       neovim = {
         enable = true;
