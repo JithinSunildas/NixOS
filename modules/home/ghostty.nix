@@ -1,5 +1,6 @@
 {
   stylix.targets.ghostty.enable = false;
+
   programs.ghostty = {
     enable = true;
     settings = {
@@ -7,31 +8,31 @@
       window-decoration = "none";
       font-size = 12;
 
-      # Core Colors
-      background = "#14171d";
-      foreground = "#c5c9c7";
-      cursor-color = "#c5c9c7";
-      selection-background = "#3E424A";
-      selection-foreground = "#c5c9c7";
+      # Core Colors (Kanso Warmth)
+      background = "#2b2b2b"; # The correct warm grey
+      foreground = "#cbcbcb"; # Soft white
+      cursor-color = "#d79921"; # Amber/Gold for visibility
+      selection-background = "#525252";
+      selection-foreground = "#cbcbcb";
 
-      # ANSI Palette
+      # ANSI Palette (Kanso/Gruvbox-ish Earth Tones)
       palette = [
-        "0=#14171d"
-        "1=#c4746e"
-        "2=#8a9a7b"
-        "3=#c4b28a"
-        "4=#8ba4b0"
-        "5=#a292a3"
-        "6=#8ea4a2"
-        "7=#a4a7a4"
-        "8=#5C6066"
-        "9=#e46876"
-        "10=#87a987"
-        "11=#e6c384"
-        "12=#7fb4ca"
-        "13=#938aa9"
-        "14=#7aa89f"
-        "15=#c5c9c7"
+        "0=#2b2b2b" # Black
+        "1=#c5735e" # Red (Clay)
+        "2=#88aa22" # Green (Moss)
+        "3=#d79921" # Yellow (Gold)
+        "4=#6890c0" # Blue (Faded)
+        "5=#a888c8" # Magenta (Muted)
+        "6=#609090" # Cyan (Teal)
+        "7=#cbcbcb" # White
+        "8=#525252" # Bright Black
+        "9=#c5735e" # Bright Red
+        "10=#88aa22" # Bright Green
+        "11=#d79921" # Bright Yellow
+        "12=#6890c0" # Bright Blue
+        "13=#a888c8" # Bright Magenta
+        "14=#609090" # Bright Cyan
+        "15=#e1e1e1" # Bright White
       ];
     };
   };
