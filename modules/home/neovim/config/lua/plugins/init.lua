@@ -60,8 +60,4 @@ return {
   "abecodes/tabout.nvim",
   "nvim-treesitter/nvim-treesitter",
   "nvim-treesitter/nvim-treesitter-textobjects",
-  {
-    "mg979/vim-visual-multi",
-    lazy = false
-  }
 }

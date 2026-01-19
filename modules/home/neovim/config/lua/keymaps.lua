@@ -58,9 +58,6 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increast width" }
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
-map("n", "<leader>]", "<cmd>tabnext<cr>", { desc = "Next tab" })
-map("n", "<leader>[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
-
 -- === Editing ===
 -- Move lines up/down
 map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move line down" })
@@ -78,9 +75,11 @@ map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
 
 -- Keep search matches centered
 map("n", "n", "nzzzv", { desc = "Next match (centered)" })
+map("n", "<C-n>", "viw", { desc = "Match word" })
 map("n", "m", "vi", { desc = "Match inside" })
 map("n", "N", "Nzzzv", { desc = "Previous match (centered)" })
 map("n", "M", "va", { desc = "Match around" })
+map("n", "R", "*Ncgn", { desc = "Change word under cursor" })
 
 -- Better paste (don't yank replaced text)
 map("v", "p", '"_dP', { desc = "Paste without yanking" })
@@ -120,6 +119,8 @@ map("i", "<C-y>", "<C-o><C-r>", { desc = "Redo" })
 -- === Diagnostics ===
 map("n", "<leader>xx", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
 map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Location list" })
+map("n", "<leader>]", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
+map("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next diagnostic" })
 map('n', '<leader>d', function()
   vim.diagnostic.open_float(nil, { focus = false })
 end, { desc = "Show inline diagnostics" })
