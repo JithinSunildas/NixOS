@@ -46,6 +46,13 @@
       ghostty.enable = false;
       fish.enable = false;
 
+      neovim = {
+        enable = true;
+        transparentBackground.main = false;
+        transparentBackground.signColumn = false;
+      };
+      helix.enable = true;
+
       fuzzel.enable = true;
     };
   };
