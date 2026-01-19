@@ -48,5 +48,5 @@ require("lazy").setup("plugins.init", {
 require("lsp")
 require("plugins.setup")
 require("plugins.extra")
-vim.cmd("colorscheme kanso")
+-- vim.cmd("colorscheme kanso")
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
