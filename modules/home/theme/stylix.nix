@@ -46,12 +46,6 @@
       ghostty.enable = false;
 
       fuzzel.enable = true;
-      neovim = {
-        enable = true;
-        transparentBackground.main = false;
-        transparentBackground.signColumn = false;
-      };
-      helix.enable = true;
     };
   };
 
