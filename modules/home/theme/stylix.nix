@@ -44,6 +44,7 @@
       };
 
       ghostty.enable = false;
+      fish.enable = false;
 
       fuzzel.enable = true;
     };
