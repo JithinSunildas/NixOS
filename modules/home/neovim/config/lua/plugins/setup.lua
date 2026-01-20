@@ -81,17 +81,16 @@ pcall(telescope.load_extension, "fzf", "projects")
 
 -- Telescope keymaps
 local map = vim.keymap.set
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-map("n", "<leader>fF", function()
+map("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+map("n", "<leader>F", function()
   require("telescope.builtin").find_files({
     hidden = true,
   })
 end, { desc = "Find Files (hidden)" })
-map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
-map("n", "<leader>fp", "<cmd>Telescope projects<cr>", { desc = "Recent Projects" })
-map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
+map("n", "<leader>g", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
+map("n", "<leader>hf", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
+map("n", "<leader>p", "<cmd>Telescope projects<cr>", { desc = "Recent Projects" })
+map("n", "<leader>r", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
 
 require("project_nvim").setup({
   patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "pubspec.yaml", "package.json", "flake.nix" },
@@ -155,28 +154,6 @@ require("lualine").setup({
     globalstatus = true,
   },
 })
-
--- === Bufferline ===
-require("bufferline").setup({
-  options = {
-    mode = "buffers",
-    diagnostics = "nvim_lsp",
-    separator_style = "thin",
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "File Explorer",
-        highlight = "Directory",
-        separator = true,
-      },
-    },
-  },
-})
-
--- Bufferline keymaps
-map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
-map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous Buffer" })
-map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 
 -- === Gitsigns ===
 require("gitsigns").setup({
