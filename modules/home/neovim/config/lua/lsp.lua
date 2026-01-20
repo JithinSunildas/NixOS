@@ -19,7 +19,7 @@ local on_attach = function(client, bufnr)
   map("n", "gi", vim.lsp.buf.implementation, "Goto Implementation")
   map("n", "gr", vim.lsp.buf.references, "References")
   map("n", "K", vim.lsp.buf.hover, "Hover Docs")
-  map("n", "<leader>tr", vim.lsp.buf.rename, "Rename")
+  map("n", "<leader>nr", vim.lsp.buf.rename, "Rename")
   map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
   map("n", "<leader>d", vim.diagnostic.open_float, "Line Diagnostic")
 end
