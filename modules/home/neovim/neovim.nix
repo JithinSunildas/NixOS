@@ -1,5 +1,6 @@
 # modules/home/neovim/nvim.nix
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     clang-tools
     nil
@@ -86,7 +87,6 @@
       indent-blankline-nvim
       nvim-colorizer-lua
       flash-nvim
-      vim-visual-multi
       fidget-nvim
       mini-nvim
       tabout-nvim
@@ -120,7 +120,9 @@
     '';
   };
 
-  xdg.configFile."nvim/init.lua" = { source = ./config/init.lua; };
+  xdg.configFile."nvim/init.lua" = {
+    source = ./config/init.lua;
+  };
 
   xdg.configFile."nvim/lua" = {
     source = ./config/lua;
