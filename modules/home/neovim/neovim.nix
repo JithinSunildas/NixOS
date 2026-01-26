@@ -115,7 +115,7 @@
       fd
       git
     ];
-    extraLuaConfig = ''
+    initLua = ''
       -- This runs BEFORE init.lua
     '';
   };
