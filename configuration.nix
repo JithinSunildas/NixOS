@@ -56,21 +56,8 @@
     efi.canTouchEfiVariables = false;
   };
 
-  # --- Custom Compiled Kernel ---
-  boot.kernelPackages = pkgs.linuxPackages_latest.extend (
-    self: super: {
-      kernel = super.kernel.override {
-        ignoreConfigErrors = true;
-        structuredExtraConfig = with lib.kernel; {
-          # Use lib.mkForce to override the default 'n' value
-          PREEMPT = lib.mkForce yes;
-
-          MCORE_NATIVE = yes;
-        };
-      };
-    }
-  );
-  boot.kernelModules = [ "uinput" ];
+  # --- Kernel ---
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # --- Networking & Localization ---
   networking = {
