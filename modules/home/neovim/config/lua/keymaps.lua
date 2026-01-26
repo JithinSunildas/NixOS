@@ -89,8 +89,11 @@ map("v", "p", '"_dP', { desc = "Paste without yanking" })
 map("n", "<leader>q", "<cmd>b# | bd#<cr>", { desc = "Delete buffer" })
 map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
-map("n", "<leader>bb", "<cmd>b#<cr>", { desc = "Switch to last buffer" })
+map("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Switch to last buffer" })
 map("n", "<leader><Tab>", "<cmd>Telescope buffers<cr>", { desc = "List open buffers" })
+map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<S-Tab>", "<cmd>bprev<cr>", { desc = "Previous Buffer" })
+map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 
 -- === Terminal ===
 -- Open terminal in split
@@ -156,10 +159,6 @@ map("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<cr>", { desc = "Reset buffer"
 map("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk" })
 map("n", "<leader>hb", "<cmd>Gitsigns blame_line<cr>", { desc = "Blame line" })
 map("n", "<leader>hd", "<cmd>Gitsigns diffthis<cr>", { desc = "Diff this" })
-
--- === Quick Actions ===
--- Source current file
-map("n", "<leader><leader>", "<cmd>source %<cr>", { desc = "Source current file" })
 
 -- Toggle options
 map("n", "<leader>un", "<cmd>set nu!<cr>", { desc = "Toggle line numbers" })

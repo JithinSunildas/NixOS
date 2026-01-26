@@ -32,7 +32,6 @@ return {
 
   -- UI
   "nvim-lualine/lualine.nvim",
-  "akinsho/bufferline.nvim",
   "goolord/alpha-nvim",
   "lukas-reineke/indent-blankline.nvim",
   "NvChad/nvim-colorizer.lua",
