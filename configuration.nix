@@ -1,13 +1,16 @@
 { pkgs, lib, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ./packages/packages.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./packages/packages.nix
+  ];
 
   # --- NixOS Core Settings ---
   nixpkgs.config.allowUnfree = true;
 
   # Hibernation swap space...
-  swapDevices = [{ device = "/dev/nvme0n1p3"; }];
+  swapDevices = [ { device = "/dev/nvme0n1p3"; } ];
   boot.resumeDevice = "/dev/nvme0n1p3";
 
   # Optimization: Silent boot + existing hibernation fixes
@@ -23,7 +26,10 @@
   services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
   services.logind.settings.Login.HandleLidSwitch = "suspend";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Optimization: Use all cores for your custom kernel build
   nix.settings.cores = 0;
@@ -51,17 +57,19 @@
   };
 
   # --- Custom Compiled Kernel ---
-  boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
-    kernel = super.kernel.override {
-      ignoreConfigErrors = true;
-      structuredExtraConfig = with lib.kernel; {
-        # Use lib.mkForce to override the default 'n' value
-        PREEMPT = lib.mkForce yes;
+  boot.kernelPackages = pkgs.linuxPackages_latest.extend (
+    self: super: {
+      kernel = super.kernel.override {
+        ignoreConfigErrors = true;
+        structuredExtraConfig = with lib.kernel; {
+          # Use lib.mkForce to override the default 'n' value
+          PREEMPT = lib.mkForce yes;
 
-        MCORE_NATIVE = yes;
+          MCORE_NATIVE = yes;
+        };
       };
-    };
-  });
+    }
+  );
   boot.kernelModules = [ "uinput" ];
 
   # --- Networking & Localization ---
@@ -70,8 +78,10 @@
     networkmanager.enable = true;
     hosts = {
       "192.168.18.33" = [ "raspi.casa.local" ];
-      "10.129.16.223" =
-        [ "blog.inlanefreight.local" "blog-dev.inlanefreight.local" ];
+      "10.129.16.223" = [
+        "blog.inlanefreight.local"
+        "blog-dev.inlanefreight.local"
+      ];
     };
   };
 
