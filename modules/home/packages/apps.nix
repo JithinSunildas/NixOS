@@ -13,7 +13,6 @@
     obsidian
     zathura
     gnome-calculator
-    kdePackages.okular
 
     # Communication
     telegram-desktop
