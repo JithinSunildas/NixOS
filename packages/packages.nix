@@ -10,6 +10,7 @@
     neovim
     wget
     wl-clipboard-rs
+    wl-clipboard
     git
     helix
     openssh
