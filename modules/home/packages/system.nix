@@ -14,6 +14,7 @@
     imagemagick
     ffmpegthumbnailer
     tesseract5
+    grim
     unar
     jq
     poppler-utils
