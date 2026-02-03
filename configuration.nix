@@ -128,6 +128,15 @@
       enable = true;
       ly.enable = true;
     };
+    batsignal = {
+      enable = true;
+      extraArgs = [
+        "-w 20" # Warning at 20%
+        "-c 10" # Critical at 10%
+        "-d 5" # Danger/Halt at 5%
+        "-u critical" # Use critical urgency for notifications
+      ];
+    };
     openssh.enable = true;
     emacs.enable = true;
     gvfs.enable = true;
@@ -167,12 +176,12 @@
       enable = true;
       plugins = [ pkgs.obs-studio-plugins.wlrobs ];
     };
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
-    gamemode.enable = true;
+    # steam = {
+    #   enable = true;
+    #   remotePlay.openFirewall = true;
+    #   dedicatedServer.openFirewall = true;
+    # };
+    # gamemode.enable = true;
   };
 
   xdg.portal.wlr.enable = true;
