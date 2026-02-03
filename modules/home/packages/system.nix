@@ -16,6 +16,8 @@
     tesseract5
     grim
     unar
+    kanshi
+    wl-mirror
     jq
     poppler-utils
 
