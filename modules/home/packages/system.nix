@@ -10,6 +10,7 @@
     xhost
     ninja
     pkg-config
+    notify
     imagemagick
     ffmpegthumbnailer
     unar
