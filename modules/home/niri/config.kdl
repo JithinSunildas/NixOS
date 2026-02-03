@@ -150,6 +150,7 @@ spawn-at-startup "swaync"
 binds {
   Mod+Shift+Slash { show-hotkey-overlay; }
   Mod+Shift+R { spawn "niri" "msg" "action" "reload-config"; }
+  Mod+Space { spawn "~/nix-config/scripts/niri-switcher.sh"; }
 
   // App bindings
   Mod+Return hotkey-overlay-title="Open Terminal " { spawn "ghostty"; }
