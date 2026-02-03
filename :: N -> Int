@@ -1,3 +1,0 @@
-data N = Z | Suc N
-
-f :: N -> Int
