@@ -13,6 +13,7 @@
     notify
     imagemagick
     ffmpegthumbnailer
+    tesseract5
     unar
     jq
     poppler-utils
