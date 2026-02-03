@@ -9,7 +9,6 @@
     xxd
     xhost
     ninja
-    niriswitcher
     pkg-config
     imagemagick
     ffmpegthumbnailer
