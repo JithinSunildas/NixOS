@@ -23,9 +23,6 @@
     "nvme.noacpi=1"
   ];
 
-  services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
-  services.logind.settings.Login.HandleLidSwitch = "suspend";
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -75,11 +72,16 @@
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
+  # Battery Notifications
+  # systemd.user.services.batsignal = {
+  #   enable = true;
+  #   extraArgs = [
+  #     "-w 20" # Warning at 20%
+  #     "-c 10" # Critical at 10%
+  #     "-d 5" # Danger/Halt at 5%
+  #     "-u critical" # Use critical urgency for notifications
+  #   ];
+  # };
 
   # --- User Configuration ---
   users.users.tikhaboom = {
@@ -119,6 +121,16 @@
 
   # --- Services ---
   services = {
+    udev.extraRules = ''
+      KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+    '';
+    logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
+    logind.settings.Login.HandleLidSwitch = "suspend";
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+    };
     xserver.xkb = {
       layout = "us";
       variant = "";
@@ -167,12 +179,12 @@
       enable = true;
       plugins = [ pkgs.obs-studio-plugins.wlrobs ];
     };
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
-    gamemode.enable = true;
+    # steam = {
+    #   enable = true;
+    #   remotePlay.openFirewall = true;
+    #   dedicatedServer.openFirewall = true;
+    # };
+    # gamemode.enable = true;
   };
 
   xdg.portal.wlr.enable = true;
@@ -181,8 +193,4 @@
     fontconfig.enable = true;
     packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
   };
-
-  services.udev.extraRules = ''
-    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-  '';
 }

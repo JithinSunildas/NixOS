@@ -5,9 +5,11 @@
 
 {
   nixpkgs.config.allowUnfree = true;
-  home.username = "tikhaboom";
-  home.homeDirectory = "/home/tikhaboom";
-  home.stateVersion = "25.05";
+  home = {
+    username = "tikhaboom";
+    homeDirectory = "/home/tikhaboom";
+    stateVersion = "25.05";
+  };
 
   programs.home-manager.enable = true;
 

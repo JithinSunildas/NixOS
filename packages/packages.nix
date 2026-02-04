@@ -8,13 +8,14 @@
     ffmpeg
     limine
     neovim
+    # batsignal
     wget
     wl-clipboard-rs
+    wl-clipboard
     git
     helix
     openssh
     mariadb
-    emacs
     curl
     wlogout
     eza
@@ -36,9 +37,5 @@
     nixfmt-rfc-style
     xwayland
     xwayland-satellite
-
-    # --- NVIDIA drivers and related packages (Combined) ---
-    nvidia-vaapi-driver
-    nvidia-modprobe
   ];
 }

@@ -16,7 +16,6 @@ input {
 
   mouse {
     // off
-    natural-scroll
     accel-speed 0.8
     // accel-profile "flat"
     // scroll-method "no-scroll"
@@ -66,7 +65,7 @@ layout {
 
   focus-ring {
     width 1
-    active-color "#7fc8ff"
+    active-color "#8a9a7b"
     inactive-color "#505050"
   }
 
@@ -158,8 +157,9 @@ binds {
   Mod+B hotkey-overlay-title="Open Browser " { spawn "zen"; }
   Mod+O hotkey-overlay-title="Open Obsidian " { spawn "obsidian"; }
   Mod+Shift+C hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
-  Alt+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
-  Alt+Shift+Space hotkey-overlay-title="Toggle waybar" allow-inhibiting=false { spawn-sh "pkill waybar || waybar"; }
+  Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
+  Mod+Shift+Space hotkey-overlay-title="Toggle waybar" allow-inhibiting=false { spawn-sh "pkill waybar || waybar"; }
+  Mod+S { spawn "sh" "-c" "grim -g \"$(slurp)\" - | tesseract - - | wl-copy && notify-send 'OCR' 'Text copied to clipboard'"; }
   // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
   XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
   XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
@@ -248,7 +248,7 @@ binds {
   // Mod+Shift+E { quit; }
   // Ctrl+Alt+Delete { quit; }
   Mod+Shift+P { power-off-monitors; }
-  Mod+Delete { spawn-sh "pkill wlogout || wlogout"; }
+  Alt+Space { spawn-sh "pkill wlogout || wlogout"; }
 }
 layer-rule {
   place-within-backdrop true

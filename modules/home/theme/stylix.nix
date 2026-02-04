@@ -3,7 +3,7 @@
 {
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
     image = ./wallpapers/secluded-grove-pixel.png;
     polarity = "dark";
 
@@ -43,8 +43,8 @@
         platform = "qtct";
       };
 
-      ghostty.enable = false;
-      fish.enable = false;
+      ghostty.enable = true;
+      fish.enable = true;
 
       neovim = {
         enable = true;

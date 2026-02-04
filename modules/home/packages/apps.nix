@@ -6,25 +6,36 @@
     qutebrowser
     firefox
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    
+
     # Office & Productivity
     libreoffice
     cheese
     obsidian
+    zathura
     gnome-calculator
-    kdePackages.okular
-    
+
     # Communication
     telegram-desktop
     discord
-    
+
     # Media
     mpv
     obs-studio
     gifski
-    imv 
-    
+    imv
+
     # Downloads
     qbittorrent
   ];
+
+  # === Tweaks & Configs ===
+
+  programs = {
+    zathura = {
+      enable = true;
+      options = {
+        selection-clipboard = "clipboard";
+      };
+    };
+  };
 }

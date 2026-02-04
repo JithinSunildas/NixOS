@@ -2,10 +2,6 @@
 
 {
   home = {
-    username = "tikhaboom";
-    homeDirectory = "/home/tikhaboom";
-    stateVersion = "25.05";
-    
     packages = [
     ];
   };
@@ -30,6 +26,7 @@
     ./fish/fish.nix
     ./neovim/neovim.nix
     ./zellij/zellij.nix
+    ./xcompose/xcompose.nix
     ./ghostty.nix
     ./spicetify.nix
     ./bash.nix

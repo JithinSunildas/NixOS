@@ -129,7 +129,6 @@ alias fgrep='fgrep --color=auto'
 # Process management
 alias psf='ps aux | grep -v grep | grep -i'
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
-alias killall='killall -v'
 alias cmyram='sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
 
 # System info

@@ -1,0 +1,61 @@
+# Include system defaults
+include "%L"
+
+# --- Moody / Nature / Dragon ---
+<Multi_key> <d> <r> <a> <g> : "🐉"   # Dragon
+<Multi_key> <m> <o> <o> <n> : "🌙"   # Moon
+<Multi_key> <f> <o> <g>     : "🌫️"   # Fog
+<Multi_key> <w> <a> <v>     : "🌊"   # Kanagawa Wave
+<Multi_key> <t> <r> <e>     : "🌲"   # Tree
+<Multi_key> <k> <a> <n>     : "⛩️"   # Shinto Shrine (Kanagawa vibe)
+<Multi_key> <f> <i> <r>     : "🔥"   # Fire
+
+# --- Personal Details (Prefix with ;) ---
+<Multi_key> <semicolon> <n>     : "Jithin Sunildas"
+<Multi_key> <semicolon> <e>     : "jithinsunildas6@gmail.com"
+<Multi_key> <semicolon> <p>     : "8590575311"
+<Multi_key> <semicolon> <g>     : "https://github.com/JithinSunildas"
+
+# --- Slang & Social ---
+<Multi_key> <l> <o> <l>         : "😂"
+<Multi_key> <s> <k> <u>         : "💀"
+<Multi_key> <p> <o> <g>         : "🚀"
+<Multi_key> <w> <t> <f>         : "🤨"
+<Multi_key> <b> <y> <e>         : "👋"
+<Multi_key> <h> <e> <y>         : "🖐️"
+<Multi_key> <r> <e> <l>         : "😌"
+<Multi_key> <n> <o>             : "🙂‍↔️"
+<Multi_key> <w> <n> <k>         : "😉"
+<Multi_key> <b> <r> <n>         : "🧠"
+<Multi_key> <e> <y> <e>         : "👀"
+<Multi_key> <k> <s> <m>         : "🤌"
+<Multi_key> <k> <i> <s>         : "😙"
+<Multi_key> <s> <m> <r>         : "😏"
+<Multi_key> <c> <o> <l>         : "😎"
+<Multi_key> <l> <m> <o>         : "🤣"
+<Multi_key> <f> <m> <n>         : "🌝"
+<Multi_key> <m> <l> <t>         : "🫠"
+<Multi_key> <c> <r> <y>         : "😭"
+<Multi_key> <t> <e> <a>         : "🥲"
+<Multi_key> <t> <u>             : "👍"
+<Multi_key> <t> <d>             : "👎"
+<Multi_key> <s> <h> <g>         : "🤷"
+<Multi_key> <b> <l> <k>         : "🧑‍🦯"
+<Multi_key> <p> <l> <s>         : "🙏"
+
+# --- Graphs & Visuals ---
+<Multi_key> <g> <u>             : "📈"
+<Multi_key> <g> <d>             : "📉"
+<Multi_key> <v> <b>             : "📊"
+<Multi_key> <t> <p>             : "🔝"
+
+# --- Tech & Dev ---
+<Multi_key> <l> <l>             : "λ" 
+<Multi_key> <n> <i> <x>         : "❄️"
+<Multi_key> <g> <i> <t>         : "󰊢" 
+<Multi_key> <r> <y> <t>         : "✔" 
+<Multi_key> <r> <t>             : "→" 
+<Multi_key> <l> <t>             : "←" 
+<Multi_key> <u > <p>            : "↑"
+<Multi_key> <d> <n>             : "↓"
+<Multi_key> <e> <q>             : "≡" 

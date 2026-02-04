@@ -28,12 +28,9 @@ map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=tru
 
 -- === Clipboard ===
 -- System clipboard shortcuts
-map("v", "<C-c>", '<Esc>gcc', { desc = "Comment/uncomment" })
-map("n", "<C-c>", 'gcc', { desc = "Comment/uncomment" })
-map("i", "<C-v>", "<C-r>+", { desc = "Paste from clipboard" })
-map("n", "<C-a>", "ggVG", { desc = "Select all" })
-map("i", "<C-a>", "<Esc>ggVG", { desc = "Select all" })
-map("v", "<C-a>", "ggVG", { desc = "Select all" })
+map("n", "<A-a>", "ggVG", { desc = "Select all" })
+map("i", "<A-a>", "<Esc>ggVG", { desc = "Select all" })
+map("v", "<A-a>", "ggVG", { desc = "Select all" })
 
 -- === Window Management ===
 -- Navigate between windows

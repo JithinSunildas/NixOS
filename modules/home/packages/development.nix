@@ -1,14 +1,15 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # Editors
     helix
     vscode
+    emacs
 
     # Build tools
     cmake
 
     # Hardware design
-    kicad
     iverilog
 
     # Mobile
@@ -37,5 +38,7 @@
     dbeaver-bin
   ];
 
-  nixpkgs.config = { android_sdk.accept_license = true; };
+  nixpkgs.config = {
+    android_sdk.accept_license = true;
+  };
 }

@@ -10,15 +10,20 @@
     xhost
     ninja
     pkg-config
+    notify
     imagemagick
-    ffmpegthumbnailer 
-    unar             
-    jq               
-    poppler-utils    
-    
+    ffmpegthumbnailer
+    tesseract5
+    grim
+    unar
+    kanshi
+    wl-mirror
+    jq
+    poppler-utils
+
     # File management
     yazi
-    
+
     # System monitoring/management
     gparted
     gnome-disk-utility
