@@ -128,15 +128,15 @@
       enable = true;
       ly.enable = true;
     };
-    batsignal = {
-      enable = true;
-      extraArgs = [
-        "-w 20" # Warning at 20%
-        "-c 10" # Critical at 10%
-        "-d 5" # Danger/Halt at 5%
-        "-u critical" # Use critical urgency for notifications
-      ];
-    };
+    # batsignal = {
+    #   enable = true;
+    #   extraArgs = [
+    #     "-w 20" # Warning at 20%
+    #     "-c 10" # Critical at 10%
+    #     "-d 5" # Danger/Halt at 5%
+    #     "-u critical" # Use critical urgency for notifications
+    #   ];
+    # };
     openssh.enable = true;
     emacs.enable = true;
     gvfs.enable = true;
