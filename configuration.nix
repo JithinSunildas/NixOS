@@ -73,15 +73,15 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Battery Notifications
-  systemd.user.services.batsignal = {
-    enable = true;
-    extraArgs = [
-      "-w 20" # Warning at 20%
-      "-c 10" # Critical at 10%
-      "-d 5" # Danger/Halt at 5%
-      "-u critical" # Use critical urgency for notifications
-    ];
-  };
+  # systemd.user.services.batsignal = {
+  #   enable = true;
+  #   extraArgs = [
+  #     "-w 20" # Warning at 20%
+  #     "-c 10" # Critical at 10%
+  #     "-d 5" # Danger/Halt at 5%
+  #     "-u critical" # Use critical urgency for notifications
+  #   ];
+  # };
 
   # --- User Configuration ---
   users.users.tikhaboom = {

@@ -8,7 +8,7 @@
     ffmpeg
     limine
     neovim
-    batsignal
+    # batsignal
     wget
     wl-clipboard-rs
     wl-clipboard
