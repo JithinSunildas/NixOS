@@ -51,15 +51,6 @@ output "HDMI-A-1" {
   position x=1280 y=0
 }
 
-profile {
-    output eDP-1 enable
-    output HDMI-A-1 enable mode 1920x1080@60 position 1920,0
-}
-
-profile {
-    output eDP-1 enable
-}
-
 layout {
   gaps 15
   center-focused-column "on-overflow"
