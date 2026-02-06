@@ -26,6 +26,10 @@ vim.opt.rtp:prepend(lazypath)
 -- Load basic config FIRST (before lazy)
 require("options")
 require("keymaps")
+require("file_spec_config")
+require("floating_term")
+require("statusline")
+require("tabs")
 
 require("lazy").setup("plugins.suckless", {
   defaults = {

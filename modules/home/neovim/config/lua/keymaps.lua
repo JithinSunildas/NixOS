@@ -14,6 +14,9 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
+-- Quick file navigation
+vim.keymap.set("n", "<leader>e", ":Explore<CR>", { desc = "Open file explorer" })
+
 -- Save and --[[ quit ]]
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
@@ -146,6 +149,31 @@ map("n", "[c", function()
   end)
   return "<Ignore>"
 end, { expr = true, desc = "Previous git hunk" })
+
+-- Copy Full File-Path
+vim.keymap.set("n", "<leader>pa", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  print("file:", path)
+end)
+-- Copy Path Relative to Project Root
+vim.keymap.set("n", "<leader>pr", function()
+  local current_file = vim.fn.expand("%:p")
+  -- Look for the project root (indicated by .git)
+  local root_file = vim.fs.find({ ".git" }, { upward = true, path = current_file })[1]
+  if root_file then
+    local root_dir = vim.fn.fnamemodify(root_file, ":h")
+    -- Calculate the relative path from root
+    local rel_path = vim.fn.fnamemodify(current_file, ":." .. root_dir)
+    vim.fn.setreg("+", rel_path)
+    print("Project path:", rel_path)
+  else
+    -- Fallback to just the filename if no .git is found
+    local fallback = vim.fn.expand("%:.")
+    vim.fn.setreg("+", fallback)
+    print("No root found, using relative path:", fallback)
+  end
+end, { desc = "Copy relative path from project root" })
 
 -- Acggtions
 map("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<cr>", { desc = "Stage hunk" })
