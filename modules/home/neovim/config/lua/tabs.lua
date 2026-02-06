@@ -47,8 +47,8 @@ vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', { desc = 'Close tab' })
 
 -- Tab moving
 vim.keymap.set('n', '<leader>tm', ':tabmove<CR>', { desc = 'Move tab' })
-vim.keymap.set('n', 'Tab', ':tabmove +1<CR>', { desc = 'Move tab right' })
-vim.keymap.set('n', 'S-Tab', ':tabmove -1<CR>', { desc = 'Move tab left' })
+vim.keymap.set('n', '<Tab>', ':tabmove +1<CR>', { desc = 'Move tab right' })
+vim.keymap.set('n', '<S-Tab>', ':tabmove -1<CR>', { desc = 'Move tab left' })
 
 -- Function to open file in new tab
 local function open_file_in_tab()

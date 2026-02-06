@@ -5,75 +5,75 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
 
-    -- The Smart Return Key Fix:
-    ["<CR>"] = cmp.mapping({
-      i = function(fallback)
-        if cmp.visible() and cmp.get_active_entry() then
-          -- If the menu is open AND you've highlighted something, confirm it
-          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-        else
-          -- Otherwise, just a regular new line
-          fallback()
-        end
-      end,
-      s = cmp.mapping.confirm({ select = true }),
-      c = cmp.mapping.confirm({ select = false }),
+        -- The Smart Return Key Fix:
+        ["<CR>"] = cmp.mapping({
+            i = function(fallback)
+                if cmp.visible() and cmp.get_active_entry() then
+                    -- If the menu is open AND you've highlighted something, confirm it
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                else
+                    -- Otherwise, just a regular new line
+                    fallback()
+                end
+            end,
+            s = cmp.mapping.confirm({ select = true }),
+            c = cmp.mapping.confirm({ select = false }),
+        }),
+
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
     }),
-
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
-  }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
+    }),
 
 }) -- === Telescope ===
 local telescope = require("telescope")
 
 telescope.setup({
-  defaults = {
-    prompt_prefix = "🔍 ",
-    selection_caret = "➜ ",
-    path_display = { "truncate" },
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
+    defaults = {
+        prompt_prefix = "🔍 ",
+        selection_caret = "➜ ",
+        path_display = { "truncate" },
     },
-  },
+    extensions = {
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+        },
+    },
 })
 
 -- Load extensions
@@ -83,9 +83,9 @@ pcall(telescope.load_extension, "fzf")
 local map = vim.keymap.set
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
 map("n", "<leader>F", function()
-  require("telescope.builtin").find_files({
-    hidden = true,
-  })
+    require("telescope.builtin").find_files({
+        hidden = true,
+    })
 end, { desc = "Find Files (hidden)" })
 map("n", "<leader>g", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 map("n", "<leader>hf", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
@@ -93,53 +93,53 @@ map("n", "<leader>r", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
 
 -- === Flash.nvim - Enhanced navigation and search ===
 require("flash").setup({
-  labels = "asdfghjklqwertyuiopzxcvbnm",
-  search = {
-    multi_window = true,
-    forward = true,
-    wrap = true,
-  },
-  jump = {
-    jumplist = true,
-    pos = "start",
-    history = false,
-    register = false,
-    nohlsearch = false,
-  },
-  label = {
-    uppercase = false,
-    rainbow = {
-      enabled = false,
-      shade = 5,
+    labels = "asdfghjklqwertyuiopzxcvbnm",
+    search = {
+        multi_window = true,
+        forward = true,
+        wrap = true,
     },
-  },
-  modes = {
-    search = { enabled = false },
-    char = { enabled = true },
-  },
+    jump = {
+        jumplist = true,
+        pos = "start",
+        history = false,
+        register = false,
+        nohlsearch = false,
+    },
+    label = {
+        uppercase = false,
+        rainbow = {
+            enabled = false,
+            shade = 5,
+        },
+    },
+    modes = {
+        search = { enabled = false },
+        char = { enabled = true },
+    },
 })
 
 -- Flash keymaps
 local map = vim.keymap.set
 
 map({ "n", "x", "o", "v" }, "<CR>", function()
-  require("flash").jump()
+    require("flash").jump()
 end, { desc = "Flash" })
 
 map({ "n", "x", "o" }, "S", function()
-  require("flash").treesitter()
+    require("flash").treesitter()
 end, { desc = "Flash Treesitter" })
 
 map("o", "r", function()
-  require("flash").remote()
+    require("flash").remote()
 end, { desc = "Remote Flash" })
 
 map({ "o", "x" }, "R", function()
-  require("flash").treesitter_search()
+    require("flash").treesitter_search()
 end, { desc = "Treesitter Search" })
 
 map({ "c" }, "<c-s>", function()
-  require("flash").toggle()
+    require("flash").toggle()
 end, { desc = "Toggle Flash Search" })
 
 -- === Nvim-autopairs - Auto close brackets, quotes, etc. ===
@@ -149,23 +149,23 @@ local Rule = require("nvim-autopairs.rule")
 local cond = require("nvim-autopairs.conds")
 
 npairs.setup({
-  check_ts = true,      -- Use treesitter
-  ts_config = {
-    lua = { "string" }, -- Don't add pairs in lua string treesitter nodes
-    javascript = { "template_string" },
-    java = false,       -- Don't check treesitter on java
-  },
-  disable_filetype = { "TelescopePrompt", "vim" },
-  fast_wrap = {
-    map = "<M-e>",
-    chars = { "{", "[", "(", '"', "'" },
-    pattern = [=[[%'%"%)%>%]%)%}%,]]=],
-    end_key = "$",
-    keys = "qwertyuiopzxcvbnmasdfghjkl",
-    check_comma = true,
-    highlight = "Search",
-    highlight_grey = "Comment",
-  },
+    check_ts = true,        -- Use treesitter
+    ts_config = {
+        lua = { "string" }, -- Don't add pairs in lua string treesitter nodes
+        javascript = { "template_string" },
+        java = false,       -- Don't check treesitter on java
+    },
+    disable_filetype = { "TelescopePrompt", "vim" },
+    fast_wrap = {
+        map = "<M-e>",
+        chars = { "{", "[", "(", '"', "'" },
+        pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+        end_key = "$",
+        keys = "qwertyuiopzxcvbnmasdfghjkl",
+        check_comma = true,
+        highlight = "Search",
+        highlight_grey = "Comment",
+    },
 })
 
 -- Integration with nvim-cmp
@@ -175,45 +175,45 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 -- Add spaces between parentheses
 npairs.add_rules({
-  Rule(" ", " "):with_pair(function(opts)
-    local pair = opts.line:sub(opts.col - 1, opts.col)
-    return vim.tbl_contains({ "()", "[]", "{}" }, pair)
-  end),
-  Rule("( ", " )")
-      :with_pair(function()
-        return false
-      end)
-      :with_move(function(opts)
-        return opts.prev_char:match(".%)") ~= nil
-      end)
-      :use_key(")"),
-  Rule("{ ", " }")
-      :with_pair(function()
-        return false
-      end)
-      :with_move(function(opts)
-        return opts.prev_char:match(".%}") ~= nil
-      end)
-      :use_key("}"),
-  Rule("[ ", " ]")
-      :with_pair(function()
-        return false
-      end)
-      :with_move(function(opts)
-        return opts.prev_char:match(".%]") ~= nil
-      end)
-      :use_key("]"),
+    Rule(" ", " "):with_pair(function(opts)
+        local pair = opts.line:sub(opts.col - 1, opts.col)
+        return vim.tbl_contains({ "()", "[]", "{}" }, pair)
+    end),
+    Rule("( ", " )")
+        :with_pair(function()
+            return false
+        end)
+        :with_move(function(opts)
+            return opts.prev_char:match(".%)") ~= nil
+        end)
+        :use_key(")"),
+    Rule("{ ", " }")
+        :with_pair(function()
+            return false
+        end)
+        :with_move(function(opts)
+            return opts.prev_char:match(".%}") ~= nil
+        end)
+        :use_key("}"),
+    Rule("[ ", " ]")
+        :with_pair(function()
+            return false
+        end)
+        :with_move(function(opts)
+            return opts.prev_char:match(".%]") ~= nil
+        end)
+        :use_key("]"),
 })
 
 -- === Gitsigns ===
 require("gitsigns").setup({
-  signs = {
-    add = { text = "│" },
-    change = { text = "│" },
-    delete = { text = "_" },
-    topdelete = { text = "‾" },
-    changedelete = { text = "~" },
-  },
+    signs = {
+        add = { text = "│" },
+        change = { text = "│" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+    },
 })
 
 -- === Utilities ===
