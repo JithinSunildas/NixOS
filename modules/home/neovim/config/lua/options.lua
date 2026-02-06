@@ -46,7 +46,7 @@ vim.g.netrw_banner = 0       -- Hide the help banner (hit 'I' to toggle if neede
 vim.g.netrw_liststyle = 3    -- Use tree-style view
 vim.g.netrw_browse_split = 4 -- Open files in the previous window
 vim.g.netrw_altv = 1         -- Open vertical splits to the right
-vim.g.netrw_winsize = 25     -- Default width of the Lexplore sidebar
+vim.g.netrw_winsize = 20     -- Default width of the Lexplore sidebar
 vim.g.netrw_keepdir = 0      -- Sync current directory with browsing directory
 
 -- [[ Backups and Swaps ]]
