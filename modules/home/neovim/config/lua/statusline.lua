@@ -117,6 +117,17 @@ local function mode_icon()
     return modes[mode] or "  " .. mode:upper()
 end
 
+local function short_path()
+    local path = vim.fn.expand('%:~:.')
+    local parts = vim.split(path, '/')
+    if #parts <= 2 then
+        return path
+    else
+        return parts[#parts - 1] .. '/' .. parts[#parts]
+    end
+end
+
+_G.short_path = short_path
 _G.mode_icon = mode_icon
 _G.git_branch = git_branch
 _G.file_type = file_type
@@ -135,8 +146,7 @@ local function setup_dynamic_statusline()
                 "%#StatusLineBold#",
                 "%{v:lua.mode_icon()}",
                 "%#StatusLine#",
-                " │ %t %h%m%r",
-                "%{v:lua.git_branch()}",
+                " │ %{v:lua.short_path()} %h%m%r",
                 " │ ",
                 "%{v:lua.file_type()} ",
                 "%{v:lua.file_size()}",

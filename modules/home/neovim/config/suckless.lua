@@ -24,7 +24,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load basic config FIRST (before lazy)
-require("intro")
+-- require("intro")
 require("options")
 require("keymaps")
 require("file_spec_config")
