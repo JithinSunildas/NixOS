@@ -35,14 +35,11 @@ return {
 
   -- Utilities
   "windwp/nvim-autopairs",
-  "numToStr/Comment.nvim",
-  "folke/which-key.nvim",
 
   -- Extra plugins
   "folke/flash.nvim",
   "j-hui/fidget.nvim",
   "echasnovski/mini.surround",
-  "abecodes/tabout.nvim",
   "nvim-treesitter/nvim-treesitter",
   "nvim-treesitter/nvim-treesitter-textobjects",
 }
