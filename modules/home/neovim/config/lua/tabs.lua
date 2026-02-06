@@ -2,39 +2,43 @@
 -- TABS
 -- ============================================================================
 
-function _G.custom_tabline()
-    local s = ''
-    for i = 1, vim.fn.tabpagenr('$') do
-        -- Select highlighting
-        if i == vim.fn.tabpagenr() then
-            s = s .. '%#TabLineSel#'
-        else
-            s = s .. '%#TabLine#'
-        end
-        -- Set the tab page number (used by mouse clicks)
-        s = s .. '%' .. i .. 'T'
-        -- Get the filename (just the tail, not full path)
-        local buflist = vim.fn.tabpagebuflist(i)
-        local winnr = vim.fn.tabpagewinnr(i)
-        local bufnr = buflist[winnr]
-        local filename = vim.fn.bufname(bufnr)
-        -- Extract just the filename
-        if filename == '' then
-            filename = '[No Name]'
-        else
-            filename = vim.fn.fnamemodify(filename, ':t') -- :t gets tail (filename only)
-        end
-        local modified = vim.fn.getbufvar(bufnr, "&modified") == 1 and '+' or ''
-
-        s = s .. ' ' .. i .. ': ' .. filename .. modified .. ' '
-    end
-    s = s .. '%#TabLineFill#%T'
-    return s
-end
-
 -- Tab display settings
 vim.opt.showtabline = 1 -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
 vim.opt.tabline = ''    -- Use default tabline (empty string uses built-in)
+
+-- Pin a buffer to a tab
+local pinned_tabs = {}
+
+local function toggle_pin_buffer()
+    local tab = vim.api.nvim_get_current_tabpage()
+    local buf = vim.api.nvim_get_current_buf()
+
+    if pinned_tabs[tab] == buf then
+        pinned_tabs[tab] = nil
+        print("Tab unpinned")
+    else
+        pinned_tabs[tab] = buf
+        print("Tab pinned to buffer: " .. vim.fn.bufname(buf))
+    end
+end
+
+-- Prevention Logic
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+        local tab = vim.api.nvim_get_current_tabpage()
+        local buf = vim.api.nvim_get_current_buf()
+        local pinned_buf = pinned_tabs[tab]
+
+        if pinned_buf and buf ~= pinned_buf then
+            -- If we navigated away, go back and open the new buffer in a vertical split instead
+            vim.cmd("buffer " .. pinned_buf)
+            vim.cmd("vsplit " .. vim.fn.bufname(buf))
+            print("Tab is pinned! Opening in split instead.")
+        end
+    end
+})
+
+vim.keymap.set('n', '<leader>tp', toggle_pin_buffer, { desc = 'Toggle [T]ab [P]in' })
 
 -- Transparent tabline appearance
 vim.cmd([[
