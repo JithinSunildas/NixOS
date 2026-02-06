@@ -77,7 +77,7 @@ telescope.setup({
 })
 
 -- Load extensions
-pcall(telescope.load_extension, "fzf", "projects")
+pcall(telescope.load_extension, "fzf")
 
 -- Telescope keymaps
 local map = vim.keymap.set
@@ -89,12 +89,7 @@ map("n", "<leader>F", function()
 end, { desc = "Find Files (hidden)" })
 map("n", "<leader>g", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 map("n", "<leader>hf", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
-map("n", "<leader>p", "<cmd>Telescope projects<cr>", { desc = "Recent Projects" })
 map("n", "<leader>r", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
-
-require("project_nvim").setup({
-  patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "pubspec.yaml", "package.json", "flake.nix" },
-})
 
 -- === Flash.nvim - Enhanced navigation and search ===
 require("flash").setup({
