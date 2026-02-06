@@ -91,6 +91,7 @@ map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
 map("n", "<leader>r", require('telescope.builtin').registers, { desc = "[F]ind [R]isters (Yank list)" })
+map("v", "<leader>r", require('telescope.builtin').registers, { desc = "[F]ind [R]isters (Yank list)" })
 
 -- === Flash.nvim - Enhanced navigation and search ===
 require("flash").setup({

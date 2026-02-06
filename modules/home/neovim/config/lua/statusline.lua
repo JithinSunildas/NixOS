@@ -40,7 +40,6 @@ local ORDER = {
 
 local PAD = " "
 local SEP = "%="
-local SBAR = { "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
 
 -- 3. UTILITIES
 local function concat(parts)
@@ -60,18 +59,20 @@ end
 -- COLORED MODE INDICATOR
 local function mode_widget()
     local modes = {
-        ["n"]   = "NO", -- Normal
-        ["no"]  = "OP",
-        ["v"]   = "VI", -- Visual
-        ["V"]   = "VL", -- Visual Line
-        ["\22"] = "VB", -- Visual Block
-        ["s"]   = "SE",
-        ["S"]   = "SL",
-        ["i"]   = "IN", -- Insert
-        ["R"]   = "RE", -- Replace
-        ["c"]   = "CO", -- Command
-        ["t"]   = "TE", -- Terminal
-        ["!"]   = "SH", -- Shell
+        ["n"]   = "NORMAL",
+        ["no"]  = "O-PENDING",
+        ["v"]   = "VISUAL",
+        ["V"]   = "V-LINE",
+        ["\22"] = "V-BLOCK",
+        ["s"]   = "SELECT",
+        ["S"]   = "S-LINE",
+        ["\19"] = "S-BLOCK",
+        ["i"]   = "INSERT",
+        ["R"]   = "REPLACE",
+        ["c"]   = "COMMAND",
+        ["r"]   = "PROMPT",
+        ["t"]   = "TERMINAL",
+        ["!"]   = "SHELL",
     }
 
     local current_mode = api.nvim_get_mode().mode
@@ -151,13 +152,6 @@ local function cursor_widget()
     return string.format("%3d:%-2d %3s", line, col, "%P")
 end
 
-local function scrollbar_widget()
-    local cur = fn.line(".")
-    local total = fn.line("$")
-    local idx = math.floor((cur - 1) / total * #SBAR) + 1
-    return tools.hl_str("Substitute", SBAR[idx] and SBAR[idx]:rep(2) or "")
-end
-
 -- 5. RENDER FUNCTION
 function M.render()
     local buf = api.nvim_win_get_buf(vim.g.statusline_winid or 0)
@@ -169,17 +163,16 @@ function M.render()
     end
 
     local parts = {
-        pad       = PAD,
-        mode      = mode_widget(),
-        branch    = branch_widget(root),
-        path      = path_widget(fname),
-        mod       = get_opt("modified", { buf = buf }) and ICON.modified or
+        pad      = PAD,
+        mode     = mode_widget(),
+        branch   = branch_widget(root),
+        path     = path_widget(fname),
+        mod      = get_opt("modified", { buf = buf }) and ICON.modified or
             (get_opt("modifiable", { buf = buf }) and "" or ICON.nomodifiable),
-        sep       = SEP,
-        diag      = diagnostics_widget(),
-        fileinfo  = "",
-        cursor    = cursor_widget(),
-        scrollbar = scrollbar_widget(),
+        sep      = SEP,
+        diag     = diagnostics_widget(),
+        fileinfo = "",
+        cursor   = cursor_widget(),
     }
 
     return concat(parts)
@@ -191,7 +184,9 @@ vim.o.statusline = "%!v:lua.require('statusline').render()"
 vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = function()
-        vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true, inherit = "StatusLine" })
+        local hl = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false })
+        hl.bold = true
+        vim.api.nvim_set_hl(0, "StatusLineBold", hl)
     end,
 })
 
