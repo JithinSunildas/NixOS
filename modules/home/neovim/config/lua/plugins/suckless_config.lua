@@ -81,15 +81,16 @@ pcall(telescope.load_extension, "fzf")
 
 -- Telescope keymaps
 local map = vim.keymap.set
-map("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-map("n", "<leader>F", function()
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+map("n", "<leader>fF", function()
     require("telescope.builtin").find_files({
         hidden = true,
     })
 end, { desc = "Find Files (hidden)" })
-map("n", "<leader>g", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
-map("n", "<leader>hf", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
-map("n", "<leader>r", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
+map("n", "<leader>r", require('telescope.builtin').registers, { desc = "[F]ind [R]isters (Yank list)" })
 
 -- === Flash.nvim - Enhanced navigation and search ===
 require("flash").setup({
