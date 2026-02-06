@@ -20,37 +20,38 @@ local function diagnostic_status()
     local err = #vim.diagnostic.get(0, { severity = levels.errors })
     local warn = #vim.diagnostic.get(0, { severity = levels.warnings })
     local status = ""
-
-    -- %#DiagnosticError# tells Neovim to use that highlight group
     if err > 0 then
         status = status .. "%#DiagnosticError#● " .. err .. " "
     end
-
-    -- %#DiagnosticWarn# switches the color to orange
     if warn > 0 then
         status = status .. "%#DiagnosticWarn#● " .. warn .. " "
     end
-
-    -- We MUST reset back to %#StatusLine# at the end,
-    -- otherwise everything after the dots (like line numbers) will be orange!
     if status ~= "" then
         return status .. "%#StatusLine#│ "
     else
         return ""
     end
 end
+
 _G.diagnostic_status = diagnostic_status
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = function()
-        vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#ff5555", bg = "none", bold = true })
-        vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#ffb86c", bg = "none", bold = true })
-    end,
-})
-vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#ff5555", bg = "none", bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#ffb86c", bg = "none", bold = true })
+local function setup_diagnostic_highlights()
+    local statusline_bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID('StatusLine')), 'bg')
+    vim.api.nvim_set_hl(0, "DiagnosticError", {
+        fg = "#ff5555",
+        bg = statusline_bg ~= "" and statusline_bg or "NONE"
+    })
+    vim.api.nvim_set_hl(0, "DiagnosticWarn", {
+        fg = "#ffb86c",
+        bg = statusline_bg ~= "" and statusline_bg or "NONE"
+    })
+end
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = setup_diagnostic_highlights
+})
+
+setup_diagnostic_highlights()
 local function file_type()
     local ft = vim.bo.filetype
     local icons = {
