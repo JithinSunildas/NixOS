@@ -1,20 +1,22 @@
 local M = {}
 
+-- Safely get tools or empty table to prevent crashes
+local tools = _G.tools or { ui = { icons = {} }, hl_str = function(_, s) return s end }
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local get_opt = api.nvim_get_option_value
 
-local icons = tools.ui.icons
-
+-- 1. DEFINE ICONS & HIGHLIGHTS
+-- We define them manually here so we don't rely on complex external tables
+local icons = tools.ui.icons or {}
 local HL = {
-    branch = { "DiagnosticOk", icons.branch },
-    file = { "NonText", icons.node },
-    fileinfo = { "Function", icons.document },
-    nomodifiable = { "DiagnosticWarn", icons.bullet },
-    modified = { "DiagnosticError", icons.bullet },
-    readonly = { "DiagnosticWarn", icons.lock },
-    error = { "DiagnosticError", icons.error },
-    warn = { "DiagnosticWarn", icons.warning },
-    visual = { "DiagnosticInfo", "‹› " },
+    branch       = { "DiagnosticOk", icons.branch or "" },
+    file         = { "NonText", icons.node or "󰈔" },
+    fileinfo     = { "Function", icons.document or "≡" },
+    nomodifiable = { "DiagnosticWarn", icons.bullet or "•" },
+    modified     = { "DiagnosticError", icons.bullet or "•" },
+    readonly     = { "DiagnosticWarn", icons.lock or "" },
+    error        = { "DiagnosticError", icons.error or "E" },
+    warn         = { "DiagnosticWarn", icons.warning or "W" },
 }
 
 local ICON = {}
@@ -22,26 +24,24 @@ for k, v in pairs(HL) do
     ICON[k] = tools.hl_str(v[1], v[2])
 end
 
+-- 2. ORDER OF WIDGETS
 local ORDER = {
     "pad",
-    "path",
-    "venv",
-    "mod",
-    "ro",
-    "sep",
-    "diag",
-    "fileinfo",
+    "branch",   -- Changed: Branch first
+    "path",     -- Path (dir/file)
+    "mod",      -- Modified/ReadOnly status
+    "sep",      -- Spacer (%=)
+    "diag",     -- Diagnostics
+    "fileinfo", -- Filetype info
+    "cursor",   -- NEW: Line/Col/Percentage
     "pad",
-    "scrollbar",
     "pad",
 }
 
 local PAD = " "
 local SEP = "%="
-local SBAR =
-{ "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
 
--- utilities -----------------------------------------
+-- 3. UTILITIES
 local function concat(parts)
     local out, i = {}, 1
     for _, k in ipairs(ORDER) do
@@ -54,154 +54,104 @@ local function concat(parts)
     return table.concat(out, " ")
 end
 
-local function esc_str(str)
-    return str:gsub("([%(%)%%%+%-%*%?%[%]%^%$])", "%%%1")
-end
+-- 4. WIDGET FUNCTIONS
 
--- path and git info -----------------------------------------
-local function path_widget(root, fname)
-    local file_name = fn.fnamemodify(fname, ":t")
-    if fname == "" then file_name = "[No Name]" end
-
-    -- Suckless Icon Logic: Use the tools table icons or fallback to [FT]
-    local ft = bo.filetype
-    local devicon = ""
-
-    -- Check if we have a custom icon in our tools global
-    if tools.ui.icons and tools.ui.icons[ft] then
-        devicon = tools.hl_str("Special", tools.ui.icons[ft]) .. " "
-    else
-        -- Fallback: simple text bracket if no icon exists
-        if ft ~= "" then
-            devicon = tools.hl_str("NonText", "[" .. ft:upper() .. "] ")
-        end
-    end
-
-    local path = devicon .. file_name
-
-    if bo.buftype == "help" then return ICON.file .. " " .. path end
-
-    local dir_path = fn.fnamemodify(fname, ":h") .. "/"
-    if dir_path == "./" then dir_path = "" end
-
-    local remote = tools.get_git_remote_name(root)
+-- GIT BRANCH (No Repo Name)
+local function branch_widget(root)
+    if not root then return "" end
     local branch = tools.get_git_branch(root)
-    local repo_info = ""
 
-    -- Git Integration
-    if remote and branch then
-        -- Relative path from project root
-        dir_path = dir_path:gsub("^" .. esc_str(root) .. "/", "")
-        repo_info = string.format("%s %s @ %s ", ICON.branch, remote, branch)
+    if branch and branch ~= "" then
+        return string.format("%s %s ", ICON.branch, branch)
     end
-
-    -- Responsive UI: Hide paths if the window is too narrow
-    local win_w = api.nvim_win_get_width(0)
-    local need = #repo_info + #dir_path + #path
-    if win_w < need + 5 then dir_path = "" end
-    if win_w < need - #dir_path then repo_info = "" end
-
-    return repo_info .. ICON.file .. " " .. dir_path .. path .. " "
+    return ""
 end
 
--- diagnostics ---------------------------------------------
+-- PATH (parent_dir/filename [FT])
+local function path_widget(fname)
+    if fname == "" then return "[No Name]" end
+
+    -- Get only the tail (filename) and head (directory)
+    local tail = fn.fnamemodify(fname, ":t")
+    local parent = fn.fnamemodify(fname, ":h:t")
+
+    local path_str = tail
+    if parent ~= "." and parent ~= "/" then
+        path_str = parent .. "/" .. tail
+    end
+
+    -- Icon Logic (Filetype AFTER name)
+    local ft = bo.filetype
+    local ft_icon = ""
+    if tools.ui.icons and tools.ui.icons[ft] then
+        ft_icon = tools.hl_str("Special", tools.ui.icons[ft])
+    elseif ft ~= "" then
+        ft_icon = tools.hl_str("NonText", "[" .. ft:upper() .. "]")
+    end
+
+    return string.format("%s %s %s", ICON.file, path_str, ft_icon)
+end
+
+-- DIAGNOSTICS (Errors/Warnings)
 local function diagnostics_widget()
-    if not tools.diagnostics_available() then return "" end
-    local diag_count = vim.diagnostic.count()
-    local err, warn =
-        string.format("%-3d", diag_count[1] or 0),
-        string.format("%-3d", diag_count[2] or 0)
+    if not tools.diagnostics_available or not tools.diagnostics_available() then return "" end
 
-    return string.format(
-        "%s %s  %s %s  ",
-        ICON.error,
-        tools.hl_str("DiagnosticError", err),
-        ICON.warn,
-        tools.hl_str("DiagnosticWarn", warn)
-    )
-end
+    -- Check for native diagnostic count (Neovim 0.10+) or fallback
+    local count = vim.diagnostic.count and vim.diagnostic.count(0) or { 0, 0, 0, 0 }
+    -- count table: 1=Error, 2=Warn, 3=Info, 4=Hint
 
--- file/selection info -------------------------------------
-local function fileinfo_widget()
-    local ft = get_opt("filetype", {})
-    local lines = tools.group_number(api.nvim_buf_line_count(0), ",")
-    local str = ICON.fileinfo .. " "
+    local err = count[vim.diagnostic.severity.ERROR] or 0
+    local warn = count[vim.diagnostic.severity.WARN] or 0
 
-    if not tools.nonprog_modes[ft] then
-        return str .. string.format("%3s lines", lines)
+    local parts = ""
+    if err > 0 then
+        parts = parts .. string.format("%s %s ", ICON.error, tools.hl_str("DiagnosticError", err))
+    end
+    if warn > 0 then
+        parts = parts .. string.format("%s %s ", ICON.warn, tools.hl_str("DiagnosticWarn", warn))
     end
 
-    local wc = fn.wordcount()
-    if not wc.visual_words then
-        return str
-            .. string.format(
-                "%3s lines  %3s words",
-                lines,
-                tools.group_number(wc.words, ",")
-            )
-    end
-
-    local vlines = math.abs(fn.line(".") - fn.line("v")) + 1
-    return str
-        .. string.format(
-            "%3s lines %3s words  %3s chars",
-            tools.group_number(vlines, ","),
-            tools.group_number(wc.visual_words, ","),
-            tools.group_number(wc.visual_chars, ",")
-        )
+    return parts
 end
 
--- python venv ---------------------------------------------
-local function venv_widget()
-    if bo.filetype ~= "python" then return "" end
-    local env = vim.env.VIRTUAL_ENV
-
-    local str
-    if env and env ~= "" then
-        str = string.format("[.venv: %s]  ", fn.fnamemodify(env, ":t"))
-        return tools.hl_str("Comment", str)
-    end
-    env = vim.env.CONDA_DEFAULT_ENV
-    if env and env ~= "" then
-        str = string.format("[conda: %s]  ", env)
-        return tools.hl_str("Comment", str)
-    end
-    return tools.hl_str("Comment", "[no venv]")
+-- CURSOR POSITION (Ln:Col %%)
+local function cursor_widget()
+    local line = fn.line(".")
+    local col = fn.col(".")
+    -- %P is native vim statusline code for Percentage
+    return string.format("%3d:%-2d %3s", line, col, "%P")
 end
 
--- scrollbar ---------------------------------------------
-local function scrollbar_widget()
-    local cur = api.nvim_win_get_cursor(0)[1]
-    local total = api.nvim_buf_line_count(0)
-    local idx = math.floor((cur - 1) / total * #SBAR) + 1
-    return tools.hl_str("Substitute", SBAR[idx]:rep(2))
-end
-
--- render ---------------------------------------------
+-- 5. RENDER FUNCTION
 function M.render()
-    local fname = api.nvim_buf_get_name(0)
-    local root = (bo.buftype == "" and tools.get_path_root(fname)) or nil
-    if bo.buftype ~= "" and bo.buftype ~= "help" then fname = bo.ft end
+    -- Get buffer info
+    local buf = api.nvim_win_get_buf(vim.g.statusline_winid or 0)
+    local fname = api.nvim_buf_get_name(buf)
 
-    local buf = api.nvim_win_get_buf(vim.g.statusline_winid)
+    -- Get root for Git info
+    local root = tools.get_path_root and tools.get_path_root(fname) or nil
+
+    -- Handle special buffers (Help, Terminal, etc.)
+    if get_opt("buftype", { buf = buf }) == "help" then
+        return "  Help: " .. fn.fnamemodify(fname, ":t")
+    end
 
     local parts = {
-        pad = PAD,
-        path = path_widget(root, fname),
-        venv = venv_widget(),
-        mod = get_opt("modifiable", { buf = buf })
-            and (get_opt("modified", { buf = buf }) and ICON.modified or " ")
-            or ICON.nomodifiable,
-        ro = get_opt("readonly", { buf = buf }) and ICON.readonly or "",
-        sep = SEP,
-        diag = diagnostics_widget(),
-        fileinfo = fileinfo_widget(),
-        scrollbar = scrollbar_widget(),
+        pad      = PAD,
+        branch   = branch_widget(root),
+        path     = path_widget(fname),
+        mod      = get_opt("modified", { buf = buf }) and ICON.modified or
+            (get_opt("modifiable", { buf = buf }) and "" or ICON.nomodifiable),
+        sep      = SEP,
+        diag     = diagnostics_widget(),
+        fileinfo = "", -- Removed detailed word count per your request (kept simplified)
+        cursor   = cursor_widget(),
     }
 
     return concat(parts)
 end
 
+-- 6. SET STATUSLINE
 vim.o.statusline = "%!v:lua.require('statusline').render()"
 
 return M
