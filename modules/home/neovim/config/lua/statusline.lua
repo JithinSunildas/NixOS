@@ -1,12 +1,11 @@
 local M = {}
 
--- Safely get tools or empty table to prevent crashes
+-- Safely get tools
 local tools = _G.tools or { ui = { icons = {} }, hl_str = function(_, s) return s end }
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local get_opt = api.nvim_get_option_value
 
 -- 1. DEFINE ICONS & HIGHLIGHTS
--- We define them manually here so we don't rely on complex external tables
 local icons = tools.ui.icons or {}
 local HL = {
     branch       = { "DiagnosticOk", icons.branch or "" },
@@ -26,20 +25,22 @@ end
 
 -- 2. ORDER OF WIDGETS
 local ORDER = {
+    "mode", -- Mode first (Colored)
+    "branch",
+    "path",
+    "mod",
+    "sep",
+    "diag",
+    "fileinfo",
+    "cursor",
     "pad",
-    "branch",   -- Changed: Branch first
-    "path",     -- Path (dir/file)
-    "mod",      -- Modified/ReadOnly status
-    "sep",      -- Spacer (%=)
-    "diag",     -- Diagnostics
-    "fileinfo", -- Filetype info
-    "cursor",   -- NEW: Line/Col/Percentage
-    "pad",
+    "scrollbar",
     "pad",
 }
 
 local PAD = " "
 local SEP = "%="
+local SBAR = { "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
 
 -- 3. UTILITIES
 local function concat(parts)
@@ -56,31 +57,69 @@ end
 
 -- 4. WIDGET FUNCTIONS
 
--- GIT BRANCH (No Repo Name)
+-- COLORED MODE INDICATOR
+local function mode_widget()
+    local modes = {
+        ["n"]   = "NO", -- Normal
+        ["no"]  = "OP",
+        ["v"]   = "VI", -- Visual
+        ["V"]   = "VL", -- Visual Line
+        ["\22"] = "VB", -- Visual Block
+        ["s"]   = "SE",
+        ["S"]   = "SL",
+        ["i"]   = "IN", -- Insert
+        ["R"]   = "RE", -- Replace
+        ["c"]   = "CO", -- Command
+        ["t"]   = "TE", -- Terminal
+        ["!"]   = "SH", -- Shell
+    }
+
+    local current_mode = api.nvim_get_mode().mode
+    local label = modes[current_mode] or current_mode:upper()
+
+    -- COLOR LOGIC
+    local color = "StatusLineBold" -- Default (White/Bold)
+
+    -- Insert = Green
+    if current_mode == "i" then
+        color = "DiagnosticOk"
+    end
+
+    -- Visual = Orange
+    if current_mode == "v" or current_mode == "V" or current_mode == "\22" then
+        color = "DiagnosticWarn"
+    end
+
+    -- Replace = Red
+    if current_mode == "R" then
+        color = "DiagnosticError"
+    end
+
+    -- Command = Blue (Info)
+    if current_mode == "c" then
+        color = "DiagnosticInfo"
+    end
+
+    return tools.hl_str(color, " " .. label .. " ")
+end
+
 local function branch_widget(root)
     if not root then return "" end
     local branch = tools.get_git_branch(root)
-
     if branch and branch ~= "" then
         return string.format("%s %s ", ICON.branch, branch)
     end
     return ""
 end
 
--- PATH (parent_dir/filename [FT])
 local function path_widget(fname)
     if fname == "" then return "[No Name]" end
-
-    -- Get only the tail (filename) and head (directory)
     local tail = fn.fnamemodify(fname, ":t")
     local parent = fn.fnamemodify(fname, ":h:t")
-
     local path_str = tail
     if parent ~= "." and parent ~= "/" then
         path_str = parent .. "/" .. tail
     end
-
-    -- Icon Logic (Filetype AFTER name)
     local ft = bo.filetype
     local ft_icon = ""
     if tools.ui.icons and tools.ui.icons[ft] then
@@ -88,21 +127,14 @@ local function path_widget(fname)
     elseif ft ~= "" then
         ft_icon = tools.hl_str("NonText", "[" .. ft:upper() .. "]")
     end
-
     return string.format("%s %s %s", ICON.file, path_str, ft_icon)
 end
 
--- DIAGNOSTICS (Errors/Warnings)
 local function diagnostics_widget()
     if not tools.diagnostics_available or not tools.diagnostics_available() then return "" end
-
-    -- Check for native diagnostic count (Neovim 0.10+) or fallback
     local count = vim.diagnostic.count and vim.diagnostic.count(0) or { 0, 0, 0, 0 }
-    -- count table: 1=Error, 2=Warn, 3=Info, 4=Hint
-
     local err = count[vim.diagnostic.severity.ERROR] or 0
     local warn = count[vim.diagnostic.severity.WARN] or 0
-
     local parts = ""
     if err > 0 then
         parts = parts .. string.format("%s %s ", ICON.error, tools.hl_str("DiagnosticError", err))
@@ -110,48 +142,57 @@ local function diagnostics_widget()
     if warn > 0 then
         parts = parts .. string.format("%s %s ", ICON.warn, tools.hl_str("DiagnosticWarn", warn))
     end
-
     return parts
 end
 
--- CURSOR POSITION (Ln:Col %%)
 local function cursor_widget()
     local line = fn.line(".")
     local col = fn.col(".")
-    -- %P is native vim statusline code for Percentage
     return string.format("%3d:%-2d %3s", line, col, "%P")
+end
+
+local function scrollbar_widget()
+    local cur = fn.line(".")
+    local total = fn.line("$")
+    local idx = math.floor((cur - 1) / total * #SBAR) + 1
+    return tools.hl_str("Substitute", SBAR[idx] and SBAR[idx]:rep(2) or "")
 end
 
 -- 5. RENDER FUNCTION
 function M.render()
-    -- Get buffer info
     local buf = api.nvim_win_get_buf(vim.g.statusline_winid or 0)
     local fname = api.nvim_buf_get_name(buf)
-
-    -- Get root for Git info
     local root = tools.get_path_root and tools.get_path_root(fname) or nil
 
-    -- Handle special buffers (Help, Terminal, etc.)
     if get_opt("buftype", { buf = buf }) == "help" then
         return "  Help: " .. fn.fnamemodify(fname, ":t")
     end
 
     local parts = {
-        pad      = PAD,
-        branch   = branch_widget(root),
-        path     = path_widget(fname),
-        mod      = get_opt("modified", { buf = buf }) and ICON.modified or
+        pad       = PAD,
+        mode      = mode_widget(),
+        branch    = branch_widget(root),
+        path      = path_widget(fname),
+        mod       = get_opt("modified", { buf = buf }) and ICON.modified or
             (get_opt("modifiable", { buf = buf }) and "" or ICON.nomodifiable),
-        sep      = SEP,
-        diag     = diagnostics_widget(),
-        fileinfo = "", -- Removed detailed word count per your request (kept simplified)
-        cursor   = cursor_widget(),
+        sep       = SEP,
+        diag      = diagnostics_widget(),
+        fileinfo  = "",
+        cursor    = cursor_widget(),
+        scrollbar = scrollbar_widget(),
     }
 
     return concat(parts)
 end
 
--- 6. SET STATUSLINE
 vim.o.statusline = "%!v:lua.require('statusline').render()"
+
+-- Force Highlight Groups (just in case)
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+        vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true, inherit = "StatusLine" })
+    end,
+})
 
 return M

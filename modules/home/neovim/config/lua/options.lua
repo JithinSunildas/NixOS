@@ -8,6 +8,7 @@ opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
 opt.scrolloff = 8
+vim.opt.showmode = false
 opt.cmdheight = 1
 opt.cursorline = true
 opt.cursorlineopt = "number,line"
