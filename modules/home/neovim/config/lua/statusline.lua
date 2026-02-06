@@ -21,13 +21,13 @@ local function diagnostic_status()
     local warn = #vim.diagnostic.get(0, { severity = levels.warnings })
     local status = ""
     if err > 0 then
-        status = status .. "%#DiagnosticError#● " .. err .. " "
+        status = status .. "Err ● " .. err .. " "
     end
     if warn > 0 then
-        status = status .. "%#DiagnosticWarn#● " .. warn .. " "
+        status = status .. "Warn ● " .. warn .. " "
     end
     if status ~= "" then
-        return status .. "%#StatusLine#│ "
+        return status .. "│ "
     else
         return ""
     end
@@ -135,11 +135,10 @@ local function setup_dynamic_statusline()
                 "%#StatusLineBold#",
                 "%{v:lua.mode_icon()}",
                 "%#StatusLine#",
-                " │ %f %h%m%r",
+                " │ %t %h%m%r",
                 "%{v:lua.git_branch()}",
                 " │ ",
                 "%{v:lua.file_type()}",
-                " | ",
                 "%{v:lua.file_size()}",
                 "%=",         -- Right-align everything after this
                 "%{v:lua.diagnostic_status()}",
