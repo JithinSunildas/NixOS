@@ -38,8 +38,6 @@ return {
 
   -- Extra plugins
   "folke/flash.nvim",
-  "j-hui/fidget.nvim",
-  "echasnovski/mini.surround",
   "nvim-treesitter/nvim-treesitter",
   "nvim-treesitter/nvim-treesitter-textobjects",
 }
