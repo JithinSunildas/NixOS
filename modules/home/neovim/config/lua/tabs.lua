@@ -2,6 +2,36 @@
 -- TABS
 -- ============================================================================
 
+function _G.custom_tabline()
+    local s = ''
+    for i = 1, vim.fn.tabpagenr('$') do
+        -- Select highlighting
+        if i == vim.fn.tabpagenr() then
+            s = s .. '%#TabLineSel#'
+        else
+            s = s .. '%#TabLine#'
+        end
+        -- Set the tab page number (used by mouse clicks)
+        s = s .. '%' .. i .. 'T'
+        -- Get the filename (just the tail, not full path)
+        local buflist = vim.fn.tabpagebuflist(i)
+        local winnr = vim.fn.tabpagewinnr(i)
+        local bufnr = buflist[winnr]
+        local filename = vim.fn.bufname(bufnr)
+        -- Extract just the filename
+        if filename == '' then
+            filename = '[No Name]'
+        else
+            filename = vim.fn.fnamemodify(filename, ':t') -- :t gets tail (filename only)
+        end
+        local modified = vim.fn.getbufvar(bufnr, "&modified") == 1 and '+' or ''
+
+        s = s .. ' ' .. i .. ': ' .. filename .. modified .. ' '
+    end
+    s = s .. '%#TabLineFill#%T'
+    return s
+end
+
 -- Tab display settings
 vim.opt.showtabline = 1 -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
 vim.opt.tabline = ''    -- Use default tabline (empty string uses built-in)
@@ -17,8 +47,8 @@ vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', { desc = 'Close tab' })
 
 -- Tab moving
 vim.keymap.set('n', '<leader>tm', ':tabmove<CR>', { desc = 'Move tab' })
-vim.keymap.set('n', '<leader>t>', ':tabmove +1<CR>', { desc = 'Move tab right' })
-vim.keymap.set('n', '<leader>t<', ':tabmove -1<CR>', { desc = 'Move tab left' })
+vim.keymap.set('n', 'Tab', ':tabmove +1<CR>', { desc = 'Move tab right' })
+vim.keymap.set('n', 'S-Tab', ':tabmove -1<CR>', { desc = 'Move tab left' })
 
 -- Function to open file in new tab
 local function open_file_in_tab()

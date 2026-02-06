@@ -138,7 +138,7 @@ local function setup_dynamic_statusline()
                 " │ %t %h%m%r",
                 "%{v:lua.git_branch()}",
                 " │ ",
-                "%{v:lua.file_type()}",
+                "%{v:lua.file_type()} ",
                 "%{v:lua.file_size()}",
                 "%=",         -- Right-align everything after this
                 "%{v:lua.diagnostic_status()}",
