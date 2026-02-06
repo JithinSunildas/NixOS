@@ -14,16 +14,19 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
+-- Quick file navigation
+vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { desc = "Open file explorer" })
+
 -- Save and --[[ quit ]]
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 
 -- Search and Replace
 map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-  desc = "Toggle Spectre (Find and Replace)"
+    desc = "Toggle Spectre (Find and Replace)"
 })
 map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-  desc = "Search current word"
+    desc = "Search current word"
 })
 
 -- === Clipboard ===
@@ -67,15 +70,13 @@ map("v", "<", "<gv", { desc = "Indent left" })
 map("v", ">", ">gv", { desc = "Indent right" })
 
 -- Keep cursor centered when scrolling
-map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down (centered)" })
-map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
 -- Keep search matches centered
 map("n", "n", "nzzzv", { desc = "Next match (centered)" })
-map("n", "<C-n>", "viw", { desc = "Match word" })
-map("n", "m", "vi", { desc = "Match inside" })
 map("n", "N", "Nzzzv", { desc = "Previous match (centered)" })
-map("n", "M", "va", { desc = "Match around" })
+map("n", "M", "vi", { desc = "Match inside" })
 map("n", "R", "*Ncgn", { desc = "Change word under cursor" })
 
 -- Better paste (don't yank replaced text)
@@ -88,8 +89,6 @@ map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 map("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Switch to last buffer" })
 map("n", "<leader><Tab>", "<cmd>Telescope buffers<cr>", { desc = "List open buffers" })
-map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<S-Tab>", "<cmd>bprev<cr>", { desc = "Previous Buffer" })
 map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 
 -- === Terminal ===
@@ -109,6 +108,8 @@ map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" })
 map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
+map("i", "<A-Backspace>", "<C-w>", { desc = "Select all" })
+map("i", "<A-Delete>", "<C-o>dw", { desc = "Select all" })
 map("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })
 map("i", "<C-h>", "<C-Left>", { desc = "Move previous word" })
 map("i", "<C-Del>", "<C-o>dw", { desc = "Delete next word" })
@@ -122,30 +123,55 @@ map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Loc
 map("n", "<leader>]", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
 map("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next diagnostic" })
 map('n', '<leader>d', function()
-  vim.diagnostic.open_float(nil, { focus = false })
+    vim.diagnostic.open_float(nil, { focus = false })
 end, { desc = "Show inline diagnostics" })
 
 -- === Git (with gitsigns) ===
 -- Navigation
 map("n", "]c", function()
-  if vim.wo.diff then
-    return "]c"
-  end
-  vim.schedule(function()
-    require("gitsigns").next_hunk()
-  end)
-  return "<Ignore>"
+    if vim.wo.diff then
+        return "]c"
+    end
+    vim.schedule(function()
+        require("gitsigns").next_hunk()
+    end)
+    return "<Ignore>"
 end, { expr = true, desc = "Next git hunk" })
 
 map("n", "[c", function()
-  if vim.wo.diff then
-    return "[c"
-  end
-  vim.schedule(function()
-    require("gitsigns").prev_hunk()
-  end)
-  return "<Ignore>"
+    if vim.wo.diff then
+        return "[c"
+    end
+    vim.schedule(function()
+        require("gitsigns").prev_hunk()
+    end)
+    return "<Ignore>"
 end, { expr = true, desc = "Previous git hunk" })
+
+-- Copy Full File-Path
+vim.keymap.set("n", "<leader>pa", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    print("file:", path)
+end)
+-- Copy Path Relative to Project Root
+vim.keymap.set("n", "<leader>pr", function()
+    local current_file = vim.fn.expand("%:p")
+    -- Look for the project root (indicated by .git)
+    local root_file = vim.fs.find({ ".git" }, { upward = true, path = current_file })[1]
+    if root_file then
+        local root_dir = vim.fn.fnamemodify(root_file, ":h")
+        -- Calculate the relative path from root
+        local rel_path = vim.fn.fnamemodify(current_file, ":." .. root_dir)
+        vim.fn.setreg("+", rel_path)
+        print("Project path:", rel_path)
+    else
+        -- Fallback to just the filename if no .git is found
+        local fallback = vim.fn.expand("%:.")
+        vim.fn.setreg("+", fallback)
+        print("No root found, using relative path:", fallback)
+    end
+end, { desc = "Copy relative path from project root" })
 
 -- Acggtions
 map("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<cr>", { desc = "Stage hunk" })
