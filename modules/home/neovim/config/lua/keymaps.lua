@@ -76,7 +76,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 -- Keep search matches centered
 map("n", "n", "nzzzv", { desc = "Next match (centered)" })
 map("n", "N", "Nzzzv", { desc = "Previous match (centered)" })
--- map("n", "M", "vi", { desc = "Match inside" })
+map("n", "M", "vi", { desc = "Match inside" })
 map("n", "R", "*Ncgn", { desc = "Change word under cursor" })
 
 -- Better paste (don't yank replaced text)
