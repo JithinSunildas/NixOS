@@ -11,7 +11,9 @@ local function git_branch()
     return ""
 end
 
--- Diagnostic counts (Dots + Numbers)
+vim.cmd("colorscheme kanagawa-dragon")
+
+-- Diagnostic counts (Dots + Numbers with COLORS)
 local function diagnostic_status()
     local levels = {
         errors = vim.diagnostic.severity.ERROR,
@@ -20,23 +22,26 @@ local function diagnostic_status()
     local err = #vim.diagnostic.get(0, { severity = levels.errors })
     local warn = #vim.diagnostic.get(0, { severity = levels.warnings })
     local status = ""
-    -- Error Dot + Count
+
+    -- %#DiagnosticError# tells Neovim to use that highlight group
     if err > 0 then
         status = status .. "%#DiagnosticError#● " .. err .. " "
     end
-    -- Warning Dot + Count
+
+    -- %#DiagnosticWarn# switches the color to orange
     if warn > 0 then
         status = status .. "%#DiagnosticWarn#● " .. warn .. " "
     end
-    -- Reset to standard statusline color and add separator if diagnostics exist
+
+    -- We MUST reset back to %#StatusLine# at the end,
+    -- otherwise everything after the dots (like line numbers) will be orange!
     if status ~= "" then
         return status .. "%#StatusLine#│ "
     else
         return ""
     end
 end
-_G.diagnostic_status = diagnostic_status -- File type with icon
-
+_G.diagnostic_status = diagnostic_status
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#ff5555", bg = "none" })
 vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#ffb86c", bg = "none" })
 
