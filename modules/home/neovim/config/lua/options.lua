@@ -41,6 +41,14 @@ vim.opt.foldmethod = "expr"                     -- Use expression for folding
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Use treesitter for folding
 vim.opt.foldlevel = 99                          -- Start with all folds open
 
+-- NETRW (EXPLORER) SETTINGS
+vim.g.netrw_banner = 0       -- Hide the help banner (hit 'I' to toggle if needed)
+vim.g.netrw_liststyle = 3    -- Use tree-style view
+vim.g.netrw_browse_split = 4 -- Open files in the previous window
+vim.g.netrw_altv = 1         -- Open vertical splits to the right
+vim.g.netrw_winsize = 25     -- Default width of the Lexplore sidebar
+vim.g.netrw_keepdir = 0      -- Sync current directory with browsing directory
+
 -- [[ Backups and Swaps ]]
 opt.swapfile = false -- Disable swap files (less error-prone with modern SSDs/systems)
 opt.backup = false   -- Disable backups

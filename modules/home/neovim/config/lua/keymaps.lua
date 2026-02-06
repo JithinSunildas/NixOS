@@ -15,7 +15,7 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
 -- Quick file navigation
-vim.keymap.set("n", "<leader>e", ":Explore<CR>", { desc = "Open file explorer" })
+vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { desc = "Open file explorer" })
 
 -- Save and --[[ quit ]]
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
