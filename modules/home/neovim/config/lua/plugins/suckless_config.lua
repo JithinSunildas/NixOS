@@ -155,7 +155,4 @@ require("gitsigns").setup({
     },
 })
 
--- === Utilities ===
-require("nvim-autopairs").setup()
-
 return {}
