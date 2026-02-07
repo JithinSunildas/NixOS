@@ -192,11 +192,6 @@ map("n", "<leader>ur", "<cmd>set rnu!<cr>", { desc = "Toggle relative numbers" }
 map("n", "<leader>uw", "<cmd>set wrap!<cr>", { desc = "Toggle line wrap" })
 map("n", "<leader>us", "<cmd>set spell!<cr>", { desc = "Toggle spell check" })
 
-map("K", function()
-    local word = vim.fn.expand("<cword>")
-    pcall(vim.cmd, "vertical Man " .. word)
-end, "System Man Page (Split)")
-
 -- map("", "<up>", "<nop>", { noremap = true })
 -- map("", "<down>", "<nop>", { noremap = true })
 -- map("i", "<up>", "<nop>", { noremap = true })
