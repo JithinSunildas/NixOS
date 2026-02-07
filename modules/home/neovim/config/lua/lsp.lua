@@ -1,139 +1,247 @@
 -- modules/home/neovim/config/lua/lsp.lua
--- Neovim 0.11+ native LSP configuration
+-- Neovim 0.11+ native LSP configuration (NO nvim-lspconfig)
 
-local api = vim.api
-local lsp = vim.lsp
-
--- 1. Capabilities (Keep this, it's correct)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- 2. On Attach (Cleaned up)
+-- =========================
+-- ON_ATTACH
+-- =========================
+
 local on_attach = function(client, bufnr)
-    local map = function(keys, func, desc)
-        vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, desc = desc })
+    local map = function(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
     end
 
-    map("gd", vim.lsp.buf.definition, "Goto Definition")
-    map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-    map("gi", vim.lsp.buf.implementation, "Goto Implementation")
-    map("gr", vim.lsp.buf.references, "References")
-    map("K", vim.lsp.buf.hover, "Hover Docs")
-    map("<leader>br", vim.lsp.buf.rename, "Rename")
-    map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-    map("<leader>d", vim.diagnostic.open_float, "Line Diagnostic")
+    map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
+    map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
+    map("n", "gi", vim.lsp.buf.implementation, "Goto Implementation")
+    map("n", "gr", vim.lsp.buf.references, "References")
+    map("n", "K", vim.lsp.buf.hover, "Hover Docs")
+    map("n", "<leader>br", vim.lsp.buf.rename, "Rename")
+    map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+    map("n", "<leader>d", vim.diagnostic.open_float, "Line Diagnostic")
 end
 
--- 3. Diagnostic Signs (Using your existing tools global)
-local tools = _G.tools or { ui = { icons = {} } }
-local icons = tools.ui.icons
-local signs = { Error = icons.dot or "E", Warn = icons.dot or "W", Hint = icons.dot or "H", Info = icons.dot or "I" }
+-- Change the Diagnostic symbols in the sign column (gutter)
+local tools = _G.tools or { ui = { icons = {} }, hl_str = function(_, s) return s end }
+local icons = tools.ui.icons or {}
+local signs = { Error = icons.dot, Warn = icons.dot, Hint = icons.dot, Info = icons.dot }
 
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- 4. Shared Config (Don't repeat yourself!)
-local defaults = {
+-- =========================
+-- COMPLETEOPT (IMPORTANT FOR CMP + TAB)
+-- =========================
+
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+
+-- =========================
+-- ENABLE SERVERS
+-- =========================
+
+vim.lsp.enable({
+    "nixd",
+    "rust_analyzer",
+    "clangd",
+    "pyright",
+    "lua_ls",
+    "jdtls",
+    "haskell_language_server",
+    "gopls",
+    "zls",
+    "ocamllsp",
+    "tsserver",
+    "tailwindcss",
+    "cssls",
+    "emmet_ls",
+    "html"
+})
+
+-- =========================
+-- LSP SERVER DEFINITIONS
+-- =========================
+
+vim.lsp.config.haskell_language_server = {
+    cmd = { "haskell-language-server-wrapper", "--lsp" },
+    filetypes = { "haskell", "lhaskell" },
+    root_markers = {
+        "stack.yaml",
+        "cabal.project",
+        "*.cabal",
+        "hie.yaml",
+        ".git",
+    },
     capabilities = capabilities,
     on_attach = on_attach,
 }
 
--- Helper to merge tables
-local function make_config(custom_config)
-    return vim.tbl_deep_extend("force", defaults, custom_config or {})
-end
-
--- =========================
--- SERVER CONFIGURATIONS
--- =========================
-
-lsp.config.nixd = make_config({
-    cmd = { "nixd" },
-    root_markers = { "flake.nix", ".git" },
-})
-
-lsp.config.rust_analyzer = make_config({
+vim.lsp.config.rust_analyzer = {
     cmd = { "rust-analyzer" },
-    root_markers = { "Cargo.toml" },
+    filetypes = { "rust" },
+    root_markers = { "Cargo.toml", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
     settings = {
         ["rust-analyzer"] = {
-            checkOnSave = { command = "clippy" },
-            cargo = { buildScripts = { enable = true } },
+            diagnostics = {
+                enable = true,
+            },
+            imports = {
+                granularity = { group = "module" },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = { enable = true },
+            },
+            procMacro = { enable = true },
         }
     }
-})
+}
 
-lsp.config.clangd = make_config({
-    cmd = { "clangd", "--background-index" },
+vim.lsp.config.clangd = {
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--query-driver=/run/current-system/sw/bin/g++,/run/current-system/sw/bin/gcc",
+    },
+    filetypes = { "c", "h", "hpp", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
-})
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 
-lsp.config.pyright = make_config({
+vim.lsp.config.jdtls = {
+    cmd = { "jdtls" },
+    filetypes = { "java" },
+    root_markers = { "pom.xml", "gradle.build", ".git", "build.gradle" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        java = {
+            format = {
+                enabled = true,
+                settings = {
+                    url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                    profile = "GoogleStyle",
+                },
+            },
+        },
+    },
+}
+
+vim.lsp.config.pyright = {
     cmd = { "pyright-langserver", "--stdio" },
-    root_markers = { "pyproject.toml" },
-})
+    filetypes = { "python" },
+    root_markers = { "pyproject.toml", "setup.py", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 
-lsp.config.lua_ls = make_config({
+vim.lsp.config.lua_ls = {
     cmd = { "lua-language-server" },
+    filetypes = { "lua" },
+    root_markers = { ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
     settings = {
         Lua = {
             runtime = { version = "LuaJIT" },
             diagnostics = { globals = { "vim" } },
-            workspace = { library = api.nvim_get_runtime_file("", true), checkThirdParty = false },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            },
             telemetry = { enable = false },
         },
     },
-})
+}
 
--- Renamed tsserver -> ts_ls (Standard for newer configs)
-lsp.config.ts_ls = make_config({
-    cmd = { "typescript-language-server", "--stdio" },
-    root_markers = { "package.json", "tsconfig.json" },
-})
-
-lsp.config.gopls = make_config({
-    cmd = { "gopls" },
-    root_markers = { "go.work", "go.mod" },
-})
-
-lsp.config.zls = make_config({
+vim.lsp.config.zls = {
     cmd = { "zls" },
-    root_markers = { "build.zig" },
-})
+    filetypes = { "zig", "zir" },
+    root_markers = { "build.zig", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 
-lsp.config.ocamllsp = make_config({
+vim.lsp.config.ocamllsp = {
     cmd = { "ocamllsp" },
-    root_markers = { "dune-project", "*.opam" },
-})
+    filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+    root_markers = { "*.opam", "dune-project", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 
-lsp.config.html = make_config({ cmd = { "vscode-html-language-server", "--stdio" } })
-lsp.config.cssls = make_config({ cmd = { "vscode-css-language-server", "--stdio" } })
-lsp.config.tailwindcss = make_config({
+-- =========================
+-- WEB DEVELOPMENT
+-- =========================
+
+require("luasnip.loaders.from_vscode").lazy_load()
+
+vim.lsp.config.emmet_ls = {
+    cmd = { "emmet-ls", "--stdio" },
+    filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "eruby" },
+    root_markers = { ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+vim.lsp.config.nixd = {
+    cmd = { "nixd" },
+    filetypes = { "nix" },
+    root_markers = { "flake.nix", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+vim.lsp.config.gopls = {
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    root_markers = { "go.work", "go.mod", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+vim.lsp.config.tsserver = {
+    cmd = { "typescript-language-server", "--stdio" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    root_markers = { "package.json", "tsconfig.json", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+vim.lsp.config.tailwindcss = {
     cmd = { "tailwindcss-language-server", "--stdio" },
-    root_markers = { "tailwind.config.js", "tailwind.config.ts" },
-})
+    filetypes = { "html", "css", "javascriptreact", "typescriptreact", "svelte", "vue" },
+    root_markers = { "tailwind.config.js", "tailwind.config.ts", "postcss.config.js" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+vim.lsp.config.cssls = {
+    cmd = { "vscode-css-language-server", "--stdio" },
+    filetypes = { "css", "scss", "less" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+vim.lsp.config.html = {
+    cmd = { "vscode-html-language-server", "--stdio" },
+    filetypes = { "html" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 
 -- =========================
--- AUTO-START LOGIC
--- =========================
--- In 0.11 native, you usually enable the servers you want.
--- If you are on a very specific nightly, your previous `vim.lsp.enable` might be needed.
--- But generally, we just let filetypes trigger it.
-
-for server, config in pairs(lsp.config) do
-    -- Enable all configured servers
-    vim.lsp.enable(server)
-end
-
--- =========================
--- FEATURES
+-- INLAY HINTS
 -- =========================
 
--- Inlay Hints (Auto-enable on attach)
-api.nvim_create_autocmd("LspAttach", {
+vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client and client.server_capabilities.inlayHintProvider then
@@ -142,9 +250,18 @@ api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- Format on Save (Suckless Version)
-api.nvim_create_autocmd("BufWritePre", {
+-- =========================
+-- SAFE FORMAT ON SAVE
+-- =========================
+
+vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
-        vim.lsp.buf.format({ async = false })
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
+        for _, client in ipairs(clients) do
+            if client.server_capabilities.documentFormattingProvider then
+                vim.lsp.buf.format({ async = false, id = client.id })
+                return
+            end
+        end
     end,
 })
