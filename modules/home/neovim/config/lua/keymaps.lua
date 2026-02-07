@@ -131,8 +131,6 @@ vim.keymap.set("i", ")", function() return escape_pair(")") end, { expr = true, 
 vim.keymap.set("i", "]", function() return escape_pair("]") end, { expr = true, desc = "Skip ]" })
 vim.keymap.set("i", "}", function() return escape_pair("}") end, { expr = true, desc = "Skip }" })
 vim.keymap.set("i", ">", function() return escape_pair(">") end, { expr = true, desc = "Skip >" })
-vim.keymap.set("i", "'", function() return escape_pair("'") end, { expr = true, desc = "Skip '" })
-vim.keymap.set("i", '"', function() return escape_pair('"') end, { expr = true, desc = 'Skip "' })
 -- Selection & navigation
 map("i", "<A-Backspace>", "<C-w>", { desc = "Select all" })
 map("i", "<A-Delete>", "<C-o>dw", { desc = "Select all" })
