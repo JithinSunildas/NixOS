@@ -14,8 +14,8 @@ local HL = {
     nomodifiable = { "DiagnosticWarn", icons.bullet or "•" },
     modified     = { "DiagnosticError", icons.bullet or "•" },
     readonly     = { "DiagnosticWarn", icons.lock or "" },
-    error        = { "DiagnosticError", icons.error or "E" },
-    warn         = { "DiagnosticWarn", icons.warning or "W" },
+    error        = { "DiagnosticError", icons.dot or "E" },
+    warn         = { "DiagnosticWarn", icons.dot or "W" },
 }
 
 local ICON = {}
