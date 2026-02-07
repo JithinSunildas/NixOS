@@ -110,12 +110,12 @@ map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 -- === Powerful Insert mode ===
 -- Autopairs
 map("i", "(", "()<Left>", { desc = "Native autopairs" })
-map("i", "[", "[]<Left", { desc = "Native autopairs" })
-map("i", "{", "{}<Left", { desc = "Native autopairs" })
-map("i", "<", "<><Left", { desc = "Native autopairs" })
-map("i", "'", "''<Left", { desc = "Native autopairs" })
-map("i", "\"", "\"\"<Left", { desc = "Native autopairs" })
-map("i", "`", "``<Left", { desc = "Native autopairs" })
+map("i", "[", "[]<Left>", { desc = "Native autopairs" })
+map("i", "{", "{}<Left>", { desc = "Native autopairs" })
+map("i", "<", "<><Left>", { desc = "Native autopairs" })
+map("i", "'", "''<Left>", { desc = "Native autopairs" })
+map("i", "\"", "\"\"<Left>", { desc = "Native autopairs" })
+map("i", "`", "``<Left>", { desc = "Native autopairs" })
 -- Selection & navigation
 map("i", "<A-Backspace>", "<C-w>", { desc = "Select all" })
 map("i", "<A-Delete>", "<C-o>dw", { desc = "Select all" })
