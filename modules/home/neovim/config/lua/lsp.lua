@@ -29,10 +29,28 @@ local tools = _G.tools or { ui = { icons = {} }, hl_str = function(_, s) return 
 local icons = tools.ui.icons or {}
 local signs = { Error = icons.dot, Warn = icons.dot, Hint = icons.dot, Info = icons.dot }
 
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = icons.error or "✘",
+            [vim.diagnostic.severity.WARN]  = icons.warning or "▲",
+            [vim.diagnostic.severity.HINT]  = icons.hint or "⚑",
+            [vim.diagnostic.severity.INFO]  = icons.info or "»",
+        },
+    },
+    virtual_text = true,
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = true,
+        header = "",
+        prefix = "",
+    },
+})
 
 -- =========================
 -- COMPLETEOPT (IMPORTANT FOR CMP + TAB)
