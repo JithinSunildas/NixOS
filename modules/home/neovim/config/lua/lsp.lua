@@ -32,10 +32,10 @@ local signs = { Error = icons.dot, Warn = icons.dot, Hint = icons.dot, Info = ic
 vim.diagnostic.config({
     signs = {
         text = {
-            [vim.diagnostic.severity.ERROR] = icons.error or "✘",
-            [vim.diagnostic.severity.WARN]  = icons.warning or "▲",
-            [vim.diagnostic.severity.HINT]  = icons.hint or "⚑",
-            [vim.diagnostic.severity.INFO]  = icons.info or "»",
+            [vim.diagnostic.severity.ERROR] = icons.dot,
+            [vim.diagnostic.severity.WARN]  = icons.dot,
+            [vim.diagnostic.severity.HINT]  = icons.dot,
+            [vim.diagnostic.severity.INFO]  = icons.dot,
         },
     },
     virtual_text = true,
