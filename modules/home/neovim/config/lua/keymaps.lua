@@ -119,13 +119,13 @@ local function escape_pair(char) -- Checks the char under cursor
         return char
     end
 end
-map("i", "(", "()<Left>", { desc = "Native autopairs" })
-map("i", "[", "[]<Left>", { desc = "Native autopairs" })
-map("i", "{", "{}<Left>", { desc = "Native autopairs" })
-map("i", "<", "<><Left>", { desc = "Native autopairs" })
-map("i", "'", "''<Left>", { desc = "Native autopairs" })
-map("i", "\"", "\"\"<Left>", { desc = "Native autopairs" })
-map("i", "`", "``<Left>", { desc = "Native autopairs" })
+-- map("i", "(", "()<Left>", { desc = "Native autopairs" })
+-- map("i", "[", "[]<Left>", { desc = "Native autopairs" })
+-- map("i", "{", "{}<Left>", { desc = "Native autopairs" })
+-- map("i", "<", "<><Left>", { desc = "Native autopairs" })
+-- map("i", "'", "''<Left>", { desc = "Native autopairs" })
+-- map("i", "\"", "\"\"<Left>", { desc = "Native autopairs" })
+-- map("i", "`", "``<Left>", { desc = "Native autopairs" })
 vim.keymap.set("i", ")", function() return escape_pair(")") end, { expr = true, desc = "Skip )" })
 vim.keymap.set("i", "]", function() return escape_pair("]") end, { expr = true, desc = "Skip ]" })
 vim.keymap.set("i", "}", function() return escape_pair("}") end, { expr = true, desc = "Skip }" })
