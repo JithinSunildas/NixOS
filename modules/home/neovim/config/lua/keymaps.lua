@@ -109,6 +109,17 @@ map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
 -- Autopairs
+local function escape_pair(char) -- Checks the char under cursor
+    local col = vim.fn.col('.')
+    local line = vim.fn.getline('.')
+    local next_char = line:sub(col, col)
+
+    if next_char == char then
+        return "<Right>"
+    else
+        return char
+    end
+end
 map("i", "(", "()<Left>", { desc = "Native autopairs" })
 map("i", "[", "[]<Left>", { desc = "Native autopairs" })
 map("i", "{", "{}<Left>", { desc = "Native autopairs" })
@@ -116,6 +127,12 @@ map("i", "<", "<><Left>", { desc = "Native autopairs" })
 map("i", "'", "''<Left>", { desc = "Native autopairs" })
 map("i", "\"", "\"\"<Left>", { desc = "Native autopairs" })
 map("i", "`", "``<Left>", { desc = "Native autopairs" })
+vim.keymap.set("i", ")", function() return escape_pair(")") end, { expr = true, desc = "Skip )" })
+vim.keymap.set("i", "]", function() return escape_pair("]") end, { expr = true, desc = "Skip ]" })
+vim.keymap.set("i", "}", function() return escape_pair("}") end, { expr = true, desc = "Skip }" })
+vim.keymap.set("i", ">", function() return escape_pair(">") end, { expr = true, desc = "Skip >" })
+vim.keymap.set("i", "'", function() return escape_pair("'") end, { expr = true, desc = "Skip '" })
+vim.keymap.set("i", '"', function() return escape_pair('"') end, { expr = true, desc = 'Skip "' })
 -- Selection & navigation
 map("i", "<A-Backspace>", "<C-w>", { desc = "Select all" })
 map("i", "<A-Delete>", "<C-o>dw", { desc = "Select all" })
