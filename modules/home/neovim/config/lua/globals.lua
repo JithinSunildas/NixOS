@@ -15,7 +15,7 @@ _G.tools = {
             document    = "≡",
             r_chev      = ">",
             info        = "󰌶 ",
-            dot         = "⚫",
+            dot         = "◙",
         },
     },
     nonprog_modes = {
