@@ -108,6 +108,9 @@ map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" })
 map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
+map("i", "(", "()Left", { desc = "Native autopairs" })
+map("i", "[", "[]Left", { desc = "Native autopairs" })
+map("i", "{", "{}Left", { desc = "Native autopairs" })
 map("i", "<A-Backspace>", "<C-w>", { desc = "Select all" })
 map("i", "<A-Delete>", "<C-o>dw", { desc = "Select all" })
 map("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })
@@ -188,6 +191,11 @@ map("n", "<leader>un", "<cmd>set nu!<cr>", { desc = "Toggle line numbers" })
 map("n", "<leader>ur", "<cmd>set rnu!<cr>", { desc = "Toggle relative numbers" })
 map("n", "<leader>uw", "<cmd>set wrap!<cr>", { desc = "Toggle line wrap" })
 map("n", "<leader>us", "<cmd>set spell!<cr>", { desc = "Toggle spell check" })
+
+map("K", function()
+    local word = vim.fn.expand("<cword>")
+    pcall(vim.cmd, "vertical Man " .. word)
+end, "System Man Page (Split)")
 
 -- map("", "<up>", "<nop>", { noremap = true })
 -- map("", "<down>", "<nop>", { noremap = true })
