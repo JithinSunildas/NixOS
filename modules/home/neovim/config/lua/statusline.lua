@@ -35,7 +35,6 @@ local ORDER = {
     "cursor",
     "pad",
     "scrollbar",
-    "pad",
 }
 
 local PAD = " "
