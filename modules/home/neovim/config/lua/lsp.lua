@@ -87,6 +87,7 @@ vim.lsp.enable({
     "haskell_language_server",
     "gopls",
     "zls",
+    "tinymist",
     "ocamllsp",
     "tsserver",
     "tailwindcss",
@@ -192,6 +193,21 @@ vim.lsp.config.lua_ls = {
             telemetry = { enable = false },
         },
     },
+}
+
+vim.lsp.config.tinymist = {
+    cmd = { "tinymist" },
+    filetypes = { "typst" },
+    -- These markers help your system find the project root
+    root_markers = { "typst.toml", ".git" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+    single_file_support = true,
+    settings = {
+        exportPdf = "onType",
+        outputPath = "$root/target/$name",
+        formatterMode = "typstyle",
+    }
 }
 
 vim.lsp.config.zls = {
