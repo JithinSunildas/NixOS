@@ -126,7 +126,7 @@ vim.lsp.config.rust_analyzer = {
                 enable = true,
             },
             imports = {
-                granularity = { group = "module" },
+                granularity = { group = "module", "unlinked-file" },
                 prefix = "self",
             },
             cargo = {
