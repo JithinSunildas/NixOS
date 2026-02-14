@@ -24,7 +24,8 @@ return {
     -- UI
     {
         -- "webhooked/kanso.nvim
-        "rebelot/kanagawa.nvim",
+        -- "rebelot/kanagawa.nvim",
+        "sainnhe/gruvbox-material",
         lazy = false,
     },
 

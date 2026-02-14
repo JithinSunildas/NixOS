@@ -148,7 +148,7 @@ map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Loc
 map("n", "<leader>]", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
 map("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next diagnostic" })
 map('n', '<leader>d', function()
-    vim.diagnostic.open_float(nil, { focus = false })
+    vim.diagnostic.open_float(nil, { focus = true })
 end, { desc = "Show inline diagnostics" })
 
 -- === Git (with gitsigns) ===

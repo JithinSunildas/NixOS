@@ -3,7 +3,7 @@
 {
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-medium";
     image = ./wallpapers/secluded-grove-pixel.png;
     polarity = "dark";
 
