@@ -43,7 +43,7 @@
         platform = "qtct";
       };
 
-      ghostty.enable = true;
+      ghostty.enable = false;
       fish.enable = true;
 
       neovim = {
