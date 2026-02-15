@@ -11,7 +11,7 @@ opt.scrolloff = 8
 opt.showmode = false
 opt.laststatus = 3
 opt.cmdheight = 1
-opt.cursorline = true
+vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
 opt.cursorlineopt = "number,line"
 opt.wrap = true
 opt.linebreak = true
@@ -57,14 +57,14 @@ opt.backup = false   -- Disable backups
 opt.undofile = true  -- Enable persistent undo (undo history survives reboots)
 
 vim.diagnostic.config({
-  virtual_text = {
-    spacing = 4,
-    prefix = "●",
-  },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
+    virtual_text = {
+        spacing = 4,
+        prefix = "●",
+    },
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
 })
 
 -- Basic autocommands
@@ -72,25 +72,25 @@ local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 
 -- Return to last edit position when opening files
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup,
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local lcount = vim.api.nvim_buf_line_count(0)
-    local line = mark[1]
-    local ft = vim.bo.filetype
-    if line > 0 and line <= lcount
-        and vim.fn.index({ "commit", "gitrebase", "xxd" }, ft) == -1
-        and not vim.o.diff then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
-  end,
+    group = augroup,
+    callback = function()
+        local mark = vim.api.nvim_buf_get_mark(0, '"')
+        local lcount = vim.api.nvim_buf_line_count(0)
+        local line = mark[1]
+        local ft = vim.bo.filetype
+        if line > 0 and line <= lcount
+            and vim.fn.index({ "commit", "gitrebase", "xxd" }, ft) == -1
+            and not vim.o.diff then
+            pcall(vim.api.nvim_win_set_cursor, 0, mark)
+        end
+    end,
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup,
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    group = augroup,
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- -- Auto-close terminal when process exits
@@ -105,31 +105,31 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Disable line numbers in terminal
 vim.api.nvim_create_autocmd("TermOpen", {
-  group = augroup,
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.signcolumn = "no"
-  end,
+    group = augroup,
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.opt_local.signcolumn = "no"
+    end,
 })
 
 -- Auto-resize splits when window is resized
 vim.api.nvim_create_autocmd("VimResized", {
-  group = augroup,
-  callback = function()
-    vim.cmd("tabdo wincmd =")
-  end,
+    group = augroup,
+    callback = function()
+        vim.cmd("tabdo wincmd =")
+    end,
 })
 
 -- Create directories when saving files
 vim.api.nvim_create_autocmd("BufWritePre", {
-  group = augroup,
-  callback = function()
-    local dir = vim.fn.expand('<afile>:p:h')
-    if vim.fn.isdirectory(dir) == 0 then
-      vim.fn.mkdir(dir, 'p')
-    end
-  end,
+    group = augroup,
+    callback = function()
+        local dir = vim.fn.expand('<afile>:p:h')
+        if vim.fn.isdirectory(dir) == 0 then
+            vim.fn.mkdir(dir, 'p')
+        end
+    end,
 })
 
 -- Command-line completion
@@ -147,5 +147,5 @@ vim.opt.maxmempattern = 20000
 -- Create undo directory if it doesn't exist
 local undodir = vim.fn.expand("~/.vim/undodir")
 if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, "p")
+    vim.fn.mkdir(undodir, "p")
 end
