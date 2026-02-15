@@ -27,6 +27,7 @@ return {
         -- "rebelot/kanagawa.nvim",
         "sainnhe/gruvbox-material",
         lazy = false,
+        priority = 1000,
     },
 
     -- Git
