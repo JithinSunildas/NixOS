@@ -155,4 +155,9 @@ require("gitsigns").setup({
     },
 })
 
+-- === Theme ===
+require("gruvbox-material").setup({
+    contrast = "hard",
+})
+
 return {}
