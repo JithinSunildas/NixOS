@@ -1,6 +1,9 @@
 {
   programs.ghostty = {
     enable = true;
+    settings = {
+      theme = "kanagawa-dragon";
+    };
     # settings = {
     #   # Visual Settings
     #   window-decoration = "none";
