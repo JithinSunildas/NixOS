@@ -46,6 +46,7 @@
       ghostty.enable = true;
       fish.enable = true;
       waybar.enable = true;
+      niri.enable = true;
 
       neovim = {
         enable = true;
