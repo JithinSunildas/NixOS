@@ -6,7 +6,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- On Attach
-local on_attach = function(bufnr)
+local on_attach = function(_client, bufnr)
     -- Wrapper to make mapping easier: map(keys, func, description)
     local map = function(keys, func, desc)
         vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, desc = desc })
