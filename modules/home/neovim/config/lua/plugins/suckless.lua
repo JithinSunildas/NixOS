@@ -34,7 +34,8 @@ return {
     "lewis6991/gitsigns.nvim",
 
     -- Utilities
-    "folke/flash.nvim",
+    -- "folke/flash.nvim",
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-textobjects",
+    "windwp/nvim-autopairs",
 }
