@@ -53,10 +53,5 @@ require("lazy").setup("plugins.suckless", {
 -- Load LSP and plugin configurations AFTER lazy setup
 require("lsp")
 require("plugins.suckless_config")
-
--- Load theme & related configs
-vim.g.gruvbox_material_background = 'hard'
-vim.cmd("colorscheme gruvbox-material")
--- vim.cmd("colorscheme kanagawa-dragon")
 require("colors")
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
