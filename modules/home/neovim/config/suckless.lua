@@ -58,4 +58,5 @@ require("plugins.suckless_config")
 vim.g.gruvbox_material_background = 'hard'
 -- vim.cmd("colorscheme gruvbox-material")
 vim.cmd("colorscheme kanagawa-dragon")
+require("colors")
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
