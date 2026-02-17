@@ -30,7 +30,7 @@ local function apply_dragon_diagnostics()
     hl(0, "DiagnosticFloatingOk",    { fg = dragon.green })
 
     hl(0, "DiagnosticVirtualTextError", { fg = dragon.red,    bg = dragon.bg_red, bold = true })
-    hl(0, "DiagnosticVirtualTextWarn",  { fg = dragon.orange, bg = dragon.bg_ora, bold = true })
+    hl(0, "DiagnosticVirtualTextWarn",  { fg = dragon.orange, bg = dragon.bg_ora, bold = false })
     hl(0, "DiagnosticVirtualTextInfo",  { fg = dragon.blue,   bg = dragon.bg_blu })
     hl(0, "DiagnosticVirtualTextHint",  { fg = dragon.aqua,   bg = dragon.bg_grn })
 
