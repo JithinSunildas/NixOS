@@ -95,31 +95,6 @@ map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" })
 map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
--- Autopairs
-local function escape_pair(char) -- Checks the char under cursor
-    local col = vim.fn.col('.')
-    local line = vim.fn.getline('.')
-    local next_char = line:sub(col, col)
-    if next_char == char then
-        return "<Right>"
-    else
-        return char
-    end
-end
--- map("i", "(", "()<Left>", { desc = "Native autopairs" })
--- map("i", "[", "[]<Left>", { desc = "Native autopairs" })
--- map("i", "{", "{}<Left>", { desc = "Native autopairs" })
--- map("i", "<", "<><Left>", { desc = "Native autopairs" })
--- map("i", "'", "''<Left>", { desc = "Native autopairs" })
--- map("i", "\"", "\"\"<Left>", { desc = "Native autopairs" })
--- map("i", "`", "``<Left>", { desc = "Native autopairs" })
-vim.keymap.set("i", ")", function() return escape_pair(")") end, { expr = true, desc = "Skip )" })
-vim.keymap.set("i", "]", function() return escape_pair("]") end, { expr = true, desc = "Skip ]" })
-vim.keymap.set("i", "}", function() return escape_pair("}") end, { expr = true, desc = "Skip }" })
-vim.keymap.set("i", ">", function() return escape_pair(">") end, { expr = true, desc = "Skip >" })
-vim.keymap.set("i", "'", function() return escape_pair("'") end, { expr = true, desc = "Skip '" })
-vim.keymap.set("i", '"', function() return escape_pair('"') end, { expr = true, desc = 'Skip "' })
--- Selection & navigation
 map("i", "<A-Backspace>", "<C-w>", { desc = "Select all" })
 map("i", "<A-Delete>", "<C-o>dw", { desc = "Select all" })
 map("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })
@@ -135,8 +110,8 @@ map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Loc
 map("n", "<leader>]", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
 map("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next diagnostic" })
 map('n', '<leader>d', function()
-    vim.diagnostic.open_float({ scope = "cursor", focus = true })
-end, { desc = "Show and focus diagnostics" })
+    vim.diagnostic.open_float(nil, { focus = true })
+end, { desc = "Show inline diagnostics" })
 
 -- === Git (with gitsigns) ===
 -- Navigation
