@@ -7,27 +7,14 @@ vim.opt.mouse = ""
 
 local map = vim.keymap.set
 
--- Disable space default behavior (since it's our leader key)
 map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- === General ===
--- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
--- Quick file navigation
 vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { desc = "Open file explorer" })
 
--- Save and --[[ quit ]]
-map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
-
--- Search and Replace
-map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre (Find and Replace)"
-})
-map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word"
-})
 
 -- === Clipboard ===
 -- System clipboard shortcuts
@@ -58,6 +45,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increast width" }
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
+
 -- === Editing ===
 -- Move lines up/down
 map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move line down" })
@@ -96,7 +84,6 @@ map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 map("n", "<leader>tt", "<cmd>tabnew | terminal<cr>", { desc = "Terminal (new tab)" })
 map("n", "<leader>th", "<cmd>split | terminal<cr>", { desc = "Terminal horizontal" })
 map("n", "<leader>tv", "<cmd>vsplit | terminal<cr>", { desc = "Terminal vertical" })
-
 -- Exit terminal mode easily
 map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -148,8 +135,8 @@ map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Loc
 map("n", "<leader>]", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
 map("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next diagnostic" })
 map('n', '<leader>d', function()
-    vim.diagnostic.open_float(nil, { focus = true })
-end, { desc = "Show inline diagnostics" })
+    vim.diagnostic.open_float({ scope = "cursor", focus = true })
+end, { desc = "Show and focus diagnostics" })
 
 -- === Git (with gitsigns) ===
 -- Navigation
