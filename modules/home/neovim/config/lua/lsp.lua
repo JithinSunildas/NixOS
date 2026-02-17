@@ -53,10 +53,13 @@ vim.diagnostic.config({
             [vim.diagnostic.severity.INFO]  = icons.dot,
         },
     },
-    virtual_text = true,
+    virtual_text = {
+        severity = { min = vim.diagnostic.severity.HINT },
+        spacing = 4,
+    },
+    severity_sort = true,
     update_in_insert = false,
     underline = true,
-    severity_sort = true,
     float = {
         focusable = false,
         style = "minimal",
