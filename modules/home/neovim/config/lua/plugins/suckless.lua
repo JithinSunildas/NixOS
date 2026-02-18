@@ -12,9 +12,6 @@ return {
             "L3MON4D3/LuaSnip",
         },
     },
-    {
-        -- "neovim/nvim-lspconfig",
-    },
 
     -- Telescope
     "nvim-telescope/telescope.nvim",

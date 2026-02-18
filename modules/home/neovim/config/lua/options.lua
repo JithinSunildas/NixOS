@@ -39,8 +39,8 @@ opt.splitbelow = true
 opt.splitright = true
 
 -- Fold settings
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "manual"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 
 -- NETRW (EXPLORER) SETTINGS
