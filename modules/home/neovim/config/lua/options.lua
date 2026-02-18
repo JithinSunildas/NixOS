@@ -39,9 +39,9 @@ opt.splitbelow = true
 opt.splitright = true
 
 -- Fold settings
-vim.opt.foldmethod = "expr"                     -- Use expression for folding
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Use treesitter for folding
-vim.opt.foldlevel = 99                          -- Start with all folds open
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 99
 
 -- NETRW (EXPLORER) SETTINGS
 vim.g.netrw_banner = 0       -- Hide the help banner (hit 'I' to toggle if needed)

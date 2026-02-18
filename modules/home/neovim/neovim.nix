@@ -41,58 +41,6 @@
     viAlias = true;
     vimAlias = true;
     # All your plugins managed by Nix
-    plugins = with pkgs.vimPlugins; [
-      # LSP
-      nvim-lspconfig
-
-      # Autocompletion
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
-      luasnip
-      cmp_luasnip
-      # Treesitter
-      (nvim-treesitter.withPlugins (p: [
-        p.c
-        p.cpp
-        p.rust
-        p.nix
-        p.lua
-        p.python
-        p.java
-        p.javascript
-        p.typescript
-        p.html
-        p.css
-        p.json
-      ]))
-      nvim-treesitter-textobjects
-      # Fuzzy finder
-      telescope-nvim
-      telescope-fzf-native-nvim
-      plenary-nvim
-      # UI
-      nvim-tree-lua
-      lualine-nvim
-      nvim-web-devicons
-      bufferline-nvim
-      which-key-nvim
-      alpha-nvim
-      # Git
-      gitsigns-nvim
-      # Utilities
-      nvim-autopairs
-      comment-nvim
-      indent-blankline-nvim
-      nvim-colorizer-lua
-      flash-nvim
-      fidget-nvim
-      mini-nvim
-      tabout-nvim
-      # Lazy.nvim for managing additional config
-      lazy-nvim
-    ];
     # External tools needed by plugins
     extraPackages = with pkgs; [
       # Language servers
