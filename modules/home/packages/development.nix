@@ -40,7 +40,6 @@
     # Databases
     mysql80
     postgresql
-    dbeaver-bin
   ];
 
   nixpkgs.config = {
