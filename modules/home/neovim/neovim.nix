@@ -40,28 +40,6 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    # External tools needed by plugins
-    extraPackages = with pkgs; [
-      # Language servers
-      clang-tools
-      pyright
-      vimPlugins.nvim-jdtls
-      lua-language-server
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted # html, css, json
-      # Formatters
-      black
-      isort
-      prettier
-      stylua
-      nixfmt
-      # Linters
-      ruff
-      # Tools for telescope
-      ripgrep
-      fd
-      git
-    ];
     initLua = ''
       -- This runs BEFORE init.lua
     '';
