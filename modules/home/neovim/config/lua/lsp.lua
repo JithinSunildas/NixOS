@@ -88,9 +88,10 @@ vim.lsp.config.rust_analyzer = {
         ["rust-analyzer"] = {
             diagnostics = {
                 enable = true,
+                disabled = { "unlinked-file" },
             },
             imports = {
-                granularity = { group = "module", "unlinked-file" },
+                granularity = { group = "module" },
                 prefix = "self",
             },
             cargo = {
