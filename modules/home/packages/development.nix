@@ -9,6 +9,11 @@
     # Build tools
     cmake
 
+    # Design and Frontend
+    typst
+    tinymist
+    pandoc
+
     # Hardware design
     iverilog
 

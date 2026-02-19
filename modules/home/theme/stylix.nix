@@ -3,7 +3,7 @@
 {
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
     image = ./wallpapers/secluded-grove-pixel.png;
     polarity = "dark";
 
@@ -45,15 +45,10 @@
 
       ghostty.enable = true;
       fish.enable = true;
-
-      neovim = {
-        enable = true;
-        transparentBackground.main = false;
-        transparentBackground.signColumn = false;
-      };
-      helix.enable = true;
+      waybar.enable = true;
 
       fuzzel.enable = true;
+      vim.enable = true;
     };
   };
 

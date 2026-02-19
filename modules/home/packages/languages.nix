@@ -24,11 +24,13 @@
     lld
     pkg-config
 
-    # C/C++
+    # C/C++/Zig
     (pkgs.lib.hiPrio pkgs.clang)
+    (pkgs.lib.hiPrio pkgs.vim)
     clang-tools
     lldb
     gcc
+    zig_0_15
 
     # Haskell
     haskellPackages.ghc

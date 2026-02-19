@@ -24,7 +24,8 @@ return {
     -- UI
     {
         -- "webhooked/kanso.nvim
-        "rebelot/kanagawa.nvim",
+        -- "rebelot/kanagawa.nvim",
+        "sainnhe/gruvbox-material",
         lazy = false,
         priority = 1000,
     },
@@ -33,9 +34,6 @@ return {
     "lewis6991/gitsigns.nvim",
 
     -- Utilities
-    "windwp/nvim-autopairs",
-
-    -- Extra plugins
     "folke/flash.nvim",
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-textobjects",
