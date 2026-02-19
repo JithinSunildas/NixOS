@@ -31,6 +31,7 @@ zoxide init fish | source
 # ==========================================
 alias e='~/.config/emacs/bin/doom emacs -nw'
 alias vi='nvim -R'
+alias flake='~/Work/Rust/Flake/target/release/Flake'
 alias run='~/Work/OS/Assignment_1/run'
 alias doom='exec /home/tikhaboom/.config/emacs/bin/doom'
 alias pick='exec /home/tikhaboom/nix-config/scripts/yazi.sh'

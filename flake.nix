@@ -22,8 +22,17 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, stylix
-    , spicetify-nix, ... }: {
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      zen-browser,
+      stylix,
+      spicetify-nix,
+      ...
+    }:
+    {
       nixosConfigurations = {
         SuperDuperComputer = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -36,7 +45,9 @@
         tikhaboom = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
-            config = { allowUnfree = true; };
+            config = {
+              allowUnfree = true;
+            };
           };
 
           modules = [
