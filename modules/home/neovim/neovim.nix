@@ -1,5 +1,5 @@
 # modules/home/neovim/nvim.nix
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = with pkgs; [
     clang-tools
@@ -44,15 +44,15 @@
       -- This runs BEFORE init.lua
     '';
   };
+  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tikhaboom/nix-config/modules/home/neovim/config";
+  # xdg.configFile."nvim/init.lua" = {
+  #   # source = ./config/init.lua;
+  #   # source = ./config/suckless.lua;
+  #   # source = ./config/symlink.lua;
+  # };
 
-  xdg.configFile."nvim/init.lua" = {
-    # source = ./config/init.lua;
-    # source = ./config/suckless.lua;
-    source = ./config/symlink.lua;
-  };
-
-  xdg.configFile."nvim/lua" = {
-    source = ./config/lua;
-    recursive = true;
-  };
+  # xdg.configFile."nvim/lua" = {
+  #   source = ./config/lua;
+  #   recursive = true;
+  # };
 }
