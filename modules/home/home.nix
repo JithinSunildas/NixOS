@@ -1,7 +1,5 @@
 # modules/home/home.nix
-{
-  ...
-}:
+{ pkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -9,6 +7,10 @@
     username = "tikhaboom";
     homeDirectory = "/home/tikhaboom";
     stateVersion = "25.05";
+
+    sessionVariables = {
+      RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+    };
   };
 
   programs.home-manager.enable = true;
