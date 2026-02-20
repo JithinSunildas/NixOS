@@ -38,6 +38,7 @@ local on_attach = function(_client, bufnr)
 end
 
 require("diagnostic")
+vim.lsp.set_log_level("error")
 
 -- COMPLETEOPT (IMPORTANT FOR CMP + TAB)
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }

@@ -24,10 +24,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load basic config FIRST (before lazy)
+-- require("intro")
+require("globals")
 require("options")
+require("file_spec_config")
+require("floating_term")
+require("statusline")
+require("tabs")
 require("keymaps")
 
-require("lazy").setup("plugins.init", {
+require("lazy").setup("plugins.suckless", {
     defaults = {
         lazy = true,
     },
@@ -46,7 +52,6 @@ require("lazy").setup("plugins.init", {
 
 -- Load LSP and plugin configurations AFTER lazy setup
 require("lsp")
-require("plugins.setup")
-require("plugins.extra")
-vim.cmd("colorscheme gruvbox-material")
+require("plugins.suckless_config")
+-- require("colors")
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
