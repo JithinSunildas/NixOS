@@ -105,7 +105,6 @@
   # --- Environment ---
   environment.systemPackages = with pkgs; [
     polkit
-    nixfmt-rfc-style
     xwayland
     xwayland-satellite
     android-tools

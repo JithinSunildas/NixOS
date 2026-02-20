@@ -34,7 +34,6 @@
     fastfetch
     btop
     ripgrep
-    nixfmt-rfc-style
     xwayland
     xwayland-satellite
   ];

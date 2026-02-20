@@ -15,6 +15,7 @@ set -gx XDG_CACHE_HOME $HOME/.cache
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
+fish_add_path ~/.cargo/bin
 
 # ==========================================
 # Starship Prompt

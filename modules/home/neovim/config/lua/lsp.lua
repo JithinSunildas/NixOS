@@ -211,6 +211,24 @@ vim.lsp.config.nixd = {
     root_markers = { "flake.nix", ".git" },
     capabilities = capabilities,
     on_attach = on_attach,
+    settings = {
+        nixd = {
+nixpkgs = {
+                expr = 'import (builtins.getFlake "${workspaceFolder}").inputs.nixpkgs { }',
+            },
+            formatting = {
+                command = { "alejandra" },
+            },
+            options = {
+                nixos = {
+                    expr = '(builtins.getFlake "${workspaceFolder}").nixosConfigurations."SuperDuperComputer".options',
+                },
+                home_manager = {
+                    expr = '(builtins.getFlake "${workspaceFolder}").homeConfigurations."tikhaboom".options',
+                },
+            },
+        },
+    }
 }
 
 vim.lsp.config.gopls = {

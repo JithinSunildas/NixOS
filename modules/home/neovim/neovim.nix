@@ -24,7 +24,6 @@
     isort
     prettier
     stylua
-    nixfmt
     google-java-format
     ormolu
     # Linters
@@ -44,7 +43,8 @@
       -- This runs BEFORE init.lua
     '';
   };
-  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tikhaboom/nix-config/modules/home/neovim/config";
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "/home/tikhaboom/nix-config/modules/home/neovim/config";
   # xdg.configFile."nvim/init.lua" = {
   #   # source = ./config/init.lua;
   #   # source = ./config/suckless.lua;
