@@ -47,7 +47,8 @@
 
   xdg.configFile."nvim/init.lua" = {
     # source = ./config/init.lua;
-    source = ./config/suckless.lua;
+    # source = ./config/suckless.lua;
+    source = ./config/symlink.lua;
   };
 
   xdg.configFile."nvim/lua" = {
