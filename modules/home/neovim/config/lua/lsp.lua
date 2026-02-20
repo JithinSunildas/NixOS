@@ -5,11 +5,8 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- =========================
--- ON_ATTACH
--- =========================
-
-local on_attach = function(client, bufnr)
+-- On Attach
+local on_attach = function(_client, bufnr)
     -- Wrapper to make mapping easier: map(keys, func, description)
     local map = function(keys, func, desc)
         vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, desc = desc })
@@ -29,54 +26,23 @@ local on_attach = function(client, bufnr)
     end, "System Man Page (Split)")
 
     -- ACTIONS
-    map("<leader>ca", vim.lsp.buf.code_action, "Code Action (Quick Fix)")
+    map("<leader>ca", function() vim.lsp.buf.code_action() end, "Code Action (Quick Fix)")
     map("<leader>rn", vim.lsp.buf.rename, "Smart Rename")
     map("<leader>cf", function() vim.lsp.buf.format { async = true } end, "Format File")
 
     -- DIAGNOSTICS JUMPING
-    map("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
-    map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
-    map("[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, "Prev Error")
-    map("]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, "Next Error")
+    map("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Prev Diagnostic")
+    map("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next Diagnostic")
+    map("[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end, "Prev Error")
+    map("]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end, "Next Error")
 end
--- Change the Diagnostic symbols in the sign column (gutter)
-local tools = _G.tools or { ui = { icons = {} }, hl_str = function(_, s) return s end }
-local icons = tools.ui.icons or {}
-local signs = { Error = icons.dot, Warn = icons.dot, Hint = icons.dot, Info = icons.dot }
 
-vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = icons.dot,
-            [vim.diagnostic.severity.WARN]  = icons.dot,
-            [vim.diagnostic.severity.HINT]  = icons.dot,
-            [vim.diagnostic.severity.INFO]  = icons.dot,
-        },
-    },
-    virtual_text = true,
-    update_in_insert = false,
-    underline = true,
-    severity_sort = true,
-    float = {
-        focusable = false,
-        style = "minimal",
-        border = "rounded",
-        source = true,
-        header = "",
-        prefix = "",
-    },
-})
+require("diagnostic")
 
--- =========================
 -- COMPLETEOPT (IMPORTANT FOR CMP + TAB)
--- =========================
-
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
--- =========================
 -- ENABLE SERVERS
--- =========================
-
 vim.lsp.enable({
     "nixd",
     "rust_analyzer",
@@ -96,9 +62,7 @@ vim.lsp.enable({
     "html"
 })
 
--- =========================
 -- LSP SERVER DEFINITIONS
--- =========================
 
 vim.lsp.config.haskell_language_server = {
     cmd = { "haskell-language-server-wrapper", "--lsp" },
@@ -124,9 +88,10 @@ vim.lsp.config.rust_analyzer = {
         ["rust-analyzer"] = {
             diagnostics = {
                 enable = true,
+                disabled = { "unlinked-file" },
             },
             imports = {
-                granularity = { group = "module", "unlinked-file" },
+                granularity = { group = "module" },
                 prefix = "self",
             },
             cargo = {
@@ -226,9 +191,7 @@ vim.lsp.config.ocamllsp = {
     on_attach = on_attach,
 }
 
--- =========================
 -- WEB DEVELOPMENT
--- =========================
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -286,31 +249,30 @@ vim.lsp.config.html = {
     on_attach = on_attach,
 }
 
--- =========================
--- INLAY HINTS
--- =========================
-
+-- INLAY HINTS 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client and client.server_capabilities.inlayHintProvider then
-            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-        end
+        vim.schedule(function()
+            if not (args.data and args.data.client_id) then return end
+
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            if client and client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+            end
+        end)
     end,
 })
 
--- =========================
 -- SAFE FORMAT ON SAVE
--- =========================
-
 vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "LSP Format on Save",
     callback = function()
-        local clients = vim.lsp.get_clients({ bufnr = 0 })
-        for _, client in ipairs(clients) do
-            if client.server_capabilities.documentFormattingProvider then
-                vim.lsp.buf.format({ async = false, id = client.id })
-                return
+        vim.lsp.buf.format({
+            async = false,
+            timeout_ms = 1000,
+            filter = function(client)
+                return client.name ~= "lua_ls" or false
             end
-        end
+        })
     end,
 })

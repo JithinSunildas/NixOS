@@ -7,27 +7,14 @@ vim.opt.mouse = ""
 
 local map = vim.keymap.set
 
--- Disable space default behavior (since it's our leader key)
 map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- === General ===
--- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
--- Quick file navigation
 vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { desc = "Open file explorer" })
 
--- Save and --[[ quit ]]
-map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
-
--- Search and Replace
-map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre (Find and Replace)"
-})
-map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word"
-})
 
 -- === Clipboard ===
 -- System clipboard shortcuts
@@ -58,6 +45,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increast width" }
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
+
 -- === Editing ===
 -- Move lines up/down
 map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move line down" })
@@ -96,7 +84,6 @@ map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 map("n", "<leader>tt", "<cmd>tabnew | terminal<cr>", { desc = "Terminal (new tab)" })
 map("n", "<leader>th", "<cmd>split | terminal<cr>", { desc = "Terminal horizontal" })
 map("n", "<leader>tv", "<cmd>vsplit | terminal<cr>", { desc = "Terminal vertical" })
-
 -- Exit terminal mode easily
 map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -108,31 +95,6 @@ map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" })
 map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
--- Autopairs
-local function escape_pair(char) -- Checks the char under cursor
-    local col = vim.fn.col('.')
-    local line = vim.fn.getline('.')
-    local next_char = line:sub(col, col)
-    if next_char == char then
-        return "<Right>"
-    else
-        return char
-    end
-end
--- map("i", "(", "()<Left>", { desc = "Native autopairs" })
--- map("i", "[", "[]<Left>", { desc = "Native autopairs" })
--- map("i", "{", "{}<Left>", { desc = "Native autopairs" })
--- map("i", "<", "<><Left>", { desc = "Native autopairs" })
--- map("i", "'", "''<Left>", { desc = "Native autopairs" })
--- map("i", "\"", "\"\"<Left>", { desc = "Native autopairs" })
--- map("i", "`", "``<Left>", { desc = "Native autopairs" })
-vim.keymap.set("i", ")", function() return escape_pair(")") end, { expr = true, desc = "Skip )" })
-vim.keymap.set("i", "]", function() return escape_pair("]") end, { expr = true, desc = "Skip ]" })
-vim.keymap.set("i", "}", function() return escape_pair("}") end, { expr = true, desc = "Skip }" })
-vim.keymap.set("i", ">", function() return escape_pair(">") end, { expr = true, desc = "Skip >" })
-vim.keymap.set("i", "'", function() return escape_pair("'") end, { expr = true, desc = "Skip '" })
-vim.keymap.set("i", '"', function() return escape_pair('"') end, { expr = true, desc = 'Skip "' })
--- Selection & navigation
 map("i", "<A-Backspace>", "<C-w>", { desc = "Select all" })
 map("i", "<A-Delete>", "<C-o>dw", { desc = "Select all" })
 map("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })

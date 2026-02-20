@@ -27,11 +27,11 @@ vim.opt.rtp:prepend(lazypath)
 -- require("intro")
 require("globals")
 require("options")
-require("keymaps")
 require("file_spec_config")
 require("floating_term")
 require("statusline")
 require("tabs")
+require("keymaps")
 
 require("lazy").setup("plugins.suckless", {
     defaults = {
@@ -53,8 +53,5 @@ require("lazy").setup("plugins.suckless", {
 -- Load LSP and plugin configurations AFTER lazy setup
 require("lsp")
 require("plugins.suckless_config")
-
--- Load theme & related configs
-vim.g.gruvbox_material_background = 'hard'
-vim.cmd("colorscheme gruvbox-material")
+-- require("colors")
 vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })

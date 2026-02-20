@@ -4,6 +4,7 @@ _G.tools = {
         icons = {
             branch      = "",
             bullet      = "•",
+            box         = "■",
             lock        = "",
             warning     = " ",
             error       = " ",
