@@ -16,6 +16,7 @@
     go
 
     # Rust
+    rustPlatform.rustLibSrc
     cargo
     rustc
     rust-analyzer
