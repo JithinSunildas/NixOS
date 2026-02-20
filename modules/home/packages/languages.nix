@@ -16,19 +16,14 @@
     go
 
     # Rust
-    rustPlatform.rustLibSrc
-    cargo
-    rustc
-    rust-analyzer
-    rustfmt
-    clippy
-    lld
+    rustup
     pkg-config
 
     # C/C++/Zig
     (pkgs.lib.hiPrio pkgs.clang)
     (pkgs.lib.hiPrio pkgs.vim)
     clang-tools
+    lld
     lldb
     gcc
     zig_0_15

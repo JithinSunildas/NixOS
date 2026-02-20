@@ -4,20 +4,21 @@
     # Terminal multiplexers
     tmux
     zellij
-    
+
     # Terminals
     ghostty
     kitty
-    
+
     # Shell tools
+    nushell
     starship
     dict
     asciinema
-    fd               
-    ripgrep          
-    fzf              
+    fd
+    ripgrep
+    fzf
     lf
-    zoxide           
+    zoxide
     man-db
     man-pages
     man-pages-posix

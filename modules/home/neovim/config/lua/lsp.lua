@@ -1,6 +1,8 @@
 -- modules/home/neovim/config/lua/lsp.lua
 -- Neovim 0.11+ native LSP configuration (NO nvim-lspconfig)
 
+vim.lsp.set_log_level("error")
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -38,7 +40,6 @@ local on_attach = function(_client, bufnr)
 end
 
 require("diagnostic")
-vim.lsp.set_log_level("error")
 
 -- COMPLETEOPT (IMPORTANT FOR CMP + TAB)
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
