@@ -213,7 +213,7 @@ vim.lsp.config.nixd = {
     on_attach = on_attach,
     settings = {
         nixd = {
-nixpkgs = {
+            nixpkgs = {
                 expr = 'import (builtins.getFlake "${workspaceFolder}").inputs.nixpkgs { }',
             },
             formatting = {

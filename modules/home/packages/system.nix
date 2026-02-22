@@ -20,6 +20,7 @@
     wl-mirror
     jq
     poppler-utils
+    psmisc
 
     # File management
     yazi
