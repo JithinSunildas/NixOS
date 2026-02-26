@@ -32,6 +32,7 @@ require("floating_term")
 require("statusline")
 require("tabs")
 require("keymaps")
+require("yazi.yazi")
 
 require("lazy").setup("plugins.suckless", {
     defaults = {

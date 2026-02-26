@@ -12,8 +12,6 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- === General ===
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
-vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { desc = "Open file explorer" })
-
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 
 -- === Clipboard ===
