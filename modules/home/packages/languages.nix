@@ -7,7 +7,7 @@
     nixpkgs-fmt
 
     # Python
-    python3
+    python312
     python3Packages.pip
     pyright
     black
