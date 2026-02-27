@@ -12,7 +12,7 @@ local function toggle_yazi_sidebar()
     local chooser_file = vim.fn.tempname()
 
     -- 2. Create the vertical split
-    vim.cmd("topleft 30vsplit")
+    vim.cmd("topleft 60vsplit")
     yazi_win = vim.api.nvim_get_current_win()
 
     -- 3. Create a dedicated empty buffer for the terminal
