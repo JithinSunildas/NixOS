@@ -9,8 +9,8 @@
     # Python
     (python313.withPackages (ps: with ps; [ 
       black 
+      pyright
     ]))
-    pyright
 
     # Go
     go
