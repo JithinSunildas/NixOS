@@ -33,10 +33,6 @@ in
   # java
   google-java-format
 
-  # python
-  basedpyright
-  ruff
-
   # qml... pretty big. we should remove it
   kdePackages.qtdeclarative
 
