@@ -7,9 +7,10 @@
     nixpkgs-fmt
 
     # Python
-    python3
+    (python313.withPackages (ps: with ps; [ 
+      black 
+    ]))
     pyright
-    black
 
     # Go
     go
