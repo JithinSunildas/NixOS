@@ -8,7 +8,6 @@
 
     # Python
     python3
-    python3Packages.pip
     pyright
     black
 
