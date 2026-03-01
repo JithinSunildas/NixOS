@@ -28,7 +28,7 @@
     ./zellij/zellij.nix
     ./xcompose/xcompose.nix
     ./ghostty.nix
-    ./spicetify.nix
+    # ./spicetify.nix
     ./bash.nix
     ./tmux.nix
     ./dunst.nix
