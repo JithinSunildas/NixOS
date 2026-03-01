@@ -16,14 +16,14 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # spicetify-nix = {
+    #   url = "github:Gerg-L/spicetify-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, stylix
-    , spicetify-nix, ... }: {
+    , ... }: {
       nixosConfigurations = {
         SuperDuperComputer = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -45,7 +45,7 @@
             # spicetify-nix.homeManagerModules.default
           ];
 
-          extraSpecialArgs = { inherit inputs spicetify-nix; };
+          extraSpecialArgs = { inherit inputs ; };
         };
       };
     };
