@@ -42,7 +42,7 @@
           modules = [
             ./modules/home/home.nix
             stylix.homeModules.stylix
-            spicetify-nix.homeManagerModules.default
+            # spicetify-nix.homeManagerModules.default
           ];
 
           extraSpecialArgs = { inherit inputs spicetify-nix; };
