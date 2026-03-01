@@ -4,6 +4,7 @@
     # System utilities
     efibootmgr
     unzip
+    file
     cyme
     parted
     xxd
