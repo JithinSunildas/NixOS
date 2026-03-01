@@ -12,17 +12,17 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # stylix = {
+    #   url = "github:danth/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # spicetify-nix = {
     #   url = "github:Gerg-L/spicetify-nix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, stylix
+  outputs = inputs@{ self, nixpkgs, home-manager, zen-browser #stylix
     , ... }: {
       nixosConfigurations = {
         SuperDuperComputer = nixpkgs.lib.nixosSystem {
@@ -41,7 +41,7 @@
 
           modules = [
             ./modules/home/home.nix
-            stylix.homeModules.stylix
+            # stylix.homeModules.stylix
             # spicetify-nix.homeManagerModules.default
           ];
 
