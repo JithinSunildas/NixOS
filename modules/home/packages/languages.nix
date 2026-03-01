@@ -40,7 +40,7 @@
     nodePackages.prettier
 
     # Java
-    jdt-language-server
+    # jdt-language-server
 
     # Other
     superhtml
