@@ -21,6 +21,7 @@
     # Media
     mpv
     obs-studio
+    rhythmbox
     gifski
     imv
 
