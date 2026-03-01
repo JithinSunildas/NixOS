@@ -13,7 +13,7 @@
     zls
     (pkgs.lib.lowPrio pkgs.vimPlugins.flutter-tools-nvim)
     ocamlPackages.ocaml-lsp
-    typescript-language-server
+    # typescript-language-server
     tailwindcss-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.prettier

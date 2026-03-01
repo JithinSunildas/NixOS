@@ -38,7 +38,7 @@ in
 
   # js
   biome
-  typescript-language-server
+  # typescript-language-server
   vscode-langservers-extracted
   stylelint-lsp
 

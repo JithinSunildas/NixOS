@@ -35,12 +35,11 @@
 
     # JavaScript/TypeScript
     nodejs
-    nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.prettier
 
     # Java
-    # jdt-language-server
+    jdt-language-server
 
     # Other
     superhtml
