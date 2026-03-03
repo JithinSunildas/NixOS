@@ -21,7 +21,6 @@
     emmet-ls
 
     # Formatters
-    black
     isort
     prettier
     stylua

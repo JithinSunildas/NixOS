@@ -10,6 +10,8 @@
 
     sessionVariables = {
       RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      QT_QPA_PLATFORMTHEME = "kde";
     };
   };
 
