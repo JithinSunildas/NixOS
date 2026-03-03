@@ -8,7 +8,7 @@
     lua-language-server
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted # html, css, json
-    # haskell-language-server
+    haskell-language-server
     gopls
     zls
     # jdt-language-server
