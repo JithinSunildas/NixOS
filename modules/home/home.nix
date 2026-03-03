@@ -1,5 +1,5 @@
 # modules/home/home.nix
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -11,7 +11,7 @@
     sessionVariables = {
       RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
       QT_QPA_PLATFORM = "wayland;xcb";
-      QT_QPA_PLATFORMTHEME = "kde";
+      QT_QPA_PLATFORMTHEME = lib.mkForce "kde";
     };
   };
 
