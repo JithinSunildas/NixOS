@@ -83,7 +83,7 @@ map("n", "<leader>tt", "<cmd>tabnew | terminal<cr>", { desc = "Terminal (new tab
 map("n", "<leader>th", "<cmd>split | terminal<cr>", { desc = "Terminal horizontal" })
 map("n", "<leader>tv", "<cmd>vsplit | terminal<cr>", { desc = "Terminal vertical" })
 -- Exit terminal mode easily
-map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
