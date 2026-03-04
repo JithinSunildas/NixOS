@@ -19,20 +19,32 @@ return {
     "nvim-lua/plenary.nvim",
 
     -- UI
+    -- "webhooked/kanso.nvim
+    -- "rebelot/kanagawa.nvim",
     {
-        -- "webhooked/kanso.nvim
-        -- "rebelot/kanagawa.nvim",
-        "sainnhe/gruvbox-material",
+        "sainnhe/everforest",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.g.gruvbox_material_background = 'hard'
-            vim.g.gruvbox_material_foreground = 'material'
-            vim.g.gruvbox_material_better_performance = 1
-
-            vim.cmd.colorscheme("gruvbox-material")
+            vim.o.background = "dark"
+            vim.g.everforest_better_performance = 1
+            vim.g.everforest_background = 'hard'
+            vim.g.everforest_enable_italic = true
+            vim.cmd.colorscheme("everforest")
         end,
     },
+    -- {
+    --     "sainnhe/gruvbox-material",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = "dark"
+    --         vim.g.gruvbox_material_background = 'hard'
+    --         vim.g.gruvbox_material_foreground = 'material'
+    --         vim.g.gruvbox_material_better_performance = 1
+    --         vim.cmd.colorscheme("gruvbox-material")
+    --     end,
+    -- },
 
     -- Git
     "lewis6991/gitsigns.nvim",
