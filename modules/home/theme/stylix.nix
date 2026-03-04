@@ -3,7 +3,7 @@
 {
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/rosepine-moon.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine-moon.yaml";
     image = ./wallpapers/secluded-grove-pixel.png;
     polarity = "dark";
 
