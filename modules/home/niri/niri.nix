@@ -8,17 +8,17 @@
     enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=12";
-        terminal = "foot"; # or your preferred terminal
-      };
-      colors = {
-        background = "1a1b26ff"; # Tokyo Night Dark background
-        text = "c0caf5ff";
-        match = "bb9af7ff";
-        selection = "33467bff";
-        selection-text = "c0caf5ff";
-        border = "bb9af7ff";
+        font = "Libre Baskerville:size=12";
+        terminal = "foot"; 
       };
     };
+    colors = {
+        background = "0f0f0fff";     # Deep black-gray
+        text = "d1d1d1ff";           # Soft white/light gray
+        match = "ffffffff";          # Pure white for matched characters (pop)
+        selection = "2a2a2aff";      # Subtle dark gray for selection
+        selection-text = "ffffffff"; # White text when selected
+        border = "333333ff";         # Dark gray border
+      };
   };
 }
