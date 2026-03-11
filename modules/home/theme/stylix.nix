@@ -47,7 +47,7 @@
       fish.enable = true;
       waybar.enable = true;
 
-      fuzzel.enable = true;
+      fuzzel.enable = false;
       vim.enable = true;
     };
   };
