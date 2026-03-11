@@ -8,7 +8,7 @@
     enable = true;
     settings = {
       main = {
-        font = "Inter:size=12";
+        font = "Libre Baskerville:size=12";
         terminal = "foot"; 
       };
       colors = {
