@@ -1,35 +1,41 @@
 /* === Global Styles === */
 * {
+    font-family: "JetBrainsMono Nerd Font"; /* Uses your font */
     font-size: 12px;
     font-weight: bold;
-    margin-left: 1px;
-    margin-right: 1px;
 }
+
 /* === Waybar Window === */
 window#waybar {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: @base00; /* Stylix Background */
+    color: @base05;            /* Stylix Foreground/Text */
+    border-bottom: 1px solid @base01;
 }
+
 /* === Workspaces === */
 #workspaces {
-    background: #0F1419;
+    background: @base01;
     border-radius: 15px;
-    padding: 0px 8px;
+    margin: 4px;
 }
+
 #workspaces button {
-    padding: 0px 3px;
-    border: 0;
+    padding: 0px 5px;
+    color: @base05;
+    background: transparent;
     border-radius: 10px;
-    background: #0F1419;
-    color: #E6E1CF;
 }
-#workspaces button:hover,
+
 #workspaces button.active {
-    background: linear-gradient(45deg, #131721, #131721);
-    border: 1px solid transparent;
-    color: #E6B673;
+    background: @base02;
+    color: @base0B; /* Usually the 'accent' color */
 }
-/* === Module Defaults === */
+
+#workspaces button:hover {
+    background: @base03;
+}
+
+/* === Module Grouping === */
 #window,
 #memory,
 #clock,
@@ -43,37 +49,25 @@ window#waybar {
 #custom-notification,
 #custom-startmenu,
 #custom-exit,
-#group-tray-expander,
-#custom-expand-icon,
 #mpris {
     border-radius: 15px;
     padding: 0px 10px;
-    background: #000000;  /* Fixed: was incomplete */
+    background: @base01; /* Slightly lighter than bar background */
+    color: @base05;
+    margin: 4px 2px;
 }
-/* === Individual Modules === */
-#memory { color: #ffffff; }
-#clock { color: #ffffff; }
-#cpu { color: #ffffff; }
-#disk { color: #ffffff; }
-#network { color: #ffffff; }
-#tray { color: #ffffff; }
-#pulseaudio { color: #ffffff; }
-#custom-notification { color: #E6E1CF; }
-#custom-startmenu { color: #ffffff; }
-#custom-expand-icon { color: #ffffff; }
-#mpris { color: #ffffff; }
-/* === Special Modules === */
+
+/* === Specific Overrides (Optional) === */
+#battery.charging {
+    color: @base0B; /* Greener/Accent color when charging */
+}
+
+#battery.critical {
+    color: @base08; /* Red/Warning color */
+}
+
+/* === Special Shaping === */
 #idle_inhibitor,
 #battery {
     border-radius: 15px 50px 15px 50px;
-    margin: 2px;
-    padding: 2px 20px;
-    background: #000000;
-}
-#idle_inhibitor { color: #ffffff; }
-#battery { color: #ffffff; }
-#custom-exit { color: #ffffff; }
-/* === Tray === */
-.tray-group-item {
-    padding: 0 4px;
 }
