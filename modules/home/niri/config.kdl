@@ -64,6 +64,7 @@ layout {
   default-column-width { proportion 0.5; }
 
   focus-ring {
+    off
     // width 1
     // active-color "#8a9a7b"
     // inactive-color "#505050"
@@ -109,7 +110,7 @@ animations {
 // Inactive windows
 window-rule {
     match is-focused=false
-    opacity 0.7
+    opacity 0.6
 }
 
 // Active/focused window
