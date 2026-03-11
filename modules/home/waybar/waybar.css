@@ -1,41 +1,37 @@
 /* === Global Styles === */
 * {
-    font-family: "JetBrainsMono Nerd Font"; /* Uses your font */
+    font-family: "JetBrainsMono Nerd Font";
     font-size: 12px;
     font-weight: bold;
 }
 
 /* === Waybar Window === */
 window#waybar {
-    background-color: @base00; /* Stylix Background */
-    color: @base05;            /* Stylix Foreground/Text */
-    border-bottom: 1px solid @base01;
+    /* Stylix handles the bar background and text color */
 }
 
 /* === Workspaces === */
 #workspaces {
-    background: @base01;
     border-radius: 15px;
     margin: 4px;
+    padding: 0px 8px;
 }
 
 #workspaces button {
     padding: 0px 5px;
-    color: @base05;
-    background: transparent;
     border-radius: 10px;
+    border: 0;
 }
 
 #workspaces button.active {
-    background: @base02;
-    color: @base0B; /* Usually the 'accent' color */
+    /* Stylix handles the active workspace highlight */
 }
 
 #workspaces button:hover {
-    background: @base03;
+    /* Stylix handles the hover state */
 }
 
-/* === Module Grouping === */
+/* === Module Layout === */
 #window,
 #memory,
 #clock,
@@ -49,25 +45,22 @@ window#waybar {
 #custom-notification,
 #custom-startmenu,
 #custom-exit,
+#group-tray-expander,
+#custom-expand-icon,
 #mpris {
     border-radius: 15px;
     padding: 0px 10px;
-    background: @base01; /* Slightly lighter than bar background */
-    color: @base05;
     margin: 4px 2px;
-}
-
-/* === Specific Overrides (Optional) === */
-#battery.charging {
-    color: @base0B; /* Greener/Accent color when charging */
-}
-
-#battery.critical {
-    color: @base08; /* Red/Warning color */
 }
 
 /* === Special Shaping === */
 #idle_inhibitor,
 #battery {
     border-radius: 15px 50px 15px 50px;
+    padding: 2px 20px;
+}
+
+/* === Tray === */
+.tray-group-item {
+    padding: 0 4px;
 }
