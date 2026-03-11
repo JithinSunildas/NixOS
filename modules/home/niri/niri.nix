@@ -8,16 +8,16 @@
     enable = true;
     settings = {
       main = {
-        font = "Libre Baskerville:size=12";
+        font = "Libre Baskerville:size=10";
         terminal = "foot"; 
       };
       colors = {
-          background = "0f0f0fff";     # Deep black-gray
-          text = "d1d1d1ff";           # Soft white/light gray
-          match = "ffffffff";          # Pure white for matched characters (pop)
-          selection = "2a2a2aff";      # Subtle dark gray for selection
-          selection-text = "ffffffff"; # White text when selected
-          border = "333333ff";         # Dark gray border
+          background = "0f0f0fff";     
+          text = "d1d1d1ff";           
+          match = "ffffffff";          
+          selection = "2a2a2aff";      
+          selection-text = "ffffffff"; 
+          border = "333333ff";         
         };
     };
   };
