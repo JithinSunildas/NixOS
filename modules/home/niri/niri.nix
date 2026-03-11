@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 
 {
-	xdg.configFile."niri/config.kdl".source = ./config.kdl;
+  xdg.configFile."niri".source =
+    config.lib.file.mkOutOfStoreSymlink "/home/tikhaboom/nix-config/modules/home/niri/config.kdl";
 }

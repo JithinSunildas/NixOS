@@ -21,16 +21,28 @@ return {
     -- UI
     -- "webhooked/kanso.nvim
     -- "rebelot/kanagawa.nvim",
+    -- {
+    --     "sainnhe/everforest",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.o.background = "dark"
+    --         vim.g.everforest_better_performance = 1
+    --         vim.g.everforest_background = 'hard'
+    --         vim.g.everforest_enable_italic = true
+    --         vim.cmd.colorscheme("everforest")
+    --     end,
+    -- },
     {
-        "sainnhe/everforest",
+        "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.o.background = "dark"
-            vim.g.everforest_better_performance = 1
-            vim.g.everforest_background = 'hard'
-            vim.g.everforest_enable_italic = true
-            vim.cmd.colorscheme("everforest")
+            -- vim.o.background = "dark"
+            -- vim.g.everforest_better_performance = 1
+            -- vim.g.everforest_background = 'hard'
+            -- vim.g.everforest_enable_italic = true
+            vim.cmd.colorscheme("kanagawa-dragon")
         end,
     },
     -- {
