@@ -151,7 +151,7 @@
       '';
     };
     postgresql.enable = true;
-    mysql = {
+    mariadb = {
       enable = true;
       package = pkgs.mariadb;
     };

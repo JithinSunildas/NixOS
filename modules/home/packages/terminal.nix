@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     # Terminal multiplexers
     tmux
-    zellij
 
     # Terminals
     ghostty
@@ -22,5 +21,6 @@
     man-db
     man-pages
     man-pages-posix
+    neomutt
   ];
 }
