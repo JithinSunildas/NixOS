@@ -157,9 +157,8 @@
     dictd = {
       enable = true;
       DBs = with pkgs.dictdDBs; [
-        wordnet        
-        wiktionary     
-        moby-thesaurus 
+        wordnet
+        wiktionary
       ];
     };
   };
