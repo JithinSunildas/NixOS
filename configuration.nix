@@ -108,7 +108,6 @@
     xwayland
     xwayland-satellite
     android-tools
-    dict
   ];
 
   environment.variables = {
@@ -154,6 +153,14 @@
     mariadb = {
       enable = true;
       package = pkgs.mariadb;
+    };
+    dictd = {
+      enable = true;
+      DBs = with pkgs.dictdDBs; [
+        wordnet        
+        wiktionary     
+        moby-thesaurus 
+      ];
     };
   };
 

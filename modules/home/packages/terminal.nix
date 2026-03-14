@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = with pkgs; [
     # Terminal multiplexers
@@ -23,4 +23,7 @@
     man-pages-posix
     neomutt
   ];
+  home.file.".dict/dict.conf".text = ''
+    server localhost
+  '';
 }
