@@ -20,9 +20,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gazelle.url = "github:Zeus-Deus/gazelle-tui";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, stylix
+  outputs = inputs@{ self, nixpkgs, home-manager, gazelle, zen-browser, stylix
     , spicetify-nix, ... }: {
       nixosConfigurations = {
         SuperDuperComputer = nixpkgs.lib.nixosSystem {
@@ -43,6 +44,7 @@
             ./modules/home/home.nix
             stylix.homeModules.stylix
             spicetify-nix.homeManagerModules.default
+            gazelle.homeModules.gazelle
           ];
 
           extraSpecialArgs = { inherit inputs spicetify-nix; };

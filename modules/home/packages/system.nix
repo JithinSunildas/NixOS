@@ -22,6 +22,7 @@
     wl-mirror
     jq
     poppler-utils
+    inputs.gazelle.packages.${pkgs.system}.default
     psmisc
 
     # File management

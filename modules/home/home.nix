@@ -37,6 +37,7 @@
     };
     bash.enable = true;
     fish.enable = true;
+    gazelle.enable = true;
   };
 
   ########################################
