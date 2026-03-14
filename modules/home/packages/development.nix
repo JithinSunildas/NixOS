@@ -27,6 +27,7 @@
     maven
     gradle
     spring-boot-cli
+    mariadb
 
     # PHP/Laravel
     php83

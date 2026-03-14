@@ -15,7 +15,6 @@
     git
     helix
     openssh
-    mariadb
     curl
     wlogout
     eza
