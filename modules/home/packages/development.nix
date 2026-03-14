@@ -39,7 +39,7 @@
     php83Extensions.gd
 
     # Databases
-    mysql80
+    mariadb
     postgresql
   ];
 
