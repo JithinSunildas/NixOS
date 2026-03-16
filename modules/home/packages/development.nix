@@ -9,6 +9,7 @@
     # Build tools
     cmake
     pkgsCross.musl64.stdenv.cc
+x86_64-linux-musl-gcc
 
     # Design and Frontend
     typst
