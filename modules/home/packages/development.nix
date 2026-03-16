@@ -9,7 +9,6 @@
     # Build tools
     cmake
     pkgsCross.musl64.stdenv.cc
-x86_64-linux-musl-gcc
 
     # Design and Frontend
     typst
@@ -44,6 +43,9 @@ x86_64-linux-musl-gcc
     mariadb
     postgresql
   ];
+
+  CC_x86_64_unknown_linux_musl = "${pkgs.pkgsCross.musl64.stdenv.cc}/bin/x86_64-unknown-linux-musl-gcc";
+  CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER = "${pkgs.pkgsCross.musl64.stdenv.cc}/bin/x86_64-unknown-linux-musl-gcc";
 
   nixpkgs.config = {
     android_sdk.accept_license = true;
