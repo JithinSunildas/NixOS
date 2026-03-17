@@ -108,7 +108,7 @@ vim.lsp.config.clangd = {
     cmd = {
         "clangd",
         "--background-index",
-        "--query-driver=/run/current-system/sw/bin/g++,/run/current-system/sw/bin/gcc",
+        "--query-driver=/run/current-system/sw/bin/clang++,/run/current-system/sw/bin/clang",
     },
     filetypes = { "c", "h", "hpp", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
