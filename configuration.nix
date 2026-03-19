@@ -133,13 +133,13 @@
       layout = "us";
       variant = "";
     };
+    guix.enable = true;
     qbittorrent.enable = true;
     displayManager = {
       enable = true;
       ly.enable = true;
     };
     openssh.enable = true;
-    emacs.enable = true;
     gvfs.enable = true;
     kanata = {
       enable = true;
