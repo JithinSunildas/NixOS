@@ -108,7 +108,7 @@ vim.lsp.config.clangd = {
     cmd = {
         "clangd",
         "--background-index",
-        "--query-driver=/run/current-system/sw/bin/clang++,/run/current-system/sw/bin/clang",
+        "--query-driver=/**/*", -- The NixOS magic wildcard
     },
     filetypes = { "c", "h", "hpp", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
