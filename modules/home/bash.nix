@@ -7,7 +7,7 @@
 
     shellAliases = {
       grep = "grep --color=auto";
-      ls = "lsd";
+      ls = "eza";
       ll = "ls -l";
       la = "ls -lAtr";
       cat = "bat";

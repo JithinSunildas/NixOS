@@ -49,6 +49,7 @@ alias nd='nix-store --query --requisites /run/current-system | grep -F /nix/stor
 alias see='nix search nixpkgs'
 alias ndev='nix develop'
 alias nshell='nix-shell'
+alias flake='~/Work/Rust/Flake/target/release/Flake'
 alias hib='sudo systemctl hibernate'
 alias susp='sudo systemctl suspend'
 alias reboot='sudo systemctl reboot'
