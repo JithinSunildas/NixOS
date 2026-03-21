@@ -50,5 +50,9 @@
   services = {
     ssh-agent.enable = true;
     swww.enable = true;
+    ollama = {
+      enable = true;
+      acceleration = null;
+    };
   };
 }

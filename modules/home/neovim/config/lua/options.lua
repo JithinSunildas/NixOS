@@ -33,7 +33,7 @@ opt.incsearch = true
 opt.hlsearch = true
 
 -- [[ Clipboard and System Interaction ]]
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"
 
 -- [[ Window Splitting ]]
 opt.splitbelow = true

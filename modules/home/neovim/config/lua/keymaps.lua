@@ -19,6 +19,12 @@ map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 map("n", "<A-a>", "ggVG", { desc = "Select all" })
 map("i", "<A-a>", "<Esc>ggVG", { desc = "Select all" })
 map("v", "<A-a>", "ggVG", { desc = "Select all" })
+map("n", "<leader>y", "\"+y", { desc = "Copy to clipboard" })
+map("v", "<leader>y", "\"+y", { desc = "Copy to clipboard" })
+map("n", "<leader>P", "\"+P", { desc = "Paste from clipboard" })
+map("n", "<leader>p", "\"+p", { desc = "Paste from clipboard" })
+map("v", "<leader>P", "\"+P", { desc = "Paste from clipboard" })
+map("v", "<leader>p", "\"+p", { desc = "Paste from clipboard" })
 
 -- === Window Management ===
 -- Navigate between windows
@@ -134,13 +140,13 @@ map("n", "[c", function()
 end, { expr = true, desc = "Previous git hunk" })
 
 -- Copy Full File-Path
-vim.keymap.set("n", "<leader>pa", function()
+vim.keymap.set("n", "<leader>va", function()
     local path = vim.fn.expand("%:p")
     vim.fn.setreg("+", path)
     print("file:", path)
 end)
 -- Copy Path Relative to Project Root
-vim.keymap.set("n", "<leader>pr", function()
+vim.keymap.set("n", "<leader>vr", function()
     local current_file = vim.fn.expand("%:p")
     -- Look for the project root (indicated by .git)
     local root_file = vim.fs.find({ ".git" }, { upward = true, path = current_file })[1]

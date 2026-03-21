@@ -1,9 +1,9 @@
 {
   programs.ghostty = {
     enable = true;
-    # settings = {
-    #   theme = "kanagawa-dragon";
-    # };
+    settings = {
+      "shell-integration-features" = "no-paste-protection";
+    };
     # settings = {
     #   # Visual Settings
     #   window-decoration = "none";
