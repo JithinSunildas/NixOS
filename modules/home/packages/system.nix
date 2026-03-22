@@ -4,6 +4,7 @@
     # System utilities
     efibootmgr
     unzip
+    zstd
     file
     cyme
     parted
