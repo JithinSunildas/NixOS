@@ -72,6 +72,11 @@
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
+
   # Battery Notifications
   # systemd.user.services.batsignal = {
   #   enable = true;
@@ -134,6 +139,7 @@
       variant = "";
     };
     guix.enable = true;
+    blueman.enable = true;
     qbittorrent.enable = true;
     displayManager = {
       enable = true;
