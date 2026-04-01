@@ -138,6 +138,13 @@
       layout = "us";
       variant = "";
     };
+    throttled = {
+      enable = true;
+      extraConfig = ''
+        [GENERAL]
+        Disable_BDPROCHOT=True
+      '';
+    };
     guix.enable = true;
     blueman.enable = true;
     qbittorrent.enable = true;

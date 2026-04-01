@@ -9,6 +9,7 @@
     limine
     neovim
     # batsignal
+    throttled
     wget
     wl-clipboard-rs
     wl-clipboard
