@@ -142,8 +142,17 @@
       enable = true;
       extraConfig = ''
         [GENERAL]
-        Update_Rate_s = 5
-        Disable_BDPROCHOT=True
+        Enabled: True
+        Sysfs_Power_Path: /sys/class/power_supply/AC*/online
+        Autoreload: True
+
+        [BATTERY]
+        Update_Rate_s: 30
+        Disable_BDPROCHOT: True
+
+        [AC]
+        Update_Rate_s: 5
+        Disable_BDPROCHOT: True
       '';
     };
     guix.enable = true;
