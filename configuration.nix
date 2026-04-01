@@ -142,6 +142,7 @@
       enable = true;
       extraConfig = ''
         [GENERAL]
+        Update_Rate_s = 5
         Disable_BDPROCHOT=True
       '';
     };
