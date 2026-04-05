@@ -6,8 +6,8 @@
     nil
     pyright
     lua-language-server
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted # html, css, json
+    # nodePackages.typescript-language-server
+    # nodePackages.vscode-langservers-extracted # html, css, json
     haskell-language-server
     gopls
     zls
@@ -16,8 +16,8 @@
     ocamlPackages.ocaml-lsp
     # typescript-language-server
     tailwindcss-language-server
-    nodePackages.vscode-langservers-extracted
-    nodePackages.prettier
+    # nodePackages.vscode-langservers-extracted
+    # nodePackages.prettier
     emmet-ls
 
     # Formatters

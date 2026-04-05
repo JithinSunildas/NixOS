@@ -49,7 +49,7 @@
   ########################################
   services = {
     ssh-agent.enable = true;
-    awww.enable = true;
+    swww.enable = true;
     ollama = {
       enable = true;
       acceleration = null;

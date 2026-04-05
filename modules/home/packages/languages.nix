@@ -37,8 +37,8 @@
 
     # JavaScript/TypeScript
     nodejs
-    nodePackages.vscode-langservers-extracted
-    nodePackages.prettier
+    # nodePackages.vscode-langservers-extracted
+    # nodePackages.prettier
 
     # Java
 
