@@ -13,7 +13,7 @@
     dunst
 
     # Wallpaper & Theming
-    swww
+    awww
     nwg-look
 
     # Lock screen
