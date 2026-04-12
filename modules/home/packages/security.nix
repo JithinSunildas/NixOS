@@ -10,6 +10,6 @@
     
     # VPN
     openvpn
-    protonvpn-gui
+    proton-vpn
   ];
 }

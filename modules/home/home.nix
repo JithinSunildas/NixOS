@@ -42,7 +42,7 @@
     bash.enable = true;
     fish.enable = true;
     gazelle.enable = true;
-    # nix-ld.enable = true;
+    nix-ld.enable = true;
   };
 
   ########################################
