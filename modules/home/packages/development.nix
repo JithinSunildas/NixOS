@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
 # Editors
-    helix
+      helix
       vscode
       emacs
 

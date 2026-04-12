@@ -9,6 +9,7 @@
     cyme
     parted
     xxd
+    nix-ld
     xhost
     ninja
     pkg-config
