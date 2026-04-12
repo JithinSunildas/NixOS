@@ -1,5 +1,5 @@
 # modules/home/stylix.nix
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   stylix = {
     enable = true;
@@ -53,6 +53,7 @@
   };
 
   gtk = {
+    gtk4.theme = config.gtk.theme;
     enable = true;
     iconTheme = {
       name = "Reversal-dark";
