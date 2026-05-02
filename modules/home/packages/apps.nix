@@ -19,6 +19,8 @@
 
     # Media
     mpv
+    xclip
+    python313Packages.subliminal
     obs-studio
     rhythmbox
     gifski
