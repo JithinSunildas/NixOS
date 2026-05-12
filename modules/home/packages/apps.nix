@@ -9,7 +9,6 @@
 
     # Office & Productivity
     cheese
-    obsidian
     zathura
     gnome-calculator
 
