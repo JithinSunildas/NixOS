@@ -13,7 +13,6 @@
     xhost
     ninja
     pkg-config
-    wifitui
     notify
     imagemagick
     ffmpegthumbnailer
