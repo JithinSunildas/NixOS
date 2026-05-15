@@ -38,10 +38,10 @@
     };
 
     targets = {
-      # qt = {
-      #   enable = true;
-      #   platform = "qtct";
-      # };
+      qt = {
+        enable = true;
+        platform = "qtct";
+      };
 
       ghostty.enable = true;
       fish.enable = true;
@@ -61,9 +61,9 @@
     };
   };
 
-  qt = {
-    enable = true;
-    platformTheme.name = "qtct";
-    style.name = "adwaita-dark";
-  };
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "qtct";
+  #   style.name = "adwaita-dark";
+  # };
 }
