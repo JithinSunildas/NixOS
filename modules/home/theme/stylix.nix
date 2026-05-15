@@ -38,10 +38,10 @@
     };
 
     targets = {
-      qt = {
-        enable = true;
-        platform = "qtct";
-      };
+      # qt = {
+      #   enable = true;
+      #   platform = "qtct";
+      # };
 
       ghostty.enable = true;
       fish.enable = true;
