@@ -40,7 +40,7 @@
     targets = {
       qt = {
         enable = true;
-        platform = "qtct";
+        platform = "gtk";
       };
 
       ghostty.enable = true;
@@ -63,7 +63,6 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "qtct";
-    style.name = "adwaita-dark";
+    platformTheme.name = "gtk";
   };
 }
