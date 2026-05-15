@@ -22,9 +22,9 @@
     python313Packages.subliminal
     obs-studio
     rhythmbox
+    strawberry
     gifski
     imv
-    lollypop
     kdePackages.kdenlive
 
     # Downloads
