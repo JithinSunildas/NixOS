@@ -24,6 +24,8 @@
     rhythmbox
     gifski
     imv
+    lollypop
+    kdePackages.kdenlive
 
     # Downloads
     qbittorrent
