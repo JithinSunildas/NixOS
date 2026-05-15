@@ -6,25 +6,24 @@
     nil
     pyright
     lua-language-server
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted # html, css, json
+    # nodePackages.typescript-language-server
+    # nodePackages.vscode-langservers-extracted # html, css, json
     haskell-language-server
     gopls
     zls
+    # jdt-language-server
     (pkgs.lib.lowPrio pkgs.vimPlugins.flutter-tools-nvim)
     ocamlPackages.ocaml-lsp
-    typescript-language-server
+    # typescript-language-server
     tailwindcss-language-server
-    nodePackages.vscode-langservers-extracted
-    nodePackages.prettier
+    # nodePackages.vscode-langservers-extracted
+    # nodePackages.prettier
     emmet-ls
 
     # Formatters
-    black
     isort
     prettier
     stylua
-    nixfmt
     google-java-format
     ormolu
     # Linters
@@ -44,15 +43,6 @@
       -- This runs BEFORE init.lua
     '';
   };
-  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tikhaboom/nix-config/modules/home/neovim/config";
-  # xdg.configFile."nvim/init.lua" = {
-  #   # source = ./config/init.lua;
-  #   # source = ./config/suckless.lua;
-  #   # source = ./config/symlink.lua;
-  # };
-
-  # xdg.configFile."nvim/lua" = {
-  #   source = ./config/lua;
-  #   recursive = true;
-  # };
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "/home/tikhaboom/nix-config/modules/home/neovim/config";
 }

@@ -1,35 +1,39 @@
 /* === Global Styles === */
 * {
-    font-size: 12px;
+    font-family: "Libre Baskerville";
+    font-size: 11px;
     font-weight: bold;
-    margin-left: 1px;
-    margin-right: 1px;
+    padding: 0;
+    margin: 0;
 }
+
 /* === Waybar Window === */
 window#waybar {
-    background-color: #000000;
-    color: #ffffff;
+    /* Stylix handles the bar background and text color */
 }
+
 /* === Workspaces === */
 #workspaces {
-    background: #0F1419;
     border-radius: 15px;
+    margin: 4px;
     padding: 0px 8px;
 }
+
 #workspaces button {
-    padding: 0px 3px;
-    border: 0;
+    padding: 0px 5px;
     border-radius: 10px;
-    background: #0F1419;
-    color: #E6E1CF;
+    border: 0;
 }
-#workspaces button:hover,
+
 #workspaces button.active {
-    background: linear-gradient(45deg, #131721, #131721);
-    border: 1px solid transparent;
-    color: #E6B673;
+    /* Stylix handles the active workspace highlight */
 }
-/* === Module Defaults === */
+
+#workspaces button:hover {
+    /* Stylix handles the hover state */
+}
+
+/* === Module Layout === */
 #window,
 #memory,
 #clock,
@@ -48,31 +52,16 @@ window#waybar {
 #mpris {
     border-radius: 15px;
     padding: 0px 10px;
-    background: #000000;  /* Fixed: was incomplete */
+    margin: 4px 2px;
 }
-/* === Individual Modules === */
-#memory { color: #ffffff; }
-#clock { color: #ffffff; }
-#cpu { color: #ffffff; }
-#disk { color: #ffffff; }
-#network { color: #ffffff; }
-#tray { color: #ffffff; }
-#pulseaudio { color: #ffffff; }
-#custom-notification { color: #E6E1CF; }
-#custom-startmenu { color: #ffffff; }
-#custom-expand-icon { color: #ffffff; }
-#mpris { color: #ffffff; }
-/* === Special Modules === */
+
+/* === Special Shaping === */
 #idle_inhibitor,
 #battery {
     border-radius: 15px 50px 15px 50px;
-    margin: 2px;
     padding: 2px 20px;
-    background: #000000;
 }
-#idle_inhibitor { color: #ffffff; }
-#battery { color: #ffffff; }
-#custom-exit { color: #ffffff; }
+
 /* === Tray === */
 .tray-group-item {
     padding: 0 4px;

@@ -12,8 +12,6 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- === General ===
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
-vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { desc = "Open file explorer" })
-
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 
 -- === Clipboard ===
@@ -21,6 +19,12 @@ map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all (force)" })
 map("n", "<A-a>", "ggVG", { desc = "Select all" })
 map("i", "<A-a>", "<Esc>ggVG", { desc = "Select all" })
 map("v", "<A-a>", "ggVG", { desc = "Select all" })
+map("n", "<leader>y", "\"+y", { desc = "Copy to clipboard" })
+map("v", "<leader>y", "\"+y", { desc = "Copy to clipboard" })
+map("n", "<leader>P", "\"+P", { desc = "Paste from clipboard" })
+map("n", "<leader>p", "\"+p", { desc = "Paste from clipboard" })
+map("v", "<leader>P", "\"+P", { desc = "Paste from clipboard" })
+map("v", "<leader>p", "\"+p", { desc = "Paste from clipboard" })
 
 -- === Window Management ===
 -- Navigate between windows
@@ -85,7 +89,7 @@ map("n", "<leader>tt", "<cmd>tabnew | terminal<cr>", { desc = "Terminal (new tab
 map("n", "<leader>th", "<cmd>split | terminal<cr>", { desc = "Terminal horizontal" })
 map("n", "<leader>tv", "<cmd>vsplit | terminal<cr>", { desc = "Terminal vertical" })
 -- Exit terminal mode easily
-map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
@@ -136,13 +140,13 @@ map("n", "[c", function()
 end, { expr = true, desc = "Previous git hunk" })
 
 -- Copy Full File-Path
-vim.keymap.set("n", "<leader>pa", function()
+vim.keymap.set("n", "<leader>va", function()
     local path = vim.fn.expand("%:p")
     vim.fn.setreg("+", path)
     print("file:", path)
 end)
 -- Copy Path Relative to Project Root
-vim.keymap.set("n", "<leader>pr", function()
+vim.keymap.set("n", "<leader>vr", function()
     local current_file = vim.fn.expand("%:p")
     -- Look for the project root (indicated by .git)
     local root_file = vim.fs.find({ ".git" }, { upward = true, path = current_file })[1]

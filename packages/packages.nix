@@ -9,13 +9,13 @@
     limine
     neovim
     # batsignal
+    throttled
     wget
     wl-clipboard-rs
     wl-clipboard
     git
     helix
     openssh
-    mariadb
     curl
     wlogout
     eza
@@ -34,7 +34,6 @@
     fastfetch
     btop
     ripgrep
-    nixfmt-rfc-style
     xwayland
     xwayland-satellite
   ];

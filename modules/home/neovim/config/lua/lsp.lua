@@ -1,6 +1,8 @@
 -- modules/home/neovim/config/lua/lsp.lua
 -- Neovim 0.11+ native LSP configuration (NO nvim-lspconfig)
 
+vim.lsp.set_log_level("error")
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -38,7 +40,6 @@ local on_attach = function(_client, bufnr)
 end
 
 require("diagnostic")
-vim.lsp.set_log_level("error")
 
 -- COMPLETEOPT (IMPORTANT FOR CMP + TAB)
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
@@ -107,7 +108,7 @@ vim.lsp.config.clangd = {
     cmd = {
         "clangd",
         "--background-index",
-        "--query-driver=/run/current-system/sw/bin/g++,/run/current-system/sw/bin/gcc",
+        "--query-driver=/**/*", -- The NixOS magic wildcard
     },
     filetypes = { "c", "h", "hpp", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
@@ -210,6 +211,24 @@ vim.lsp.config.nixd = {
     root_markers = { "flake.nix", ".git" },
     capabilities = capabilities,
     on_attach = on_attach,
+    settings = {
+        nixd = {
+            nixpkgs = {
+                expr = 'import (builtins.getFlake "${workspaceFolder}").inputs.nixpkgs { }',
+            },
+            formatting = {
+                command = { "alejandra" },
+            },
+            options = {
+                nixos = {
+                    expr = '(builtins.getFlake "${workspaceFolder}").nixosConfigurations."SuperDuperComputer".options',
+                },
+                home_manager = {
+                    expr = '(builtins.getFlake "${workspaceFolder}").homeConfigurations."tikhaboom".options',
+                },
+            },
+        },
+    }
 }
 
 vim.lsp.config.gopls = {

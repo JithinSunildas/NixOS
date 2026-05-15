@@ -1,33 +1,31 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    ollama
+
     # Nix
     nixd
     nil
     nixpkgs-fmt
 
     # Python
-    python3
-    python3Packages.pip
-    pyright
-    black
+    (python313.withPackages (ps: with ps; [ 
+      black 
+      pyright
+    ]))
 
     # Go
     go
 
     # Rust
-    cargo
-    rustc
-    rust-analyzer
-    rustfmt
-    clippy
-    lld
+    rustup
     pkg-config
 
     # C/C++/Zig
     (pkgs.lib.hiPrio pkgs.clang)
     (pkgs.lib.hiPrio pkgs.vim)
     clang-tools
+    lld
     lldb
     gcc
     zig_0_15
@@ -39,12 +37,10 @@
 
     # JavaScript/TypeScript
     nodejs
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
-    nodePackages.prettier
+    # nodePackages.vscode-langservers-extracted
+    # nodePackages.prettier
 
     # Java
-    jdt-language-server
 
     # Other
     superhtml

@@ -3,9 +3,10 @@
 local opt = vim.opt
 
 -- [[ UI Configuration ]]
-vim.opt.termguicolors = true
+opt.termguicolors = true
 opt.number = true
 opt.relativenumber = true
+opt.guicursor:append("v-ve:hor50")
 opt.signcolumn = "yes"
 opt.scrolloff = 8
 opt.showmode = false
@@ -32,7 +33,7 @@ opt.incsearch = true
 opt.hlsearch = true
 
 -- [[ Clipboard and System Interaction ]]
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"
 
 -- [[ Window Splitting ]]
 opt.splitbelow = true

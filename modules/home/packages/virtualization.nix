@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     # QEMU
-    qemu_full
+    qemu_kvm
     virt-manager
     
     # Docker

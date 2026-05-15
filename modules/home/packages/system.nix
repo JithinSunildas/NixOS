@@ -1,12 +1,15 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
     # System utilities
     efibootmgr
     unzip
+    zstd
+    file
     cyme
     parted
     xxd
+    nix-ld
     xhost
     ninja
     pkg-config
@@ -20,6 +23,8 @@
     wl-mirror
     jq
     poppler-utils
+    # inputs.gazelle.packages.${pkgs.system}.default
+    psmisc
 
     # File management
     yazi

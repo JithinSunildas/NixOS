@@ -1,9 +1,9 @@
 # modules/home/stylix.nix
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
     image = ./wallpapers/secluded-grove-pixel.png;
     polarity = "dark";
 
@@ -47,12 +47,13 @@
       fish.enable = true;
       waybar.enable = true;
 
-      fuzzel.enable = true;
+      fuzzel.enable = false;
       vim.enable = true;
     };
   };
 
   gtk = {
+    gtk4.theme = config.gtk.theme;
     enable = true;
     iconTheme = {
       name = "Reversal-dark";
@@ -60,8 +61,9 @@
     };
   };
 
-  qt = {
-    enable = true;
-    platformTheme.name = "qtct";
-  };
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "qtct";
+  #   style.name = "adwaita-dark";
+  # };
 }

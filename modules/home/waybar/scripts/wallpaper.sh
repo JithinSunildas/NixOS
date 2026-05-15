@@ -7,14 +7,14 @@ PICS=($(ls "$DIR"))
 
 RANDOMPICS="${PICS[$RANDOM % ${#PICS[@]}]}"
 
-if pidof swww >/dev/null; then
-  pkill swww
+if pidof awww >/dev/null; then
+  pkill awww
 fi
 
 wait
 
-# swww init
-swww img "${DIR}/${RANDOMPICS}" --transition-type wipe --transition-fps 60 --transition-duration 0.3 --transition-angle 30 --transition-step 90 &
+# awww init
+awww img "${DIR}/${RANDOMPICS}" --transition-type wipe --transition-fps 60 --transition-duration 0.3 --transition-angle 30 --transition-step 90 &
 wait
 
 wal -i "${DIR}/${RANDOMPICS}"

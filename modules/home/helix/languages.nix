@@ -33,16 +33,12 @@ in
   # java
   google-java-format
 
-  # python
-  basedpyright
-  ruff
-
   # qml... pretty big. we should remove it
   kdePackages.qtdeclarative
 
   # js
   biome
-  typescript-language-server
+  # typescript-language-server
   vscode-langservers-extracted
   stylelint-lsp
 

@@ -72,6 +72,11 @@
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
+
   # Battery Notifications
   # systemd.user.services.batsignal = {
   #   enable = true;
@@ -105,11 +110,9 @@
   # --- Environment ---
   environment.systemPackages = with pkgs; [
     polkit
-    nixfmt-rfc-style
     xwayland
     xwayland-satellite
     android-tools
-    dict
   ];
 
   environment.variables = {
@@ -135,13 +138,31 @@
       layout = "us";
       variant = "";
     };
+    throttled = {
+      enable = true;
+      extraConfig = ''
+        [GENERAL]
+        Enabled: True
+        Sysfs_Power_Path: /sys/class/power_supply/AC*/online
+        Autoreload: True
+
+        [BATTERY]
+        Update_Rate_s: 30
+        Disable_BDPROCHOT: True
+
+        [AC]
+        Update_Rate_s: 5
+        Disable_BDPROCHOT: True
+      '';
+    };
+    guix.enable = true;
+    blueman.enable = true;
     qbittorrent.enable = true;
     displayManager = {
       enable = true;
       ly.enable = true;
     };
     openssh.enable = true;
-    emacs.enable = true;
     gvfs.enable = true;
     kanata = {
       enable = true;
@@ -155,6 +176,13 @@
     mysql = {
       enable = true;
       package = pkgs.mariadb;
+    };
+    dictd = {
+      enable = true;
+      DBs = with pkgs.dictdDBs; [
+        wordnet
+        wiktionary
+      ];
     };
   };
 

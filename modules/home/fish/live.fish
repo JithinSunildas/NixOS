@@ -15,6 +15,7 @@ set -gx XDG_CACHE_HOME $HOME/.cache
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
+fish_add_path ~/.cargo/bin
 
 # ==========================================
 # Starship Prompt
@@ -31,7 +32,7 @@ zoxide init fish | source
 # ==========================================
 alias e='~/.config/emacs/bin/doom emacs -nw'
 alias vi='nvim -R'
-alias flake='~/Work/Rust/Flake/target/release/Flake'
+alias info="info --vi-keys"
 alias run='~/Work/OS/Assignment_1/run'
 alias doom='exec /home/tikhaboom/.config/emacs/bin/doom'
 alias pick='exec /home/tikhaboom/nix-config/scripts/yazi.sh'
@@ -42,12 +43,13 @@ alias update='sudo nix-channel --update'
 alias nr='cd ~/nix-config && sudo nixos-rebuild switch --flake .#SuperDuperComputer'
 alias hr='home-manager switch --flake ~/nix-config#tikhaboom'
 alias hb='home-manager switch --flake ~/nix-config#tikhaboom -b backup'
-alias nc='nix-collect-garbage -d'
+alias ncg='nix-collect-garbage -d'
 alias ncs='sudo nix-collect-garbage -d'
 alias nd='nix-store --query --requisites /run/current-system | grep -F /nix/store | xargs du -sh | sort -hr'
 alias see='nix search nixpkgs'
 alias ndev='nix develop'
 alias nshell='nix-shell'
+alias flake='~/Work/Rust/Flake/target/release/Flake'
 alias hib='sudo systemctl hibernate'
 alias susp='sudo systemctl suspend'
 alias reboot='sudo systemctl reboot'
@@ -98,7 +100,6 @@ alias q='exit'
 alias c='clear'
 alias h='history'
 alias w='cd ~/Work'
-alias d='cd ~/Downloads'
 alias doc='cd ~/Documents'
 alias notes='cd ~/Documents/My\ Vault/'
 alias nconf='cd ~/nix-config'

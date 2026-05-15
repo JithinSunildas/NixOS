@@ -1,7 +1,5 @@
 # modules/home/home.nix
-{
-  ...
-}:
+{ pkgs, lib, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -9,6 +7,12 @@
     username = "tikhaboom";
     homeDirectory = "/home/tikhaboom";
     stateVersion = "25.05";
+
+    sessionVariables = {
+      RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      QT_QPA_PLATFORMTHEME = lib.mkForce "kde";
+    };
   };
 
   programs.home-manager.enable = true;
@@ -31,8 +35,14 @@
         color.ui = "auto";
       };
     };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     bash.enable = true;
     fish.enable = true;
+    gazelle.enable = true;
+    # nix-ld.enable = true;
   };
 
   ########################################
@@ -40,6 +50,10 @@
   ########################################
   services = {
     ssh-agent.enable = true;
-    swww.enable = true;
+    awww.enable = true;
+    ollama = {
+      enable = true;
+      acceleration = null;
+    };
   };
 }
