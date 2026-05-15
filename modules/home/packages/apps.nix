@@ -21,7 +21,6 @@
     xclip
     python313Packages.subliminal
     obs-studio
-    rhythmbox
     strawberry
     gifski
     imv
