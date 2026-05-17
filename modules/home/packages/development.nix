@@ -47,4 +47,7 @@
   nixpkgs.config = {
     android_sdk.accept_license = true;
   };
+
+  programs.emacs.enable = true;
+  services.emacs.enable = true;
 }
