@@ -11,6 +11,7 @@
     # batsignal
     throttled
     wget
+    mangowc
     wl-clipboard-rs
     wl-clipboard
     git
