@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     river-classic
-    rivercarro
+    stacktile
     swayidle 
   ];
 
