@@ -131,4 +131,5 @@ riverctl rule-add -title "Picture in picture" float
 # Launches the dynamic master/stack engine with clean 15px inner and outer gaps 
 # matching your original layout parameters perfectly.
 pkill rivertile
-rivertile -view-padding 15 -outer-padding 15 &
+pkill rivercarro
+rivercarro -layout bsp -g 15 &
