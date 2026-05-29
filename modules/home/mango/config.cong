@@ -39,8 +39,6 @@ xkb_rules_layout=us
 xkb_rules_options=compose:ralt
 
 # --- Autostart & Environment ---
-# Push Wayland vars to dbus (Fixes Waybar and Ghostty OpenGL context)
-exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=mango
 exec-once=waybar
 exec-once=swayosd-server
 exec-once=awww-daemon
