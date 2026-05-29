@@ -19,7 +19,7 @@
     ./packages/apps.nix
 
     # Configs
-    ./niri/niri.nix
+    # ./niri/niri.nix
     # ./river/river.nix
     ./mango/mango.nix
     ./waybar/waybar.nix
