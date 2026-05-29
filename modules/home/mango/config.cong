@@ -28,7 +28,7 @@ bind=SUPER+SHIFT,r,reload_config
 bind=SUPER+SHIFT,p,spawn,wlogout
 
 # Apps
-bind=SUPER,d,spawn,rofi -show drun
+bind=SUPER,d,spawn,wofi --show drun
 bind=SUPER,Return,spawn,foot
 bind=SUPER+SHIFT,Return,spawn,kitty
 bind=SUPER,B,spawn,brave
