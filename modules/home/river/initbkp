@@ -1,0 +1,135 @@
+#!/usr/bin/env fish
+
+# ==============================================================================
+# 1. INPUT CONFIGURATION & ENVIRONMENT
+# ==============================================================================
+
+# Keyboard settings: layout, compose key, and default NumLock
+riverctl keyboard-layout -options "compose:ralt" us
+riverctl xcursor-theme Adwaita 24
+
+# Touchpad hardware rules (Tap, natural scroll, speed, disable-while-typing)
+riverctl input "pointer-*" tap enabled
+riverctl input "pointer-*" natural-scroll enabled
+riverctl input "pointer-*" accel-speed 0.8
+riverctl input "pointer-*" disable-while-typing enabled
+
+# Mouse hardware rules
+riverctl input "pointer-*" accel-speed 0.8
+
+# Pointer focus configuration (Equivalent to focus-follows-mouse)
+riverctl focus-follows-cursor always
+
+# ==============================================================================
+# 2. OUTPUT & DISPLAY TOPOLOGY
+# ==============================================================================
+# Configures your HDMI monitor position and standard full-HD refresh profile
+riverctl output HDMI-A-1 mode 1920x1080@60Hz position 1280 0 scale 1.0 transform normal
+
+# ==============================================================================
+# 3. WINDOW STYLING, RADIUS & BORDERS
+# ==============================================================================
+# Set flat aesthetic (0 radius) and borders matching your custom color palette
+riverctl border-width 2
+riverctl border-color-focused "0xffffc87f"   # Niri active border hex
+riverctl border-color-unfocused "0xff505050" # Niri inactive border hex
+riverctl border-color-urgent "0xff9b0000"    # Niri urgent color hex
+
+# ==============================================================================
+# 4. CORE SYSTEM APPS & BACKGROUND DAEMONS
+# ==============================================================================
+# Explicitly kills existing instances before spawning to safely handle live reloads
+pkill waybar; waybar &
+pkill awww-daemon; awww-daemon &
+pkill swayosd-server; swayosd-server --style ~/nix-config/modules/home/river/swayosd.css &
+pkill swaync; swaync &
+
+# ==============================================================================
+# 5. KEYBINDINGS (MOD = SUPER / MOD4)
+# ==============================================================================
+set MOD Mod4
+
+# --- Application Launchers ---
+riverctl map normal $MOD Return spawn ghostty
+riverctl map normal $MOD E      spawn nautilus
+riverctl map normal $MOD B      spawn zen-beta
+riverctl map normal $MOD O      spawn obsidian
+riverctl map normal $MOD N      spawn "ghostty -e nmtui"
+riverctl map normal $MOD Y      spawn "ghostty -e yazi"
+riverctl map normal $MOD Shift N spawn "ghostty -e nvim"
+riverctl map normal $MOD Shift C spawn gnome-calculator
+riverctl map normal $MOD Space  spawn "pkill fuzzel || fuzzel"
+riverctl map normal $MOD Alt Space spawn "pkill wlogout || wlogout"
+
+# Send the currently focused window to the next monitor (e.g., Laptop -> HDMI)
+riverctl map normal $MOD Shift O send-to-output next
+# Move your actual keyboard/mouse focus to the next monitor 
+riverctl map normal $MOD O focus-output next
+
+# --- Panel/Bar Toggles ---
+riverctl map normal $MOD Shift Space spawn "pkill waybar || waybar"
+
+# --- Hard Utilities & Custom OCR Pipeline ---
+riverctl map normal $MOD S spawn "sh -c 'grim -g \"\$(slurp)\" - | tesseract - - | wl-copy && notify-send \"OCR\" \"Text copied to clipboard\"'"
+
+# --- Hardware / Media Controller Mapping (SwayOSD Integration) ---
+riverctl map normal -allow-when-locked XF86AudioRaiseVolume  spawn "swayosd-client --output-volume raise"
+riverctl map normal -allow-when-locked XF86AudioLowerVolume  spawn "swayosd-client --output-volume lower"
+riverctl map normal -allow-when-locked XF86AudioMute         spawn "swayosd-client --output-volume mute-toggle"
+riverctl map normal -allow-when-locked XF86AudioMicMute      spawn "swayosd-client --input-volume mute-toggle"
+riverctl map normal -allow-when-locked XF86MonBrightnessUp   spawn "swayosd-client --brightness raise"
+riverctl map normal -allow-when-locked XF86MonBrightnessDown spawn "swayosd-client --brightness lower"
+
+# --- Window Administration & Session Lifecycle ---
+riverctl map normal $MOD Q close
+riverctl map normal $MOD Shift R spawn "riverctl reload"
+riverctl map normal $MOD Shift P spawn "riverctl power-off-monitors"
+
+# --- Navigation Architecture (Focus Mapping) ---
+# Maps your classic H/J/K/L patterns natively to Master/Stack components
+riverctl map normal $MOD H focus-view previous   # Cycles left/up through layout items
+riverctl map normal $MOD L focus-view next       # Cycles right/down through layout items
+riverctl map normal $MOD J focus-view next
+riverctl map normal $MOD K focus-view previous
+
+# --- Window Mutation & Position Swapping ---
+riverctl map normal $MOD Shift H swap previous
+riverctl map normal $MOD Shift L swap next
+riverctl map normal $MOD Shift J swap next
+riverctl map normal $MOD Shift K swap previous
+
+# --- Layout Proportions (Zoom replaces Niri width increments) ---
+riverctl map normal $MOD Equal zoom +0.05
+riverctl map normal $MOD Minus zoom -0.05
+
+# --- Window State Intercepts (Floating & Fullscreen) ---
+riverctl map normal $MOD V toggle-float
+riverctl map normal $MOD Shift F toggle-fullscreen
+
+# ==============================================================================
+# 6. DYNAMIC TAG ALLOCATION (WORKSPACES 1 - 9)
+# ==============================================================================
+# Iterates over 9 strict bits to map workspaces natively to keyboard number rows
+for i in (seq 1 9)
+    set tags (math "bshl(1, " $i " - 1)")
+    
+    # Super + [1-9]: Jump straight to target tag group
+    riverctl map normal $MOD $i set-focused-tags $tags
+    # Super + Shift + [1-9]: Reassign active surface to target tag profile
+    riverctl map normal $MOD Shift $i set-view-tags $tags
+end
+
+# ==============================================================================
+# 7. AUTOMATED WINDOW SCHEDULING RULES
+# ==============================================================================
+# Enforces native floating geometry rules for Picture-in-Picture streams
+riverctl rule-add -title "Picture in picture" float
+
+# ==============================================================================
+# 8. EXTERNAL LAYOUT GENERATOR INITIALIZATION
+# ==============================================================================
+# Launches the dynamic master/stack engine with clean 15px inner and outer gaps 
+# matching your original layout parameters perfectly.
+pkill rivertile
+pkill rivercarro
+rivercarro -layout bsp -g 15 &
