@@ -6,6 +6,7 @@
     unzip
     zstd
     file
+    slurp
     cyme
     parted
     xxd
