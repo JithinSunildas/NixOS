@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    river
+    river-classic
     swayidle 
   ];
 
