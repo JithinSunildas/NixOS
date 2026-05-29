@@ -28,6 +28,8 @@
     "flakes"
   ];
 
+  hardware.graphics.enable = true;
+
   # Optimization: Use all cores for your custom kernel build
   nix.settings.cores = 0;
 
