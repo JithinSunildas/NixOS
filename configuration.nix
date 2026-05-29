@@ -28,7 +28,10 @@
     "flakes"
   ];
 
-  hardware.graphics.enable = true;
+  hardware.graphics= {
+    enable = true;
+    enable32bit = true;
+  };
 
   # Optimization: Use all cores for your custom kernel build
   nix.settings.cores = 0;
