@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     river-classic
-    stacktile   # binary dwindle layout (replaces rivertile)
     swayidle
   ];
 
