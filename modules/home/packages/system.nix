@@ -7,6 +7,7 @@
     zstd
     file
     slurp
+    satty
     cyme
     parted
     xxd
