@@ -202,7 +202,8 @@
     };
     wireshark.enable = true;
     niri.enable = false;
-    river.enable = true;
+    river.enable = false;
+    mangowc.enable = true;
     xwayland.enable = true;
     obs-studio = {
       enable = true;
