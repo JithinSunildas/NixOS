@@ -101,7 +101,7 @@
               }
               {
                 label = "󰍃 Logout";
-                command = "niri msg action quit";
+                # command = "niri msg action quit";
               }
             ];
           };
