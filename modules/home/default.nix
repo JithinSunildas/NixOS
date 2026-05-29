@@ -20,6 +20,7 @@
 
     # Configs
     ./niri/niri.nix
+    ./river/river.nix
     ./waybar/waybar.nix
     ./theme/stylix.nix
     ./swaync/swaync.nix
