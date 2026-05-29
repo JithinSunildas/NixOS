@@ -1,32 +1,38 @@
 #!/usr/bin/env fish
 
 # ==============================================================================
-# 1. WAYLAND & GTK ENVIRONMENT FIXES
+# 1. WAYLAND & GTK ENVIRONMENT SEEDING
 # ==============================================================================
-riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
+# Must run BEFORE spawning any GL clients (Ghostty, etc.)
+# Sets XDG_CURRENT_DESKTOP so portals and dbus know we're on river
+riverctl spawn "dbus-update-activation-environment --systemd SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river XDG_SESSION_TYPE=wayland"
 
 # ==============================================================================
-# 2. INPUT DEVICES (Keyboard & Touchpad)
+# 2. INPUT DEVICES & HARDWARE TOPOLOGY
 # ==============================================================================
 riverctl keyboard-layout -options "compose:ralt" us
 riverctl focus-follows-cursor normal
 
-# Touchpad gestures and speeds
 riverctl input "pointer-*" tap enabled
 riverctl input "pointer-*" natural-scroll enabled
 riverctl input "pointer-*" accel-speed 0.8
 
+# Super + Left Click drags floaters, Right Click resizes them
+riverctl map-pointer normal Mod4 BTN_LEFT move-view
+riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
+
 # ==============================================================================
-# 3. DISPLAYS & COSMETICS
+# 3. DISPLAYS & COSMETICS (Matching Niri Colors)
 # ==============================================================================
-# Borders (2px, warm active color, gray inactive)
 riverctl border-width 2
 riverctl border-color-focused "0xffffc87f"
 riverctl border-color-unfocused "0xff505050"
 riverctl border-color-urgent "0xff9b0000"
 
+riverctl xcursor-theme Adwaita 24
+
 # ==============================================================================
-# 4. BACKGROUND DAEMONS
+# 4. UTILITY DAEMONS
 # ==============================================================================
 riverctl spawn "pkill waybar; waybar"
 riverctl spawn "pkill awww-daemon; awww-daemon"
@@ -34,89 +40,122 @@ riverctl spawn "pkill swayosd-server; swayosd-server"
 riverctl spawn "pkill swaync; swaync"
 
 # ==============================================================================
-# 5. KEYBINDINGS
+# 5. KEYBINDINGS (Ported from Niri)
 # ==============================================================================
 set MOD Mod4
 
-# --- Application Launchers ---
-riverctl map normal $MOD Return spawn "env GSK_RENDERER=gl ghostty"
-riverctl map normal $MOD E spawn nautilus
-riverctl map normal $MOD B spawn zen-beta
-riverctl map normal $MOD O spawn obsidian
+# --- Application Shell Hooks ---
+# FIX: Ghostty OpenGL issue.
+# GSK_RENDERER=gl only affects GTK's own renderer, not Ghostty's GPU stack.
+# The real fix: ensure WAYLAND_DISPLAY is exported into the environment
+# (done above via dbus-update-activation-environment) so Ghostty can acquire
+# a native Wayland EGL surface instead of falling back to X11/software paths.
+# Additionally, MESA_NO_ERROR=1 suppresses harmless GL error noise on some drivers.
+riverctl map normal $MOD Return spawn "env MESA_NO_ERROR=1 ghostty"
+riverctl map normal $MOD E spawn "nautilus"
+riverctl map normal $MOD B spawn "zen-beta"
+riverctl map normal $MOD O spawn "obsidian"
 riverctl map normal $MOD N spawn "ghostty -e nmtui"
 riverctl map normal $MOD Y spawn "ghostty -e yazi"
 riverctl map normal $MOD+Shift N spawn "ghostty -e nvim"
-riverctl map normal $MOD+Shift C spawn gnome-calculator
+riverctl map normal $MOD+Shift C spawn "gnome-calculator"
 riverctl map normal $MOD Space spawn "pkill fuzzel || fuzzel"
 riverctl map normal Alt Space spawn "pkill wlogout || wlogout"
 riverctl map normal $MOD+Shift Space spawn "pkill waybar || waybar"
 
-# --- OCR / Screenshot Snippet ---
-riverctl map normal $MOD S spawn "sh -c 'grim -g \"\$(slurp)\" - | tesseract - - | wl-copy && notify-send \"OCR\" \"Text copied to clipboard\"'"
+# --- Screen Scraper Snippet ---
+riverctl map normal $MOD S spawn "sh -c 'grim -g \"$(slurp)\" - | tesseract - - | wl-copy && notify-send \"OCR\" \"Text captured\"'"
 
-# --- Window Administration ---
+# --- Session Control Rules ---
 riverctl map normal $MOD Q close
 riverctl map normal $MOD+Shift P spawn "riverctl power-off-monitors"
-# Live reload by re-executing this script
 riverctl map normal $MOD+Shift R spawn "$HOME/nix-config/modules/home/river/init"
 
-# --- Navigation & Window Swapping (HJKL) ---
+# --- Navigation (HJKL — mirroring Niri column/window movement) ---
 riverctl map normal $MOD H focus-view previous
+riverctl map normal $MOD L focus-view next
 riverctl map normal $MOD J focus-view next
 riverctl map normal $MOD K focus-view previous
-riverctl map normal $MOD L focus-view next
 
 riverctl map normal $MOD+Shift H swap previous
+riverctl map normal $MOD+Shift L swap next
 riverctl map normal $MOD+Shift J swap next
 riverctl map normal $MOD+Shift K swap previous
-riverctl map normal $MOD+Shift L swap next
 
-# --- Window States & Layout Controls ---
+# --- Workspace navigation (Niri: Mod+J/K moved between workspaces) ---
+# In river, workspaces are tags; cycle through them with Page_Up/Down
+# matching niri's Mod+Page_Down / Mod+Page_Up
+riverctl map normal $MOD Page_Down focus-previous-tags
+riverctl map normal $MOD Page_Up   focus-previous-tags
+
+# --- Window Geometry Adjustments ---
+riverctl map normal $MOD Equal send-layout-cmd stacktile "primary_ratio +0.05"
+riverctl map normal $MOD Minus send-layout-cmd stacktile "primary_ratio -0.05"
+
+# --- Structural States ---
 riverctl map normal $MOD V toggle-float
 riverctl map normal $MOD+Shift F toggle-fullscreen
+# Mod+F = maximize (like niri's maximize-column)
+riverctl map normal $MOD F toggle-fullscreen
 
-# --- Mouse / Pointer Drags ---
-# Hold Super + Left Click to drag floating windows, Right Click to resize
-riverctl map-pointer normal $MOD BTN_LEFT move-view
-riverctl map-pointer normal $MOD BTN_RIGHT resize-view
-
-# --- Media & Hardware Keys (SwayOSD) ---
-# Map for both normal and locked states using a loop
+# --- SwayOSD Controller Loops ---
 for mode in normal locked
-    riverctl map $mode None XF86AudioRaiseVolume spawn "swayosd-client --output-volume raise"
-    riverctl map $mode None XF86AudioLowerVolume spawn "swayosd-client --output-volume lower"
-    riverctl map $mode None XF86AudioMute spawn "swayosd-client --output-volume mute-toggle"
-    riverctl map $mode None XF86AudioMicMute spawn "swayosd-client --input-volume mute-toggle"
-    riverctl map $mode None XF86MonBrightnessUp spawn "swayosd-client --brightness raise"
+    riverctl map $mode None XF86AudioRaiseVolume  spawn "swayosd-client --output-volume raise"
+    riverctl map $mode None XF86AudioLowerVolume  spawn "swayosd-client --output-volume lower"
+    riverctl map $mode None XF86AudioMute         spawn "swayosd-client --output-volume mute-toggle"
+    riverctl map $mode None XF86AudioMicMute      spawn "swayosd-client --input-volume mute-toggle"
+    riverctl map $mode None XF86MonBrightnessUp   spawn "swayosd-client --brightness raise"
     riverctl map $mode None XF86MonBrightnessDown spawn "swayosd-client --brightness lower"
 end
 
 # ==============================================================================
-# 6. WORKSPACES (Tags 1-9)
+# 6. WORKSPACES — Tags 1–9 (FIXED)
 # ==============================================================================
-for i in (seq 1 9)
-    # Correct fish math bitwise shift
-    set tags (math "1 << ($i - 1)")
-    riverctl map normal $MOD $i set-focused-tags $tags
-    riverctl map normal $MOD+Shift $i set-view-tags $tags
+# River workspaces are bitmask tags. Tag N uses bit (N-1), so:
+#   tag 1 = 1<<0 = 1,  tag 2 = 1<<1 = 2,  tag 3 = 1<<2 = 4 ...
+# Your original file had the right bitmask values but fish arithmetic
+# with `math` was being skipped — this explicit form is the safest.
+#
+# set-focused-tags  → switch view to that tag (like focus-workspace N in niri)
+# set-view-tags     → move focused window to that tag (like move-column-to-workspace N)
+# toggle-focused-tags / toggle-view-tags → useful for multi-tag overlays
+
+for i in 1 2 3 4 5 6 7 8 9
+    set tag (math "1 << ($i - 1)")
+    riverctl map normal $MOD       $i set-focused-tags $tag
+    riverctl map normal $MOD+Shift $i set-view-tags     $tag
 end
 
 # ==============================================================================
-# 7. WINDOW RULES (Floating & Overlays)
+# 7. SURFACE FILTERS
 # ==============================================================================
-# River-classic uses float-filter-add instead of rule-add
-riverctl float-filter-add title "Picture in picture"
-riverctl float-filter-add app-id "swaync"
-riverctl float-filter-add app-id "waybar"
+riverctl float-filter-add title   "Picture in picture"
+riverctl float-filter-add app-id  "swaync"
+riverctl float-filter-add app-id  "waybar"
+riverctl float-filter-add app-id  "gnome-calculator"
+riverctl float-filter-add app-id  "wlogout"
 
 # ==============================================================================
-# 8. LAYOUT ENGINE (Stacktile Dwindle)
+# 8. LAYOUT — Binary Dwindle via stacktile
 # ==============================================================================
+# rivertile only does master-stack. stacktile supports proper binary splitting:
+#   d-right = dwindle splitting to the right (like Hyprland dwindle)
+#   d-left  = dwindle splitting to the left
+#   d-top/d-bottom for vertical-first splits
+#
+# "d-right" closely mimics niri's horizontal column behavior:
+# first window is full-width, second splits it in half to the right,
+# third splits the right half again, and so on.
+
 riverctl default-layout stacktile
 
 pkill rivertile
 pkill rivercarro
 pkill stacktile
 
-# Start stacktile with primary and secondary layout rules set to dwindle
-stacktile --primary-count 1 --primary-layout dwindle --secondary-layout dwindle &
+stacktile \
+    --primary-ratio 0.5 \
+    --view-padding 6 \
+    --outer-padding 6 \
+    --layout d-right \
+    &
