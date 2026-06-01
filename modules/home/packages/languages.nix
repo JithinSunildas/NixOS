@@ -28,7 +28,7 @@
     lld
     lldb
     gcc
-    zig_0_15
+    zig
 
     # Haskell
     haskellPackages.ghc
