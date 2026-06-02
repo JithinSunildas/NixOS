@@ -3,6 +3,7 @@
 {
   stylix = {
     enable = true;
+    enableReleaseChecks = false;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
     image = ./wallpapers/secluded-grove-pixel.png;
     polarity = "dark";

@@ -109,6 +109,9 @@ vim.lsp.config.clangd = {
         "clangd",
         "--background-index",
         "--query-driver=/**/*", -- The NixOS magic wildcard
+        "--extra-arg=-std=c11", -- Forces C11 standard globally
+        "--extra-arg=-Wall",    -- (Optional) Enables standard warnings
+        "--extra-arg=-Wextra"   -- (Optional) Enables extra warnings
     },
     filetypes = { "c", "h", "hpp", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", ".git" },
