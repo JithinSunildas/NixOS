@@ -53,5 +53,16 @@
 
   xdg.configFile."clangd/config.yaml".text = ''
   CompileFlags:
+    If:
+      PathMatch: .*\.c
+    CompileFlags:
+      Add: [-std=c23, -Wall, -Wextra]
+
+    ---
+    If:
+      PathMatch: .*\.(cpp|hpp|cc|cxx)
+    CompileFlags:
+      Add: [-std=c++23, -Wall, -Wextra]
+  '';
   '';
 }
