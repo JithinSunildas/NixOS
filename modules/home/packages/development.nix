@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = with pkgs; [
 # Editors
@@ -28,16 +28,16 @@
       maven
       gradle
       spring-boot-cli
-      mariadb
 
 # PHP/Laravel
-      php83
-      php83Extensions.pdo
-      php83Extensions.mbstring
-      php83Extensions.xml
-      php83Extensions.curl
-      php83Extensions.zip
-      php83Extensions.gd
+      (php83.withExtensions ({ all, ... }: with all; [
+        pdo
+        mbstring
+        xml
+        curl
+        zip
+        gd
+      ]))
 
 # Databases
       mariadb
@@ -50,4 +50,9 @@
 
   programs.emacs.enable = true;
   services.emacs.enable = true;
+
+  xdg.configFile."clangd/config.yaml".text = ''
+  CompileFlags:
+    Add: [-std=c23, -Wall, -Wextra]
+  '';
 }
