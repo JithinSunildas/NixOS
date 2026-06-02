@@ -53,6 +53,6 @@
 
   xdg.configFile."clangd/config.yaml".text = ''
   CompileFlags:
-    Add: [-std=c23, -Wall, -Wextra]
+    Add: [-std=c17, -Wall, -Wextra]
   '';
 }
