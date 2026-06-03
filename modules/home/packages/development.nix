@@ -47,7 +47,10 @@
     android_sdk.accept_license = true;
   };
 
-  programs.emacs.enable = true;
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+  };
   services.emacs = {
     enable = true;
     defaultEditor = true;
