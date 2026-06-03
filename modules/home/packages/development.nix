@@ -4,7 +4,6 @@
 # Editors
       helix
       vscode
-      emacs
 
 # Build tools
       cmake
