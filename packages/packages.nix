@@ -15,7 +15,6 @@
     wl-clipboard-rs
     wl-clipboard
     git
-    helix
     openssh
     curl
     wlogout

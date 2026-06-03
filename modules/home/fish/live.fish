@@ -30,7 +30,7 @@ zoxide init fish | source
 # ==========================================
 # Aliases - Nix/System Management
 # ==========================================
-alias e='~/.config/emacs/bin/doom emacs -nw'
+alias e="emacsclient -nw -c"
 alias vi='nvim -R'
 alias info="info --vi-keys"
 alias run='~/Work/OS/Assignment_1/run'
