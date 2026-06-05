@@ -8,6 +8,9 @@
 # Build tools
       cmake
       cargo-zigbuild
+      gnumake
+      libvterm
+      libtool
 
 # Design and Frontend
       typst

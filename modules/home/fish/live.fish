@@ -34,7 +34,7 @@ alias e="emacsclient -nw -c"
 alias vi='nvim -R'
 alias info="info --vi-keys"
 alias run='~/Work/OS/Assignment_1/run'
-alias doom='/home/tikhaboom/.config/emacs/bin/doom'
+alias doom='EMACS_NUMBER_OF_COMPILE_JOBS=1 /home/tikhaboom/.config/emacs/bin/doom'
 alias pick='exec /home/tikhaboom/nix-config/scripts/yazi.sh'
 alias es='sudo -E nvim /etc/nixos/configuration.nix'
 alias he='nvim ~/nix-config/modules/home/home.nix'
