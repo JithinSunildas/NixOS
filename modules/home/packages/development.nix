@@ -11,7 +11,7 @@
     cmake
     cargo-zigbuild
     gnumake
-    akkuPackages.vterm
+    libvterm
     libtool
     pkg-config
     glib.dev
