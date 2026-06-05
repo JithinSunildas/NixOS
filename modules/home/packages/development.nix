@@ -14,7 +14,7 @@
     libvterm
     libtool
     pkg-config
-    glib.dev
+    glibc
 
     # Design and Frontend
     typst
@@ -62,7 +62,6 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
-    extraPackages = (epkgs: with epkgs; [ epkgs.lsp-bridge epkgs.vterm (epkgs.treesit-grammars.with-grammars (grammars: [grammars.tree-sitter-bash grammars.tree-sitter-haskell])) treemacs treemacs-all-the-icons ] );
   };
 
   services.emacs = {
