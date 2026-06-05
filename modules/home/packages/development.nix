@@ -11,7 +11,7 @@
     cmake
     cargo-zigbuild
     gnumake
-    libvterm
+    libvterm-neovim
     libtool        # Fixed from 'glibtool' (Nixpkgs uses libtool on Linux)
     pkg-config
     glib.dev
