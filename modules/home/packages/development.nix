@@ -10,7 +10,7 @@
       cargo-zigbuild
       gnumake
       libvterm
-      libtool
+      glibtool
 
 # Design and Frontend
       typst
