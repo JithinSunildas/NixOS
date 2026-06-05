@@ -11,8 +11,10 @@
     cmake
     cargo-zigbuild
     gnumake
-    libvterm-neovim
-    libtool        # Fixed from 'glibtool' (Nixpkgs uses libtool on Linux)
+    ((emacsPackagesNgGen emacs).emacsWithPackages (epkgs: [
+      epkgs.emacs-libvterm
+    ]))
+    libtool        
     pkg-config
     glib.dev
 
