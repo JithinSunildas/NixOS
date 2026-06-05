@@ -1,6 +1,8 @@
 { pkgs, config, ... }:
 {
-  home.packages = with pkgs; [
+  pkgs.mkShell = {
+    buildInputs = with pkgs; [
+  
 # Editors
       helix
       vscode
@@ -47,7 +49,11 @@
       mariadb
       postgresql
       ];
+NIX_CFLAGS_COMPILE = [ "-I${glib.dev}/include" ];
+  NIX_LDFLAGS = [ "-L${glib.lib}" ];
 
+  # Set the PKG_CONFIG_PATH to include pkg-config files for glib during build
+  PKG_CONFIG_PATH = "${glib.lib}/pkgconfig";
   nixpkgs.config = {
     android_sdk.accept_license = true;
   };
@@ -75,4 +81,4 @@
     CompileFlags:
       Add: [-std=c++23, -Wall, -Wextra]
   '';
-}
+};
