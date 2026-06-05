@@ -11,6 +11,8 @@
       gnumake
       libvterm
       glibtool
+      pkg-config
+      glib.dev
 
 # Design and Frontend
       typst

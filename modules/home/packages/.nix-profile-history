@@ -55,3 +55,4 @@ aircrack-ng
 wifitui
 flow-control
 zed-editor
+haskellPackages.yi
