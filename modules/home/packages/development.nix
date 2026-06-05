@@ -11,9 +11,7 @@
     cmake
     cargo-zigbuild
     gnumake
-    ((emacsPackagesNgGen emacs).emacsWithPackages (epkgs: [
-      epkgs.emacs-libvterm
-    ]))
+    akkuPackages.vterm
     libtool
     pkg-config
     glib.dev
