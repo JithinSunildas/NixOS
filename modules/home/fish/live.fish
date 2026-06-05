@@ -20,7 +20,13 @@ fish_add_path ~/.cargo/bin
 # ==========================================
 # Starship Prompt
 # ==========================================
-starship init fish | source
+if test "$TERM" = "dumb"
+    function fish_prompt
+        starship prompt --profile dumb 2>/dev/null
+    end
+else
+    starship init fish | source
+end
 
 # ==========================================
 # Zoxide (better cd)
