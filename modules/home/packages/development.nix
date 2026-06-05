@@ -1,59 +1,60 @@
 { pkgs, config, ... }:
+
 {
-  pkgs.mkShell = {
-    buildInputs = with pkgs; [
-  
-# Editors
-      helix
-      vscode
+  # 1. System-wide packages available in your user profile
+  home.packages = with pkgs; [
+    # Editors
+    helix
+    vscode
 
-# Build tools
-      cmake
-      cargo-zigbuild
-      gnumake
-      libvterm
-      glibtool
-      pkg-config
-      glib.dev
+    # Build tools
+    cmake
+    cargo-zigbuild
+    gnumake
+    libvterm
+    libtool        # Fixed from 'glibtool' (Nixpkgs uses libtool on Linux)
+    pkg-config
+    glib.dev
 
-# Design and Frontend
-      typst
-      tinymist
-      pandoc
+    # Design and Frontend
+    typst
+    tinymist
+    pandoc
 
-# Hardware design
-      iverilog
+    # Hardware design
+    iverilog
 
-# Mobile
-      flutter
-      android-tools
+    # Mobile
+    flutter
+    android-tools
 
-# Backend
-# Java/Spring Boot
-      jdk21
-      maven
-      gradle
-      spring-boot-cli
+    # Backend / Java
+    jdk21
+    maven
+    gradle
+    spring-boot-cli
 
-# PHP/Laravel
-      (php83.withExtensions ({ all, ... }: with all; [
-        pdo
-        mbstring
-        xml
-        curl
-        zip
-        gd
-      ]))
+    # PHP/Laravel
+    (php83.withExtensions ({ all, ... }: with all; [
+      pdo
+      mbstring
+      xml
+      curl
+      zip
+      gd
+    ]))
 
-# Databases
-      mariadb
-      postgresql
-      ];
-NIX_CFLAGS_COMPILE = [ "-I${glib.dev}/include" ];
-  NIX_LDFLAGS = [ "-L${glib.lib}" ];
+    # Databases
+    mariadb
+    postgresql
+  ];
 
-  # Set the PKG_CONFIG_PATH to include pkg-config files for glib during build
-  PKG_CONFIG_PATH = "${glib.lib}/pkgconfig";
+  home.sessionVariables = {
+    NIX_CFLAGS_COMPILE = "-I${pkgs.glib.dev}/include/glib-2.0 -I${pkgs.glib.out}/lib/glib-2.0/include";
+    NIX_LDFLAGS = "-L${pkgs.glib.out}/lib";
+    PKG_CONFIG_PATH = "${pkgs.glib.out}/lib/pkgconfig";
+  };
+
   nixpkgs.config = {
     android_sdk.accept_license = true;
   };
@@ -62,6 +63,7 @@ NIX_CFLAGS_COMPILE = [ "-I${glib.dev}/include" ];
     enable = true;
     package = pkgs.emacs-pgtk;
   };
+
   services.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
@@ -69,11 +71,11 @@ NIX_CFLAGS_COMPILE = [ "-I${glib.dev}/include" ];
   };
 
   xdg.configFile."clangd/config.yaml".text = ''
-  CompileFlags:
-    If:
-      PathMatch: .*\.c
     CompileFlags:
-      Add: [-std=c23, -Wall, -Wextra]
+      If:
+        PathMatch: .*\.c
+      CompilationFlags:
+        Add: [-std=c23, -Wall, -Wextra]
 
     ---
     If:
@@ -81,4 +83,4 @@ NIX_CFLAGS_COMPILE = [ "-I${glib.dev}/include" ];
     CompileFlags:
       Add: [-std=c++23, -Wall, -Wextra]
   '';
-};
+}
