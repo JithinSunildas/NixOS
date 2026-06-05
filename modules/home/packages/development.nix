@@ -14,7 +14,7 @@
     ((emacsPackagesNgGen emacs).emacsWithPackages (epkgs: [
       epkgs.emacs-libvterm
     ]))
-    libtool        
+    libtool
     pkg-config
     glib.dev
 
