@@ -30,7 +30,6 @@
 
   hardware.graphics= {
     enable = true;
-    enable32bit = true;
   };
 
   # Optimization: Use all cores for your custom kernel build
