@@ -15,6 +15,7 @@
     libtool
     pkg-config
     glibc
+    glib
 
     # Design and Frontend
     typst
@@ -62,6 +63,9 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
+    extraPackages = epkgs: [
+      epkgs.vterm
+    ];
   };
 
   services.emacs = {
