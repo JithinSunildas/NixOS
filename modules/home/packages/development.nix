@@ -6,6 +6,7 @@
     # Editors
     helix
     vscode
+    antigravity
 
     # Build tools
     cmake
