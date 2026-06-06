@@ -30,7 +30,7 @@
     android-tools
 
     # Backend / Java
-    jdk21
+    openjdk21
     maven
     gradle
     spring-boot-cli
