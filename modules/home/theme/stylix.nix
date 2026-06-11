@@ -27,7 +27,7 @@
       };
       monospace = {
         package = pkgs.nerd-fonts.iosevka-term-slab;
-        name = "JetBrainsMono Nerd Font Mono";
+        name = "IosevkaTermSlab Nerd Font Mono";
       };
 
       sizes = {
