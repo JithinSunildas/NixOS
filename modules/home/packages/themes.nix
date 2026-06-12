@@ -10,5 +10,6 @@
 
     # Fonts
     nerd-fonts.iosevka-term-slab
+    nerd-fonts.iosevka
   ];
 }
