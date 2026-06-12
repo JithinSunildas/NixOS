@@ -26,8 +26,8 @@
         # name = "Merriweather Sans";
       };
       monospace = {
-        package = pkgs.nerd-fonts.iosevka-term-slab;
-        # name = "IosevkaTermSlab Nerd Font Mono";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
       };
 
       sizes = {
