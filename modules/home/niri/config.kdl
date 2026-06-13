@@ -146,9 +146,9 @@ window-rule {
 window-rule {
     match is-active=false;
     open-on-workspace "active"; 
-    activate-on-urgent true;
+    // activate-on-urgent true;
 }
-
+ 
 spawn-at-startup "waybar"
 spawn-sh-at-startup "awww-daemon"
 spawn-at-startup "swayosd-server"
@@ -159,13 +159,13 @@ binds {
   Mod+Shift+R { spawn "niri" "msg" "action" "reload-config"; }
 
   // App bindings
-  Mod+Return hotkey-overlay-title="Open Terminal " { spawn "ghostty"; }
+  Mod+Return hotkey-overlay-title="Open Terminal " { spawn "/home/tikhaboom/.nix-profile/bin/ghostty"; }
   Mod+E hotkey-overlay-title="Open Files " { spawn "nautilus"; }
   Mod+B hotkey-overlay-title="Open Browser " { spawn "zen-beta"; }
   Mod+O hotkey-overlay-title="Open Obsidian " { spawn "obsidian"; }
-  Mod+N hotkey-overlay-title="Open WiFi Config " { spawn "ghostty" "-e" "nmtui"; }
-  Mod+Y hotkey-overlay-title="Open Yazi" { spawn "ghostty" "-e" "yazi"; }
-  Mod+Shift+N hotkey-overlay-title="Open Neovim " { spawn "ghostty" "-e" "nvim"; }
+  Mod+N hotkey-overlay-title="Open WiFi Config " { spawn "/home/tikhaboom/.nix-profile/bin/ghostty" "-e" "nmtui"; }
+  Mod+Y hotkey-overlay-title="Open Yazi" { spawn "/home/tikhaboom/.nix-profile/bin/ghostty" "-e" "yazi"; }
+  Mod+Shift+N hotkey-overlay-title="Open Neovim " { spawn "/home/tikhaboom/.nix-profile/bin/ghostty" "-e" "nvim"; }
   Mod+Shift+C hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
   Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "pkill fuzzel || fuzzel"; }
   Mod+Shift+Space hotkey-overlay-title="Toggle waybar" allow-inhibiting=false { spawn-sh "pkill waybar || waybar"; }
