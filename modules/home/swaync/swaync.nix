@@ -1,9 +1,8 @@
 # modules/home/swaync/swaync.nix
 
-{ pkgs, ... }:
+{ ... }:
 {
   services = {
-    swayosd-server.enable = true;
     swaync = {
         enable = true;
 
