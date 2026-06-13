@@ -19,8 +19,8 @@
     ./packages/apps.nix
 
     # Configs
-    # ./niri/niri.nix
-    ./mango/mango.nix
+    ./niri/niri.nix
+    # ./mango/mango.nix
     ./waybar/waybar.nix
     ./theme/stylix.nix
     ./swaync/swaync.nix
