@@ -20,7 +20,6 @@
 
     # Configs
     # ./niri/niri.nix
-    # ./river/river.nix
     ./mango/mango.nix
     ./waybar/waybar.nix
     ./theme/stylix.nix

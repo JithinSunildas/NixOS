@@ -143,6 +143,12 @@ window-rule {
   clip-to-geometry true
 }
 
+window-rule {
+    match is-active=false;
+    open-on-workspace "active"; 
+    activate-on-urgent true;
+}
+
 spawn-at-startup "waybar"
 spawn-sh-at-startup "awww-daemon"
 spawn-at-startup "swayosd-server"
@@ -207,8 +213,12 @@ binds {
   Mod+End  { focus-column-last; }
   Mod+Shift+Home { move-column-to-first; }
   Mod+Shift+End  { move-column-to-last; }
-  // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-  // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+  Mod+Ctrl+Shift+H  { move-window-to-monitor-left; }
+  Mod+Ctrl+Shift+L  { move-window-to-monitor-right; }
+  Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+  Mod+Shift+Ctrl+Right  { move-workspace-to-monitor-right; }
+  Mod+Ctrl+H  { focus-monitor-left; }
+  Mod+Ctrl+L  { focus-monitor-right; }
   Mod+Page_Down      { focus-workspace-down; }
   Mod+Page_Up        { focus-workspace-up; }
   Mod+Shift+J         { move-column-to-workspace-down; }

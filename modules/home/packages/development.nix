@@ -12,11 +12,8 @@
     cmake
     cargo-zigbuild
     gnumake
-    libvterm
-    libtool
     pkg-config
     glibc
-    glib
 
     # Design and Frontend
     typst
@@ -51,28 +48,8 @@
     postgresql
   ];
 
-  home.sessionVariables = {
-    NIX_CFLAGS_COMPILE = "-I${pkgs.glib.dev}/include/glib-2.0 -I${pkgs.glib.out}/lib/glib-2.0/include";
-    NIX_LDFLAGS = "-L${pkgs.glib.out}/lib";
-    PKG_CONFIG_PATH = "${pkgs.glib.out}/lib/pkgconfig";
-  };
-
   nixpkgs.config = {
     android_sdk.accept_license = true;
-  };
-
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-pgtk;
-    extraPackages = epkgs: [
-      epkgs.vterm
-    ];
-  };
-
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs-pgtk;
-    defaultEditor = true;
   };
 
   xdg.configFile."clangd/config.yaml".text = ''
