@@ -146,7 +146,7 @@ window-rule {
 
 window-rule {
     match is-urgent=true
-    open-focused true
+    open-on-workspace "active"
 }
 
 spawn-at-startup "waybar"
