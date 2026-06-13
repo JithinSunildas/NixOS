@@ -52,7 +52,7 @@ output "HDMI-A-1" {
 }
 
 layout {
-  gaps 15
+  gaps 6
   center-focused-column "on-overflow"
   always-center-single-column
   preset-column-widths {
@@ -138,10 +138,13 @@ window-rule {
     geometry-corner-radius 0
 }
 
+window-rule {
+    match is-urgent=true
+    open-focused true
+}
+
 spawn-at-startup "waybar"
 spawn-sh-at-startup "awww-daemon"
-spawn-at-startup "swayosd-server"
-spawn-at-startup "swaync"
 
 binds {
   Mod+Shift+Slash { show-hotkey-overlay; }
