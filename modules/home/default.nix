@@ -25,6 +25,7 @@
     ./theme/stylix.nix
     ./swaync/swaync.nix
     ./fish/fish.nix
+    ./emacs/emacs.nix
     ./neovim/neovim.nix
     ./zellij/zellij.nix
     ./xcompose/xcompose.nix
