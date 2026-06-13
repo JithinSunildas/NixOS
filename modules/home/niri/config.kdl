@@ -107,48 +107,37 @@ animations {
   // slowdown 0.2
 }
 
-// Inactive windows
 window-rule {
     match is-focused=false
     opacity 0.7
 }
 
-// Active/focused window
 window-rule {
     match is-focused=true
     opacity 0.9
 }
 
 window-rule {
-  match app-id=r#"^org\.wezfurlong\.wezterm$"#
-  default-column-width {}
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
 }
 
 window-rule {
-  match title="Picture in picture"
-  open-floating true
-  default-floating-position x=100 y=100 relative-to="bottom-right"
-  tiled-state false
-}
-
-/-window-rule {
-  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-  match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-  block-out-from "screen-capture"
+    match title="Picture in picture"
+    open-floating true
+    default-floating-position x=100 y=100 relative-to="bottom-right"
 }
 
 window-rule {
-  geometry-corner-radius 0
-  clip-to-geometry true
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    block-out-from "screen-capture"
 }
 
 window-rule {
-    match is-active=false;
-    open-on-workspace "active"; 
-    // activate-on-urgent true;
+    geometry-corner-radius 0
 }
- 
+
 spawn-at-startup "waybar"
 spawn-sh-at-startup "awww-daemon"
 spawn-at-startup "swayosd-server"
