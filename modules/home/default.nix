@@ -23,7 +23,7 @@
     # ./mango/mango.nix
     ./waybar/waybar.nix
     ./theme/stylix.nix
-    # ./swaync/swaync.nix
+    ./swaync/swaync.nix
     ./fish/fish.nix
     ./emacs/emacs.nix
     ./neovim/neovim.nix
@@ -33,8 +33,8 @@
     ./spicetify.nix
     ./bash.nix
     ./tmux.nix
-    ./mako.nix
-    # ./dunst.nix
+    # ./mako.nix
+    ./dunst.nix
   ];
 
   programs.fuzzel = {

@@ -124,6 +124,11 @@ window-rule {
 }
 
 window-rule {
+    match app-id="mako"
+    opacity 1.0
+}
+
+window-rule {
     match title="Picture in picture"
     open-floating true
     default-floating-position x=100 y=100 relative-to="bottom-right"
