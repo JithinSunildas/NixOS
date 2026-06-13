@@ -118,8 +118,9 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+    match app-id="emacs"
+    match app-id="zen-beta"
+    open-maximized true
 }
 
 window-rule {
