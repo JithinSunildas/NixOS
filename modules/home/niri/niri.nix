@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    niri
   ];
 
   programs.niri.enable = true;
