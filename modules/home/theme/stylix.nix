@@ -43,6 +43,7 @@
         enable = true;
         platform = "qtct";
       };
+      swaylock.colors.enable = true;
 
       ghostty.enable = true;
       fish.enable = true;
