@@ -1,6 +1,6 @@
 { config, ... }:
 
 {
-  xdg.configFile."niri/config.kdl".source = 
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/modules/home/niri/config.kdl";
+  xdg.configFile."niri".source = 
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/modules/home/niri";
 }
