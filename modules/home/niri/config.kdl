@@ -122,11 +122,15 @@ window-rule {
 window-rule {
     match app-id="emacs"
     match app-id="zen-beta"
+    match app-id="code"
+    match app-id="antigravity"
+    match app-id="zed"
     open-maximized true
 }
 
 window-rule {
-    match app-id="mako"
+    match app-id="fuzzel"
+    match app-id="waybar"
     opacity 1.0
 }
 
