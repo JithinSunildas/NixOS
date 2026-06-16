@@ -23,6 +23,7 @@
     # ./mango/mango.nix
     ./waybar/waybar.nix
     ./theme/stylix.nix
+    ./eww/eww.nix
     ./swaync/swaync.nix
     ./fish/fish.nix
     ./emacs/emacs.nix
