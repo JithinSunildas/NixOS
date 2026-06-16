@@ -17,6 +17,7 @@
     pkg-config
     notify
     imagemagick
+    ventoy
     ffmpegthumbnailer
     tesseract5
     grim
