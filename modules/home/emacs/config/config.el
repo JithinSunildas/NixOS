@@ -42,19 +42,18 @@
 
 ;;; EDITOR BEHAVIOR
 (setq scroll-margin 8)
-(setq-default tab-width 2)
+(setq-default indent-tabs-mode )
+(setq-default tab-width 4)
 (setq typescript-indent-level 2)
 (setq js-indent-level 2)
 (setq css-indent-offset 2)
 
 ;;; KEYMAPPINGS
 (map!
- :n "H" #'evil-first-non-blank
- :n "L" #'evil-end-of-line
- :v "H" #'evil-first-non-blank
- :v "L" #'evil-end-of-line
+ :nv "H" #'doom/backward-to-bol-or-indent
+ :nv "L" #'doom/forward-to-last-non-comment-or-eol
 
- :n "M-a" #'-whole-buffer
+ :n "M-a" #'mark-whole-buffer
  :i "M-a" #'mark-whole-buffer
  :v "M-a" #'mark-whole-buffer
 

@@ -130,7 +130,11 @@ window-rule {
 
 window-rule {
     match app-id="fuzzel"
-    match app-id="waybar"
+    opacity 1.0
+}
+
+window-rule {
+    match is-floating=true
     opacity 1.0
 }
 
