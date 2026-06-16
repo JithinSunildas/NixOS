@@ -4,9 +4,12 @@
     libvterm
     libtool
     glib
-    texlive.combined.scheme-medium
-    wrapfig
-    capt-of
+    (texlive.combine {
+        inherit (texlive) 
+        scheme-medium
+        wrapfig
+        capt-of;
+    })
   ];
 
   home.sessionVariables = {
