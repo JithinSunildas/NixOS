@@ -48,7 +48,6 @@
       ghostty.enable = true;
       fish.enable = true;
       waybar.enable = true;
-      eww.enable = false;
 
       fuzzel.enable = false;
       vim.enable = true;
