@@ -70,7 +70,6 @@ window#waybar {
 /* System monitor */
 #custom-sysmon {
 	color: #a7c080;
-	backface-visibility: hidden;
 	background-color: transparent;
 	padding: 15px;
 	margin: 20px;
