@@ -182,22 +182,4 @@
       "interval": 1
     }
   },
-
-  {
-    "name": "sysmon-widget",
-    "layer": "bottom",
-    "position": "left",
-    "exclusive": false,
-    "passthrough": true,
-    "width": 320,
-    "height": 500,
-    "modules-left": ["custom/sysmon"],
-
-	"custom/sysmon": {
-      "exec": "/home/tikhaboom/nix-config/modules/home/waybar/scripts/sysmon.sh",
-      "interval": 2,
-      "format": "{}",
-      "return-type": "json"
-    }
-  }
 ]

@@ -1,0 +1,12 @@
+(defwindow sysmon
+  :monitor 0
+  :geometry (geometry :x "20px" :y "20px" :width "400px" :height "300px")
+  :stacking "bg"
+  :reserve (struts :distance "0px")
+  :windowtype "desktop"
+  (box :class "sysbox" :orientation "v" :space-evenly false
+    (label :text "CPU: ${EWW_CPU.avg}%  RAM: ${EWW_RAM.used_mem} / ${EWW_RAM.total_mem}")
+    (label :text "${top_procs}")))
+
+(defpoll top_procs :interval "2s" 
+  "ps -eo comm,%cpu --sort=-%cpu | head -n 6 | awk '{printf \"%s %s%%\\n\", $1, $2}'")
