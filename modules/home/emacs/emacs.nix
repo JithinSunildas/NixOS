@@ -4,6 +4,7 @@
     libvterm
     libtool
     glib
+    texlive.combined.scheme-medium
   ];
 
   home.sessionVariables = {
