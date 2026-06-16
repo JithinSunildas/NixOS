@@ -163,6 +163,7 @@ window-rule {
 spawn-at-startup "waybar"
 spawn-sh-at-startup "awww-daemon"
 spawn-sh-at-startup "swayosd-server"
+spawn-sh-at-startup "eww daemon && eww open sysmon"
 
 layer-rule {
   place-within-backdrop true

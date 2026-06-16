@@ -1,7 +1,34 @@
+/* Strip Stylix/GTK defaults from the root window */
+* {
+	all: unset;
+}
+
+window#sysmon {
+	background-color: rgba(0, 0, 0, 0);
+	background: rgba(0, 0, 0, 0);
+}
+
+window {
+	background-color: rgba(0, 0, 0, 0);
+	background: rgba(0, 0, 0, 0);
+}
+
+/* Your widget styling */
 .sysbox {
-	background: rgba(0, 0, 0, 0.5);
-	color: #fff;
-	padding: 10px;
-	border-radius: 8px;
-	font-family: monospace;
+	background: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+	color: #a7c080;
+	font-family: "JetBrainsMono Nerd Font", "JetBrainsMono", monospace;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 20px;
+}
+
+.header {
+	color: #d3c6aa;
+	margin-bottom: 5px;
+}
+
+.procs {
+	white-space: pre;
 }
