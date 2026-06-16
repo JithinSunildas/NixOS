@@ -5,6 +5,8 @@
     libtool
     glib
     texlive.combined.scheme-medium
+    wrapfig
+    capt-of
   ];
 
   home.sessionVariables = {
