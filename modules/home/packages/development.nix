@@ -26,6 +26,7 @@
     # Mobile
     flutter
     android-tools
+    androidsdk
 
     # Backend / Java
     openjdk21
