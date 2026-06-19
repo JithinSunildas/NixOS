@@ -14,6 +14,7 @@
     gnumake
     pkg-config
     glibc
+    libsecret
 
     # Design and Frontend
     typst
@@ -26,7 +27,7 @@
     # Mobile
     flutter
     android-tools
-    androidsdk
+    # androidsdk
 
     # Backend / Java
     openjdk21
