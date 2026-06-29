@@ -55,7 +55,7 @@
   };
 
   gtk = {
-    gtk4.theme = config.gtk.theme;
+    # gtk4.theme = config.gtk.theme;
     enable = true;
     iconTheme = {
       name = "Reversal-dark";
