@@ -1,6 +1,5 @@
 cava
 cmatrix
-hollywood
 cbonsai
 lxqt.pavucontrol-qt
 ncmpcpp
@@ -56,3 +55,5 @@ zed-editor
 haskellPackages.yi
 gdb
 filezilla
+kdePackages.dolphin
+exiftool

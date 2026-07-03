@@ -38,6 +38,7 @@ zoxide init fish | source
 # ==========================================
 alias e="emacsclient -nw -c"
 alias vi='nvim -R'
+alias spotssh='ssh root@37.187.139.100 -p 20030'
 alias info="info --vi-keys"
 alias run='~/Work/OS/Assignment_1/run'
 alias doom='EMACS_NUMBER_OF_COMPILE_JOBS=1 /home/tikhaboom/.config/emacs/bin/doom'
