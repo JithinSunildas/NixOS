@@ -8,6 +8,13 @@
 
   # --- NixOS Core Settings ---
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      throttled = prev.throttled.overrideAttrs (oldAttrs: {
+        propagatedBuildInputs = (oldAttrs.propagatedBuildInputs or []) ++ [ final.python3Packages.dbus-next ];
+      });
+    })
+  ];
 
   # Hibernation swap space...
   swapDevices = [ { device = "/dev/nvme0n1p3"; } ];
@@ -144,11 +151,6 @@
     };
     throttled = {
       enable = true;
-      package = pkgs.throttled.override (oldAttrs: {
-        python3Packages = pkgs.python3Packages // {
-          propagatedBuildInputs = (oldAttrs.python3Packages.propagatedBuildInputs or []) ++ [ pkgs.python3Packages.dbus-next ];
-        };
-      });
       extraConfig = ''
         [GENERAL]
         Enabled: True
