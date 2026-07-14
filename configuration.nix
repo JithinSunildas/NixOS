@@ -149,6 +149,7 @@
       layout = "us";
       variant = "";
     };
+    upower.enable = true;
     throttled = {
       enable = true;
       extraConfig = ''
