@@ -4,7 +4,7 @@
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx GOPATH $HOME/go
-set -gx BROWSER zen
+set -gx BROWSER zen-beta
 
 # XDG Base Directory
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -40,7 +40,6 @@ alias e="emacsclient -nw -c"
 alias vi='nvim -R'
 alias spotssh='ssh root@37.187.139.100 -p 20030'
 alias info="info --vi-keys"
-alias run='~/Work/OS/Assignment_1/run'
 alias doom='EMACS_NUMBER_OF_COMPILE_JOBS=1 /home/tikhaboom/.config/emacs/bin/doom'
 alias pick='exec /home/tikhaboom/nix-config/scripts/yazi.sh'
 alias es='sudo -E nvim /etc/nixos/configuration.nix'
@@ -380,5 +379,14 @@ end
 # Load fzf keybindings if available
 if type -q fzf
   fzf --fish | source
+end
+
+function crun
+    echo "Compiling..."
+    gcc "$argv[1].c" -o "$argv[1]"
+    echo ""
+    echo "Running..."
+    echo ""
+    ./"$argv[1]"
 end
 
