@@ -41,11 +41,12 @@
         };
       };
 
-      extraLuaFiles = [
-        ./lua/keymaps.lua
-        ./lua/config.lua
-        ./lua/options.lua
-      ];
+      luaConfigRC.dev-loader = ''
+        local lua_dir = vim.fn.expand("~/nix-config/modules/home/nvf/lua/")
+        package.path = lua_dir .. "?.lua;" .. lua_dir .. "?/init.lua;" .. package.path
+        
+        dofile(lua_dir .. "init.lua")
+      '';
     };
   };
 }
