@@ -32,13 +32,14 @@
         enableTreesitter = true;
         
         rust.enable = true;
-        clang.enable = true; # Changed from c.enable to clang.enable
+        clang.enable = true;
         nix.enable = true;
       };
 
       statusline.lualine.enable = true;
 
-      utility.motion.flash = {
+      # Correct option path for flash
+      utility.motion.flash-nvim = {
         enable = true;
       };
 
