@@ -5,6 +5,7 @@
     enable = true;
 
     settings.vim = {
+      lsp.enable = true;
       viAlias = true;
 
       autocomplete.nvim-cmp.enable = true;
@@ -17,7 +18,6 @@
       git.gitsigns.enable = true;
 
       languages = {
-        enableLSP = true;
         enableTreesitter = true;
 
         rust.enable = true;
@@ -43,7 +43,6 @@
 
       luaConfigRC.dev-loader = ''
         local lua_dir = vim.fn.expand("~/nix-config/modules/home/nvf/lua/")
-        package.path = lua_dir .. "?.lua;" .. lua_dir .. "?/init.lua;" .. package.path
         
         dofile(lua_dir .. "init.lua")
       '';
