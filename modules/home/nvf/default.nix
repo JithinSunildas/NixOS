@@ -30,6 +30,7 @@
       extraLuaFiles = [
         ./lua/keymaps.lua
         ./lua/options.lua
+        ./lua/evilline.lua
       ];
     };
   };
