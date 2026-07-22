@@ -7,10 +7,19 @@
     settings.vim = {
       viAlias = true;
 
+      autocomplete.nvim-cmp.enable = true;
+      snippets.luasnip.enable = true;
+
+      utility.motion.flash-nvim.enable = true;
+      utility.telescope.enable = true;
+      git.gitsigns.enable = true;
+      utility.surround.enable = true;
+
+      # Languages & LSPs
       languages = {
         enableLSP = true;
         enableTreesitter = true;
-        
+
         rust.enable = true;
         clang.enable = true;
         nix.enable = true;
@@ -22,15 +31,16 @@
 
       statusline.lualine.enable = true;
 
-      # Correct option path for flash
-      utility.motion.flash-nvim = {
-        enable = true;
+      extraPlugins = with pkgs.vimPlugins; {
+        nvim-autopairs = {
+          plugin = nvim-autopairs;
+        };
       };
 
       extraLuaFiles = [
         ./lua/keymaps.lua
+        ./lua/config.lua
         ./lua/options.lua
-        # ./lua/evilline.lua
       ];
     };
   };
