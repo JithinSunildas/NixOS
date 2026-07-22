@@ -95,7 +95,7 @@ map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
-map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" }) -- some comment and some spaces      
+map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" }) -- some comment and some spaces
 map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
@@ -114,54 +114,61 @@ map("n", "<leader>xl", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Loc
 map("n", "<leader>]", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
 map("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next diagnostic" })
 map('n', '<leader>d', function()
-    vim.diagnostic.open_float(nil, { focus = true })
+  vim.diagnostic.open_float(nil, { focus = true })
 end, { desc = "Show inline diagnostics" })
+
+-- Open a vertical split on the far left, set width to 35, and launch Oil in the current dir
+map("n", "<leader>e", function()
+  vim.cmd("topleft vsplit")
+  vim.cmd("vertical resize 35")
+  require("oil").open()
+end, { desc = "Toggle Oil left sidebar" })
 
 -- === Git (with gitsigns) ===
 -- Navigation
 map("n", "]c", function()
-    if vim.wo.diff then
-        return "]c"
-    end
-    vim.schedule(function()
-        require("gitsigns").next_hunk()
-    end)
-    return "<Ignore>"
+  if vim.wo.diff then
+    return "]c"
+  end
+  vim.schedule(function()
+    require("gitsigns").next_hunk()
+  end)
+  return "<Ignore>"
 end, { expr = true, desc = "Next git hunk" })
 
 map("n", "[c", function()
-    if vim.wo.diff then
-        return "[c"
-    end
-    vim.schedule(function()
-        require("gitsigns").prev_hunk()
-    end)
-    return "<Ignore>"
+  if vim.wo.diff then
+    return "[c"
+  end
+  vim.schedule(function()
+    require("gitsigns").prev_hunk()
+  end)
+  return "<Ignore>"
 end, { expr = true, desc = "Previous git hunk" })
 
 -- Copy Full File-Path
 vim.keymap.set("n", "<leader>va", function()
-    local path = vim.fn.expand("%:p")
-    vim.fn.setreg("+", path)
-    print("file:", path)
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  print("file:", path)
 end)
 -- Copy Path Relative to Project Root
 vim.keymap.set("n", "<leader>vr", function()
-    local current_file = vim.fn.expand("%:p")
-    -- Look for the project root (indicated by .git)
-    local root_file = vim.fs.find({ ".git" }, { upward = true, path = current_file })[1]
-    if root_file then
-        local root_dir = vim.fn.fnamemodify(root_file, ":h")
-        -- Calculate the relative path from root
-        local rel_path = vim.fn.fnamemodify(current_file, ":." .. root_dir)
-        vim.fn.setreg("+", rel_path)
-        print("Project path:", rel_path)
-    else
-        -- Fallback to just the filename if no .git is found
-        local fallback = vim.fn.expand("%:.")
-        vim.fn.setreg("+", fallback)
-        print("No root found, using relative path:", fallback)
-    end
+  local current_file = vim.fn.expand("%:p")
+  -- Look for the project root (indicated by .git)
+  local root_file = vim.fs.find({ ".git" }, { upward = true, path = current_file })[1]
+  if root_file then
+    local root_dir = vim.fn.fnamemodify(root_file, ":h")
+    -- Calculate the relative path from root
+    local rel_path = vim.fn.fnamemodify(current_file, ":." .. root_dir)
+    vim.fn.setreg("+", rel_path)
+    print("Project path:", rel_path)
+  else
+    -- Fallback to just the filename if no .git is found
+    local fallback = vim.fn.expand("%:.")
+    vim.fn.setreg("+", fallback)
+    print("No root found, using relative path:", fallback)
+  end
 end, { desc = "Copy relative path from project root" })
 
 -- Acggtions
