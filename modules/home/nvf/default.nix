@@ -70,6 +70,7 @@
         dofile(lua_dir .. "keymaps.lua")
         dofile(lua_dir .. "config.lua")
         dofile(lua_dir .. "statusline.lua")
+        dofile(lua_dir .. "floating_term.lua")
       '';
     };
   };

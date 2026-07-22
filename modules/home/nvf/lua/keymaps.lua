@@ -94,6 +94,7 @@ map("n", "<leader>tv", "<cmd>vsplit | terminal<cr>", { desc = "Terminal vertical
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
+map("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" })
 -- Jump to beginning/end of line
 map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" }) -- some comment and some spaces
 map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
@@ -116,13 +117,6 @@ map("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next 
 map('n', '<leader>d', function()
   vim.diagnostic.open_float(nil, { focus = true })
 end, { desc = "Show inline diagnostics" })
-
--- Open a vertical split on the far left, set width to 35, and launch Oil in the current dir
-map("n", "<leader>e", function()
-  vim.cmd("topleft vsplit")
-  vim.cmd("vertical resize 35")
-  require("oil").open()
-end, { desc = "Toggle Oil left sidebar" })
 
 -- === Git (with gitsigns) ===
 -- Navigation

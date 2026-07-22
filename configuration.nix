@@ -11,7 +11,9 @@
   nixpkgs.overlays = [
     (final: prev: {
       throttled = prev.throttled.overrideAttrs (oldAttrs: {
-        propagatedBuildInputs = (oldAttrs.propagatedBuildInputs or []) ++ [ final.python3Packages.dbus-next ];
+        propagatedBuildInputs = (oldAttrs.propagatedBuildInputs or [ ]) ++ [
+          final.python3Packages.dbus-next
+        ];
       });
     })
   ];
@@ -35,7 +37,7 @@
     "flakes"
   ];
 
-  hardware.graphics= {
+  hardware.graphics = {
     enable = true;
   };
 
