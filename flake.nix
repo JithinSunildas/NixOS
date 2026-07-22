@@ -47,6 +47,7 @@
           modules = [
             ./modules/home/home.nix
             stylix.homeModules.stylix
+            nvf.homeManagerModules.default
             spicetify-nix.homeManagerModules.default
             gazelle.homeModules.gazelle
           ];
