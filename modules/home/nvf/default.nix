@@ -16,7 +16,6 @@
 
       utility = {
         motion.flash-nvim.enable = true;
-        surround.enable = true;
         oil-nvim = {
           enable = true;
           setupOpts = {
@@ -45,9 +44,7 @@
         go.enable = true;
         zig.enable = true;
         typst.enable = true;
-        ocaml.enable = true;
         ts.enable = true;
-        tailwind.enable = true;
         css.enable = true;
         html.enable = true;
       };
