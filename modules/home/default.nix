@@ -27,7 +27,8 @@
     ./swaync/swaync.nix
     ./fish/fish.nix
     ./emacs/emacs.nix
-    ./neovim/neovim.nix
+    # ./neovim/neovim.nix
+    ./nvf/default.nix
     ./zellij/zellij.nix
     ./xcompose/xcompose.nix
     ./ghostty.nix
