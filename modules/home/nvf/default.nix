@@ -5,14 +5,29 @@
     enable = true;
 
     settings.vim = {
-      lsp.enable = true;
+      lsp = {
+        enable = true;
+        formatOnSave = true;
+      };
       viAlias = true;
 
       autocomplete.nvim-cmp.enable = true;
       snippets.luasnip.enable = true;
 
-      utility.motion.flash-nvim.enable = true;
-      utility.surround.enable = true;
+      utility = {
+        motion.flash-nvim.enable = true;
+        surround.enable = true;
+        oil-nvim = {
+          enable = true;
+          setupOpts = {
+            default_file_explorer = true;
+            columns = [ "icon" ];
+            view_options = {
+              show_hidden = true;
+            };
+          };
+        };
+      };
       
       telescope.enable = true;
       git.gitsigns.enable = true;
@@ -20,14 +35,21 @@
       languages = {
         enableTreesitter = true;
 
+        nix.enable = true;
         rust.enable = true;
         clang.enable = true;
-        nix.enable = true;
+        python.enable = true;
         lua.enable = true;
+        java.enable = true;
+        haskell.enable = true;
+        go.enable = true;
         zig.enable = true;
         typst.enable = true;
-        markdown.enable = true;
-        python.enable = true;
+        ocaml.enable = true;
+        ts.enable = true;
+        tailwind.enable = true;
+        css.enable = true;
+        html.enable = true;
       };
 
       statusline.lualine.enable = true;

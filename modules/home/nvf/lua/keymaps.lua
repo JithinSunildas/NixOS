@@ -69,7 +69,9 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 map("n", "n", "nzzzv", { desc = "Next match (centered)" })
 map("n", "N", "Nzzzv", { desc = "Previous match (centered)" })
 map("n", "M", "vi", { desc = "Match inside" })
-map("n", "R", "*Ncgn", { desc = "Change word under cursor" })
+map("n", "R", "cgn", { desc = "Change word under cursor" })
+map("n", "s", "*N", { silent = true, desc = "Highlight whole word under cursor" })
+map("n", "S", "g*N", { silent = true, desc = "Highlight exact char/substring under cursor" })
 
 -- Better paste (don't yank replaced text)
 map("v", "p", '"_dP', { desc = "Paste without yanking" })
@@ -93,9 +95,7 @@ map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- === Quick Navigation ===
 -- Jump to beginning/end of line
-map({ "n", "v", "o" }, "<S-h>", "^", { desc = "Beginning of sentence" })
-map({ "n", "v", "o" }, "<S-l>", "g_", { desc = "End of sentence" })
-map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" })
+map({ "n", "v", "o" }, "gh", "0", { desc = "Beginning of line" }) -- some comment and some spaces      
 map({ "n", "v", "o" }, "gl", "$", { desc = "End of line" })
 
 -- === Powerful Insert mode ===
@@ -180,7 +180,80 @@ map("n", "<leader>ur", "<cmd>set rnu!<cr>", { desc = "Toggle relative numbers" }
 map("n", "<leader>uw", "<cmd>set wrap!<cr>", { desc = "Toggle line wrap" })
 map("n", "<leader>us", "<cmd>set spell!<cr>", { desc = "Toggle spell check" })
 
+-- Flash Motion on Return (<CR>)
+local flash_ok, flash = pcall(require, "flash")
+if flash_ok then
+  map({ "n", "x", "o" }, "<CR>", function()
+    flash.jump()
+  end, { desc = "Flash Jump" })
+
+  map({ "n", "x", "o" }, "<S-CR>", function()
+    flash.treesitter()
+  end, { desc = "Flash Treesitter Search" })
+end
+
 -- map("", "<up>", "<nop>", { noremap = true })
 -- map("", "<down>", "<nop>", { noremap = true })
 -- map("i", "<up>", "<nop>", { noremap = true })
 -- map("i", "<down>", "<nop>", { noremap = true })
+
+
+-- Doom Emacs 'H': Toggle between indent (^) and start of line (0)
+local function doom_backward_to_bol_or_indent()
+  local col = vim.fn.col(".")
+  local indent_col = vim.fn.indent(".") + 1
+
+  if col == indent_col then
+    vim.cmd("normal! 0")
+  else
+    vim.cmd("normal! ^")
+  end
+end
+
+-- Doom Emacs 'L': Smart move to last code char (before comment), g_, or EOL ($)
+local function doom_forward_to_last_non_comment_or_eol()
+  local line = vim.api.nvim_get_current_line()
+  local cur_col = vim.fn.col(".") -- 1-indexed
+  local commentstring = vim.bo.commentstring
+  local comment_leader = nil
+  if commentstring and commentstring ~= "" then
+    comment_leader = commentstring:match("^([^%%]+)%%s") or commentstring:match("^([^%%]+)")
+    if comment_leader then
+      comment_leader = vim.trim(comment_leader)
+    end
+  end
+
+  local code_end_col = nil
+
+  if comment_leader and comment_leader ~= "" then
+    local pattern = comment_leader:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
+    local s_start = line:find("%s*" .. pattern)
+    if s_start and s_start > 1 then
+      local sub = line:sub(1, s_start - 1)
+      local last_non_space = sub:find("%s*$")
+      if last_non_space then
+        code_end_col = last_non_space - 1
+      end
+    end
+  end
+
+  if not code_end_col or code_end_col < 1 then
+    vim.cmd("normal! g_")
+    code_end_col = vim.fn.col(".")
+  end
+
+  if cur_col < code_end_col then
+    vim.fn.cursor(0, code_end_col)
+  elseif cur_col == code_end_col then
+    vim.cmd("normal! g_")
+    if vim.fn.col(".") == cur_col then
+      vim.cmd("normal! $")
+    end
+  else
+    vim.cmd("normal! $")
+  end
+end
+
+local map = vim.keymap.set
+map({ "n", "v" }, "H", doom_backward_to_bol_or_indent, { desc = "Jump to indent or BOL" })
+map({ "n", "v" }, "L", doom_forward_to_last_non_comment_or_eol, { desc = "Jump to code end/comment/EOL" })
