@@ -5,7 +5,7 @@
     enable = true;
 
     settings.vim = {
-      theme.enable = false;
+      # theme.enable = false;
 
       extraPlugins = with pkgs.vimPlugins; {
         kanagawa-nvim = {
