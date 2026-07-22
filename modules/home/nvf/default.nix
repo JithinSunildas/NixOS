@@ -11,11 +11,10 @@
       snippets.luasnip.enable = true;
 
       utility.motion.flash-nvim.enable = true;
-      utility.telescope.enable = true;
-      git.gitsigns.enable = true;
       utility.surround.enable = true;
+      telescope.enable = true;
+      git.gitsigns.enable = true;
 
-      # Languages & LSPs
       languages = {
         enableLSP = true;
         enableTreesitter = true;
@@ -27,6 +26,7 @@
         zig.enable = true;
         typst.enable = true;
         markdown.enable = true;
+        python.enable = true;
       };
 
       statusline.lualine.enable = true;
