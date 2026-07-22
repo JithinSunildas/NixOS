@@ -6,9 +6,6 @@
 
     settings.vim = {
       viAlias = true;
-      vimAlias = true;
-
-      theme.enable = false;
 
       autocomplete.nvim-cmp.enable = true;
       snippets.luasnip.enable = true;
