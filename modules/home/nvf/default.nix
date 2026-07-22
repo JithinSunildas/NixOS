@@ -7,22 +7,22 @@
     settings.vim = {
       # theme.enable = false;
 
-      extraPlugins = with pkgs.vimPlugins; {
-        kanagawa-nvim = {
-          plugin = kanagawa-nvim;
-        };
-      };
+      # extraPlugins = with pkgs.vimPlugins; {
+      #   kanagawa-nvim = {
+      #     plugin = kanagawa-nvim;
+      #   };
+      # };
 
-      luaConfigRC.kanagawa = ''
-        require('kanagawa').setup({
-          theme = "dragon",
-          background = {
-            dark = "dragon",
-            light = "lotus"
-          },
-        })
-        vim.cmd("colorscheme kanagawa-dragon")
-      '';
+      # luaConfigRC.kanagawa = ''
+      #   require('kanagawa').setup({
+      #     theme = "dragon",
+      #     background = {
+      #       dark = "dragon",
+      #       light = "lotus"
+      #     },
+      #   })
+      #   vim.cmd("colorscheme kanagawa-dragon")
+      # '';
 
       viAlias = true;
       vimAlias = true;
