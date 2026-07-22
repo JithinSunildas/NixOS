@@ -5,17 +5,14 @@
     enable = true;
 
     settings.vim = {
-      # Disable nvf's internal theme module so Kanagawa-Dragon applies cleanly
       theme.enable = false;
 
-      # 1. Load kanagawa.nvim plugin
       extraPlugins = with pkgs.vimPlugins; {
         kanagawa-nvim = {
           plugin = kanagawa-nvim;
         };
       };
 
-      # 2. Configure and apply kanagawa-dragon using luaConfigRC
       luaConfigRC.kanagawa = ''
         require('kanagawa').setup({
           theme = "dragon",
@@ -27,15 +24,15 @@
         vim.cmd("colorscheme kanagawa-dragon")
       '';
 
-      # Base Editor Settings
       viAlias = true;
       vimAlias = true;
 
       languages = {
         enableLSP = true;
         enableTreesitter = true;
+        
         rust.enable = true;
-        c.enable = true;
+        clang.enable = true; # Changed from c.enable to clang.enable
         nix.enable = true;
       };
 
@@ -45,7 +42,6 @@
         enable = true;
       };
 
-      # Import keymaps
       extraLuaFiles = [
         ./lua/keymaps.lua
       ];
