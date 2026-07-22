@@ -44,7 +44,9 @@
       luaConfigRC.dev-loader = ''
         local lua_dir = vim.fn.expand("~/nix-config/modules/home/nvf/lua/")
         
-        dofile(lua_dir .. "init.lua")
+        dofile(lua_dir .. "options.lua")
+        dofile(lua_dir .. "keymaps.lua")
+        dofile(lua_dir .. "config.lua")
       '';
     };
   };
