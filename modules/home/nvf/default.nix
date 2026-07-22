@@ -6,12 +6,16 @@
 
     settings.vim = {
       viAlias = true;
+      vimAlias = true;
+
+      theme.enable = false;
 
       autocomplete.nvim-cmp.enable = true;
       snippets.luasnip.enable = true;
 
       utility.motion.flash-nvim.enable = true;
       utility.surround.enable = true;
+      
       telescope.enable = true;
       git.gitsigns.enable = true;
 
@@ -33,7 +37,10 @@
 
       extraPlugins = with pkgs.vimPlugins; {
         nvim-autopairs = {
-          plugin = nvim-autopairs;
+          package = nvim-autopairs;
+        };
+        telescope-fzf-native-nvim = {
+          package = telescope-fzf-native-nvim;
         };
       };
 
