@@ -38,6 +38,8 @@
       lsp = {
         enable = true;
         formatOnSave = true;
+        enableTreesitter = true;
+        enableExtraDiagnostics = true;
       };
       viAlias = true;
 
