@@ -1,6 +1,36 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    clang-tools
+    nil
+    pyright
+    lua-language-server
+    haskell-language-server
+    gopls
+    zls
+    jdt-language-server
+    (pkgs.lib.lowPrio pkgs.vimPlugins.flutter-tools-nvim)
+    ocamlPackages.ocaml-lsp
+    typescript-language-server
+    tailwindcss-language-server
+    # nodePackages.vscode-langservers-extracted
+    # nodePackages.prettier
+    emmet-ls
+
+    # Formatters
+    isort
+    prettier
+    stylua
+    google-java-format
+    ormolu
+    # Linters
+    ruff
+    # Tools for telescope
+    ripgrep
+    fd
+    git
+  ];
   programs.nvf = {
     enable = true;
 

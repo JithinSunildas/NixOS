@@ -123,7 +123,8 @@ window-rule {
     match app-id="emacs"
     match app-id="zen-beta"
     match app-id="code"
-    match app-id="antigravity"
+    match app-id="antigravity-ide"
+    match app-id="neovide"
     match app-id="zed"
     open-maximized true
 }

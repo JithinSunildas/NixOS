@@ -6,7 +6,7 @@
     # Editors
     helix
     vscode
-    antigravity
+    antigravity-ide
 
     # Build tools
     cmake
@@ -36,14 +36,17 @@
     spring-boot-cli
 
     # PHP/Laravel
-    (php83.withExtensions ({ all, ... }: with all; [
-      pdo
-      mbstring
-      xml
-      curl
-      zip
-      gd
-    ]))
+    (php83.withExtensions (
+      { all, ... }: with all;
+      [
+        pdo
+        mbstring
+        xml
+        curl
+        zip
+        gd
+      ]
+    ))
 
     # Databases
     mariadb
