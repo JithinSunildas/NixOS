@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     clang-tools
-    nil
+    nixd
     pyright
     lua-language-server
     haskell-language-server
@@ -65,7 +65,13 @@
       languages = {
         enableTreesitter = true;
 
-        nix.enable = true;
+        nix = {
+          enable = true;
+          lsp = {
+            enable = true;
+            server = "nixd";
+          };
+        };
         rust.enable = true;
         clang.enable = true;
         python.enable = true;
@@ -75,7 +81,7 @@
         go.enable = true;
         zig.enable = true;
         typst.enable = true;
-        ts.enable = true;
+        typescript.enable = true;
         css.enable = true;
         html.enable = true;
       };
