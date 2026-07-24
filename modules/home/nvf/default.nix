@@ -38,7 +38,6 @@
       lsp = {
         enable = true;
         formatOnSave = true;
-        enableTreesitter = true;
         inlayHints.enable = true;
       };
       viAlias = true;
