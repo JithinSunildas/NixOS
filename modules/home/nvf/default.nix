@@ -39,7 +39,7 @@
         enable = true;
         formatOnSave = true;
         enableTreesitter = true;
-        enableExtraDiagnostics = true;
+        inlayHints = true;
       };
       viAlias = true;
 
