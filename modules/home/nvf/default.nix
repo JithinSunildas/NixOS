@@ -88,6 +88,9 @@
         telescope-fzf-native-nvim = {
           package = telescope-fzf-native-nvim;
         };
+        render-markdown-nvim = {
+          package = render-markdown-nvim;
+        };
       };
 
       luaConfigRC.dev-loader = ''
