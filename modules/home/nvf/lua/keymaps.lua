@@ -21,10 +21,8 @@ map("i", "<A-a>", "<Esc>ggVG", { desc = "Select all" })
 map("v", "<A-a>", "ggVG", { desc = "Select all" })
 map("n", "<leader>y", "\"+y", { desc = "Copy to clipboard" })
 map("v", "<leader>y", "\"+y", { desc = "Copy to clipboard" })
-map("n", "<leader>P", "\"+P", { desc = "Paste from clipboard" })
-map("n", "<leader>p", "\"+p", { desc = "Paste from clipboard" })
-map("v", "<leader>P", "\"+P", { desc = "Paste from clipboard" })
-map("v", "<leader>p", "\"+p", { desc = "Paste from clipboard" })
+map({ "n", "v", "o" }, "<leader>P", "\"+P", { desc = "Paste from clipboard" })
+map({ "n", "v", "o" }, "<leader>p", "\"+p", { desc = "Paste from clipboard" })
 
 -- === Window Management ===
 -- Navigate between windows
@@ -233,7 +231,7 @@ local function doom_forward_to_last_non_comment_or_eol()
       local sub = line:sub(1, s_start - 1)
       local last_non_space = sub:find("%s*$")
       if last_non_space then
-        code_end_col = last_non_space - 1
+        code_end_col = last_non_space
       end
     end
   end
@@ -256,5 +254,5 @@ local function doom_forward_to_last_non_comment_or_eol()
 end
 
 local map = vim.keymap.set
-map({ "n", "v" }, "H", doom_backward_to_bol_or_indent, { desc = "Jump to indent or BOL" })
-map({ "n", "v" }, "L", doom_forward_to_last_non_comment_or_eol, { desc = "Jump to code end/comment/EOL" })
+map({ "n", "v", "o" }, "H", doom_backward_to_bol_or_indent, { desc = "Jump to indent or BOL" })
+map({ "n", "v", "o" }, "L", doom_forward_to_last_non_comment_or_eol, { desc = "Jump to code end/comment/EOL" })

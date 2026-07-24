@@ -63,6 +63,21 @@ pcall(telescope.load_extension, "fzf")
 
 -- Telescope keymaps
 local map = vim.keymap.set
+local function get_git_root()
+  local dot_git = vim.fn.finddir(".git", ".;")
+  if dot_git ~= "" then
+    return vim.fn.fnamemodify(dot_git, ":h")
+  end
+  return nil
+end
+
+map("n", "<leader>fp", function()
+  local git_root = get_git_root()
+  require("telescope.builtin").find_files({
+    cwd = git_root, -- Defaults to current working directory if nil
+    hidden = true,
+  })
+end, { desc = "Find Files (Project Root)" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
 map("n", "<leader>fF", function()
   require("telescope.builtin").find_files({
