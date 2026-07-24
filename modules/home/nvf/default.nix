@@ -69,7 +69,7 @@
           enable = true;
           lsp = {
             enable = true;
-            server = "nixd";
+            servers = [ "nixd" ];
           };
         };
         rust.enable = true;
