@@ -1,34 +1,33 @@
+/* 1. Strip GTK defaults from all nodes */
 * {
-	all: unset;
+  all: unset;
 }
 
-window#sysmon {
-	background-color: none;
-	background: none;
+/* 2. Target the top-level GTK window and force total transparency */
+window,
+window#sysmon,
+.background {
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
 }
 
-window {
-	background-color: none;
-	background: none;
-}
-
-/* Your widget styling */
+/* 3. Your widget styling */
 .sysbox {
-	background-color: none;
-	background: none;
-	color: #a7c080;
-	font-family: "JetBrainsMono Nerd Font", "JetBrainsMono", monospace;
-	font-size: 13px;
-	font-weight: bold;
-	padding: 20px;
-}
+  background-color: transparent;
+  background-image: none;
+  color: rgba(167, 192, 128, 0.85); /* #a7c080 at 85% opacity */
+  font-family: "JetBrainsMono Nerd Font", "JetBrainsMono", monospace;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 20px;
 
-.header {
-	color: #d3c6aa;
-	margin-bottom: 5px;
-}
+  .header {
+    color: rgba(211, 198, 170, 0.9); /* #d3c6aa at 90% opacity */
+    margin-bottom: 5px;
+  }
 
-.procs {
-	white-space: pre;
+  .procs {
+    white-space: pre;
+  }
 }
-
