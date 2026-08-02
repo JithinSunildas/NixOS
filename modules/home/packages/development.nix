@@ -21,14 +21,8 @@
     tinymist
     pandoc
 
-    # Hardware design
-    iverilog
-
     # Mobile
     android-tools
-
-    # Backend / Java
-    spring-boot-cli
 
     # PHP/Laravel
     (php83.withExtensions (
@@ -44,7 +38,6 @@
     ))
 
     # Databases
-    mariadb
     postgresql
   ];
 

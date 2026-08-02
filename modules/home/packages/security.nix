@@ -4,8 +4,6 @@
     # Penetration testing
     bettercap
     nmap
-    hashcat
-    metasploit
     ffuf
     
     # VPN
