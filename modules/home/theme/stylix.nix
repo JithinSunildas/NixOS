@@ -13,6 +13,7 @@
       name = "Vimix-cursors";
       size = 24;
     };
+
     # Configure fonts
     fonts = {
       serif = {
@@ -22,8 +23,6 @@
       sansSerif = {
         package = pkgs.inter;
         name = "Inter";
-        # package = pkgs.merriweather-sans;
-        # name = "Merriweather Sans";
       };
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
@@ -44,28 +43,27 @@
         platform = "qtct";
       };
       swaylock.enable = true;
-
       ghostty.enable = true;
       fish.enable = true;
       waybar.enable = true;
-
       fuzzel.enable = false;
       vim.enable = true;
     };
   };
 
+  home.pointerCursor = {
+    enable = true;
+    package = pkgs.vimix-cursors;
+    name = "Vimix-cursors";
+    size = 24;
+    gtk.enable = true;
+  };
+
   gtk = {
-    # gtk4.theme = config.gtk.theme;
     enable = true;
     iconTheme = {
       name = "Reversal-dark";
       package = pkgs.reversal-icon-theme;
     };
   };
-
-  # qt = {
-  #   enable = true;
-  #   platformTheme.name = "qtct";
-  #   style.name = "adwaita-dark";
-  # };
 }

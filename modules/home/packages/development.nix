@@ -25,14 +25,9 @@
     iverilog
 
     # Mobile
-    flutter
     android-tools
-    # androidsdk
 
     # Backend / Java
-    openjdk21
-    maven
-    gradle
     spring-boot-cli
 
     # PHP/Laravel

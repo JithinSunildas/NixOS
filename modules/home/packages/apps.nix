@@ -12,13 +12,11 @@
 
     # Communication
     telegram-desktop
-    discord
 
     # Media
     mpv
     xclip
     python313Packages.subliminal
-    obs-studio
     strawberry
     gifski
     imv

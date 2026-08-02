@@ -30,17 +30,8 @@
     gcc
     zig
 
-    # Haskell
-    haskellPackages.ghc
-    haskellPackages.cabal-install
-    haskellPackages.stack
-
     # JavaScript/TypeScript
     nodejs
-    # nodePackages.vscode-langservers-extracted
-    # nodePackages.prettier
-
-    # Java
 
     # Other
     superhtml
