@@ -8,12 +8,12 @@
     image = ./wallpapers/secluded-grove-pixel.png;
     polarity = "dark";
 
-    cursor = {
-      package = pkgs.vimix-cursors;
-      name = "Vimix-cursors";
-      size = 24;
-    };
-
+    # cursor = {
+    #   package = pkgs.vimix-cursors;
+    #   name = "Vimix-cursors";
+    #   size = 24;
+    # };
+    #
     # Configure fonts
     fonts = {
       serif = {
