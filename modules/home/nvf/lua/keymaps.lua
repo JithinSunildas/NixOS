@@ -76,7 +76,7 @@ map("v", "p", '"_dP', { desc = "Paste without yanking" })
 
 -- === Buffer Navigation ===
 -- Note: Tab and S-Tab are configured in plugins.lua for bufferline
-map("n", "<leader>q", "<cmd>b# | bd#<cr>", { desc = "Delete buffer" })
+map("n", "<leader>q", "<cmd>b# | bd!#<cr>", { desc = "Delete buffer" })
 map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 map("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Switch to last buffer" })

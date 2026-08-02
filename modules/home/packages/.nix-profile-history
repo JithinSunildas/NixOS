@@ -12,7 +12,6 @@ killall
 sl
 wev
 libinput
-neovide
 pstree
 nushell
 powershell
@@ -33,13 +32,10 @@ lsof
 nicotine-plus
 ani-cli
 cava
-easyeffects
 kdePackages.okular
 smassh
-unigine-heaven
 tuicam
 amp
-neovide
 aider-chat
 bluetuith
 gpu-screen-recorder
@@ -51,7 +47,6 @@ iw
 aircrack-ng
 wifitui
 flow-control
-zed-editor
 haskellPackages.yi
 gdb
 filezilla
@@ -64,4 +59,6 @@ wireshark
 bmon
 heroic
 python313Packages.numpy
-google-chrome
+android-studio
+ncdu
+openssl
