@@ -6,7 +6,7 @@
   ...
 }: {
   programs.helix = let
-    isArm = pkgs.system == "aarch64-linux";
+    isArm = pkgs.stdenv.hostPlatform.system == "aarch64-linux";
   in {
     package = pkgs.helix;
     enable = true;

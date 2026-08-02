@@ -2,7 +2,7 @@ pkgs: config:
 with pkgs;
 let
 
-  isArm = pkgs.system == "aarch64-linux";
+  isArm = pkgs.stdenv.hostPlatform.system == "aarch64-linux";
 
   extensionsIf = cond: extensions: if cond then extensions else [ ];
 
