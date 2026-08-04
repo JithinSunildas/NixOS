@@ -30,6 +30,7 @@
         enable = true;
         formatOnSave = true;
         inlayHints.enable = true;
+        package = null;
       };
       viAlias = true;
 
@@ -67,7 +68,7 @@
         clang.enable = true;
         python.enable = true;
         lua.enable = true;
-        # java.enable = true;
+        java.enable = true;
         haskell.enable = true;
         go.enable = true;
         zig.enable = true;
