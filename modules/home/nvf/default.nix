@@ -6,9 +6,6 @@
     nixd
     pyright
     lua-language-server
-    gopls
-    zls
-    (pkgs.lib.lowPrio pkgs.vimPlugins.flutter-tools-nvim)
     typescript-language-server
     tailwindcss-language-server
     emmet-ls
@@ -70,7 +67,7 @@
         clang.enable = true;
         python.enable = true;
         lua.enable = true;
-        java.enable = true;
+        # java.enable = true;
         haskell.enable = true;
         go.enable = true;
         zig.enable = true;
