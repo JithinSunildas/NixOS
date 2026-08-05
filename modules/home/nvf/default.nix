@@ -30,7 +30,6 @@
         enable = true;
         formatOnSave = true;
         inlayHints.enable = true;
-        package = null;
       };
       viAlias = true;
 
@@ -76,6 +75,7 @@
         typescript.enable = true;
         css.enable = true;
         html.enable = true;
+        package = null;
       };
 
       statusline.lualine.enable = true;
