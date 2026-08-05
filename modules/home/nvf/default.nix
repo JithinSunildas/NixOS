@@ -61,8 +61,8 @@
           lsp = {
             enable = true;
             servers = [ "nixd" ];
-            format = true;
           };
+            format = true;
         };
         rust.enable = true;
         clang.enable = true;
