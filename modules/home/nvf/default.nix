@@ -68,7 +68,7 @@
         clang.enable = true;
         python.enable = true;
         lua.enable = true;
-        javaenable = true;
+        java.enable = true;
         haskell.enable = true;
         go.enable = true;
         zig.enable = true;
