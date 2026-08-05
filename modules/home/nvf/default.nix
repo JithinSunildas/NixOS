@@ -61,15 +61,11 @@
           lsp = {
             enable = true;
             servers = [ "nixd" ];
-            formatOnSave =  true;
           };
         };
         rust.enable = true;
         clang.enable = true;
-        python= {
-          enable = true;
-          package = null;
-        };
+        python.enable = true;
         lua.enable = true;
         java= {
           enable = true;
@@ -79,18 +75,9 @@
           enable = true;
           package = null;
         };
-        zig= {
-          enable = true;
-          package = null;
-        };
-        go= {
-          enable = true;
-          package = null;
-        };
-        typst= {
-          enable = true;
-          package = null;
-        };
+        go.enable = true;
+        zig.enable = true;
+        typst.enable = true;
         typescript.enable = true;
         css.enable = true;
         html.enable = true;
