@@ -29,7 +29,6 @@
     ./emacs/emacs.nix
     # ./neovim/neovim.nix
     ./nvf/default.nix
-    ./zellij/zellij.nix
     ./xcompose/xcompose.nix
     ./ghostty.nix
     ./spicetify.nix
