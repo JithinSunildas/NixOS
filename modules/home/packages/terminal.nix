@@ -18,6 +18,7 @@
     fzf
     lf
     zoxide
+    eza
     man-db
     man-pages
     man-pages-posix
