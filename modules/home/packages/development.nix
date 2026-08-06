@@ -23,7 +23,6 @@
     android-tools
 
     # Databases
-    postgresql
   ];
 
   nixpkgs.config = {
