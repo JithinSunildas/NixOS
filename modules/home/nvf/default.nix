@@ -62,7 +62,6 @@
             enable = true;
             servers = [ "nixd" ];
           };
-            format = true;
         };
         rust.enable = true;
         clang.enable = true;
