@@ -6,7 +6,7 @@
     # Editors
     helix
     vscode
-    antigravity-ide
+    antigravity
 
     # Build tools
     cmake
@@ -17,25 +17,10 @@
     libsecret
 
     # Design and Frontend
-    typst
-    tinymist
     pandoc
 
     # Mobile
     android-tools
-
-    # PHP/Laravel
-    (php83.withExtensions (
-      { all, ... }: with all;
-      [
-        pdo
-        mbstring
-        xml
-        curl
-        zip
-        gd
-      ]
-    ))
 
     # Databases
     postgresql

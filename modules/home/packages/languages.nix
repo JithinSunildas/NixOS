@@ -5,7 +5,6 @@
 
     # Nix
     nixd
-    nil
     nixpkgs-fmt
 
     # Python
@@ -13,9 +12,6 @@
       black 
       pyright
     ]))
-
-    # Go
-    go
 
     # Rust
     rustup
