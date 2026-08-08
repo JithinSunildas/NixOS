@@ -19,6 +19,7 @@
     lf
     zoxide
     eza
+    btop
     man-db
     man-pages
     man-pages-posix

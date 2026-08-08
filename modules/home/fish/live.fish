@@ -111,12 +111,12 @@ alias notes='cd ~/Documents/My\ Vault/'
 alias nconf='cd ~/nix-config'
 
 # LS aliases (using eza)
-alias ls='eza --icons'
-alias ll='eza -l --icons --git'
-alias la='eza -a --icons'
-alias lla='eza -la --icons --git'
-alias lt='eza --tree --icons'
-alias lta='eza --tree --level=2 --icons -a'
+alias ls='eza'
+alias ll='eza -l --git'
+alias la='eza -a'
+alias lla='eza -la --git'
+alias lt='eza --tree'
+alias lta='eza --tree --level=2 -a'
 
 # Navigation
 alias ..='cd ..'
@@ -162,7 +162,7 @@ alias srcfish='source ~/nix-config/modules/home/fish/live.fish'
 
 # Docker
 alias d='docker'
-alias dc='docker-compose'
+alias dc='docker compose'
 alias dps='docker ps'
 alias dpsa='docker ps -a'
 alias di='docker images'
