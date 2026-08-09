@@ -20,6 +20,7 @@
     zoxide
     eza
     btop
+    wifitui
     man-db
     man-pages
     man-pages-posix
