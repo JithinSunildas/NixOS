@@ -3,8 +3,6 @@
   home.packages = with pkgs; [
     # Browsers
     chromium
-    qutebrowser
-    firefox
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Office & Productivity
@@ -14,13 +12,11 @@
 
     # Communication
     telegram-desktop
-    discord
 
     # Media
     mpv
     xclip
     python313Packages.subliminal
-    obs-studio
     strawberry
     gifski
     imv

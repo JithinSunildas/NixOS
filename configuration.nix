@@ -8,6 +8,15 @@
 
   # --- NixOS Core Settings ---
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      throttled = prev.throttled.overrideAttrs (oldAttrs: {
+        propagatedBuildInputs = (oldAttrs.propagatedBuildInputs or [ ]) ++ [
+          final.python3Packages.dbus-next
+        ];
+      });
+    })
+  ];
 
   # Hibernation swap space...
   swapDevices = [ { device = "/dev/nvme0n1p3"; } ];
@@ -27,6 +36,10 @@
     "nix-command"
     "flakes"
   ];
+
+  hardware.graphics = {
+    enable = true;
+  };
 
   # Optimization: Use all cores for your custom kernel build
   nix.settings.cores = 0;
@@ -138,6 +151,7 @@
       layout = "us";
       variant = "";
     };
+    upower.enable = true;
     throttled = {
       enable = true;
       extraConfig = ''
@@ -196,12 +210,13 @@
     fish.enable = true;
     neovim = {
       enable = true;
-      defaultEditor = true;
+      # defaultEditor = true;
       viAlias = true;
       vimAlias = true;
     };
     wireshark.enable = true;
     niri.enable = true;
+    nix-ld.enable = true;
     xwayland.enable = true;
     obs-studio = {
       enable = true;

@@ -1,50 +1,45 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
+
 {
+  # 1. System-wide packages available in your user profile
   home.packages = with pkgs; [
-# Editors
-      helix
-      vscode
-      emacs
+    # Editors
+    helix
+    vscode
+    antigravity-ide
 
-# Build tools
-      cmake
-      cargo-zigbuild
+    # Build tools
+    cmake
+    cargo-zigbuild
+    gnumake
+    pkg-config
+    glibc
+    libsecret
 
-# Design and Frontend
-      typst
-      tinymist
-      pandoc
+    # Design and Frontend
+    pandoc
 
-# Hardware design
-      iverilog
+    # Mobile
+    android-tools
 
-# Mobile
-      flutter
-      android-tools
-
-# Backend
-# Java/Spring Boot
-      jdk21
-      maven
-      gradle
-      spring-boot-cli
-      mariadb
-
-# PHP/Laravel
-      php83
-      php83Extensions.pdo
-      php83Extensions.mbstring
-      php83Extensions.xml
-      php83Extensions.curl
-      php83Extensions.zip
-      php83Extensions.gd
-
-# Databases
-      mariadb
-      postgresql
-      ];
+    # Databases
+  ];
 
   nixpkgs.config = {
     android_sdk.accept_license = true;
   };
+
+  xdg.configFile."clangd/config.yaml".text = ''
+    CompileFlags:
+      If:
+        PathMatch: .*\.c
+      CompilationFlags:
+        Add: [-std=c23, -Wall, -Wextra]
+
+    ---
+    If:
+      PathMatch: .*\.(cpp|hpp|cc|cxx)
+    CompileFlags:
+      Add: [-std=c++23, -Wall, -Wextra]
+  '';
 }

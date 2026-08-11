@@ -1,7 +1,7 @@
 -- modules/home/neovim/config/lua/lsp.lua
 -- Neovim 0.11+ native LSP configuration (NO nvim-lspconfig)
 
-vim.lsp.set_log_level("error")
+-- vim.lsp.set_log_level("error")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)

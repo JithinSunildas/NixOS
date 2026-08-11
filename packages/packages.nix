@@ -7,32 +7,20 @@
     home-manager
     ffmpeg
     limine
-    neovim
-    # batsignal
     throttled
     wget
     wl-clipboard-rs
     wl-clipboard
     git
-    helix
     openssh
     curl
     wlogout
-    eza
     libmtp
-    zoxide
-    bat
-    tmux
-    lazygit
     fzf
     nh
     gnumake
     brightnessctl
-    cmatrix
     ly
-    fish
-    fastfetch
-    btop
     ripgrep
     xwayland
     xwayland-satellite

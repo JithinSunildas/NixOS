@@ -5,7 +5,6 @@
     adw-gtk3
 
     # Icon themes
-    candy-icons
     reversal-icon-theme
   ];
 }

@@ -6,10 +6,11 @@
     unzip
     zstd
     file
+    slurp
+    satty
     cyme
     parted
     xxd
-    nix-ld
     xhost
     ninja
     pkg-config
@@ -23,7 +24,6 @@
     wl-mirror
     jq
     poppler-utils
-    # inputs.gazelle.packages.${pkgs.system}.default
     psmisc
 
     # File management

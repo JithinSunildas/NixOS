@@ -1,0 +1,21 @@
+(defwindow sysmon
+  :monitor 0
+  :geometry (geometry :x "20px" :y "0px" :width "320px" :height "400px" :anchor "center left")
+  :stacking "bg"
+  :exclusive false
+  :windowtype "desktop"
+  (sysmon_layout))
+
+(defwidget sysmon_layout []
+  (box :class "sysbox" :orientation "v" :space-evenly false :spacing 20
+    
+    (box :class "section" :orientation "v" :space-evenly false :spacing 5
+      (label :class "header" :text "=== SYSTEM ===" :halign "start")
+      (label :class "metric" :text "CPU: ${round(EWW_CPU.avg, 1)}%" :halign "start")
+      (label :class "metric" :text "RAM: ${round(EWW_RAM.used_mem / 1073741824, 1)}G / ${round(EWW_RAM.total_mem / 1073741824, 1)}G" :halign "start"))
+
+    (box :class "section" :orientation "v" :space-evenly false :spacing 5
+      (label :class "header" :text "=== TOP PROCESSES ===" :halign "start")
+      (label :class "procs" :text top_procs :halign "start"))))
+
+(defpoll top_procs :interval "2s" "/home/tikhaboom/nix-config/modules/home/eww/get_procs.sh")

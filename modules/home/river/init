@@ -1,0 +1,127 @@
+#!/bin/sh
+
+# =========================================================
+# Environment Setup (Fixes Ghostty & Waybar issues)
+# =========================================================
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+# =========================================================
+# Modifiers & Startup
+# =========================================================
+mod="Super"
+
+# Kill running instances to prevent duplicates on reload
+pkill rivertile
+pkill swayosd-server
+pkill awww-daemon
+
+# Spawn startup apps
+waybar &
+swayosd-server &
+awww-daemon &
+swaync &
+
+# =========================================================
+# Application & Core Binds
+# =========================================================
+# Explicitly fixing the reload bind to re-run this init script
+riverctl map normal $mod+Shift R spawn "sh ${XDG_CONFIG_HOME:-$HOME/.config}/river/init"
+
+riverctl map normal $mod Return spawn "ghostty"
+riverctl map normal $mod E spawn "nautilus"
+riverctl map normal $mod B spawn "zen-beta"
+riverctl map normal $mod O spawn "obsidian"
+riverctl map normal $mod N spawn "ghostty -e nmtui"
+riverctl map normal $mod Y spawn "ghostty -e yazi"
+riverctl map normal $mod+Shift N spawn "ghostty -e nvim"
+riverctl map normal $mod+Shift C spawn "gnome-calculator"
+riverctl map normal $mod Space spawn "pkill fuzzel || fuzzel"
+riverctl map normal $mod+Shift Space spawn "pkill waybar || waybar"
+riverctl map normal $mod S spawn "sh -c 'grim -g \"\$(slurp)\" - | tesseract - - | wl-copy && notify-send \"OCR\" \"Text copied to clipboard\"'"
+
+# Hardware / Media Keys
+riverctl map normal None XF86AudioRaiseVolume spawn "swayosd-client --output-volume raise"
+riverctl map normal None XF86AudioLowerVolume spawn "swayosd-client --output-volume lower"
+riverctl map normal None XF86AudioMute spawn "swayosd-client --output-volume mute-toggle"
+riverctl map normal None XF86AudioMicMute spawn "swayosd-client --input-volume mute-toggle"
+riverctl map normal None XF86MonBrightnessUp spawn "swayosd-client --brightness raise"
+riverctl map normal None XF86MonBrightnessDown spawn "swayosd-client --brightness lower"
+
+# Screenshot / System
+riverctl map normal None Print spawn "grim -g \"\$(slurp)\" ~/Pictures/Screenshots/Screenshot_from_\$(date +'%Y-%m-%d_%H-%M-%S').png"
+riverctl map normal Alt Space spawn "pkill wlogout || wlogout"
+riverctl map normal $mod+Shift P spawn "wlr-randr --output HDMI-A-1 --off" # Emulating power-off-monitors
+
+# =========================================================
+# Window Management Binds
+# =========================================================
+riverctl map normal $mod Q close
+riverctl map normal $mod J focus-view next
+riverctl map normal $mod K focus-view previous
+riverctl map normal $mod+Shift J swap next
+riverctl map normal $mod+Shift K swap previous
+riverctl map normal $mod V toggle-float
+riverctl map normal $mod+Shift F toggle-fullscreen
+
+# Master-stack layout adjustments
+riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map normal $mod+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal $mod+Shift L send-layout-cmd rivertile "main-count -1"
+
+# =========================================================
+# Workspaces (Tags) Mapping
+# =========================================================
+# Focus tags (Workspaces 1-9)
+riverctl map normal Super 1 set-focused-tags 1
+riverctl map normal Super 2 set-focused-tags 2
+riverctl map normal Super 3 set-focused-tags 4
+riverctl map normal Super 4 set-focused-tags 8
+riverctl map normal Super 5 set-focused-tags 16
+riverctl map normal Super 6 set-focused-tags 32
+riverctl map normal Super 7 set-focused-tags 64
+riverctl map normal Super 8 set-focused-tags 128
+riverctl map normal Super 9 set-focused-tags 256
+
+# Move windows to tags
+riverctl map normal Super+Shift 1 set-view-tags 1
+riverctl map normal Super+Shift 2 set-view-tags 2
+riverctl map normal Super+Shift 3 set-view-tags 4
+riverctl map normal Super+Shift 4 set-view-tags 8
+riverctl map normal Super+Shift 5 set-view-tags 16
+riverctl map normal Super+Shift 6 set-view-tags 32
+riverctl map normal Super+Shift 7 set-view-tags 64
+riverctl map normal Super+Shift 8 set-view-tags 128
+riverctl map normal Super+Shift 9 set-view-tags 256
+
+# =========================================================
+# Input Configuration (Touchpad & Keyboard)
+# =========================================================
+# These target standard libinput devices. You can verify device names using `riverctl list-inputs`.
+riverctl keyboard-layout us -options "compose:ralt"
+
+riverctl input "pointer-*-*" accel-profile flat
+riverctl input "pointer-*-*" pointer-accel 0.8
+riverctl input "pointer-*-*" natural-scroll enabled
+riverctl input "pointer-*-*" tap enabled
+riverctl input "pointer-*-*" drag enabled
+riverctl input "pointer-*-*" drag-lock disabled
+riverctl input "pointer-*-*" disable-while-typing enabled
+
+# =========================================================
+# Appearance & Layout Rules
+# =========================================================
+# Window Borders and Aesthetics
+riverctl border-width 2
+riverctl border-color-focused 0xa9b665   # Soft Green
+riverctl border-color-unfocused 0x504945 # Dark Gray
+riverctl border-color-urgent 0xe67e80    # Soft Red
+riverctl background-color 0x272e33       # Dark backdrop
+
+# Tell River to route windows to stacktile
+riverctl default-layout stacktile
+
+# Kill any existing layout generator on reload, then start stacktile
+pkill stacktile
+stacktile --primary-ratio 0.5 --padding 10 &

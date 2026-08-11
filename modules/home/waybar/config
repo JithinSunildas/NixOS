@@ -1,10 +1,11 @@
-{
-  "layer": "top",
+[
+  {
+    "layer": "top",
     "position": "top",
 
     "modules-left": [
       "niri/workspaces",
-    "niri/window"
+      "niri/window"
     ],
 
     "modules-center": [
@@ -12,10 +13,10 @@
     ],
 
     "modules-right": [
-    "group/tray-expander",
-    "battery",
-    "custom/notification",
-    "custom/exit"
+      "group/tray-expander",
+      "battery",
+      "custom/notification",
+      "custom/exit"
     ],
 
     "group/tray-expander": {
@@ -26,12 +27,12 @@
       },
       "modules": [
         "custom/expand-icon",
-      "network",
-      "pulseaudio",
-      "disk",
-      "memory",
-      "cpu",
-      "tray",
+        "network",
+        "pulseaudio",
+        "disk",
+        "memory",
+        "cpu",
+        "tray"
       ]
     },
 
@@ -47,53 +48,51 @@
       "tooltip-format": "{title} | {app_id}"
     },
 
-    "custom/clock": {
-      "exec": "date +'%b %d '$(case $(date +%u) in 1) echo 'തിങ്കൾ';; 2) echo 'ചൊവ്വ';; 3) echo 'ബുധൻ';; 4) echo 'വ്യാഴം';; 5) echo 'വെള്ളി';; 6) echo 'ശനി';; 7) echo 'ഞായർ';; esac)' %H:%M:%S'",
-      "interval": 1,
-      "format": "{}",
-      "tooltip": true,
-      "tooltip-format": "<big>{:%A, %d.%B %Y }</big><tt><small>{calendar}</small></tt>",
-      "on-click": "waybar-client --tool-tips toggle"
-    },
-
     "niri/window": {
       "max-length": 60,
       "separate-outputs": false
+    },
+
+    "custom/clock": {
+      "exec": "printf '%s %s %s\n' \"$(date +'%b %d')\" \"$(case $(date +%u) in 1) echo 'തിങ്കൾ';; 2) echo 'ചൊവ്വ';; 3) echo 'ബുധൻ';; 4) echo 'വ്യാഴം';; 5) echo 'വെള്ളി';; 6) echo 'ശനി';; 7) echo 'ഞായർ';; esac)\" \"$(date +'%H:%M:%S')\"",
+      "interval": 1,
+      "format": "{}",
+      "tooltip": false,
+      "on-click": "waybar-client --tool-tips toggle"
     },
 
     "memory": {
       "interval": 5,
       "format": "  {}%",
       "tooltip": true,
-      "on-click": "ghostty -e btop"
+      "on-click": "/home/tikhaboom/.nix-profile/bin/ghostty -e btop"
     },
 
     "cpu": {
       "interval": 1,
       "format": "  {usage:2}%",
       "tooltip": true,
-      "on-click": "ghostty -e btop"
+      "on-click": "/home/tikhaboom/.nix-profile/bin/ghostty -e btop"
     },
 
     "disk": {
       "format": "  {free}",
       "tooltip": true
-        // "on-click": "ghostty -e sh -c df -h ; read"
     },
 
     "network": {
       "format-icons": [
         "󰤯",
-      "󰤟",
-      "󰤢",
-      "󰤥",
-      "󰤨"
+        "󰤟",
+        "󰤢",
+        "󰤥",
+        "󰤨"
       ],
       "format-ethernet": " {bandwidthDownBits}",
       "format-wifi": " {bandwidthDownBits}",
       "format-disconnected": "󰤮",
       "tooltip": true,
-      "on-click": "ghostty -e nmtui",
+      "on-click": "/home/tikhaboom/.nix-profile/bin/ghostty -e nmtui",
       "on-click-right": "nm-connection-editor",
       "interval": 1
     },
@@ -124,8 +123,8 @@
         "car": "",
         "default": [
           "",
-        "",
-        ""
+          "",
+          ""
         ]
       },
       "on-click": "pavucontrol"
@@ -168,18 +167,19 @@
       "format-plugged": "󱘖 {capacity}%",
       "format-icons": [
         "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
       ],
       "on-click": "",
       "tooltip": false,
       "interval": 1
     }
-}
+  },
+]

@@ -12,6 +12,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +27,7 @@
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, gazelle, zen-browser, stylix
+  outputs = inputs@{ self, nixpkgs, home-manager, gazelle, zen-browser, stylix, nvf
     , spicetify-nix, ... }: {
       nixosConfigurations = {
         SuperDuperComputer = nixpkgs.lib.nixosSystem {
@@ -45,6 +49,7 @@
           modules = [
             ./modules/home/home.nix
             stylix.homeModules.stylix
+            nvf.homeManagerModules.default
             spicetify-nix.homeManagerModules.default
             gazelle.homeModules.gazelle
           ];

@@ -4,7 +4,7 @@
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx GOPATH $HOME/go
-set -gx BROWSER zen
+set -gx BROWSER zen-beta
 
 # XDG Base Directory
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -20,7 +20,13 @@ fish_add_path ~/.cargo/bin
 # ==========================================
 # Starship Prompt
 # ==========================================
-starship init fish | source
+if test "$TERM" = "dumb"
+    function fish_prompt
+        starship prompt --profile dumb 2>/dev/null
+    end
+else
+    starship init fish | source
+end
 
 # ==========================================
 # Zoxide (better cd)
@@ -30,11 +36,11 @@ zoxide init fish | source
 # ==========================================
 # Aliases - Nix/System Management
 # ==========================================
-alias e='~/.config/emacs/bin/doom emacs -nw'
+alias e="emacsclient -nw -c"
 alias vi='nvim -R'
+alias spotssh='ssh root@37.187.139.100 -p 20030'
 alias info="info --vi-keys"
-alias run='~/Work/OS/Assignment_1/run'
-alias doom='exec /home/tikhaboom/.config/emacs/bin/doom'
+alias doom='EMACS_NUMBER_OF_COMPILE_JOBS=1 /home/tikhaboom/.config/emacs/bin/doom'
 alias pick='exec /home/tikhaboom/nix-config/scripts/yazi.sh'
 alias es='sudo -E nvim /etc/nixos/configuration.nix'
 alias he='nvim ~/nix-config/modules/home/home.nix'
@@ -105,12 +111,12 @@ alias notes='cd ~/Documents/My\ Vault/'
 alias nconf='cd ~/nix-config'
 
 # LS aliases (using eza)
-alias ls='eza --icons'
-alias ll='eza -l --icons --git'
-alias la='eza -a --icons'
-alias lla='eza -la --icons --git'
-alias lt='eza --tree --icons'
-alias lta='eza --tree --level=2 --icons -a'
+alias ls='eza'
+alias ll='eza -l --git'
+alias la='eza -a'
+alias lla='eza -la --git'
+alias lt='eza --tree'
+alias lta='eza --tree --level=2 -a'
 
 # Navigation
 alias ..='cd ..'
@@ -156,7 +162,7 @@ alias srcfish='source ~/nix-config/modules/home/fish/live.fish'
 
 # Docker
 alias d='docker'
-alias dc='docker-compose'
+alias dc='docker compose'
 alias dps='docker ps'
 alias dpsa='docker ps -a'
 alias di='docker images'
@@ -373,5 +379,14 @@ end
 # Load fzf keybindings if available
 if type -q fzf
   fzf --fish | source
+end
+
+function crun
+    echo "Compiling..."
+    gcc "$argv[1].c" -o "$argv[1]"
+    echo ""
+    echo "Running..."
+    echo ""
+    ./"$argv[1]"
 end
 

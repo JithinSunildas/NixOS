@@ -6,15 +6,13 @@
     nil
     pyright
     lua-language-server
-    # nodePackages.typescript-language-server
-    # nodePackages.vscode-langservers-extracted # html, css, json
     haskell-language-server
     gopls
     zls
-    # jdt-language-server
+    jdt-language-server
     (pkgs.lib.lowPrio pkgs.vimPlugins.flutter-tools-nvim)
     ocamlPackages.ocaml-lsp
-    # typescript-language-server
+    typescript-language-server
     tailwindcss-language-server
     # nodePackages.vscode-langservers-extracted
     # nodePackages.prettier

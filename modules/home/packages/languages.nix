@@ -5,7 +5,6 @@
 
     # Nix
     nixd
-    nil
     nixpkgs-fmt
 
     # Python
@@ -13,9 +12,6 @@
       black 
       pyright
     ]))
-
-    # Go
-    go
 
     # Rust
     rustup
@@ -28,19 +24,10 @@
     lld
     lldb
     gcc
-    zig_0_15
-
-    # Haskell
-    haskellPackages.ghc
-    haskellPackages.cabal-install
-    haskellPackages.stack
+    zig
 
     # JavaScript/TypeScript
     nodejs
-    # nodePackages.vscode-langservers-extracted
-    # nodePackages.prettier
-
-    # Java
 
     # Other
     superhtml

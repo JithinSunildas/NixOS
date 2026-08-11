@@ -1,7 +1,11 @@
 local M = {}
 
 -- Safely get tools
-local tools = _G.tools or { ui = { icons = {} }, hl_str = function(_, s) return s end }
+-- 1. Safely get tools and ensure the fallback actually applies colors
+local tools = _G.tools or {
+    ui = { icons = {} },
+    hl_str = function(hl, s) return "%#" .. hl .. "#" .. s .. "%*" end
+}
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local get_opt = api.nvim_get_option_value
 
@@ -131,10 +135,21 @@ local function path_widget(fname)
 end
 
 local function diagnostics_widget()
-    if not tools.diagnostics_available or not tools.diagnostics_available() then return "" end
-    local count = vim.diagnostic.count and vim.diagnostic.count(0) or { 0, 0, 0, 0 }
-    local err = count[vim.diagnostic.severity.ERROR] or 0
-    local warn = count[vim.diagnostic.severity.WARN] or 0
+    if tools.diagnostics_available and not tools.diagnostics_available() then
+        return ""
+    end
+
+    local err, warn = 0, 0
+
+    if vim.diagnostic.count then
+        local count = vim.diagnostic.count(0) or {}
+        err = count[vim.diagnostic.severity.ERROR] or 0
+        warn = count[vim.diagnostic.severity.WARN] or 0
+    else
+        err = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+        warn = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+    end
+
     local parts = ""
     if err > 0 then
         parts = parts .. string.format("%s %s ", ICON.error, tools.hl_str("DiagnosticError", err))
@@ -142,6 +157,7 @@ local function diagnostics_widget()
     if warn > 0 then
         parts = parts .. string.format("%s %s ", ICON.warn, tools.hl_str("DiagnosticWarn", warn))
     end
+
     return parts
 end
 

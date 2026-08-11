@@ -1,0 +1,159 @@
+{
+  extensions = {},
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {}
+  },
+  inactive_winbar = {},
+  options = {
+    always_divide_middle = true,
+    always_show_tabline = true,
+    component_separators = {
+      left = "",
+      right = ""
+    },
+    disabled_filetypes = {
+      statusline = { "alpha" },
+      winbar = {}
+    },
+    globalstatus = true,
+    icons_enabled = true,
+    ignore_focus = { "NvimTree" },
+    refresh = {
+      events = { "WinEnter", "BufEnter", "BufWritePost", "SessionLoadPost", "FileChangedShellPost", "VimResized", "Filetype", "CursorMoved", "CursorMovedI", "ModeChanged" },
+      refresh_time = 16,
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000
+    },
+    section_separators = {
+      left = "",
+      right = ""
+    },
+    theme = "base16"
+  },
+  sections = {
+    lualine_a = { { "mode",
+        icons_enabled = true,
+        separator = {
+          left = "▎",
+          right = ""
+        }
+      }, { "",
+        draw_empty = true,
+        separator = {
+          left = "",
+          right = ""
+        }
+      } },
+    lualine_b = { { "filetype",
+        colored = true,
+        icon = {
+          align = "left"
+        },
+        icon_only = true
+      }, { "filename",
+        separator = {
+          right = ""
+        },
+        symbols = {
+          modified = " ",
+          readonly = " "
+        }
+      }, { "",
+        draw_empty = true,
+        separator = {
+          left = "",
+          right = ""
+        }
+      } },
+    lualine_c = { { "diff",
+        colored = false,
+        diff_color = {
+          added = "DiffAdd",
+          modified = "DiffChange",
+          removed = "DiffDelete"
+        },
+        separator = {
+          right = ""
+        },
+        symbols = {
+          added = "+",
+          modified = "~",
+          removed = "-"
+        }
+      } },
+    lualine_x = { { <function 1>,
+        icon = " ",
+        separator = {
+          left = ""
+        }
+      }, { "diagnostics",
+        always_visible = false,
+        colored = true,
+        diagnostics_color = {
+          color_error = {
+            fg = "red"
+          },
+          color_info = {
+            fg = "cyan"
+          },
+          color_warn = {
+            fg = "yellow"
+          }
+        },
+        sources = { "nvim_lsp", "nvim_diagnostic", "nvim_diagnostic", "vim_lsp", "coc" },
+        symbols = {
+          error = "󰅙  ",
+          hint = "󰌵 ",
+          info = "  ",
+          warn = "  "
+        },
+        update_in_insert = false
+      } },
+    lualine_y = { { "",
+        draw_empty = true,
+        separator = {
+          left = "",
+          right = ""
+        }
+      }, { "searchcount",
+        maxcount = 999,
+        separator = {
+          left = ""
+        },
+        timeout = 120
+      }, { "branch",
+        icon = " •",
+        separator = {
+          left = ""
+        }
+      } },
+    lualine_z = { { "",
+        draw_empty = true,
+        separator = {
+          left = "",
+          right = ""
+        }
+      }, { "progress",
+        separator = {
+          left = ""
+        }
+      }, { "location" }, { "fileformat",
+        color = {
+          fg = "black"
+        },
+        symbols = {
+          dos = "",
+          mac = "",
+          unix = ""
+        }
+      } }
+  },
+  tabline = {},
+  winbar = {}
+}

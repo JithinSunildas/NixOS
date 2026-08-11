@@ -42,8 +42,15 @@
     bash.enable = true;
     fish.enable = true;
     gazelle.enable = true;
-    # nix-ld.enable = true;
   };
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      warn-dirty = false;
+    };
+  };
+  wayland.windowManager.hyprland.configType = "hyprlang";
 
   ########################################
   # 🖥️ Shell config (optional)
