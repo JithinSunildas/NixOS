@@ -331,6 +331,27 @@ function commit --description "Move binned packages into default.nix and clear t
     echo "🧹 Bin cleared. Run 'hrb' to finalize."
 end
 
+function fish_command_not_found
+    set -l cmd $argv[1]
+    if string match -r '\?$' -- $cmd
+        # Strip the trailing '?' from the package name
+        set -l pkg (string sub -e -1 -- $cmd)
+        set -e argv[1]
+        
+        echo "Running $pkg from nixpkgs..." >&2
+        nix run "nixpkgs#$pkg" -- $argv
+        return $status
+    else
+        __fish_default_command_not_found_handler $argv
+    end
+end
+
+function t
+    set -l pkg $argv[1]
+    set -e argv[1]
+    nix run "nixpkgs#$pkg" -- $argv
+end
+
 # Quick home-manager rebuild with commit
 function hrb
   cd ~/nix-config
