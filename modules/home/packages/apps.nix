@@ -21,6 +21,7 @@
     gifski
     imv
     kdePackages.kdenlive
+    inkscape
 
     # Downloads
     qbittorrent
