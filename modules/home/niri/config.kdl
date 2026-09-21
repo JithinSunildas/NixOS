@@ -126,11 +126,15 @@ window-rule {
     match app-id="antigravity-ide"
     match app-id="neovide"
     match app-id="zed"
+    match app-id="kdenlive"
     open-maximized true
 }
 
 window-rule {
     match app-id="fuzzel"
+    match app-id="kdenlive"
+    match app-id="zathura"
+    match app-id="zen-beta"
     opacity 1.0
 }
 
