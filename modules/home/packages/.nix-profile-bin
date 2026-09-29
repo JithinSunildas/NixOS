@@ -101,3 +101,5 @@ python313Packages.numpy
 android-studio
 ncdu
 openssl
+wiki-tui
+python313Packages.aiosmtpd

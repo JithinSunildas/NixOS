@@ -21,6 +21,7 @@
     gifski
     imv
     kdePackages.kdenlive
+    audacity
     inkscape
 
     # Downloads
