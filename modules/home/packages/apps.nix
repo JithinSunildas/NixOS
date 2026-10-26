@@ -24,6 +24,7 @@
 
     # Downloads
     qbittorrent
+    localsend
   ];
 
   # === Tweaks & Configs ===
