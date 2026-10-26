@@ -111,9 +111,9 @@ alias nconf='cd ~/nix-config'
 
 # LS aliases (using eza)
 alias ls='eza'
-alias ll='eza -l --git'
+alias ll='eza -lh --git'
 alias la='eza -a'
-alias lla='eza -la --git'
+alias lla='eza -lha --git'
 alias lt='eza --tree'
 alias lta='eza --tree --level=2 -a'
 
